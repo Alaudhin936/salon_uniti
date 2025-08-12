@@ -22,10 +22,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Dashboards
-Route::get('/', function () {
-    return redirect()->route('dashboard');
-});
+// Route::get('/', function () {
+//     return redirect()->route('dashboard');
+// });
 
+Route::get('/dashboard', function () {
+    return view('dashboards.default_dashboard');
+})->name('dashboard')->middleware('role:1');
 
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
@@ -38,10 +41,9 @@ Route::get('/logout', function () {
     return redirect('/login');
 })->name('logout');
 
-Route::middleware('role:1')->group(function() {
-    Route::view('/', 'dashboards.default_dashboard')->name('dashboard');
-    Route::get('/salons',[AdminController::class,'index'])->name('salons');
-    Route::post('/salon/store',[AdminController::class,'registerSalon'])->name('salons.store');
+Route::middleware('role:1')->group(function () {
+    Route::get('/salons', [AdminController::class, 'index'])->name('salons');
+    Route::post('/salon/store', [AdminController::class, 'registerSalon'])->name('salons.store');
 });
 
 Route::prefix('salonweb')->group(function () {
@@ -57,11 +59,11 @@ Route::prefix('salonweb')->group(function () {
 
     Route::post('/store', [ServiceController::class, 'store'])->name('services.store');
 
-    Route::middleware('role:2')->group(function(){
-        Route::get('/dashboard', [AppointmentController::class,'index'])->name('vendor_dashboard');
+    Route::middleware('role:2')->group(function () {
+        Route::get('/dashboard', [AppointmentController::class, 'index'])->name('vendor_dashboard');
         Route::get('/appointments', [AppointmentController::class, 'appointments'])->name('appointments');
         Route::get('/customers', [AppointmentController::class, 'customers'])->name('customers');
-        Route::post('/appointments/store',[AppointmentController::class,'store'])->name('appointments.store');
+        Route::post('/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
         Route::get('/services', [ServiceController::class, 'index'])->name('services');
         Route::post('/services/{id}', [ServiceController::class, 'update'])->name('services.update');
         Route::post('/services/{id}/delete', [ServiceController::class, 'delete'])->name('services.destroy');
