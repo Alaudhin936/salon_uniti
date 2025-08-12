@@ -30,8 +30,8 @@
       <div class="col-sm-6 col-lg-3">
         <div class="card o-hidden">
           <div class="card-header pb-0">
-            <div class="d-flex"> 
-              <div class="flex-grow-1"> 
+            <div class="d-flex">
+              <div class="flex-grow-1">
                 <p class="square-after f-w-600 header-text-primary">Earnings<i class="fa fa-circle"> </i></p>
                 <h4>6659</h4>
               </div>
@@ -57,8 +57,8 @@
       <div class="col-sm-6 col-lg-3">
         <div class="card o-hidden product-widget">
           <div class="card-header pb-0">
-            <div class="d-flex"> 
-              <div class="flex-grow-1"> 
+            <div class="d-flex">
+              <div class="flex-grow-1">
                 <p class="square-after f-w-600 header-text-success">Products<i class="fa fa-circle"> </i></p>
                 <h4>9856</h4>
               </div>
@@ -85,8 +85,8 @@
       <div class="col-sm-6 col-lg-3">
         <div class="card o-hidden message-widget">
           <div class="card-header pb-0">
-            <div class="d-flex"> 
-              <div class="flex-grow-1"> 
+            <div class="d-flex">
+              <div class="flex-grow-1">
                 <p class="square-after f-w-600 header-text-secondary">Messages<i class="fa fa-circle"> </i></p>
                 <h4>893</h4>
               </div>
@@ -110,8 +110,8 @@
       <div class="col-sm-6 col-lg-3">
         <div class="card o-hidden user-widget">
           <div class="card-header pb-0">
-            <div class="d-flex"> 
-              <div class="flex-grow-1"> 
+            <div class="d-flex">
+              <div class="flex-grow-1">
                 <p class="square-after f-w-600 header-text-info">New User<i class="fa fa-circle"> </i></p>
                 <h4>45631</h4>
               </div>
@@ -136,8 +136,8 @@
       <div class="col-xl-6 box-col-6">
         <div class="widget-joins card widget-arrow">
           <div class="card-header pb-0">
-            <div class="d-flex"> 
-              <div class="flex-grow-1"> 
+            <div class="d-flex">
+              <div class="flex-grow-1">
                 <h4>Sale Details</h4>
               </div>
             </div>
@@ -195,8 +195,8 @@
       <div class="col-xl-6 box-col-6">
         <div class="widget-joins card">
           <div class="card-header pb-0">
-            <div class="d-flex"> 
-              <div class="flex-grow-1"> 
+            <div class="d-flex">
+              <div class="flex-grow-1">
                 <h4>Order Details</h4>
               </div>
             </div>
@@ -460,7 +460,7 @@
         </div>
       </div>
       <div class="col-xl-4 col-lg-6 col-md-12">
-        <div class="card custom-profile">                 
+        <div class="card custom-profile">
           <div class="card-body">
             <div class="card-profile"><img class="user-img" src="{{ asset('assets/images/general-widget/user-profile.png') }}" alt=""></div>
             <div class="text-center profile-details">
@@ -497,8 +497,8 @@
         <div>
           <div class="card activity-widget">
             <div class="card-header pb-0">
-              <div class="d-flex"> 
-                <div class="flex-grow-1"> 
+              <div class="d-flex">
+                <div class="flex-grow-1">
                   <h4>Recent Activity</h4>
                 </div>
                 <div class="setting-list">
@@ -571,7 +571,7 @@
 &lt;div class="recent-circle bg-color-primary"&gt;&lt;/div&gt;
 &lt;div class="flex-grow-1"&gt;
   &lt;h6&gt; Any desktop publishing pack ages editors. &lt;/h6&gt;
-  &lt;span class="align-middle"&gt; 
+  &lt;span class="align-middle"&gt;
     &lt;i class="feather feather-clock me-2 align-middle"&gt;
     &lt;span class="align-middle"&gt; 25 July 2022 | 20 hours ago &lt;/span&gt;
   &lt;/span&gt;
@@ -581,7 +581,7 @@
 &lt;div class="recent-circle bg-color-secondary"&gt;&lt;/div&gt;
 &lt;div class="flex-grow-1"&gt;
   &lt;h6&gt; Contrary to popular belief, Lorem Ipsum is not simply. &lt;/h6&gt;
-  &lt;span class="align-middle"&gt; 
+  &lt;span class="align-middle"&gt;
     &lt;i class="feather feather-clock me-2 align-middle"&gt;
     &lt;span class="align-middle"&gt; 25 July 2022 | 20 hours ago &lt;/span&gt;
   &lt;/span&gt;
@@ -591,7 +591,7 @@
 &lt;div class="recent-circle bg-color-success"&gt;&lt;/div&gt;
 &lt;div class="flex-grow-1"&gt;
   &lt;h6&gt; Established fact that a reader will be distracted lorem. &lt;/h6&gt;
-  &lt;span class="align-middle"&gt; 
+  &lt;span class="align-middle"&gt;
     &lt;i class="feather feather-clock me-2 align-middle"&gt;
     &lt;span class="align-middle"&gt; 25 July 2022 | 20 hours ago &lt;/span&gt;
   &lt;/span&gt;
@@ -601,7 +601,7 @@
 &lt;div class="recent-circle bg-color-info"&gt;&lt;/div&gt;
 &lt;div class="flex-grow-1"&gt;
   &lt;h6&gt; Established fact that a reader will be distracted lorem. &lt;/h6&gt;
-  &lt;span class="align-middle"&gt; 
+  &lt;span class="align-middle"&gt;
     &lt;i class="feather feather-clock me-2 align-middle"&gt;
     &lt;span class="align-middle"&gt; 25 July 2022 | 20 hours ago &lt;/span&gt;
   &lt;/span&gt;
@@ -624,13 +624,13 @@
                 <p>
                   Contrary to popular belief, Lorem Ipsum is not simply
                   random text. It has roots in a piece of classical Latin
-                  literature from 45 BC, making it over 2000 years old.                          
+                  literature from 45 BC, making it over 2000 years old.
                 </p>
               </div>
             </div>
           </div>
           <div class="col-xl-12 col-lg-12">
-            <div class="card order-widget">                    
+            <div class="card order-widget">
               <div class="card-body">
                 <div class="row heder-widget">
                   <div class="col-6"><span>New Order</span>
@@ -660,8 +660,8 @@
       <div class="col-xl-6 col-lg-6 col-sm-12">
         <div class="card browser-table">
           <div class="card-header">
-            <div class="d-flex"> 
-              <div class="flex-grow-1"> 
+            <div class="d-flex">
+              <div class="flex-grow-1">
                 <h4>Usage in Browser</h4>
               </div>
             </div>
@@ -714,7 +714,7 @@
         </div>
       </div>
       <div class="col-xl-6 col-lg-12">
-        <div class="row">              
+        <div class="row">
           <div class="col-sm-6">
             <div class="card social-widget-card">
               <div class="card-body">
@@ -816,8 +816,8 @@
       <div class="col-xl-6 col-lg-6">
         <div class="card user-status">
           <div class="card-header pb-0">
-            <div class="d-flex"> 
-              <div class="flex-grow-1"> 
+            <div class="d-flex">
+              <div class="flex-grow-1">
                 <h4>Product Cart</h4>
               </div>
               <div class="setting-list">
@@ -977,8 +977,8 @@
       <div class="col-xl-6 col-lg-6">
         <div class="card employee-status">
           <div class="card-header pb-0">
-            <div class="d-flex"> 
-              <div class="flex-grow-1"> 
+            <div class="d-flex">
+              <div class="flex-grow-1">
                 <h4>Employee Status</h4>
               </div>
               <div class="setting-list">
@@ -1268,8 +1268,8 @@
       <div class="col-sm-12 col-lg-6 col-xl-8 col-md-12 box-col-6 xl-50">
         <div class="card">
           <div class="card-header pb-0">
-            <div class="d-flex"> 
-              <div class="flex-grow-1"> 
+            <div class="d-flex">
+              <div class="flex-grow-1">
                 <h4>Contact Us</h4>
               </div>
               <div class="setting-list">
@@ -1355,7 +1355,7 @@
         </div>
       </div>
     </div>
-  </div>  
+  </div>
 @endsection
 
 @section('scripts')
@@ -1370,9 +1370,9 @@
 <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.custom.js') }}"></script>
 <script src="{{ asset('assets/js/owlcarousel/owl.carousel.js') }}"></script>
 <script src="{{ asset('assets/js/general-widget.js') }}"></script>
-<script src="{{ asset('assets/js/height-equal.js') }}"></script>  
+<script src="{{ asset('assets/js/height-equal.js') }}"></script>
 <script>
     localStorage.clear();
-    localStorage.setItem('body-wrapper', 'box-layout');
-</script> 
+    localStorage.setItem('body-wrapper', '');
+</script>
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Salon;
+use App\Models\User;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,8 +21,11 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
-
-            return redirect()->intended('dashboard');
+              if(auth()->user()->role_id == 2){
+                return redirect('/salonweb/dashboard');
+            }else if(auth()->user()->role_id == 1){
+                return redirect('/dashboard');
+            }
         }
 
         return back()->withErrors([
@@ -39,7 +43,7 @@ class LoginController extends Controller
 
         $phone = $request->input('ph_number');
         $otp = rand(1000, 9999);
-        $user = Salon::where('phone', $phone)->first();
+        $user = User::where('phone', $phone)->where('role_id',2)->first();
         FacadesSession::put('salondummyphone', $phone);
         if ($user) {
             $user->update([
@@ -100,7 +104,7 @@ class LoginController extends Controller
     {
         $submittedOtp = $request->input('verify_otp');
         $phone = session('salondummyphone');
-        $user = Salon::where('phone', $phone)
+        $user = User::where('phone', $phone)
             ->where('otp', $submittedOtp)
             ->first();
 
@@ -119,7 +123,7 @@ class LoginController extends Controller
                 'salon_phone'     => $user->phone,
                 'role'            => 'salon'
             ]);
-
+            Auth::login($user);
             return redirect()->route('vendor_dashboard')
                 ->with('message', 'OTP verified successfully!');
         } else {

@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('css'); ?>
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vendors/photoswipe.css')); ?>">
 <?php $__env->stopSection(); ?>
@@ -39,7 +37,7 @@
                             </div>
                             <div class="user-designation">
                                 <div class="title"><a target="_blank" href="">
-                                        <h4>Emay Walter</h4>
+                                        <h4><?php echo e(auth()->user()->name); ?></h4>
                                         <h6 class="f-w-500">designer</h6>
                                     </a></div>
                                 <div class="social-media">

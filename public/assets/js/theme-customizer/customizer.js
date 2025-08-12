@@ -112,11 +112,11 @@ $(document).ready(function () {
             case 'normal-sidebar': {
                 $(".page-wrapper").attr("class", "page-wrapper horizontal-wrapper " + boxed);
                 $(".logo-wrapper").find('img').attr('src', '../assets/images/logo/logo.png');
-                
+
                 localStorage.setItem('page-wrapper', 'horizontal-wrapper');
                 break;
             }
-            case 'box-layout': {                
+            case 'box-layout': {
                 $(".page-wrapper").attr("class", "page-wrapper compact-wrapper box-layout " + boxed);
                 localStorage.setItem('page-wrapper', 'compact-wrapper box-layout');
                 break;
@@ -143,7 +143,7 @@ $(document).ready(function () {
         $(".main-layout .box-layout").removeClass('active');
         $(this).addClass("active");
         var layout = $(this).attr("data-attr");
-        $("body").attr("class", "box-layout");
+        // $("body").attr("class", "box-layout");
     });
     $("body").attr("class", localStorage.getItem("body-wrapper")||'');
 });

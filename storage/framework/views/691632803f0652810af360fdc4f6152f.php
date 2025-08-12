@@ -16,4 +16,5 @@
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/style.css')); ?>">
     <link id="color" rel="stylesheet" href="<?php echo e(asset('assets/css/color-1.css')); ?>" media="screen">
     <!-- Responsive css-->
-    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/responsive.css')); ?>"><?php /**PATH C:\xampp8.2\htdocs\salon_unitiii\resources\views/others/others_layout/css.blade.php ENDPATH**/ ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/responsive.css')); ?>">
+<?php /**PATH C:\xampp8.2\htdocs\salon_unitiii\resources\views/others/others_layout/css.blade.php ENDPATH**/ ?>

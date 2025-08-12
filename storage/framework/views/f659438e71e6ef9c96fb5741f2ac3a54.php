@@ -33,4 +33,5 @@
     </div>
     <?php echo $__env->make('others.others_layout.script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   </body>
-</html><?php /**PATH C:\xampp8.2\htdocs\salon_unitiii\resources\views/others/others_layout/master.blade.php ENDPATH**/ ?>
+</html>
+<?php /**PATH C:\xampp8.2\htdocs\salon_unitiii\resources\views/others/others_layout/master.blade.php ENDPATH**/ ?>

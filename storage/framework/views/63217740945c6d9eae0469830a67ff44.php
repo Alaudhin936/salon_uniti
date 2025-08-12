@@ -72,7 +72,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <h4><a href="user-profile.html"><span>Welcome Back</span> John </a><span class="right-circle"><i
+                            <h4><a href="user-profile.html"><span>Welcome Back</span> <?php echo e(auth()->user()->name); ?> </a><span class="right-circle"><i
                                         class="fa fa-check-circle font-primary f-14 middle"></i></span></h4>
                             <div><span class="badge badge-primary">Your 5</span><span
                                     class="font-primary f-12 middle f-w-500 ms-2"> Task Is Pending</span></div>

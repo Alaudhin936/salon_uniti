@@ -1,7 +1,13 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\VendorController;
+use GuzzleHttp\Middleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,31 +30,43 @@ Route::get('/', function () {
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
+Route::get('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+
+    return redirect('/login');
+})->name('logout');
+
+Route::middleware('role:1')->group(function() {
+    Route::view('/', 'dashboards.default_dashboard')->name('dashboard');
+    Route::get('/salons',[AdminController::class,'index'])->name('salons');
+    Route::post('/salon/store',[AdminController::class,'registerSalon'])->name('salons.store');
+});
+
 Route::prefix('salonweb')->group(function () {
     Route::view('login', 'others.authentication.vendor_login');
 
-    // OTP form page
     Route::get('/verifyOtp', function () {
         return view('others.authentication.verify_otp');
     })->name('verifyOTP');
 
-    // OTP form submission
     Route::post('/verifyOtp', [LoginController::class, 'salonVerifyOTP'])->name('verifyOtpSubmit');
 
     Route::post('/salonLoginSubmit', [LoginController::class, 'salonLoginSubmit'])->name('salonWebLogin');
 
-    Route::get('/dashboard', function () {
-        return view('dashboards.default_dashboard');
-    })->name('vendor_dashboard');
+    Route::post('/store', [ServiceController::class, 'store'])->name('services.store');
+
+    Route::middleware('role:2')->group(function(){
+        Route::get('/dashboard', [AppointmentController::class,'index'])->name('vendor_dashboard');
+        Route::get('/appointments', [AppointmentController::class, 'appointments'])->name('appointments');
+        Route::get('/customers', [AppointmentController::class, 'customers'])->name('customers');
+        Route::post('/appointments/store',[AppointmentController::class,'store'])->name('appointments.store');
+        Route::get('/services', [ServiceController::class, 'index'])->name('services');
+        Route::post('/services/{id}', [ServiceController::class, 'update'])->name('services.update');
+        Route::post('/services/{id}/delete', [ServiceController::class, 'delete'])->name('services.destroy');
+    });
 });
-
-
-Route::prefix('dashboard')->group(function () {
-    Route::view('/', 'dashboards.default_dashboard')->name('dashboard')->middleware('auth');
-});
-
-
-
 
 Route::view('ecommerce-dashboard', 'dashboards.ecommerce_dashboard')->name('ecommerce_dashboard');
 
@@ -280,13 +298,13 @@ Route::view('error-page4', 'others.error_pages.error_page4')->name('error_page4'
 Route::view('error-page5', 'others.error_pages.error_page5')->name('error_page5');
 
 //others -> authentication
-Route::view('login', 'others.authentication.login')->name('login');
+Route::view('login', 'others.authentication.login')->name('login')->middleware('guestCheck');
 Route::view('login-one', 'others.authentication.login_one')->name('login_one');
 Route::view('login-two', 'others.authentication.login_two')->name('login_two');
 Route::view('login-bs-validation', 'others.authentication.login_bs_validation')->name('login_bs_validation');
 Route::view('login-bs-tt-validation', 'others.authentication.login_bs_tt_validation')->name('login_bs_tt_validation');
 Route::view('login-sa-validation', 'others.authentication.login_sa_validation')->name('login_sa_validation');
-Route::view('sign-up', 'others.authentication.sign_up')->name('sign_up');
+Route::view('sign-up', 'others.authentication.sign_up')->name('sign_up')->middleware('auth');
 Route::view('sign-up-one', 'others.authentication.sign_up_one')->name('sign_up_one');
 Route::view('sign-up-two', 'others.authentication.sign_up_two')->name('sign_up_two');
 Route::view('unlock', 'others.authentication.unlock')->name('unlock');

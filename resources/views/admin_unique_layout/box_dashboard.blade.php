@@ -65,7 +65,7 @@
                   <li> <img src="{{ ('assets/images/dashboard/default/ribbon7.png') }}" alt=""></li>
                 </ul>
               </div>
-              <h4><a href="user-profile.html"><span>Welcome Back</span> John </a><span class="right-circle"><i
+              <h4><a href="user-profile.html"><span>Welcome Back</span> {{auth()->user()->name}} </a><span class="right-circle"><i
                     class="fa fa-check-circle font-primary f-14 middle"></i></span></h4>
               <div><span class="badge badge-primary">Your 5</span><span
                   class="font-primary f-12 middle f-w-500 ms-2"> Task Is Pending</span></div>
@@ -73,222 +73,68 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-lg-6 col-md-6 box-col-25">
-        <div class="card total-revenue overflow-hidden">
-          <div class="card-header">
-            <div class="d-flex justify-content-between">
-              <div class="flex-grow-1">
-                <p class="square-after f-w-600 header-text-primary">Total Revenue<i class="fa fa-circle"></i>
-                </p>
-                <h4>96.564%</h4>
-              </div>
-              <div class="setting-list">
-                <ul class="list-unstyled setting-option">
-                  <li>
-                    <div class="setting-light"><i class="icon-layout-grid2"></i></div>
-                  </li>
-                  <li><i class="view-html fa fa-code font-white"></i></li>
-                  <li><i class="icofont icofont-maximize full-card font-white"></i></li>
-                  <li><i class="icofont icofont-minus minimize-card font-white"></i></li>
-                  <li><i class="icofont icofont-refresh reload-card font-white"></i></li>
-                  <li><i class="icofont icofont-error close-card font-white"> </i></li>
-                </ul>
-              </div>
+      <div class="col-xxl-6 col-xl-6 col-md-6 dash-30 box-col-35">
+       <div class="card mb-5 shadow-sm border-0">
+            <div class="card-header bg-danger text-white fw-bold py-3">
+                <i class="fas fa-calendar-check me-2"></i>Recent Appointments
             </div>
-          </div>
-          <div class="card-body p-0">
-            <div class="revenue-chart" id="revenue-chart"></div>
-            <div class="code-box-copy">
-              <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#revenue"><i
-                  class="icofont icofont-copy-alt"></i></button>
-              <pre><code class="language-html" id="revenue">&lt;div class="card total-revenue overflow-hidden"&gt;
-&lt;div class="card-header"&gt;
-&lt;div class="d-flex justify-content-between"&gt;
-&lt;div class="flex-grow-1"&gt;
-  &lt;p class="square-after f-w-600 header-text-primary"&gt;Total Revenue
-    &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
-  &lt;/p&gt;
-  &lt;h4&gt; 96.564%&lt;/h4&gt;
-&lt;/div&gt;
-&lt;div class="setting-list"&gt;
-  &lt;ul class="list-unstyled setting-option"&gt;
-    &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="card-body p-0"&gt;
-&lt;div class="revenue-chart" id="revenue-chart"&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</code></pre>
+            <div class="card-body p-3">
+                @php
+                    $today = \Carbon\Carbon::today();
+                    $recentAppointments = $appointments->filter(function($group, $date) use ($today) {
+                        return \Carbon\Carbon::parse($date)->lt($today);
+                    });
+                @endphp
+
+                @if($recentAppointments->isEmpty())
+                    <div class="text-center py-5">
+                        <div class="text-muted">
+                            <i class="fas fa-calendar-times fa-3x mb-3 opacity-50"></i>
+                            <p class="fs-5">No recent appointments.</p>
+                        </div>
+                    </div>
+                @else
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0 align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-4">Date</th>
+                                    <th>Customer</th>
+                                    <th>Service</th>
+                                    <th>Time</th>
+                                    <th class="pe-4">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($recentAppointments as $date => $items)
+                                    @foreach($items as $appointment)
+                                        <tr class="border-bottom">
+                                            <td class="ps-4 fw-medium">{{ \Carbon\Carbon::parse($appointment->date)->format('d M Y') }}</td>
+                                            <td class="text-primary fw-semibold">{{ $appointment->customer_name }}</td>
+                                            <td class="text-muted">{{ $appointment->service_name }}</td>
+                                            <td>
+                                                <span class="badge bg-light text-dark border">
+                                                    {{ $appointment->slot_start }} - {{ $appointment->slot_end }}
+                                                </span>
+                                            </td>
+                                            <td class="pe-4">
+                                                <span class="badge rounded-pill
+                                                    @if($appointment->status == 'booked') bg-success
+                                                    @elseif($appointment->status == 'cancelled') bg-danger
+                                                    @else bg-secondary @endif">
+                                                    {{ ucfirst($appointment->status) }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
             </div>
-          </div>
         </div>
-        <div class="card total-investment">
-          <div class="card-header pb-0">
-            <div class="d-flex justify-content-between">
-              <div class="flex-grow-1">
-                <p class="square-after f-w-600 header-text-primary">Total Investment<i class="fa fa-circle"> </i>
-                </p>
-                <h4>96.564%</h4>
-              </div>
-              <div class="setting-list">
-                <ul class="list-unstyled setting-option">
-                  <li>
-                    <div class="setting-light"><i class="icon-layout-grid2"></i></div>
-                  </li>
-                  <li><i class="view-html fa fa-code font-white"></i></li>
-                  <li><i class="icofont icofont-maximize full-card font-white"></i></li>
-                  <li><i class="icofont icofont-minus minimize-card font-white"></i></li>
-                  <li><i class="icofont icofont-refresh reload-card font-white"></i></li>
-                  <li><i class="icofont icofont-error close-card font-white"> </i></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="progress sm-progress-bar">
-              <div class="progress-colors" role="progressbar" style="width: 100%" aria-valuenow="100"
-                aria-valuemin="0" aria-valuemax="100">
-                <div class="bg-secondary progress-1"></div>
-                <div class="bg-primary progress-2"></div>
-              </div>
-            </div>
-            <div class="bottom-progress"><span class="badge round-badge-primary font-worksans">3.56% <i
-                  class="fa fa-caret-up"></i></span><span
-                class="pull-right font-primary font-worksans f-w-700">75%</span></div>
-            <div class="code-box-copy">
-              <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#investment"><i
-                  class="icofont icofont-copy-alt"></i></button>
-              <pre><code class="language-html" id="investment">&lt;div class="card total-investment"&gt;
-&lt;div class="card-header pb-0"&gt;
-&lt;div class="d-flex justify-content-between"&gt;
-&lt;div class="flex-grow-1"&gt;
-  &lt;p class="square-after f-w-600 header-text-primary"&gt; Total Investment
-    &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
-  &lt;/p&gt;
-  &lt;h4&gt; 96.564%&lt;/h4&gt;
-&lt;/div&gt;
-&lt;div class="setting-list"&gt;
-  &lt;ul class="list-unstyled setting-option"&gt;
-    &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="card-body p-0"&gt;
-&lt;div class="progress sm-progress-bar"&gt;
-&lt;div class="progress-colors" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"&gt;
-  &lt;div class="bg-secondary.progress-1"&gt;&lt;/div&gt;
-  &lt;div class="bg-primary.progress-2"&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xxl-3 col-xl-4 col-md-6 dash-30 box-col-35">
-        <div class="card our-user">
-          <div class="card-header pb-0">
-            <div class="d-flex justify-content-between">
-              <div class="flex-grow-1">
-                <p class="square-after f-w-600 header-text-primary">Our Total Users<i class="fa fa-circle"></i>
-                </p>
-                <h4>96.564%</h4>
-              </div>
-              <div class="setting-list">
-                <ul class="list-unstyled setting-option">
-                  <li>
-                    <div class="setting-light"><i class="icon-layout-grid2"></i></div>
-                  </li>
-                  <li><i class="view-html fa fa-code font-white"></i></li>
-                  <li><i class="icofont icofont-maximize full-card font-white"></i></li>
-                  <li><i class="icofont icofont-minus minimize-card font-white"></i></li>
-                  <li><i class="icofont icofont-refresh reload-card font-white"></i></li>
-                  <li><i class="icofont icofont-error close-card font-white"> </i></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="user-chart">
-              <div id="user-chart"></div>
-              <div class="icon-donut"><i data-feather="arrow-up-circle"></i></div>
-            </div>
-            <ul>
-              <li>
-                <p class="f-w-600 font-primary f-12">Desktop</p><span class="f-w-600">96.564%</span>
-              </li>
-              <li>
-                <p class="f-w-600 font-primary f-12">Mobile </p><span class="f-w-600">92.624%</span>
-              </li>
-              <li>
-                <p class="f-w-600 font-primary f-12">Tablet </p><span class="f-w-600">46.564%</span>
-              </li>
-            </ul>
-            <div class="code-box-copy">
-              <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#users"><i
-                  class="icofont icofont-copy-alt"></i></button>
-              <pre><code class="language-html" id="users">&lt;div class="card our-user"&gt;
-&lt;div class="card-header pb-0"&gt;
-&lt;div class="d-flex justify-content-between"&gt;
-&lt;div class="flex-grow-1"&gt;
-  &lt;p class="square-after f-w-600 header-text-primary"&gt; Our Total Users
-    &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
-  &lt;/p&gt;
-  &lt;h4&gt; 96.564% &lt;/h4&gt;
-&lt;/div&gt;
-&lt;div class="setting-list"&gt;
-  &lt;ul class="list-unstyled setting-option"&gt;
-    &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="card-body"&gt;
-&lt;div class="user-chart"&gt;
-&lt;div id="user-chart"&gt;&lt;/div&gt;
-&lt;div class="icon-donut"&gt;
-  &lt;i class="feather feather-arrow-up-circle"&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;
-  &lt;p class="f-w-600 font-primary f-12"&gt; Desktop &lt;/p&gt;
-  &lt;span class="f-w-600"&gt; 96.564% &lt;/span&gt;
-&lt;/li&gt;
-&lt;li&gt;
-  &lt;p class="f-w-600 font-primary f-12"&gt; Mobile &lt;/p&gt;
-  &lt;span class="f-w-600"&gt; 92.624% &lt;/span&gt;
-&lt;/li&gt;
-&lt;li&gt;
-  &lt;p class="f-w-600 font-primary f-12"&gt; Tablet &lt;/p&gt;
-  &lt;span class="f-w-600"&gt; 46.564% &lt;/span&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-            </div>
-          </div>
-        </div>
+
       </div>
       <div class="col-xl-4 col-lg-6 box-col-30 xl-30">
         <div class="card our-earning">
@@ -528,7 +374,7 @@
       &lt;td&gt; 16 august &lt;/td&gt;
       &lt;td class="text-end"&gt;
         &lt;button class="btn btn-primary" type="button" onclick="document.location='user-cards.html'"&gt; Pending &lt;/button&gt;
-      &lt;/td&gt; 
+      &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;
@@ -545,10 +391,10 @@
       &lt;/td&gt;
       &lt;td&gt; 21 September &lt;/td&gt;
       &lt;td class="text-end"&gt;
-        &lt;button class="btn btn-secondary" type="button" onclick="document.location='user-cards.html'"&gt; Done 
+        &lt;button class="btn btn-secondary" type="button" onclick="document.location='user-cards.html'"&gt; Done
           &lt;i class="fa fa-check-circle"&gt;
         &lt;/button&gt;
-      &lt;/td&gt; 
+      &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;
@@ -566,7 +412,7 @@
       &lt;td&gt; 06 March &lt;/td&gt;
       &lt;td class="text-end"&gt;
         &lt;button class="btn btn-success" type="button" onclick="document.location='user-cards.html'"&gt; Pending &lt;/button&gt;
-      &lt;/td&gt; 
+      &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;
@@ -584,7 +430,7 @@
       &lt;td&gt; 12 February &lt;/td&gt;
       &lt;td class="text-end"&gt;
         &lt;button class="btn btn-info" type="button" onclick="document.location='user-cards.html'"&gt; Pending &lt;/button&gt;
-      &lt;/td&gt; 
+      &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;
@@ -602,7 +448,7 @@
       &lt;td&gt; 06 March &lt;/td&gt;
       &lt;td class="text-end"&gt;
         &lt;button class="btn btn-danger" type="button" onclick="document.location='user-cards.html'"&gt; Pending &lt;/button&gt;
-      &lt;/td&gt; 
+      &lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -940,10 +786,10 @@
 &lt;div class="card-body chat-box"&gt;
 &lt;div class="d-flex left-chat"&gt;
 &lt;div class="flex-grow-1"&gt;
-  &lt;div class="message-main"&gt; 
+  &lt;div class="message-main"&gt;
     &lt;p class="mb-0"&gt; Hii &lt;/p&gt;
   &lt;/div &gt;
-  &lt;div class="sub-message message-main"&gt; 
+  &lt;div class="sub-message message-main"&gt;
     &lt;p class="mb-0"&gt; Good Evening, My Friend &lt;/p&gt;
   &lt;/div &gt;
 &lt;/div&gt;
@@ -951,7 +797,7 @@
 &lt;/div&gt;
 &lt;div class="d-flex right-chat"&gt;
 &lt;div class="flex-grow-1 text-end"&gt;
-  &lt;div class="message-main pull-right"&gt; 
+  &lt;div class="message-main pull-right"&gt;
     &lt;p class="text-start mb-0"&gt; What can do for you &lt;/p&gt;
     &lt;div class="clearfix"&gt;&lt;/div&gt;
   &lt;/div &gt;
@@ -959,7 +805,7 @@
 &lt;/div&gt;
 &lt;div class="d-flex left-chat"&gt;
 &lt;div class="flex-grow-1"&gt;
-  &lt;div class="sub-message message-main mt-0"&gt; 
+  &lt;div class="sub-message message-main mt-0"&gt;
     &lt;p class="mb-0"&gt; Can i Borrow some money &lt;/p&gt;
   &lt;/div &gt;
 &lt;/div&gt;
@@ -1134,7 +980,7 @@
         </div>
       </div>
     </div>
-  </div>    
+  </div>
 @endsection
 
 @section('scripts')
@@ -1163,6 +1009,6 @@
 <script src="{{ asset('assets/js/typeahead-search/typeahead-custom.js') }}"></script>
 <script>
      localStorage.clear();
-     localStorage.setItem('body-wrapper', 'box-layout');
+     localStorage.setItem('body-wrapper', '');
  </script>
 @endsection

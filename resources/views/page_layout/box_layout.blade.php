@@ -28,7 +28,7 @@
       <div class="card alert alert-primary" role="alert">
         <h4 class="alert-heading">Tip!</h4>
         <p>
-          Add class="box-layout" attribute to get this layout. The boxed layout is helpful when working on
+          Add class="" attribute to get this layout. The boxed layout is helpful when working on
           large screens because it prevents the site from stretching very wide.
         </p>
       </div>
@@ -36,8 +36,8 @@
     <div class="col-sm-12">
       <div class="card">
         <div class="card-header pb-0">
-          <div class="d-flex"> 
-            <div class="flex-grow-1"> 
+          <div class="d-flex">
+            <div class="flex-grow-1">
               <h4>Title</h4>
             </div>
             <div class="setting-list">

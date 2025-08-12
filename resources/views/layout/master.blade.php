@@ -1,76 +1,95 @@
 <!DOCTYPE html>
-<html lang="en" @if (Route::currentRouteName()=='layout_rtl') dir="rtl" @endif>
+<html lang="en" @if (Route::currentRouteName() == 'layout_rtl') dir="rtl" @endif>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+<!-- Add this to your <head> section -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <head>
     @include('layout.head')
     <!-- comman css-->
     @include('layout.css')
 </head>
-
+<style>
+    * {
+        font-family: 'poppins', sans-serif;
+    }
+</style>
 @switch(Route::currentRouteName())
     @case('dashboard')
+
         <body onload="startTime()">
         @break
 
-    @case('box_layout')
-        <body class="box-layout">
-        @break
+        @case('box_layout')
 
-    @case('layout_rtl')
-        <body class="rtl">
-        @break
+            <body class="">
+            @break
 
-    @case('layout_dark')
-        <body class="dark-only">
-        @break
+            @case('layout_rtl')
 
-    @default
-        <body>
-@endswitch
+                <body class="rtl">
+                @break
+
+                @case('layout_dark')
+
+                    <body class="dark-only">
+                    @break
+
+                    @default
+
+                        <body>
+                    @endswitch
 
 
-    <!-- tap on top starts-->
-    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
-    <!-- tap on tap ends-->
+                    <!-- tap on top starts-->
+                    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
+                    <!-- tap on tap ends-->
 
-    <!-- Loader starts-->
-    <div class="loader-wrapper">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"> </div>
-        <div class="dot"></div>
-    </div>
-    <!-- Loader ends-->
+                    <!-- Loader starts-->
+                    <div class="loader-wrapper">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"> </div>
+                        <div class="dot"></div>
+                    </div>
+                    <!-- Loader ends-->
 
-    <!-- page-wrapper Start-->
-    <div class="page-wrapper compact-wrapper compact-sidebar" id="pageWrapper">
+                    <!-- page-wrapper Start-->
+                    <div class="page-wrapper compact-wrapper compact-sidebar" id="pageWrapper">
 
-        <!-- Page Header Start-->
-        @include('layout.header')
-        <!-- Page Header Ends-->
+                        <!-- Page Header Start-->
+                        @include('layout.header')
+                        <!-- Page Header Ends-->
 
-        <!-- Page Body Start-->
-        <div class="page-body-wrapper">
+                        <!-- Page Body Start-->
+                        <div class="page-body-wrapper">
 
-            <!-- Page Sidebar Start-->
-            @include('layout.sidebar')
-            <!-- Page Sidebar Ends-->
+                            <!-- Page Sidebar Start-->
+                            @include('layout.sidebar')
+                            <!-- Page Sidebar Ends-->
 
-            
-            <div class="page-body">
-                @yield('main_content')
-                <!-- Container-fluid Ends-->
-            </div>
 
-            <!-- footer start-->
-            @include('layout.footer')
+                            <div class="page-body">
+                                @yield('main_content')
+                                <!-- Container-fluid Ends-->
+                            </div>
 
-        </div>
-    </div>
-    {{-- scripts --}}
-    @include('layout.script')
-    {{--end scripts --}}
+                            <!-- footer start-->
+                            @include('layout.footer')
 
-</body>
+                        </div>
+                    </div>
+                    {{-- scripts --}}
+                    @include('layout.script')
+                    {{-- end scripts --}}
+
+                </body>
+
 </html>

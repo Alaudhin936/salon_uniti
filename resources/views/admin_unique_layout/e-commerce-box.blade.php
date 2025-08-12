@@ -293,7 +293,7 @@
           &lt;img class="img-fluid" src="../assets/images/dashboard-2/dash-2/01.png" alt=""/&gt;
         &lt;/div&gt;
         &lt;div class="flex-grow-1"&gt;
-          &lt;span class="f-14 f-w-600"&gt; 
+          &lt;span class="f-14 f-w-600"&gt;
             &lt;a href="user-profile.html"&gt; Ossim keter&lt;/a&gt; &lt;/span&gt;
           &lt;p class="mb-0"&gt; 2022 &lt;/p&gt;
         &lt;/div&gt;
@@ -1476,6 +1476,6 @@
     <script src="{{ asset('assets/js/dashboard/dashboard_2.js') }}"></script>
     <script>
         localStorage.clear();
-        localStorage.setItem('body-wrapper', 'box-layout');
+        localStorage.setItem('body-wrapper', '');
     </script>
 @endsection
