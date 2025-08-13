@@ -7,7 +7,7 @@
         <div class="page-title">
             <div class="row align-items-center">
                 <div class="col-sm-6">
-                    <h3  style="color: #0a566d" >Your Appointments</h3>
+                    <h3 style="color: #0a566d">All Appointments</h3>
                 </div>
                 <div class="col-sm-6 text-sm-end text-start">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookAppointmentModal">
@@ -29,37 +29,35 @@
 
             <div class="container-fluid mt-5">
                 <?php $__currentLoopData = $appointments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $date => $bookings): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php
+                        $tableId = 'appointmentsTable_' . \Carbon\Carbon::parse($date)->format('Y_m_d');
+                    ?>
+
                     <div class="card mb-4 shadow-sm">
-                        <div class="card-header bg-primary text-white">
+                        <div class="card-header bg-primary text-white py-2">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">
+                                <b class="card-title mb-0" style="font-size: 1rem;">
                                     <i
                                         class="fa fa-calendar me-2"></i><?php echo e(\Carbon\Carbon::parse($date)->format('l, d M Y')); ?>
 
-                                </h5>
+                                </b>
                                 <span class="badge bg-light text-primary rounded-pill">
                                     <?php echo e(count($bookings)); ?> Appointments
                                 </span>
                             </div>
                         </div>
 
-                        <div class="card-body p-0">
+
+                        <div class="card-body p-3">
                             <div class="table-responsive">
-                                <table class="table table-hover table-striped mb-0">
-                                    <thead class="table-dark">
+                                <table id="<?php echo e($tableId); ?>" class="table table-hover table-striped mb-0">
+                                    <thead class="">
                                         <tr>
-                                            <th scope="col" style="width: 25%;">
-                                                <i class="fa fa-user me-1"></i>Customer
-                                            </th>
-                                            <th scope="col" style="width: 30%;">
-                                                <i class="fa fa-scissors me-1"></i>Service
-                                            </th>
-                                            <th scope="col" style="width: 25%;">
-                                                <i class="fa fa-clock me-1"></i>Time Slot
-                                            </th>
-                                            <th scope="col" class="text-center" style="width: 20%;">
-                                                <i class="fa fa-info-circle me-1"></i>Status
-                                            </th>
+                                            <th>Customer</th>
+                                            <th>Service</th>
+                                            <th>Time Slot</th>
+                                            <th class="text-center">Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -106,15 +104,11 @@
                                                 <td class="text-center">
                                                     <span
                                                         class="badge fs-6 px-3 py-2
-                                            <?php if($appointment->status == 'booked'): ?> bg-success
-                                            <?php elseif($appointment->status == 'cancelled'): ?>
-                                                bg-danger
-                                            <?php elseif($appointment->status == 'completed'): ?>
-                                                bg-primary
-                                            <?php elseif($appointment->status == 'pending'): ?>
-                                                bg-warning text-dark
-                                            <?php else: ?>
-                                                bg-secondary <?php endif; ?>">
+                                        <?php if($appointment->status == 'booked'): ?> bg-success
+                                        <?php elseif($appointment->status == 'cancelled'): ?> bg-danger
+                                        <?php elseif($appointment->status == 'completed'): ?> bg-primary
+                                        <?php elseif($appointment->status == 'pending'): ?> bg-warning text-dark
+                                        <?php else: ?> bg-secondary <?php endif; ?>">
                                                         <?php if($appointment->status == 'booked'): ?>
                                                             <i class="fa fa-check-circle me-1"></i>
                                                         <?php elseif($appointment->status == 'cancelled'): ?>
@@ -129,6 +123,32 @@
                                                         <?php echo e(ucfirst($appointment->status)); ?>
 
                                                     </span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        
+                                                        <i style="cursor: <?php echo e($appointment->status === 'completed' ? 'not-allowed' : 'pointer'); ?>;"
+                                                            data-appointment-id="<?php echo e($appointment->id); ?>"
+                                                            data-status="<?php echo e($appointment->status); ?>"
+                                                            class="fa fa-check-circle text-success fa-lg appointment-mark-done 
+               <?php echo e($appointment->status === 'completed' ? 'disabled-icon disabled' : ''); ?>">
+                                                        </i>
+
+                                                        
+                                                        <i style="cursor: <?php echo e($appointment->status === 'cancelled' ? 'not-allowed' : 'pointer'); ?>;"
+                                                            data-appointment-id="<?php echo e($appointment->id); ?>"
+                                                            data-status="<?php echo e($appointment->status); ?>"
+                                                            class="fa fa-times-circle text-danger fa-lg appointment-mark-reject 
+               <?php echo e($appointment->status === 'cancelled' ? 'disabled-icon disabled' : ''); ?>">
+                                                        </i>
+                                                    </div>
+                                                    <style>
+                                                        .disabled-icon {
+                                                            opacity: 0.5;
+                                                            pointer-events: none;
+                                                            /* This makes it unclickable */
+                                                        }
+                                                    </style>
                                                 </td>
                                             </tr>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -162,6 +182,7 @@
                         </div>
                     </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
             </div>
         </div>
     </div>
@@ -236,8 +257,24 @@
     <script src="<?php echo e(asset('assets/js/support-ticket-custom.js')); ?>"></script>
     <script>
         $(document).ready(function() {
+
+            $("table[id^='appointmentsTable_']").each(function() {
+                $(this).DataTable({
+                    paging: true,
+                    searching: true,
+                    ordering: true,
+                    info: true,
+                    pageLength: 5,
+                    lengthMenu: [5, 10, 25, 50],
+                    columnDefs: [{
+                            orderable: false,
+                            targets: [3]
+                        } // Disable sorting on Status column
+                    ]
+                });
+            });
+
             function calculateEndTime() {
-                debugger
                 let startTime = $('input[name="slot_start"]').val();
                 let duration = $('select[name="service_id"] option:selected').data('duration');
 
@@ -265,7 +302,17 @@
                     type: "POST",
                     data: $(this).serialize(),
                     success: function(response) {
-                        window.location.reload();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Service Competed Successfully',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        }).then(function(result) {
+                            if (result.isConfirmed) {
+                                window.location.reload();
+                            }
+                        });
                     },
                     error: function(xhr) {
                         debugger
@@ -278,6 +325,45 @@
                     }
                 });
 
+            });
+
+            $('.appointment-mark-done').on('click', (e) => {
+                let appointmentId = $(e.target).data('appointment-id');
+                let status = $(e.target).data('status');
+                let myUrl = "<?php echo e(route('appointments.markdone', [':id', ':status'])); ?>"
+                    .replace(':id', appointmentId)
+                    .replace(':status', status);
+
+                $.ajax({
+                    url: myUrl,
+                    type: "POST",
+                    data: {
+                        _token: '<?php echo e(csrf_token()); ?>'
+                    },
+                    success: function(response) {
+                        if (response.status == 200) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: 'Appointment Booked Successfully',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK'
+                            }).then(function(result) {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        if (xhr.status === 422) {
+                            let errors = xhr.responseJSON.errors;
+                            alert("Validation error: " + Object.values(errors).join(", "));
+                        } else {
+                            alert("Server error!");
+                        }
+                    }
+                });
             });
         })
     </script>

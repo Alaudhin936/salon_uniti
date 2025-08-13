@@ -1,89 +1,83 @@
 <div class="sidebar-wrapper">
     @if (auth()->user()->role_id == 2)
-       <div class="sidebar-container">
-    <!-- Logo & Top Controls -->
-    <div class="logo-wrapper d-flex align-items-center justify-content-between px-3 py-2">
-        <a href="{{ route('vendor_dashboard') }}" style="height: 75px" class="d-flex align-items-center">
-            <img src="{{ asset('assets/images/SALONUNITII LOGO-04 3.svg') }}"
-                 alt="Salon Uniti Logo"
-                 class="img-fluid"
-                 style="max-height: 120px; width: auto;">
-        </a>
-        <div class="d-flex align-items-center">
-            <div class="back-btn me-2"><i data-feather="arrow-left-circle"></i></div>
-            <div class="toggle-sidebar icon-box-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="menu"></i></div>
-        </div>
-    </div>
-
-    <!-- Home Icon -->
-    <div class="logo-icon-wrapper text-center my-3">
-        <a href="{{ route('dashboard') }}">
-            <div class="icon-box-sidebar"><i data-feather="home"></i></div>
-        </a>
-    </div>
-
-    <!-- Sidebar Navigation -->
-    <nav class="sidebar-main">
-        <div id="sidebar-menu">
-            <ul class="sidebar-links list-unstyled px-2" id="simple-bar">
-                <li class="sidebar-list mb-2">
-                    <a class="sidebar-link sidebar-title" href="{{ route('vendor_dashboard') }}">
-                        <i data-feather="scissors"></i><span class="ms-2">Salon</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-list mb-2">
-                    <a class="sidebar-link sidebar-title" href="{{ route('customers') }}">
-                        <i data-feather="users"></i><span class="ms-2">Customers</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-list mb-2">
-                    <a class="sidebar-link sidebar-title" href="{{ route('support_ticket') }}">
-                        <i data-feather="clock"></i><span class="ms-2">Time slots</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-list mb-2">
-                    <a class="sidebar-link sidebar-title" href="{{ route('services') }}">
-                        <i data-feather="briefcase"></i><span class="ms-2">Services</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-list mb-2">
-                    <a class="sidebar-link sidebar-title" href="{{ route('appointments') }}">
-                        <i data-feather="calendar"></i><span class="ms-2">Appointments</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-list">
-                    <a class="sidebar-link sidebar-title" href="{{ route('support_ticket') }}">
-                        <i data-feather="settings"></i><span class="ms-2">Settings</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>
-
-    @elseif(auth()->user()->role_id == 1)
-        <div>
-            <div class="logo-wrapper">
-                <a href="{{ route('vendor_dashboard') }}">
-                    <h3>Salon Unitii</h3>
+        <div class="sidebar-container">
+            <!-- Logo & Top Controls -->
+            <div class="logo-wrapper d-flex align-items-center justify-content-between px-3 py-2">
+                <a href="{{ route('vendor_dashboard') }}" style="height: 75px" class="d-flex align-items-center">
+                    <img src="{{ asset('assets/images/SALONUNITII LOGO-02 3.svg') }}" alt="Salon Uniti Logo"
+                        class="img-fluid" style="max-height: 80px; width: auto;">
                 </a>
-                <a class="logo-wrapper">Admin Page</a>
-                <div class="back-btn"><i data-feather="arrow-left-circle"></i></div>
-                <div class="toggle-sidebar icon-box-sidebar"><i class="status_toggle middle sidebar-toggle"
-                        data-feather="menu"></i></div>
+                <div class="d-flex align-items-center">
+                    <div class="back-btn me-2"><i data-feather="arrow-left-circle"></i></div>
+                    <div class="toggle-sidebar icon-box-sidebar"><i class="status_toggle middle sidebar-toggle"
+                            data-feather="menu"></i></div>
+                </div>
             </div>
 
-            <div class="logo-icon-wrapper">
+            <!-- Home Icon -->
+            <div class="logo-icon-wrapper text-center my-3">
                 <a href="{{ route('dashboard') }}">
                     <div class="icon-box-sidebar"><i data-feather="home"></i></div>
                 </a>
             </div>
 
+            <!-- Sidebar Navigation -->
+            <nav class="sidebar-main">
+                <div id="sidebar-menu">
+                    <ul class="sidebar-links list-unstyled px-2" id="simple-bar">
+                        <li class="sidebar-list mb-2">
+                            <a class="sidebar-link sidebar-title" href="{{ route('vendor_dashboard') }}">
+                                <i data-feather="scissors"></i><span class="ms-2">Salon</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-list mb-2">
+                            <a class="sidebar-link sidebar-title" href="{{ route('appointments') }}">
+                                <i data-feather="calendar"></i><span class="ms-2">Appointments</span>
+                            </a>
+                        </li>
+                        
+                        <li class="sidebar-list mb-2">
+                            <a class="sidebar-link sidebar-title" href="{{ route('customers') }}">
+                                <i data-feather="users"></i><span class="ms-2">Customers</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-list mb-2">
+                            <a class="sidebar-link sidebar-title" href="{{ route('support_ticket') }}">
+                                <i data-feather="clock"></i><span class="ms-2">Time slots</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-list mb-2">
+                            <a class="sidebar-link sidebar-title" href="{{ route('services') }}">
+                                <i data-feather="briefcase"></i><span class="ms-2">Services</span>
+                            </a>
+                        </li>
+
+
+                        {{-- <li class="sidebar-list">
+                            <a class="sidebar-link sidebar-title" href="{{ route('support_ticket') }}">
+                                <i data-feather="settings"></i><span class="ms-2">Settings</span>
+                            </a>
+                        </li> --}}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    @elseif(auth()->user()->role_id == 1)
+        <div>
+            <div class="logo-wrapper d-flex align-items-center justify-content-between px-3 py-2">
+                <a href="{{ route('vendor_dashboard') }}" style="height: 75px" class="d-flex align-items-center">
+                    <img src="{{ asset('assets/images/SALONUNITII LOGO-02 3.svg') }}" alt="Salon Uniti Logo"
+                        class="img-fluid" style="max-height: 80px; width: auto;">
+                </a>
+                <div class="d-flex align-items-center">
+                    <div class="back-btn me-2"><i data-feather="arrow-left-circle"></i></div>
+                    <div class="toggle-sidebar icon-box-sidebar"><i class="status_toggle middle sidebar-toggle"
+                            data-feather="menu"></i></div>
+                </div>
+            </div>
             <nav class="sidebar-main">
                 <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
                 <div id="sidebar-menu">
@@ -92,7 +86,6 @@
                             <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2"
                                     aria-hidden="true"></i></div>
                         </li>
-                        <hr>
 
                         <li class="sidebar-list">
                             <i class="fa fa-thumb-tack"></i>

@@ -16,6 +16,11 @@
 <!--scrollbar css-->
 <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vendors/scrollbar.css')); ?>">
 
+<!-- SweetAlert2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
+
+
 <!-- include css plugins-->
 <?php echo $__env->yieldContent('css'); ?>
 <!--end include css plugins-->

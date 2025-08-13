@@ -22,47 +22,31 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card shadow-sm">
-                        <div class="card-header bg-primary text-white">
-                            <h4 class="card-title mb-0">
-                                <i class="fas fa-cut me-2"></i>Salon Directory
-                            </h4>
+                        <div class="card-header bg-primary text-white py-2">
+
+                            <i class="fas fa-cut me-2"></i> All Vendor Lists
+
                         </div>
-                        <div class="card-body p-0">
+                        <div class="card-body p-4">
                             <div class="table-responsive">
-                                <table class="table table-striped table-hover table-bordered mb-0">
-                                    <thead class="table-dark">
+                                <table id="salonTable" class="table table-striped table-hover table-bordered mb-0">
+                                    <thead class="">
                                         <tr>
-                                            <th scope="col" class="text-center" style="width: 5%;">#</th>
-                                            <th scope="col" style="width: 20%;">
-                                                <i class="fas fa-store me-1"></i>Business Name
-                                            </th>
-                                            <th scope="col" style="width: 15%;">
-                                                <i class="fas fa-quote-left me-1"></i>Slogan
-                                            </th>
-                                            <th scope="col" class="text-center" style="width: 10%;">
-                                                <i class="fas fa-tags me-1"></i>Type
-                                            </th>
-                                            <th scope="col" style="width: 15%;">
-                                                <i class="fas fa-map-marker-alt me-1"></i>Location
-                                            </th>
-                                            <th scope="col" style="width: 15%;">
-                                                <i class="fas fa-user me-1"></i>Vendor Name
-                                            </th>
-                                            <th scope="col" style="width: 10%;">
-                                                <i class="fas fa-envelope me-1"></i>Email
-                                            </th>
-                                            <th scope="col" class="text-center" style="width: 10%;">
-                                                <i class="fas fa-phone me-1"></i>Phone
-                                            </th>
+                                            <th class="text-center">#</th>
+                                            <th>Business Name</th>
+                                            <th class="text-center">Type</th>
+                                            <th>Location</th>
+                                            <th>Vendor Name</th>
+                                            <th>Email</th>
+                                            <th class="text-center">Action</th>
+                                            <th class="text-center">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($salons as $index => $salon)
-                                            <tr class="align-middle">
-                                                <td class="text-center fw-bold text-primary">
-                                                    {{ $index + 1 }}
-                                                </td>
-                                                <td class="fw-semibold">
+                                            <tr>
+                                                <td class="text-center fw-bold text-primary">{{ $index + 1 }}</td>
+                                                <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-2"
                                                             style="width: 32px; height: 32px; font-size: 12px; color: white;">
@@ -71,17 +55,12 @@
                                                         {{ $salon->business_name }}
                                                     </div>
                                                 </td>
-                                                <td class="text-muted fst-italic">
-                                                    {{ $salon->slogan }}
-                                                </td>
+                                                {{-- <td class="text-muted fst-italic">{{ $salon->slogan }}</td> --}}
                                                 <td class="text-center">
-                                                    <span class="badge bg-secondary rounded-pill">
-                                                        {{ $salon->type }}
-                                                    </span>
+                                                    <span class="badge bg-secondary rounded-pill">{{ $salon->type }}</span>
                                                 </td>
-                                                <td>
-                                                    <i class="fas fa-map-marker-alt text-danger me-1"></i>
-                                                    {{ $salon->location }}
+                                                <td><i
+                                                        class="fas fa-map-marker-alt text-danger me-1"></i>{{ $salon->location }}
                                                 </td>
                                                 <td>
                                                     <div class="d-flex align-items-center">
@@ -95,16 +74,21 @@
                                                 <td>
                                                     <a href="mailto:{{ $salon->email }}"
                                                         class="text-decoration-none text-primary">
-                                                        <i class="fas fa-envelope me-1"></i>
-                                                        <small>{{ $salon->email }}</small>
+                                                        <i
+                                                            class="fas fa-envelope me-1"></i><small>{{ $salon->email }}</small>
                                                     </a>
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="tel:{{ $salon->phone }}"
-                                                        class="btn btn-outline-success btn-sm">
-                                                        <i class="fas fa-phone me-1"></i>
-                                                        {{ $salon->phone }}
-                                                    </a>
+                                                    <button class="btn btn-primary btn-sm viewSalonBtn"
+                                                        style="padding: 2px 8px; font-size: 12px;"
+                                                        data-id={{ $salon->id }}>View</button>
+                                                </td>
+                                                <td class="text-center">
+                                                    @if ($salon->is_active)
+                                                        <i class="fa fa-check-circle text-success"></i>
+                                                    @else
+                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -113,8 +97,7 @@
                             </div>
                         </div>
                         <div class="card-footer bg-light text-muted">
-                            <small>
-                                <i class="fas fa-info-circle me-1"></i>
+                            <small><i class="fas fa-info-circle me-1"></i>
                                 Total Salons: <span class="fw-bold">{{ count($salons) }}</span>
                             </small>
                         </div>
@@ -122,100 +105,136 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="registerSalonModal" tabindex="-1" aria-labelledby="registerSalonModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
+    </div>
 
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="registerSalonModalLabel">Register New Salon</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
 
-                    <form id="registerSalonForm">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="row">
-                                <!-- Vendor Name -->
-                                <div class="col-md-6 mb-3">
-                                    <label for="name" class="form-label">Vendor Name</label>
-                                    <input type="text" name="name" class="form-control" required>
-                                </div>
-
-                                <!-- Email -->
-                                <div class="col-md-6 mb-3">
-                                    <label for="email" class="form-label">Vendor Email</label>
-                                    <input type="email" name="email" class="form-control" required>
-                                </div>
-
-                                <!-- Phone -->
-                                <div class="col-md-6 mb-3">
-                                    <label for="phone" class="form-label">Phone</label>
-                                    <input type="text" name="phone" class="form-control" required>
-                                </div>
-
-                                <!-- Business Name -->
-                                <div class="col-md-6 mb-3">
-                                    <label for="business_name" class="form-label">Business Name</label>
-                                    <input type="text" name="business_name" class="form-control" required>
-                                </div>
-
-                                <!-- Slogan -->
-                                <div class="col-md-6 mb-3">
-                                    <label for="slogan" class="form-label">Slogan</label>
-                                    <input type="text" name="slogan" class="form-control">
-                                </div>
-
-                                <!-- Type -->
-                                <div class="col-md-6 mb-3">
-                                    <label for="type" class="form-label">Type</label>
-                                    <select name="type" class="form-select" required>
-                                        <option value="Men">Men</option>
-                                        <option value="Women">Women</option>
-                                        <option value="Unisex">Unisex</option>
-                                    </select>
-                                </div>
-
-                                <!-- Location -->
-                                <div class="col-md-12 mb-3">
-                                    <label for="location" class="form-label">Location</label>
-                                    <input type="text" name="location" class="form-control" required>
-                                </div>
-
-                                <!-- GST -->
-                                <div class="col-md-6 mb-3">
-                                    <label for="gst_number" class="form-label">GST Number (optional)</label>
-                                    <input type="text" name="gst_number" class="form-control">
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                    <label for="gst_number" class="form-label">Write New Password</label>
-                                    <input type="password" name="password" class="form-control">
-                                </div>
-
-                                <!-- Latitude -->
-                                <div class="col-md-3 mb-3">
-                                    <label for="lattitude" class="form-label">Latitude (Optional)</label>
-                                    <input type="text" name="lattitude" class="form-control">
-                                </div>
-
-                                <!-- Longitude -->
-                                <div class="col-md-3 mb-3">
-                                    <label for="longitude" class="form-label">Longitude (Optional)</label>
-                                    <input type="text" name="longitude" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save Salon</button>
-                        </div>
-                    </form>
+    <div class="modal fade" id="salonModal" tabindex="-1" aria-labelledby="salonModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="salonModalLabel">Salon Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Vendor Name:</strong> <span id="salonName"></span></p>
+                    <p><strong>Email:</strong> <span id="salonEmail"></span></p>
+                    <p><strong>Type:</strong> <span id="salonType"></span></p>
+                    <p><strong>Phone:</strong> <span id="salonPhone"></span></p>
+                    <p><strong>Location:</strong> <span id="salonLocation"></span></p>
+                    <p><strong>GST Number:</strong> <span id="salonGst"></span></p>
+                    <p><strong>Location:</strong> <span id="salonLocation"></span></p>
+                    <p><strong>Shop Open:</strong> <span id="salonOpen"></span></p>
+                    <p><strong>Shop Close:</strong> <span id="salonClose"></span></p>
+                    <p><strong>Total Revenue:</strong> <span id="salonRevenue"></span></p>
                 </div>
             </div>
         </div>
+    </div>
 
+
+
+    <div class="modal fade" id="registerSalonModal" tabindex="-1" aria-labelledby="registerSalonModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerSalonModalLabel">Register New Salon</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form id="registerSalonForm">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <!-- Vendor Name -->
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Vendor Name</label>
+                                <input type="text" name="name" class="form-control" required>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Vendor Email</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="text" name="phone" class="form-control" required>
+                            </div>
+
+                            <!-- Business Name -->
+                            <div class="col-md-6 mb-3">
+                                <label for="business_name" class="form-label">Business Name</label>
+                                <input type="text" name="business_name" class="form-control" required>
+                            </div>
+
+                            <!-- Slogan -->
+                            <div class="col-md-6 mb-3">
+                                <label for="slogan" class="form-label">Slogan</label>
+                                <input type="text" name="slogan" class="form-control">
+                            </div>
+
+                            <!-- Type -->
+                            <div class="col-md-6 mb-3">
+                                <label for="type" class="form-label">Type</label>
+                                <select name="type" class="form-select" required>
+                                    <option value="Men">Men</option>
+                                    <option value="Women">Women</option>
+                                    <option value="Unisex">Unisex</option>
+                                </select>
+                            </div>
+
+                            <!-- Location -->
+                            <div class="col-md-12 mb-3">
+                                <label for="location" class="form-label">Location</label>
+                                <input type="text" name="location" class="form-control" required>
+                            </div>
+
+                            <!-- GST -->
+                            <div class="col-md-6 mb-3">
+                                <label for="gst_number" class="form-label">GST Number (optional)</label>
+                                <input type="text" name="gst_number" class="form-control">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="gst_number" class="form-label">Write New Password</label>
+                                <input type="password" name="password" class="form-control">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="shop_open" class="form-label">Shop Opening Time</label>
+                                <input type="time" name="shop_open" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="shop_close" class="form-label">Shop Closing Time</label>
+                                <input type="time" name="shop_close" class="form-control">
+                            </div>
+
+
+                            <!-- Latitude -->
+                            <div class="col-md-3 mb-3">
+                                <label for="lattitude" class="form-label">Latitude (Optional)</label>
+                                <input type="text" name="lattitude" class="form-control">
+                            </div>
+
+                            <!-- Longitude -->
+                            <div class="col-md-3 mb-3">
+                                <label for="longitude" class="form-label">Longitude (Optional)</label>
+                                <input type="text" name="longitude" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Salon</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 @endsection
 
@@ -228,25 +247,59 @@
 
     <script>
         $(document).ready(function() {
+            $('#salonTable').DataTable({
+                "pageLength": 10, // Pagination limit
+                "ordering": true, // Enable column sorting
+                "searching": true, // Enable search box
+                "lengthChange": true, // Show rows per page dropdown
+                "language": {
+                    "search": "Search Salon:",
+                    "lengthMenu": "Show _MENU_ entries",
+                    "info": "Showing _START_ to _END_ of _TOTAL_ salons"
+                }
+            });
+
+            // Ajax form submission for adding new salon
             $('#registerSalonForm').submit(function(e) {
                 e.preventDefault();
-
                 $.ajax({
-                    url: "{{ route('salons.store') }}", // You will define this route
+                    url: "{{ route('salons.store') }}",
                     type: "POST",
                     data: $(this).serialize(),
                     success: function(response) {
                         if (response.status === 'success') {
-                            window.location.reload();
+                            location.reload();
                         } else {
                             alert('Error saving salon.');
                         }
                     },
-                    error: function(xhr) {
+                    error: function() {
                         alert('Something went wrong.');
                     }
                 });
             });
-        })
+
+
+            $(document).on('click', '.viewSalonBtn', function() {
+                let salonId = $(this).data('id');
+                let myUrl = "{{ route('salon.details', ':id') }}".replace(':id', salonId);
+                $.ajax({
+                    url: myUrl,
+                    type: 'GET',
+                    success: function(response) {
+                        // Fill modal with salon data
+                        $('#salonName').text(response.business_name);
+                        $('#salonEmail').text(response.email);
+                        $('#salonPhone').text(response.phone);
+                        $('#salonLocation').text(response.location);
+                        $('#salonType').text(response.type);
+
+                        // Show modal
+                        $('#salonModal').modal('show');
+                    }
+                });
+            });
+
+        });
     </script>
 @endsection

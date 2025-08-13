@@ -1483,7 +1483,7 @@
     color: #fff
 }
 
-.default-text{
+.default-text {
     color: #0a566d !important;
 }
 
@@ -26171,7 +26171,7 @@ footer {
     -ms-flex-pack: center;
     justify-content: center;
     margin: 0 auto;
-    background: url("../images/login/login_bg.jpg");
+
     padding: 30px 12px
 }
 

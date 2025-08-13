@@ -12,11 +12,14 @@
   <script src="<?php echo e(asset('assets/js/config.js')); ?>"></script>
   <script src="<?php echo e(asset('assets/js/sidebar-menu.js')); ?>"></script>
 
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
   <?php echo $__env->yieldContent('scripts'); ?>
   
 
-   <!-- Template js-->
-   <script src="<?php echo e(asset('assets/js/script.js')); ?>"></script>
-   <script src="<?php echo e(asset('assets/js/theme-customizer/customizer.js')); ?>"></script>
-   <!-- login js--><?php /**PATH C:\xampp8.2\htdocs\salon_unitiii\resources\views/layout/script.blade.php ENDPATH**/ ?>
+  <!-- Template js-->
+  <script src="<?php echo e(asset('assets/js/script.js')); ?>"></script>
+  <script src="<?php echo e(asset('assets/js/theme-customizer/customizer.js')); ?>"></script>
+  <!-- login js-->
+<?php /**PATH C:\xampp8.2\htdocs\salon_unitiii\resources\views/layout/script.blade.php ENDPATH**/ ?>

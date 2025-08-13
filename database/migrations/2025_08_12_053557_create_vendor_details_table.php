@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('slogan')->nullable();
             $table->string('type')->nullable();
             $table->string('location');
-            $table->string('slot_start');
-            $table->string('slot_end');
-            $table->boolean('is_active')->default(0);
+            $table->string('shop_open');
+            $table->string('shop_close');
+            $table->boolean('is_active')->default(1);
             $table->string('gst_number')->nullable();
             $table->string('lattitude')->nullable();
             $table->string('longitude')->nullable();

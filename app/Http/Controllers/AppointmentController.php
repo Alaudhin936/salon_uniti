@@ -125,4 +125,16 @@ class AppointmentController extends Controller
 
         return view('customers', compact('allCustomers'));
     }
+
+    public function markAsDone(Request $request, $id, $status) {
+        
+        $appointment = Appointment::where('id',$id)->update([
+            'status' => 'completed'
+        ]);
+
+        if($appointment){
+            return response()->json(['status' => 200]);
+        }
+
+    }
 }

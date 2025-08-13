@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
+use App\Models\User;
+use App\Models\VendorDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class ServiceController extends Controller
 {
@@ -37,12 +42,13 @@ class ServiceController extends Controller
         $service->update([
             'name' => $request->name,
             'price' => $request->price,
-            'duration' => $request->duration
+            'duration' => $request->duration,
+            'is_active' => $request->is_active
         ]);
 
         return response()->json([
             'status' => true,
-            'service' => $service
+            'service' => $service,
         ]);
     }
 
@@ -55,5 +61,71 @@ class ServiceController extends Controller
             'status' => true,
             'message' => 'Service deleted successfully'
         ]);
+    }
+
+    public function editProfile()
+    {
+        $user = auth()->user();
+
+        $vendor = \App\Models\VendorDetail::where('vendor_id', $user->id)->first();
+
+        return view('vendor_profile', compact('vendor', 'vendor'));
+    }
+
+    public function profileupdate(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'nullable|string|max:20',
+            'business_name' => 'required|string|max:255',
+            'slogan' => 'nullable|string|max:255',
+            'type' => 'nullable|string|max:100',
+            'location' => 'nullable|string|max:255',
+            'shop_open' => 'nullable',
+            'shop_close' => 'nullable',
+        ]);
+
+        $user = User::where('id', auth()->user()->id)->first();
+
+        $updateData = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+        ];
+
+        if ($request->filled('password')) {
+            $updateData['password'] = Hash::make($request->password);
+        }
+
+        $user->update($updateData);
+
+        VendorDetail::where('vendor_id', $user->id)->update([
+            'business_name' => $request->business_name,
+            'slogan' => $request->slogan,
+            'type' => $request->type,
+            'location' => $request->location,
+            'shop_open' => $request->shop_open,
+            'shop_close' => $request->shop_close,
+            'gst_number' => $request->gst_number,
+            'is_active' => $request->is_active
+        ]);
+
+        return response()->json(['message' => 'Profile updated successfully!']);
+    }
+
+    public function customerServices(Request $request)
+    {
+        $vendorId = auth()->id();
+
+        $services = DB::table('appointments')
+            ->join('services', 'appointments.service_id', '=', 'services.id')
+            ->where('services.vendor_id', $vendorId)
+            ->where('appointments.user_id', $request->customer_id)
+            ->select('services.name', 'appointments.date', 'appointments.status')
+            ->get();
+
+
+        return response()->json(['status' => 200, 'data' => $services]);
     }
 }

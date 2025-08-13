@@ -7,7 +7,7 @@
 <div class="container-fluid p-0">
     <div class="row m-0">
         <div class="col-12 p-0">
-            <div class="login-card">
+            <div class="login-card" style="background: url({{asset('assets/images/login/login_bg.jpg')}})">
                 <div>
                     <div>
                         <a class="logo" href="{{ route('dashboard') }}">
@@ -53,11 +53,6 @@
                                     </div>
                                 </div>
 
-
-                                {{-- Sign Up Link --}}
-                                <p class="mt-4 mb-0 text-center">Don't have account?
-                                    <a class="ms-2" href="{{ route('sign_up') }}">Create Account</a>
-                                </p>
                             </form>
                         </div>
                     </div>

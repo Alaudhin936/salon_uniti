@@ -34,8 +34,9 @@ class AdminController extends Controller
             'lattitude'     => 'nullable|numeric',
             'longitude'     => 'nullable|numeric',
             'password'   => 'required|string|min:6',
+            'shop_open'  => 'required',
+            'shop_close' => 'required'
         ]);
-
 
         $vendor = User::create([
             'name'     => $request->name,
@@ -52,6 +53,8 @@ class AdminController extends Controller
             'type'          => $request->type,
             'location'      => $request->location,
             'gst_number'    => $request->gst_number,
+            'shop_open'     => $request->shop_open,
+            'shop_close'    => $request->shop_close,
             'lattitude'     => $request->lattitude,
             'longitude'     => $request->longitude,
         ]);
@@ -64,6 +67,8 @@ class AdminController extends Controller
             'slogan'        => $vendorDetails->slogan,
             'type'          => $vendorDetails->type,
             'location'      => $vendorDetails->location,
+            'shop_open'     => $vendorDetails->shop_open,
+            'shop_close'    => $vendorDetails->shop_close,
         ];
 
         return response()->json([

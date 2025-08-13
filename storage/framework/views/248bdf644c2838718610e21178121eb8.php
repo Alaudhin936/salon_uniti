@@ -5,11 +5,11 @@
 <div class="container-fluid p-0">
     <div class="row m-0">
         <div class="col-12 p-0">
-            <div class="login-card">
+            <div class="login-card" style="background: url(<?php echo e(asset('assets/images/login/login_bg.jpg')); ?>)">
                 <div>
                     <div>
                         <a class="logo" href="<?php echo e(route('dashboard')); ?>">
-                            <h2>Salon Uniti</h2>
+                            <h2>Salon Unitii</h2>
                         </a>
                         <div class="login-main">
                             <form class="theme-form" method="POST" action="<?php echo e(route('login')); ?>">
@@ -65,11 +65,6 @@ unset($__errorArgs, $__bag); ?>
                                     </div>
                                 </div>
 
-                              
-                                
-                                <p class="mt-4 mb-0 text-center">Don't have account?
-                                    <a class="ms-2" href="<?php echo e(route('sign_up')); ?>">Create Account</a>
-                                </p>
                             </form>
                         </div>
                     </div>

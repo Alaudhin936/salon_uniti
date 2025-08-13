@@ -21,10 +21,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Dashboards
-// Route::get('/', function () {
-//     return redirect()->route('dashboard');
-// });
+Route::get('/', function () {
+
+    if (!Auth::check()) {
+        return redirect('/login');
+    } else {
+        if (auth()->user()->role_id == 1) {
+            return redirect('/dashboard');
+        } else {
+            return redirect('/salonweb/dashboard');
+        }
+    }
+});
 
 Route::get('/dashboard', function () {
     return view('dashboards.default_dashboard');
@@ -48,7 +56,6 @@ Route::middleware('role:1')->group(function () {
 
 Route::prefix('salonweb')->group(function () {
     Route::view('login', 'others.authentication.vendor_login');
-
     Route::get('/verifyOtp', function () {
         return view('others.authentication.verify_otp');
     })->name('verifyOTP');
@@ -56,17 +63,22 @@ Route::prefix('salonweb')->group(function () {
     Route::post('/verifyOtp', [LoginController::class, 'salonVerifyOTP'])->name('verifyOtpSubmit');
 
     Route::post('/salonLoginSubmit', [LoginController::class, 'salonLoginSubmit'])->name('salonWebLogin');
+    Route::post('/get-customer-services', [ServiceController::class, 'customerServices'])->name('vendor.customer.services');
 
     Route::post('/store', [ServiceController::class, 'store'])->name('services.store');
 
     Route::middleware('role:2')->group(function () {
+        // Route::post('/salonDetails/{id}',[AdminController::class, 'showVendorDetails'])->name('salon.details');
+        Route::post('/appointment/markdone/{id}/{status}', [AppointmentController::class, 'markAsDone'])->name('appointments.markdone');
         Route::get('/dashboard', [AppointmentController::class, 'index'])->name('vendor_dashboard');
         Route::get('/appointments', [AppointmentController::class, 'appointments'])->name('appointments');
         Route::get('/customers', [AppointmentController::class, 'customers'])->name('customers');
         Route::post('/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
         Route::get('/services', [ServiceController::class, 'index'])->name('services');
+        Route::post('/profile-update', [ServiceController::class, 'profileUpdate'])->name('salon.profileupdate');
         Route::post('/services/{id}', [ServiceController::class, 'update'])->name('services.update');
         Route::post('/services/{id}/delete', [ServiceController::class, 'delete'])->name('services.destroy');
+        Route::get('/edit-profile', [ServiceController::class, 'editProfile'])->name('salon.editprofile');
     });
 });
 
@@ -306,7 +318,7 @@ Route::view('login-two', 'others.authentication.login_two')->name('login_two');
 Route::view('login-bs-validation', 'others.authentication.login_bs_validation')->name('login_bs_validation');
 Route::view('login-bs-tt-validation', 'others.authentication.login_bs_tt_validation')->name('login_bs_tt_validation');
 Route::view('login-sa-validation', 'others.authentication.login_sa_validation')->name('login_sa_validation');
-Route::view('sign-up', 'others.authentication.sign_up')->name('sign_up')->middleware('auth');
+Route::view('sign-up', 'others.authentication.sign_up')->name('sign_up')->middleware('guest');
 Route::view('sign-up-one', 'others.authentication.sign_up_one')->name('sign_up_one');
 Route::view('sign-up-two', 'others.authentication.sign_up_two')->name('sign_up_two');
 Route::view('unlock', 'others.authentication.unlock')->name('unlock');

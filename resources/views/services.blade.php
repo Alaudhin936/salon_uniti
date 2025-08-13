@@ -7,121 +7,111 @@
 @section('main_content')
     <div class="container-fluid">
         <div class="page-title">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h3  style="color: #0a566d" >Your Services</h3>
+            <div class="row align-items-center">
+                <!-- Left: Heading -->
+                <div class="col-md-4 d-flex align-items-center">
+                    <h3 class="mb-0" style="color: #0a566d">Your Services</h3>
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i data-feather="home"></i></a></li>
+
+                <!-- Center: Breadcrumb -->
+                <div class="col-md-4">
+                    <ol class="breadcrumb mb-0 justify-content-center">
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('dashboard') }}"><i data-feather="home"></i></a>
+                        </li>
                         <li class="breadcrumb-item">Apps</li>
                         <li class="breadcrumb-item active">Services</li>
                     </ol>
                 </div>
+
+                <!-- Right: Button -->
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addServiceModal">
+                        <i class="fa fa-plus me-2"></i>Add Service
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="">
-        <div class="col-12">
-            <div class="card ecommerce-widget pro-gress h-100 shadow-sm">
-                <div class="card-header bg-primary text-white">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title mb-0">
-                            <i class="fa fa-cut me-2"></i>Services Management
-                        </h5>
-                        <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#addServiceModal">
-                            <i class="fa fa-plus me-2"></i>Add Service
-                        </button>
-                    </div>
-                </div>
 
-                <div class="card-body support-ticket-font p-0">
-                    <div class="table-responsive">
-                        <table class="table table-hover mb-0">
-                            <thead class="table-light">
-                                <tr>
-                                    <th scope="col" style="width: 5%;">#</th>
-                                    <th scope="col" style="width: 30%;">Service Name</th>
-                                    <th scope="col" style="width: 15%;">Price</th>
-                                    <th scope="col" style="width: 15%;">Duration</th>
-                                    <th scope="col" style="width: 15%;">Status</th>
-                                    <th scope="col" style="width: 20%;" class="text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($services as $index => $service)
-                                    <tr class="align-middle">
-                                        <td class="fw-bold text-primary">{{ $index + 1 }}</td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3"
-                                                    style="width: 35px; height: 35px;">
-                                                    <i class="fa fa-scissors text-white small"></i>
-                                                </div>
-                                                <strong class="text-dark">{{ $service->name }}</strong>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span class="badge bg-success">
-                                                <i class="fa fa-rupee-sign me-1"></i>{{ $service->price }}
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span class="text-muted">
-                                                <i class="fa fa-clock me-1"></i>{{ $service->duration }} min
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span class="badge bg-primary">Active</span>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="btn-group btn-group-sm">
-                                                <button class="btn btn-outline-warning edit-service"
-                                                    data-id="{{ $service->id }}" data-name="{{ $service->name }}"
-                                                    data-duration="{{ $service->duration }}"
-                                                    data-price="{{ $service->price }}">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-outline-danger delete-service"
-                                                    data-id="{{ $service->id }}">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="6" class="text-center py-5">
-                                            <div class="text-muted">
-                                                <i class="fa fa-cut mb-3 display-4 opacity-25"></i>
-                                                <h6 class="text-muted">No services available</h6>
-                                                <p class="small mb-3">Add your first service to get started</p>
-                                                <button class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#addServiceModal">
-                                                    <i class="fa fa-plus me-2"></i>Add Service
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
 
-                @if (count($services) > 0)
-                    <div class="card-footer bg-light">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <small class="text-muted">Total: <strong>{{ count($services) }}</strong> services</small>
-                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addServiceModal">
-                                <i class="fa fa-plus me-2"></i>Add Another Service
-                            </button>
-                        </div>
-                    </div>
-                @endif
-            </div>
+    <div class="card-body support-ticket-font p-0">
+        <div class="table-responsive">
+            <table id="servicesTable" class="table table-hover mb-0">
+                <thead class="table-light">
+
+                    <tr>
+                        <th>#</th>
+                        <th>Service Name</th>
+                        <th>Price</th>
+                        <th>Duration</th>
+                        <th>Status</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($services as $index => $service)
+                        <tr class="align-middle">
+                            <td class="fw-bold text-primary">{{ $index + 1 }}</td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3"
+                                        style="width: 35px; height: 35px;">
+                                        <i class="fa fa-scissors text-white small"></i>
+                                    </div>
+                                    <strong class="text-dark">{{ $service->name }}</strong>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge bg-success">
+                                    <i class="fa fa-rupee-sign me-1"></i>{{ $service->price }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-muted">
+                                    <i class="fa fa-clock me-1"></i>{{ $service->duration }} min
+                                </span>
+                            </td>
+                            <td>
+                                @if ($service->is_active)
+                                    <span class="badge bg-primary">Active</span>
+                                @else
+                                    <span class="badge bg-danger">In-Active</span>
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-warning edit-service" data-id="{{ $service->id }}"
+                                        data-name="{{ $service->name }}" data-status={{ $service->is_active }}
+                                        data-duration="{{ $service->duration }}" data-price="{{ $service->price }}">
+                                        <i class="fa fa-edit" style="color:#0a566d"></i>
+                                    </button>
+                                    <button class="btn btn-outline-danger delete-service" data-id="{{ $service->id }}">
+                                        <i class="fa fa-trash" style="color:#0a566d"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="text-center py-5">
+                                <div class="text-muted">
+                                    <i class="fa fa-cut mb-3 display-4 opacity-25"></i>
+                                    <h6 class="text-muted">No services available</h6>
+                                    <p class="small mb-3">Add your first service to get started</p>
+                                    <button class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#addServiceModal">
+                                        <i class="fa fa-plus me-2"></i>Add Service
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
+
 
     <div class="modal fade" id="addServiceModal" tabindex="-1" aria-labelledby="addServiceLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -148,7 +138,12 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save Service</button>
+                        <button type="submit" class="btn btn-success px-4" id="storeBtn">
+                            <i class="fa fa-save me-2"></i>
+                            <span class="btn-text">Save Service</span>
+                            <span class="spinner-border spinner-border-sm d-none" role="status"
+                                aria-hidden="true"></span>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -181,10 +176,22 @@
                             <input type="number" class="form-control" id="editServiceDuration" name="duration"
                                 required>
                         </div>
+                        <div class="mb-3">
+                            <label for="is_active" class="form-label">Status</label>
+                            <select id="is_active" name="is_active" class="form-select">
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Update Service</button>
+                        <button type="submit" class="btn btn-success px-4" id="saveBtn">
+                            <i class="fa fa-save me-2"></i>
+                            <span class="btn-text">Update Service</span>
+                            <span class="spinner-border spinner-border-sm d-none" role="status"
+                                aria-hidden="true"></span>
+                        </button>
                     </div>
                 </div>
             </form>
@@ -216,9 +223,26 @@
     <script>
         $(document).ready(function() {
 
+            $('#servicesTable').DataTable({
+                paging: true,
+                searching: true,
+                ordering: true,
+                info: true,
+                pageLength: 5,
+                lengthMenu: [5, 10, 25, 50],
+                columnDefs: [{
+                        orderable: false,
+                        targets: [5]
+                    } // Disable sorting for actions column
+                ]
+            });
             $("#addServiceForm").submit(function(e) {
                 e.preventDefault();
+                let btn = $('#storeBtn');
 
+                // Disable button
+                btn.prop('disabled', true);
+                btn.find('.btn-text').text('Saving...');
                 $.ajax({
                     url: "{{ route('services.store') }}",
                     type: "POST",
@@ -231,7 +255,6 @@
                             let toast = new bootstrap.Toast(toastEl);
                             toast.show();
 
-                            // Get current service count for serial number
                             let currentCount = $("tbody tr").length;
                             if ($("tbody tr td[colspan='6']").length > 0) {
                                 currentCount = 0; // Reset if empty state exists
@@ -269,15 +292,22 @@
                         data-name="${$('#serviceName').val()}"
                         data-duration="${$('#serviceDuration').val()}"
                         data-price="${$('#servicePrice').val()}">
-                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-edit" style="color:#0a566d"></i>
                     </button>
                     <button class="btn btn-outline-danger delete-service" data-id="${response.services.id}">
-                        <i class="fa fa-trash"></i>
+                        <i class="fa fa-trash" style="color:#0a566d"></i>
                     </button>
                 </div>
             </td>
         </tr>
     `);
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: 'New Service Created Successfully!',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK'
+                            });
 
                             // Update footer count
                             let newCount = $("tbody tr").length;
@@ -313,15 +343,18 @@
             });
 
             $(document).on('click', '.edit-service', function() {
+
                 let id = $(this).data('id');
                 let name = $(this).data('name');
                 let price = $(this).data('price');
                 let duration = $(this).data('duration');
+                let status = $(this).data('status');
 
                 $('#editServiceId').val(id);
                 $('#editServiceName').val(name);
                 $('#editServicePrice').val(price);
                 $('#editServiceDuration').val(duration);
+                $('#is_active').val(status);
 
                 $('#editServiceModal').modal('show');
             });
@@ -329,7 +362,11 @@
 
             $('#editServiceForm').submit(function(e) {
                 e.preventDefault();
+                let btn = $('#saveBtn');
 
+                // Disable button
+                btn.prop('disabled', true);
+                btn.find('.btn-text').text('Saving...');
                 let id = $('#editServiceId').val();
                 let url_1 = "{{ route('services.update', ':id') }}".replace(':id', id);
                 $.ajax({
@@ -338,10 +375,9 @@
                     data: $(this).serialize(),
                     success: function(response) {
                         if (response.status) {
-                            // Update the service in the table row
                             let tableRow = $(`.edit-service[data-id="${id}"]`).closest('tr');
 
-                            // Update service name in the second column
+                            // Update service name in the second colum
                             tableRow.find('td:nth-child(2) strong').text(response.service.name);
 
                             // Update price badge in the third column
@@ -354,27 +390,50 @@
         <i class="fa fa-clock me-1"></i>${response.service.duration} min
     `);
 
-                            // Update button data attributes with new values
+
+                            let statusText = response.service.is_active ? 'Active' :
+                                'In-Active';
+                            let statusClass = response.service.is_active ? 'bg-primary' :
+                                'bg-danger';
+
+                            let statusBadge = tableRow.find('td:nth-child(5) span');
+                            statusBadge
+                                .removeClass('bg-primary bg-danger') // remove old classes
+                                .addClass(statusClass) // add new class
+                                .text(statusText); // update text
+
                             tableRow.find('.edit-service')
                                 .attr('data-name', response.service.name)
                                 .attr('data-price', response.service.price)
                                 .attr('data-duration', response.service.duration);
+                            btn.prop('disabled', false);
+                            btn.find('.btn-text').text('Save Changes');
+                            btn.find('.spinner-border').addClass('d-none');
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: 'Service Updated Successfully!',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK'
+                            });
 
-                            // Show success toast
-                            let toastEl = document.getElementById('successToast');
-                            let toast = new bootstrap.Toast(toastEl);
-                            toast.show();
-
-                            // Hide modal
                             $('#editServiceModal').modal('hide');
                         }
                     },
                     error: function(xhr) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'Something Went Wrong',
+                            confirmButtonColor: 'red',
+                            confirmButtonText: 'OK'
+                        });
+
                         if (xhr.status === 422) {
                             let errors = xhr.responseJSON.errors;
-                            alert("Validation error: " + Object.values(errors).join(", "));
+                            // alert("Validation error: " + Object.values(errors).join(", "));
                         } else {
-                            alert("Something went wrong!");
+                            // alert("Something went wrong!");
                         }
                     }
                 });
@@ -399,7 +458,17 @@
                         success: function(response) {
                             if (response.status) {
                                 // Remove from DOM
-                                $(`.delete-service[data-id="${id}"]`).closest('li').remove();
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: 'Service Deleted Successfully',
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'OK'
+                                }).then(function(result){
+                                    if(result.isConfirmed){
+                                        window.location.reload();
+                                    }
+                                });
 
                                 // Show success toast
                                 let toastEl = document.getElementById('successToast');

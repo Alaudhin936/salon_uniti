@@ -11,16 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('vendor_time_slots', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('vendor_id');
-            $table->string('name');
-            $table->string('price');
-            $table->string('duration');
-            $table->boolean('services')->default(1);
             $table->timestamps();
-
-            $table->foreign('vendor_id')->on('users')->references('id')->onDelete('cascade');
         });
     }
 
@@ -29,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('vendor_time_slots');
     }
 };

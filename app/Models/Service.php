@@ -14,7 +14,8 @@ class Service extends Model
         'vendor_id',
         'name',
         'price',
-        'duration'
+        'duration',
+        'is_active'
     ];
 
 }

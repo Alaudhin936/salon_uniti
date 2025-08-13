@@ -17,6 +17,8 @@ class VendorDetail extends Model
         'location',
         'gst_number',
         'lattitude',
-        'longitude'
+        'longitude',
+        'shop_open',
+        'shop_close'
     ];
 }

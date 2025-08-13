@@ -7,7 +7,7 @@
 <div class="container-fluid p-0">
     <div class="row m-0">
         <div class="col-12 p-0">
-            <div class="login-card">
+            <div class="login-card" style="background: url({{asset('assets/images/login/login_bg.jpg')}})">
                 <div>
                     <div>
                         <a class="logo" href="{{ route('dashboard') }}">
