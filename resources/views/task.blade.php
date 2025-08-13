@@ -1,8 +1,8 @@
 @extends('layout.master')
 
 @section('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/select2.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/date-picker.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/select2.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/date-picker.css') }}">
 @endsection
 
 @section('main_content')
@@ -37,7 +37,8 @@
                                             <div class="flex-shrink-0"><img class="me-3 rounded-circle"
                                                     src="{{ asset('assets/images/user/user.png') }}" alt=""></div>
                                             <div class="flex-grow-1">
-                                                <h6 class="f-w-600"> <a href="{{ route('user_profile') }}">MARK JENCO</a></h6>
+                                                <h6 class="f-w-600"> <a href="{{ route('user_profile') }}">MARK JENCO</a>
+                                                </h6>
                                                 <p>Markjecno@gmail.com</p>
                                             </div>
                                         </div>
@@ -228,7 +229,8 @@
                                                                     <p class="project_name_0">General</p>
                                                                 </td>
                                                                 <td>
-                                                                    <p class="task_desc_0">Documentation that is used to explain regarding some attributes of an object.</p>
+                                                                    <p class="task_desc_0">Documentation that is used to
+                                                                        explain regarding some attributes of an object.</p>
                                                                 </td>
                                                                 <td><a class="me-2" href="javascript:void(0)"><i
                                                                             data-feather="link"></i></a><a
@@ -243,7 +245,8 @@
                                                                     <p class="project_name_0">General</p>
                                                                 </td>
                                                                 <td>
-                                                                    <p class="task_desc_0">kanban board is one of the tools that can be used to implement kanban to manage.</p>
+                                                                    <p class="task_desc_0">kanban board is one of the tools
+                                                                        that can be used to implement kanban to manage.</p>
                                                                 </td>
                                                                 <td><a class="me-2" href="javascript:void(0)"><i
                                                                             data-feather="link"></i></a><a
@@ -258,7 +261,8 @@
                                                                     <p class="project_name_0">General</p>
                                                                 </td>
                                                                 <td>
-                                                                    <p class="task_desc_0">There is some Console error in user profile page.</p>
+                                                                    <p class="task_desc_0">There is some Console error in
+                                                                        user profile page.</p>
                                                                 </td>
                                                                 <td><a class="me-2" href="javascript:void(0)"><i
                                                                             data-feather="link"></i></a><a
@@ -273,7 +277,8 @@
                                                                     <p class="project_name_0">General</p>
                                                                 </td>
                                                                 <td>
-                                                                    <p class="task_desc_0">Clone the theme test data file from the GitHub repository.</p>
+                                                                    <p class="task_desc_0">Clone the theme test data file
+                                                                        from the GitHub repository.</p>
                                                                 </td>
                                                                 <td><a class="me-2" href="javascript:void(0)"><i
                                                                             data-feather="link"></i></a><a
@@ -288,7 +293,9 @@
                                                                     <p class="project_name_0">Fs</p>
                                                                 </td>
                                                                 <td>
-                                                                    <p class="task_desc_0">Documentation that is used to explain regarding some attributes of an object to the client.</p>
+                                                                    <p class="task_desc_0">Documentation that is used to
+                                                                        explain regarding some attributes of an object to
+                                                                        the client.</p>
                                                                 </td>
                                                                 <td><a class="me-2" href="javascript:void(0)"><i
                                                                             data-feather="link"></i></a><a
@@ -387,7 +394,8 @@
                                                                     <p class="project_name_0">General</p>
                                                                 </td>
                                                                 <td>
-                                                                    <p class="task_desc_0">Documentation that is used to explain regarding some attributes of an object.</p>
+                                                                    <p class="task_desc_0">Documentation that is used to
+                                                                        explain regarding some attributes of an object.</p>
                                                                 </td>
                                                                 <td><a class="me-2" href="javascript:void(0)"><i
                                                                             data-feather="link"></i></a><a
@@ -402,7 +410,8 @@
                                                                     <p class="project_name_0">General</p>
                                                                 </td>
                                                                 <td>
-                                                                    <p class="task_desc_0">kanban board is one of the tools that can be used to implement kanban to manage.</p>
+                                                                    <p class="task_desc_0">kanban board is one of the tools
+                                                                        that can be used to implement kanban to manage.</p>
                                                                 </td>
                                                                 <td><a class="me-2" href="javascript:void(0)"><i
                                                                             data-feather="link"></i></a><a
@@ -417,7 +426,8 @@
                                                                     <p class="project_name_0">General</p>
                                                                 </td>
                                                                 <td>
-                                                                    <p class="task_desc_0">There is some Console error in user profile page.</p>
+                                                                    <p class="task_desc_0">There is some Console error in
+                                                                        user profile page.</p>
                                                                 </td>
                                                                 <td><a class="me-2" href="javascript:void(0)"><i
                                                                             data-feather="link"></i></a><a
@@ -432,7 +442,8 @@
                                                                     <p class="project_name_0">General</p>
                                                                 </td>
                                                                 <td>
-                                                                    <p class="task_desc_0">Clone the theme test data file from the GitHub repository.</p>
+                                                                    <p class="task_desc_0">Clone the theme test data file
+                                                                        from the GitHub repository.</p>
                                                                 </td>
                                                                 <td><a class="me-2" href="javascript:void(0)"><i
                                                                             data-feather="link"></i></a><a
@@ -447,7 +458,9 @@
                                                                     <p class="project_name_0">Fs</p>
                                                                 </td>
                                                                 <td>
-                                                                    <p class="task_desc_0">Documentation that is used to explain regarding some attributes of an object to the client.</p>
+                                                                    <p class="task_desc_0">Documentation that is used to
+                                                                        explain regarding some attributes of an object to
+                                                                        the client.</p>
                                                                 </td>
                                                                 <td><a class="me-2" href="javascript:void(0)"><i
                                                                             data-feather="link"></i></a><a
@@ -479,7 +492,8 @@
                                                                     <p class="project_name_0">General</p>
                                                                 </td>
                                                                 <td>
-                                                                    <p class="task_desc_0">Documentation that is used to explain regarding some attributes of an object.</p>
+                                                                    <p class="task_desc_0">Documentation that is used to
+                                                                        explain regarding some attributes of an object.</p>
                                                                 </td>
                                                                 <td><a class="me-2" href="javascript:void(0)"><i
                                                                             data-feather="link"></i></a><a
@@ -494,7 +508,8 @@
                                                                     <p class="project_name_0">General</p>
                                                                 </td>
                                                                 <td>
-                                                                    <p class="task_desc_0">kanban board is one of the tools that can be used to implement kanban to manage.</p>
+                                                                    <p class="task_desc_0">kanban board is one of the tools
+                                                                        that can be used to implement kanban to manage.</p>
                                                                 </td>
                                                                 <td><a class="me-2" href="javascript:void(0)"><i
                                                                             data-feather="link"></i></a><a
@@ -509,7 +524,8 @@
                                                                     <p class="project_name_0">General</p>
                                                                 </td>
                                                                 <td>
-                                                                    <p class="task_desc_0">There is some Console error in user profile page.</p>
+                                                                    <p class="task_desc_0">There is some Console error in
+                                                                        user profile page.</p>
                                                                 </td>
                                                                 <td><a class="me-2" href="javascript:void(0)"><i
                                                                             data-feather="link"></i></a><a
@@ -524,7 +540,8 @@
                                                                     <p class="project_name_0">General</p>
                                                                 </td>
                                                                 <td>
-                                                                    <p class="task_desc_0">Clone the theme test data file from the GitHub repository.</p>
+                                                                    <p class="task_desc_0">Clone the theme test data file
+                                                                        from the GitHub repository.</p>
                                                                 </td>
                                                                 <td><a class="me-2" href="javascript:void(0)"><i
                                                                             data-feather="link"></i></a><a
@@ -539,7 +556,9 @@
                                                                     <p class="project_name_0">Fs</p>
                                                                 </td>
                                                                 <td>
-                                                                    <p class="task_desc_0">Documentation that is used to explain regarding some attributes of an object to the client.</p>
+                                                                    <p class="task_desc_0">Documentation that is used to
+                                                                        explain regarding some attributes of an object to
+                                                                        the client.</p>
                                                                 </td>
                                                                 <td><a class="me-2" href="javascript:void(0)"><i
                                                                             data-feather="link"></i></a><a
@@ -600,7 +619,7 @@
                                                             <div class="form-group col-md-12 mb-0">
                                                                 <label>Tag color</label>
                                                                 <input class="form-control fill-color" type="color"
-                                                                    value="#5c61f2">
+                                                                    value="#009688">
                                                             </div>
                                                         </div>
                                                         <button class="btn btn-secondary" type="button">Save</button>
@@ -622,12 +641,12 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
-<script src="{{ asset('assets/js/datepicker/date-picker/datepicker.en.js') }}"></script>
-<script src="{{ asset('assets/js/datepicker/date-picker/datepicker.custom.js') }}"></script>
-<script src="{{ asset('assets/js/select2/select2.full.min.js') }}"></script>
-<script src="{{ asset('assets/js/select2/select2-custom.js') }}"></script>
-<script src="{{ asset('assets/js/form-validation-custom.js') }}"></script>
-<script src="{{ asset('assets/js/task/custom.js') }}"></script>
-<script src="{{ asset('assets/js/print.js') }}"></script>
+    <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
+    <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.en.js') }}"></script>
+    <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.custom.js') }}"></script>
+    <script src="{{ asset('assets/js/select2/select2.full.min.js') }}"></script>
+    <script src="{{ asset('assets/js/select2/select2-custom.js') }}"></script>
+    <script src="{{ asset('assets/js/form-validation-custom.js') }}"></script>
+    <script src="{{ asset('assets/js/task/custom.js') }}"></script>
+    <script src="{{ asset('assets/js/print.js') }}"></script>
 @endsection

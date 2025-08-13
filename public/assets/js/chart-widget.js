@@ -15,7 +15,7 @@
     stroke: {
       curve: "smooth",
     },
-    yaxis:{
+    yaxis: {
       labels: {
         show: false,
       }
@@ -59,7 +59,7 @@
         stops: [0, 100],
       },
     },
-    zoom:{
+    zoom: {
       enabled: true,
     },
     colors: [TivoAdminConfig.primary],
@@ -74,8 +74,8 @@
       },
     },
   };
-var chartlinechart = new ApexCharts(document.querySelector("#chart-widget1"),optionslinechart);
-chartlinechart.render();
+  var chartlinechart = new ApexCharts(document.querySelector("#chart-widget1"), optionslinechart);
+  chartlinechart.render();
   /*Line chart2*/
   var optionslinechart2 = {
     chart: {
@@ -91,7 +91,7 @@ chartlinechart.render();
     stroke: {
       curve: "smooth",
     },
-    yaxis:{
+    yaxis: {
       labels: {
         show: false,
       }
@@ -148,9 +148,9 @@ chartlinechart.render();
       },
     },
   };
-var chartlinechart2 = new ApexCharts(document.querySelector("#chart-widget2"),optionslinechart2);
-chartlinechart2.render();
-/*Line chart3*/
+  var chartlinechart2 = new ApexCharts(document.querySelector("#chart-widget2"), optionslinechart2);
+  chartlinechart2.render();
+  /*Line chart3*/
   var optionslinechart3 = {
     chart: {
       toolbar: {
@@ -165,7 +165,7 @@ chartlinechart2.render();
     stroke: {
       curve: "smooth",
     },
-    yaxis:{
+    yaxis: {
       labels: {
         show: false,
       }
@@ -210,7 +210,7 @@ chartlinechart2.render();
       },
     },
     colors: [TivoAdminConfig.success],
-     series: [
+    series: [
       {
         data: [30, 45, 21, 60, 22, 43, 21],
       },
@@ -221,9 +221,9 @@ chartlinechart2.render();
       },
     },
   };
-var chartlinechart3 = new ApexCharts(document.querySelector("#chart-widget3"),optionslinechart3);
-chartlinechart3.render();
-// column chart
+  var chartlinechart3 = new ApexCharts(document.querySelector("#chart-widget3"), optionslinechart3);
+  chartlinechart3.render();
+  // column chart
   var optionscolumnchart = {
     series: [
       {
@@ -247,7 +247,7 @@ chartlinechart3.render();
       height: 380,
       toolbar: {
         show: false
-        }
+      }
     },
     plotOptions: {
       bar: {
@@ -315,9 +315,9 @@ chartlinechart3.render();
       },
     },
   };
-var chartcolumnchart = new ApexCharts(document.querySelector("#chart-widget4"),optionscolumnchart);
-chartcolumnchart.render();
-// earning chart
+  var chartcolumnchart = new ApexCharts(document.querySelector("#chart-widget4"), optionscolumnchart);
+  chartcolumnchart.render();
+  // earning chart
   var options = {
     series: [70],
     chart: {
@@ -357,7 +357,7 @@ chartcolumnchart.render();
     responsive: [{
       breakpoint: 480,
       options: {
-        chart:{
+        chart: {
           height: 300
         }
       },
@@ -367,15 +367,15 @@ chartcolumnchart.render();
     },
     labels: ["Volatility"],
   };
-var chart = new ApexCharts(document.querySelector("#chart-widget5"), options);
-chart.render();
-// product chart
+  var chart = new ApexCharts(document.querySelector("#chart-widget5"), options);
+  chart.render();
+  // product chart
   var optionsproductchart = {
     chart: {
       height: 320,
       type: "line",
       toolbar: {
-          show: false
+        show: false
       }
     },
     stroke: {
@@ -437,12 +437,12 @@ chart.render();
         },
       },
     ],
-    grid:{
-        yaxis:{
-            lines:{
-                show: false
-            }
+    grid: {
+      yaxis: {
+        lines: {
+          show: false
         }
+      }
     },
     tooltip: {
       shared: true,
@@ -457,9 +457,9 @@ chart.render();
       },
     },
   };
-var chartproductchart = new ApexCharts(document.querySelector("#chart-widget6"),optionsproductchart);
-chartproductchart.render();
-// Turnover chart
+  var chartproductchart = new ApexCharts(document.querySelector("#chart-widget6"), optionsproductchart);
+  chartproductchart.render();
+  // Turnover chart
   var optionsturnoverchart = {
     chart: {
       height: 320,
@@ -494,7 +494,7 @@ chartproductchart.render();
       breakpoint: 480,
       options: {
         yaxis: {
-          labels: { show: false}
+          labels: { show: false }
         }
       },
     }],
@@ -504,12 +504,12 @@ chartproductchart.render();
         data: series.monthDataSeries1.prices,
       },
     ],
-    grid:{
-        yaxis:{
-            lines:{
-                show: false
-            }
+    grid: {
+      yaxis: {
+        lines: {
+          show: false
         }
+      }
     },
     title: {
       text: "Fundamental Analysis of Stocks",
@@ -527,9 +527,9 @@ chartproductchart.render();
       horizontalAlign: "left",
     },
   };
-var chartturnoverchart = new ApexCharts(document.querySelector("#chart-widget7"),optionsturnoverchart);
-chartturnoverchart.render();
-// sales chart
+  var chartturnoverchart = new ApexCharts(document.querySelector("#chart-widget7"), optionsturnoverchart);
+  chartturnoverchart.render();
+  // sales chart
   var optionssaleschart = {
     fill: {
       type: "gradient",
@@ -582,9 +582,9 @@ chartturnoverchart.render();
     },
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
   };
-var chartsaleschart = new ApexCharts(document.querySelector("#chart-widget8"),optionssaleschart);
-chartsaleschart.render();
-// user chart
+  var chartsaleschart = new ApexCharts(document.querySelector("#chart-widget8"), optionssaleschart);
+  chartsaleschart.render();
+  // user chart
   function generateData(baseval, count, yrange) {
     var i = 0;
     var series = [];
@@ -670,9 +670,9 @@ chartsaleschart.render();
       max: 70,
     },
   };
-var chartuserchart = new ApexCharts(document.querySelector("#chart-widget9"),optionsuserchart);
-chartuserchart.render();
-// browser-candlestick chart
+  var chartuserchart = new ApexCharts(document.querySelector("#chart-widget9"), optionsuserchart);
+  chartuserchart.render();
+  // browser-candlestick chart
   var optionscandlestickchart = {
     chart: {
       toolbar: {
@@ -691,7 +691,7 @@ chartuserchart.render();
     },
     fill: {
       opacity: 0.9,
-      colors: ["#5c61f2"],
+      colors: ["#009688"],
     },
     series: [
       {
@@ -952,8 +952,8 @@ chartuserchart.render();
       },
     },
   };
-var chartcandlestickchart = new ApexCharts(document.querySelector("#chart-widget13"),optionscandlestickchart);
-chartcandlestickchart.render();
+  var chartcandlestickchart = new ApexCharts(document.querySelector("#chart-widget13"), optionscandlestickchart);
+  chartcandlestickchart.render();
 
   var trigoStrength = 3;
   var iteration = 11;
@@ -1101,9 +1101,9 @@ chartcandlestickchart.render();
       show: true,
     },
   };
-var chartColumn = new ApexCharts(document.querySelector("#columnchart"),optionsColumn);
-chartColumn.render();
-// order status chart
+  var chartColumn = new ApexCharts(document.querySelector("#columnchart"), optionsColumn);
+  chartColumn.render();
+  // order status chart
   var optionsLine = {
     chart: {
       height: 350,
@@ -1232,7 +1232,7 @@ chartColumn.render();
       offsetX: 60,
     },
   };
-  var chartLine = new ApexCharts(document.querySelector("#linechart"),optionsLine);chartLine.render();
+  var chartLine = new ApexCharts(document.querySelector("#linechart"), optionsLine); chartLine.render();
 
   var optionsCircle = {
     chart: {
@@ -1267,7 +1267,7 @@ chartColumn.render();
     responsive: [{
       breakpoint: 480,
       options: {
-        chart:{
+        chart: {
           height: 300
         }
       },
@@ -1286,8 +1286,8 @@ chartColumn.render();
     },
     colors: [TivoAdminConfig.primary, TivoAdminConfig.secondary],
   };
-var chartCircle = new ApexCharts(document.querySelector("#circlechart"),optionsCircle);
-chartCircle.render();
+  var chartCircle = new ApexCharts(document.querySelector("#circlechart"), optionsCircle);
+  chartCircle.render();
 
   var optionsProgress1 = {
     chart: {
@@ -1353,8 +1353,8 @@ chartCircle.render();
       opacity: 1,
     },
   };
-var chartProgress1 = new ApexCharts(document.querySelector("#progress1"),optionsProgress1);
-chartProgress1.render();
+  var chartProgress1 = new ApexCharts(document.querySelector("#progress1"), optionsProgress1);
+  chartProgress1.render();
 
   var optionsProgress2 = {
     chart: {
@@ -1418,8 +1418,8 @@ chartProgress1.render();
       },
     },
   };
-var chartProgress2 = new ApexCharts(document.querySelector("#progress2"),optionsProgress2);
-chartProgress2.render();
+  var chartProgress2 = new ApexCharts(document.querySelector("#progress2"), optionsProgress2);
+  chartProgress2.render();
 
   var optionsProgress3 = {
     chart: {
@@ -1482,8 +1482,8 @@ chartProgress2.render();
       max: 100,
     },
   };
-var chartProgress3 = new ApexCharts(document.querySelector("#progress3"),optionsProgress3);
-chartProgress3.render();
+  var chartProgress3 = new ApexCharts(document.querySelector("#progress3"), optionsProgress3);
+  chartProgress3.render();
 
   var optionsProgress4 = {
     chart: {
@@ -1546,8 +1546,8 @@ chartProgress3.render();
       max: 100,
     },
   };
-var chartProgress4 = new ApexCharts(document.querySelector("#progress4"),optionsProgress4);
-chartProgress4.render();
+  var chartProgress4 = new ApexCharts(document.querySelector("#progress4"), optionsProgress4);
+  chartProgress4.render();
 
   var optionsProgress5 = {
     chart: {
@@ -1610,8 +1610,8 @@ chartProgress4.render();
       max: 100,
     },
   };
-var chartProgress5 = new ApexCharts(document.querySelector("#progress5"),optionsProgress5);
-chartProgress5.render();
+  var chartProgress5 = new ApexCharts(document.querySelector("#progress5"), optionsProgress5);
+  chartProgress5.render();
 
   window.setInterval(function () {
     iteration++;

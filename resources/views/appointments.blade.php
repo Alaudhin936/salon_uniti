@@ -9,7 +9,7 @@
         <div class="page-title">
             <div class="row align-items-center">
                 <div class="col-sm-6">
-                    <h3>Your Appointments</h3>
+                    <h3  style="color: #0a566d" >Your Appointments</h3>
                 </div>
                 <div class="col-sm-6 text-sm-end text-start">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookAppointmentModal">

@@ -113,13 +113,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #5c61f2;
-            border: 1px solid #5c61f2;
+            color: #009688;
+            border: 1px solid #009688;
             transition: all 0.5s ease;
         }
 
         .temp-social td i:hover {
-            background-color: #5c61f2;
+            background-color: #009688;
             color: #ffffff;
         }
 
@@ -261,8 +261,8 @@
                                             268 Cambridge Lane New Albany,<br> IN 47150268 Cambridge Lane <br>New Albany, IN
                                             47150</p>
                                     </td>
-                                    <td><img src="{{ asset('assets/images/email-template/space.jpg') }}" alt=" " height="25"
-                                            width="30"></td>
+                                    <td><img src="{{ asset('assets/images/email-template/space.jpg') }}" alt=" "
+                                            height="25" width="30"></td>
                                     <td
                                         style="background-color: rgba(62,95,206,0.02);border: 1px solid #eeeeee;padding: 15px;letter-spacing: 0.3px;width: 50%; border-radius:10px;">
                                         <h5
@@ -286,7 +286,8 @@
                                     <th>PRICE </th>
                                 </tr>
                                 <tr>
-                                    <td><img src="{{ asset('assets/images/email-template/4.png') }}" alt="" width="80"></td>
+                                    <td><img src="{{ asset('assets/images/email-template/4.png') }}" alt=""
+                                            width="80"></td>
                                     <td valign="top" style="padding-left: 15px;">
                                         <h5 style="margin-top: 15px;">AirPods Pro Case, Soft Silicone Skin Case.</h5>
                                     </td>
@@ -298,7 +299,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><img src="{{ asset('assets/images/email-template/1.png') }}" alt="" width="80"></td>
+                                    <td><img src="{{ asset('assets/images/email-template/1.png') }}" alt=""
+                                            width="80"></td>
                                     <td valign="top" style="padding-left: 15px;">
                                         <h5 style="margin-top: 15px;">Black Mobile Vision 1 Pro with No Cost EMI/Additional
                                             Exchange Offers</h5>
@@ -311,7 +313,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><img src="{{ asset('assets/images/email-template/4.png') }}" alt="" width="80"></td>
+                                    <td><img src="{{ asset('assets/images/email-template/4.png') }}" alt=""
+                                            width="80"></td>
                                     <td valign="top" style="padding-left: 15px;">
                                         <h5 style="margin-top: 15px;">AirPods Pro Case, Soft Silicone Skin Case.</h5>
                                     </td>
@@ -323,7 +326,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><img src="{{ asset('assets/images/email-template/1.png') }}" alt="" width="80"></td>
+                                    <td><img src="{{ asset('assets/images/email-template/1.png') }}" alt=""
+                                            width="80"></td>
                                     <td valign="top" style="padding-left: 15px;">
                                         <h5 style="margin-top: 15px;">Black Mobile Vision 1 Pro with No Cost EMI/Additional
                                             Exchange Offers</h5>
@@ -404,7 +408,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td><a href="javascript:void(0)"
-                                                            style="color: #5c61f2;font-size:14px;text-transform: capitalize;font-weight:600;">Want
+                                                            style="color: #009688;font-size:14px;text-transform: capitalize;font-weight:600;">Want
                                                             to change how you receive these emails?</a></td>
                                                 </tr>
                                                 <tr>
@@ -415,7 +419,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td><a href="javascript:void(0)"
-                                                            style="color: #5c61f2;font-size: 14px;text-transform: capitalize;font-weight:600; margin:0;">Unsubscribe</a>
+                                                            style="color: #009688;font-size: 14px;text-transform: capitalize;font-weight:600; margin:0;">Unsubscribe</a>
                                                     </td>
                                                 </tr>
                                             </tbody>

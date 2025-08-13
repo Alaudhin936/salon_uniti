@@ -73,7 +73,7 @@
       </div>
       <div class="col-xxl-6 col-xl-6 col-md-6 dash-30 box-col-35">
        <div class="card mb-5 shadow-sm border-0">
-            <div class="card-header bg-danger text-white fw-bold py-3">
+            <div class="card-header bg-primary text-white fw-bold py-3">
                 <i class="fas fa-calendar-check me-2"></i>Recent Appointments
             </div>
             <div class="card-body p-3">

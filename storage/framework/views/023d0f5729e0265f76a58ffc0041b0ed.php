@@ -7,7 +7,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3>Your Services</h3>
+                    <h3  style="color: #0a566d" >Your Services</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb">

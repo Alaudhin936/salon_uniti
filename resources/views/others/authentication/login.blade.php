@@ -11,7 +11,7 @@
                 <div>
                     <div>
                         <a class="logo" href="{{ route('dashboard') }}">
-                            <h2>Salon Uniti</h2>
+                            <h2>Salon Unitii</h2>
                         </a>
                         <div class="login-main">
                             <form class="theme-form" method="POST" action="{{ route('login') }}">
@@ -53,7 +53,7 @@
                                     </div>
                                 </div>
 
-                              
+
                                 {{-- Sign Up Link --}}
                                 <p class="mt-4 mb-0 text-center">Don't have account?
                                     <a class="ms-2" href="{{ route('sign_up') }}">Create Account</a>

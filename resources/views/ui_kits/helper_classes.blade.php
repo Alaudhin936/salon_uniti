@@ -1,32 +1,32 @@
 @extends('layout.master')
 
 @section('main_content')
-<div class="container-fluid">
-    <div class="page-title">
-      <div class="row">
-        <div class="col-sm-6">
-          <h3>Helper Classes</h3>
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>Helper Classes</h3>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"> <i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">Ui Kits</li>
+                        <li class="breadcrumb-item active">Helper Classes</li>
+                    </ol>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">                                       <i data-feather="home"></i></a></li>
-            <li class="breadcrumb-item">Ui Kits</li>
-            <li class="breadcrumb-item active">Helper Classes</li>
-          </ol>
-        </div>
-      </div>
     </div>
-  </div>
-  <!-- Container-fluid starts-->
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Padding</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.p-0 {
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Padding</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.p-0 {
 padding: 0px;
 }
 .p-5 {
@@ -59,16 +59,16 @@ padding: 45px;
 .p-50 {
 padding: 50px;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Margins</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.m-0 {
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Margins</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.m-0 {
 margin: 0px !important;
 }
 .m-5 {
@@ -101,16 +101,16 @@ margin: 45px !important;
 .m-50 {
 margin: 50px !important;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Padding Left</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.p-l-0 {
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Padding Left</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.p-l-0 {
 padding-left: 0px;
 }
 .p-l-5 {
@@ -143,16 +143,16 @@ padding-left: 45px;
 .p-l-50 {
 padding-left: 50px;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Padding Right</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.p-r-0 {
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Padding Right</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.p-r-0 {
 padding-right: 0px;
 }
 .p-r-5 {
@@ -185,16 +185,16 @@ padding-right: 45px;
 .p-r-50 {
 padding-right: 50px;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Padding Top</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.p-t-0 {
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Padding Top</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.p-t-0 {
 padding-top: 0px !important;
 }
 .p-t-5 {
@@ -227,16 +227,16 @@ padding-top: 45px !important;
 .p-t-50 {
 padding-top: 50px !important;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Padding Bottom</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.p-b-0 {
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Padding Bottom</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.p-b-0 {
 padding-bottom: 0px !important;
 }
 .p-b-5 {
@@ -269,16 +269,16 @@ padding-bottom: 45px !important;
 .p-b-50 {
 padding-bottom: 50px !important;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Margin Left</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.m-l-0 {
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Margin Left</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.m-l-0 {
 margin-left: 0px !important;
 }
 .m-l-5 {
@@ -311,16 +311,16 @@ margin-left: 45px !important;
 .m-l-50 {
 margin-left: 50px !important;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Margin Right</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.m-r-0 {
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Margin Right</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.m-r-0 {
 margin-right: 0px;
 }
 .m-r-5 {
@@ -353,16 +353,16 @@ margin-right: 45px;
 .m-r-50 {
 margin-right: 50px;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Margin Top</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.m-t-0 {
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Margin Top</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.m-t-0 {
 margin-top: 0px !important;
 }
 .m-t-5 {
@@ -395,16 +395,16 @@ margin-top: 45px !important;
 .m-t-50 {
 margin-top: 50px !important;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Margin Bottom</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.m-b-0 {
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Margin Bottom</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.m-b-0 {
 margin-bottom: 0px !important;
 }
 .m-b-5 {
@@ -437,16 +437,16 @@ margin-bottom: 45px !important;
 .m-b-50 {
 margin-bottom: 50px !important;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Vertical Align</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.baseline {
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Vertical Align</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.baseline {
 vertical-align: baseline;
 }
 .sub {
@@ -476,16 +476,16 @@ vertical-align: initial;
 .inherit {
 vertical-align: inherit;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Image Sizes</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.img-10 {
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Image Sizes</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.img-10 {
 width: 10px !important;
 }
 .img-20 {
@@ -515,17 +515,17 @@ width: 90px !important;
 .img-100 {
 width: 100px !important;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Text Color</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.font-primary {
-color: #5c61f2 !important;
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Text Color</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.font-primary {
+color: #009688 !important;
 }
 .font-secondary {
 color: #eeb82f !important;
@@ -548,17 +548,17 @@ color: #898989 !important;
 .font-warning {
 color: #f8d62b !important;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Badge Color</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.badge-primary {
-background-color: #5c61f2;
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Badge Color</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.badge-primary {
+background-color: #009688;
 }
 .badge-secondary {
 background-color: #eeb82f;
@@ -581,17 +581,17 @@ background-color: #898989;
 .badge-warning {
 background-color: #f8d62b;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Background Color</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.bg-primary {
-background-color: #5c61f2 !important;
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Background Color</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.bg-primary {
+background-color: #009688 !important;
 color: #fff;
 }
 .bg-secondary {
@@ -622,18 +622,18 @@ color: #fff;
 background-color: #f8d62b !important;
 color: #fff;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Button Color</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.btn-primary {
-background-color: #5c61f2;
-border-color: #5c61f2;
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Button Color</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.btn-primary {
+background-color: #009688;
+border-color: #009688;
 }
 .btn-secondary {
 background-color: #eeb82f;
@@ -663,16 +663,16 @@ border-color: #f4f4f4;
 background-color: #f8d62b;
 border-color: #f8d62b;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Border Radius</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.b-r-0 {
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Border Radius</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.b-r-0 {
 border-radius: 0px !important;
 }
 .b-r-1 {
@@ -705,14 +705,14 @@ border-radius: 9px !important;
 .b-r-10 {
 border-radius: 10px !important;
 }</pre>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Font Weight</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.f-w-100 {
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Font Weight</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.f-w-100 {
 font-weight: 100;
 }
 .f-w-300 {
@@ -730,14 +730,14 @@ font-weight: 700;
 .f-w-900 {
 font-weight: 900;
 }</pre>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Font Style</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.f-s-normal {
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Font Style</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.f-s-normal {
 font-style: normal;
 }
 .f-s-italic {
@@ -752,14 +752,14 @@ font-style: initial;
 .f-s-inherit {
 font-style: inherit;
 }</pre>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Float</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.f-left {
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Float</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.f-left {
 float: left;
 }
 .f-right {
@@ -768,14 +768,14 @@ float: right;
 .f-none {
 float: none;
 }</pre>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Overflow</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.o-hidden {
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Overflow</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.o-hidden {
 overflow: hidden;
 }
 .o-visible {
@@ -784,16 +784,16 @@ overflow: visible;
 .o-auto {
 overflow: auto;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Font Size</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.f-12 {
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Font Size</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.f-12 {
 font-size: 12px;
 }
 .f-14 {
@@ -928,29 +928,29 @@ font-size: 98px;
 .f-100 {
 font-size: 100px;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>All Borders Color</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.b-primary {
-border: 1px solid #5c61f2 !important;
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>All Borders Color</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.b-primary {
+border: 1px solid #009688 !important;
 }
 .b-t-primary {
-border-top: 1px solid #5c61f2 !important;
+border-top: 1px solid #009688 !important;
 }
 .b-b-primary {
-border-bottom: 1px solid #5c61f2 !important;
+border-bottom: 1px solid #009688 !important;
 }
 .b-l-primary {
-border-left: 1px solid #5c61f2 !important;
+border-left: 1px solid #009688 !important;
 }
 .b-r-primary {
-border-right: 1px solid #5c61f2 !important;
+border-right: 1px solid #009688 !important;
 }
 .b-secondary {
 border: 1px solid #eeb82f !important;
@@ -1057,16 +1057,16 @@ border-left: 1px solid #f8d62b !important;
 .b-r-warning {
 border-right: 1px solid #f8d62b !important;
 }</pre>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6">
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Border Width</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.border-1 {
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Border Width</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.border-1 {
 border-width: 1px !important;
 }
 .border-2 {
@@ -1096,14 +1096,14 @@ border-width: 9px !important;
 .border-10 {
 border-width: 10px !important;
 }</pre>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Position</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.p-static {
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Position</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.p-static {
 position: static;
 }
 .p-absolute {
@@ -1121,16 +1121,16 @@ position: initial;
 .p-inherit {
 position: inherit;
 }</pre>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header pb-0">
-            <h4>Button Outline</h4>
-          </div>
-          <div class="card-body">
-            <pre class="helper-classes">.btn-outline-primary {
-border-color: #5c61f2;
-color: #5c61f2;
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4>Button Outline</h4>
+                    </div>
+                    <div class="card-body">
+                        <pre class="helper-classes">.btn-outline-primary {
+border-color: #009688;
+color: #009688;
 background-color: transparent;
 }
 .btn-outline-secondary {
@@ -1168,13 +1168,12 @@ border-color: #f8d62b;
 color: #f8d62b;
 background-color: transparent;
 }</pre>
-          </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>    
 @endsection
 
 @section('scripts')
-    
 @endsection

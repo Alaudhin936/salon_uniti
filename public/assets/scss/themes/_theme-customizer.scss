@@ -8,22 +8,27 @@
   z-index: 3;
   transform: translate(0, -50%);
   box-shadow: 0 0 37px rgba(8, 21, 66, 0.1);
-  > .nav {
+
+  >.nav {
     border-radius: 8px;
     background-color: $white;
   }
+
   &.open {
     right: 330px;
     border-radius: 8px 0 0 8px;
     transition: all 0.3s ease;
   }
+
   .nav-link {
     padding: 0;
     position: relative;
+
     .settings {
       z-index: 3;
       position: relative;
     }
+
     &:before {
       content: "";
       position: absolute;
@@ -35,16 +40,19 @@
       transform: scale(0);
       transition: all 0.3s ease;
     }
+
     &:hover {
       i {
         color: $white;
       }
+
       &:before,
       &:after {
         opacity: 1;
         transform: scale(1);
         transition: all 0.3s ease;
       }
+
       span {
         opacity: 1;
         right: 48px;
@@ -52,9 +60,11 @@
         transition: all 0.3s ease;
       }
     }
-    & + .nav-link {
+
+    &+.nav-link {
       border-top: 1px solid $light-gray;
     }
+
     span {
       position: absolute;
       right: -60px;
@@ -71,6 +81,7 @@
       background-color: lighten($primary-color, 25%);
       box-shadow: 0 0 37px rgba(8, 21, 66, 0.1);
     }
+
     i {
       font-size: 20px;
       padding: 15px;
@@ -81,6 +92,7 @@
     }
   }
 }
+
 .customizer-contain {
   direction: ltr;
   position: fixed;
@@ -91,17 +103,21 @@
   background-color: $white;
   z-index: 8;
   transition: all 0.3s ease;
+
   &.open {
     right: 0px;
     transition: all 0.3s ease;
     box-shadow: 0 0 10px 1px rgba(68, 102, 242, 0.05);
   }
+
   li {
     position: relative;
+
     &.active {
       box-shadow: 0 0 11px 5px rgba(226, 226, 226, 0.5);
     }
   }
+
   h6 {
     text-transform: uppercase;
     font-weight: 600;
@@ -110,9 +126,11 @@
     padding-top: 15px;
     margin-bottom: 10px;
   }
+
   .customizer-header {
     padding: 25px;
     border-bottom: 1px solid $light-color;
+
     .icon-close {
       position: absolute;
       font-size: 18px;
@@ -121,28 +139,34 @@
       right: 24px;
       color: var(--theme-deafult);
     }
+
     h5 {
       font-weight: 700;
       font-size: 16px;
       text-transform: uppercase;
     }
   }
+
   .customizer-body {
     padding: 15px 25px;
     max-height: calc(100vh - 200px);
     overflow-y: scroll;
+
     .fade {
       &:not(.show) {
         display: none;
       }
     }
+
     .unlimited-color-layout {
       display: flex;
       align-items: center;
+
       .btn {
         font-size: 15px;
         padding: 4px 20px;
       }
+
       input {
         border: 1px solid $gray-60;
         height: 35px;
@@ -153,6 +177,7 @@
         margin-right: 5px;
       }
     }
+
     .layout-grid {
       &.customizer-mix {
         .color-layout {
@@ -163,21 +188,25 @@
         }
       }
     }
+
     .tab-pane {
-      > h6 {
+      >h6 {
         &:first-child {
           padding-top: 0;
           margin-top: 0;
         }
       }
     }
+
     li {
       cursor: pointer;
       opacity: 0.9;
+
       &.active {
         opacity: 1;
       }
     }
+
     .color-layout {
       height: 35px;
       width: 35px;
@@ -186,54 +215,64 @@
       margin-right: 3px;
       border: 1px solid $gray-60;
       padding: 3px;
-      > div {
-        background-color: #5c61f2;
+
+      >div {
+        background-color: #009688;
         height: 100%;
         width: 100%;
         border-radius: 30px;
       }
+
       &[data-attr="color-2"] {
         div {
           background-color: #3B7CF5;
         }
       }
+
       &[data-attr="color-3"] {
         div {
           background-color: #247164;
         }
       }
+
       &[data-attr="color-4"] {
         div {
           background-color: #6655e9;
         }
       }
+
       &[data-attr="color-5"] {
         div {
           background-color: #167A93;
         }
       }
+
       &[data-attr="color-6"] {
         div {
           background-color: #7F563A;
         }
       }
     }
+
     .dark {
-      > li {
+      >li {
         background-color: $semi-dark;
       }
     }
+
     .main-layout {
-      > li {
+      >li {
         height: 65px;
         width: 85px;
         border: 1px solid $light-color;
         border-radius: 10px;
         display: inline-block;
-        & + li {
+
+        &+li {
           margin-left: 7px;
         }
       }
+
       .box-layout {
         .body {
           .badge {
@@ -242,31 +281,36 @@
         }
       }
     }
+
     .sidebar-type,
     .sidebar-setting {
-      > li {
+      >li {
         height: 70px;
         width: 85px;
         border: 1px solid $light-color;
         border-radius: 5px;
         display: inline-block;
-        & + li {
+
+        &+li {
           margin-left: 7px;
         }
       }
     }
+
     .sidebar-type {
       li {
         &[data-attr="normal-sidebar"] {
           .body {
             ul {
               li {
+
                 &.bg-dark,
                 &.sidebar {
                   width: 100%;
                   height: 10px;
                   display: block;
                 }
+
                 &.bg-light,
                 &.body {
                   height: calc(100% - 10px);
@@ -275,6 +319,7 @@
               }
             }
           }
+
           &.body-compact {
             .body {
               ul {
@@ -291,26 +336,31 @@
     }
   }
 }
+
 .layout-grid:not(.customizer-color) {
-  li[data-attr="rtl"]{
-    .body{
-      .bg-light.sidebar{
+  li[data-attr="rtl"] {
+    .body {
+      .bg-light.sidebar {
         margin-left: 3px;
         margin-right: 0;
       }
     }
   }
+
   li {
     padding: 5px;
-    > .header {
+
+    >.header {
       height: 9px;
       border-radius: 3px;
       position: relative;
+
       ul {
         position: absolute;
         top: -8px;
         left: 5px;
-        > li {
+
+        >li {
           display: inline-block;
           width: 4px;
           height: 4px;
@@ -319,16 +369,19 @@
           background-color: var(--theme-deafult);
           margin-right: 2px;
           padding: 0;
+
           &:nth-child(2) {
             background-color: var(--theme-secondary);
           }
+
           &:nth-child(3) {
             background-color: $success-color;
           }
         }
       }
     }
-    > .body {
+
+    >.body {
       background-color: $light-color;
       height: calc(100% - 16px);
       border-radius: 3px;
@@ -336,9 +389,11 @@
       margin-top: 5px;
       text-align: center;
       line-height: 3.1;
+
       ul {
         height: 100%;
         background-color: $white;
+
         .sidebar {
           width: 18px;
           height: 100%;
@@ -346,13 +401,16 @@
           display: inline-block;
           margin-right: 3px;
           padding: 0;
+
           &.compact {
             width: 12px;
-            & ~ .body {
+
+            &~.body {
               width: calc(100% - 19px);
             }
           }
         }
+
         .body {
           width: calc(100% - 25px);
           padding: 0;
@@ -362,6 +420,7 @@
           align-items: center;
           justify-content: center;
           border-radius: 3px;
+
           .badge {
             position: absolute;
             padding: 5px 5px 4px;
@@ -371,6 +430,7 @@
     }
   }
 }
+
 /**=====================
      59.Customizer CSS Ends
 ==========================**/

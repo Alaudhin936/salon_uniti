@@ -121,13 +121,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #5c61f2;
-            border: 1px solid #5c61f2;
+            color: #009688;
+            border: 1px solid #009688;
             transition: all 0.5s ease;
         }
 
         .temp-social td i:hover {
-            background-color: #5c61f2;
+            background-color: #009688;
             color: #ffffff;
         }
 
@@ -302,10 +302,14 @@
                                             src="{{ asset('assets/images/logo/logo2.png') }}"></td>
                                     <td class="menu" align="right">
                                         <ul style="margin-right:15px;">
-                                            <li style="display: inline-block;text-decoration: unset"><a href="{{ route('dashboard') }}">Home</a></li>
-                                        <li style="display: inline-block;text-decoration: unset"><a href="{{ route('list_wish') }}">Whishlist</a></li>
-                                        <li style="display: inline-block;text-decoration: unset"><a href="{{ route('cart') }}">My cart</a></li>
-                                        <li style="display: inline-block;text-decoration: unset"><a href="{{ route('contacts') }}">Contact</a></li>
+                                            <li style="display: inline-block;text-decoration: unset"><a
+                                                    href="{{ route('dashboard') }}">Home</a></li>
+                                            <li style="display: inline-block;text-decoration: unset"><a
+                                                    href="{{ route('list_wish') }}">Whishlist</a></li>
+                                            <li style="display: inline-block;text-decoration: unset"><a
+                                                    href="{{ route('cart') }}">My cart</a></li>
+                                            <li style="display: inline-block;text-decoration: unset"><a
+                                                    href="{{ route('contacts') }}">Contact</a></li>
                                         </ul>
                                     </td>
                                 </tr>
@@ -315,8 +319,9 @@
                             <tbody>
                                 <tr>
                                     <th align="center" width="40%"><img class="img-fluid"
-                                            src="{{ asset('assets/images/email-template/slider.jpg') }}" alt=""></th>
-                                    <th width="60%" style="background-color:#5c61f2; padding: 30px;">
+                                            src="{{ asset('assets/images/email-template/slider.jpg') }}" alt="">
+                                    </th>
+                                    <th width="60%" style="background-color:#009688; padding: 30px;">
                                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
                                             <tbody>
                                                 <tr>
@@ -341,11 +346,12 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="text-button white-button"
-                                                        style="font-size:14px; line-height:18px; text-align:center; text-transform:uppercase; padding:0.6rem 1.75rem; background:#ffffff; color:#5c61f2; font-weight:bold; border-radius:30px;">
+                                                        style="font-size:14px; line-height:18px; text-align:center; text-transform:uppercase; padding:0.6rem 1.75rem; background:#ffffff; color:#009688; font-weight:bold; border-radius:30px;">
                                                         <a href="javascript:void(0)" target="_blan"
                                                             style="color:#4e54cb; text-decoration:none;"><span
-                                                                style="color:#5c61f2; text-decoration:none;">shop
-                                                                now</span></a></td>
+                                                                style="color:#009688; text-decoration:none;">shop
+                                                                now</span></a>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -407,16 +413,17 @@
                             <tbody>
                                 <tr class="add-with-banner" align="center">
                                     <td><a href="javascript:void(0)"><img class="img-fluid"
-                                                src="{{ asset('assets/images/email-template/banner.jpg') }}" alt="product"
-                                                style="width: 100%; border-radius:10px;;"></a></td>
+                                                src="{{ asset('assets/images/email-template/banner.jpg') }}"
+                                                alt="product" style="width: 100%; border-radius:10px;;"></a></td>
                                 </tr>
                             </tbody>
                         </table>
                         <table border="0" cellpadding="0" cellspacing="0" align="center" style="margin-top:30px;">
                             <tbody>
                                 <tr>
-                                    <td><img class="img-fluid" src="{{ asset('assets/images/email-template/banner-2.jpg') }}"
-                                            alt="" style="border-radius:10px;;"></td>
+                                    <td><img class="img-fluid"
+                                            src="{{ asset('assets/images/email-template/banner-2.jpg') }}" alt=""
+                                            style="border-radius:10px;;"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -430,25 +437,28 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="img-sec" align="center" style="width: 40%; "><img
-                                                            src="{{ asset('assets/images/email-template/10.jpg') }}" alt=""
+                                                            src="{{ asset('assets/images/email-template/10.jpg') }}"
+                                                            alt=""
                                                             style="width: 225px;margin-bottom: -4px; border-top-left-radius:10px;">
                                                     </td>
                                                     <td align="center"
                                                         style="background-color: #fafafa;width: 60%; border-top-right-radius:10px; padding: 12px;">
                                                         <h3 style="margin: 0; font-size: 18px;">Product One</h3>
                                                         <div
-                                                            style="color:#5c61f2; font-weight:600; font-size:16px; line-height:27px; letter-spacing:1px;margin: 4px;">
+                                                            style="color:#009688; font-weight:600; font-size:16px; line-height:27px; letter-spacing:1px;margin: 4px;">
                                                             <span class="txt-price1"
                                                                 style="color:#666666; font-weight:600; font-size:15px; line-height:25px; letter-spacing:1px;"
                                                                 data-color="Price1" data-size="Price1" data-min="10"
                                                                 data-max="35">
                                                                 <strike>$25.00</strike></span><span
-                                                                class="txt-price2">   </span>$20.90</div>
+                                                                class="txt-price2">   </span>$20.90
+                                                        </div>
                                                         <div
                                                             style="padding: 15px 0px;text-transform: uppercase;font-size: 11px;letter-spacing: 1px;">
                                                             <a href="javascript:void(0)"
-                                                                style="color: #ffffff;text-decoration:none; border-radius:10px;; background:#5c61f2; padding: 8px 12px;">SHOP
-                                                                NOW</a></div>
+                                                                style="color: #ffffff;text-decoration:none; border-radius:10px;; background:#009688; padding: 8px 12px;">SHOP
+                                                                NOW</a>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -461,22 +471,24 @@
                                                         style="background-color: #fafafa;width: 60%; padding: 12px;">
                                                         <h3 style="margin: 0; font-size: 18px;">Product One</h3>
                                                         <div
-                                                            style="color:#5c61f2; font-weight:600; font-size:16px; line-height:27px; letter-spacing: 1px; margin: 4px;">
+                                                            style="color:#009688; font-weight:600; font-size:16px; line-height:27px; letter-spacing: 1px; margin: 4px;">
                                                             <span class="txt-price1"
                                                                 style="color:#666666; font-weight:600; font-size:15px; line-height:25px; letter-spacing:1px;"
                                                                 data-color="Price1" data-size="Price1" data-min="10"
                                                                 data-max="35">
                                                                 <strike>$25.00</strike></span><span
-                                                                class="txt-price2">   </span>$20.90</div>
+                                                                class="txt-price2">   </span>$20.90
+                                                        </div>
                                                         <div
                                                             style="padding: 15px 0px;text-transform: uppercase;font-size: 11px;letter-spacing: 1px;">
                                                             <a href="javascript:void(0)"
-                                                                style="color: #ffffff;text-decoration:none; border-radius:10px;; background:#5c61f2; padding: 8px 12px;">SHOP
-                                                                NOW</a></div>
+                                                                style="color: #ffffff;text-decoration:none; border-radius:10px;; background:#009688; padding: 8px 12px;">SHOP
+                                                                NOW</a>
+                                                        </div>
                                                     </td>
                                                     <td class="img-sec" align="center" style="width: 40%;"><img
-                                                            src="{{ asset('assets/images/email-template/11.jpg') }}" alt=""
-                                                            style="width: 225px;margin-bottom: -4px;"></td>
+                                                            src="{{ asset('assets/images/email-template/11.jpg') }}"
+                                                            alt="" style="width: 225px;margin-bottom: -4px;"></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -485,25 +497,28 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="img-sec" align="center" style="width: 40%; "><img
-                                                            src="{{ asset('assets/images/email-template/12.jpg') }}" alt=""
+                                                            src="{{ asset('assets/images/email-template/12.jpg') }}"
+                                                            alt=""
                                                             style="width: 225px;margin-bottom: -4px; border-bottom-left-radius:10px;">
                                                     </td>
                                                     <td align="center"
                                                         style="background-color: #fafafa;width: 60%; border-bottom-right-radius:10px; padding: 12px;">
                                                         <h3 style="margin: 0; font-size: 18px;">Product One</h3>
                                                         <div
-                                                            style="color:#5c61f2; font-weight:600; font-size:16px; line-height:27px; letter-spacing:1px; margin: 4px;">
+                                                            style="color:#009688; font-weight:600; font-size:16px; line-height:27px; letter-spacing:1px; margin: 4px;">
                                                             <span class="txt-price1"
                                                                 style="color:#666666; font-weight:600; font-size:15px; line-height:25px; letter-spacing:1px;"
                                                                 data-color="Price1" data-size="Price1" data-min="10"
                                                                 data-max="35">
                                                                 <strike>$25.00</strike></span><span
-                                                                class="txt-price2">   </span>$20.90</div>
+                                                                class="txt-price2">   </span>$20.90
+                                                        </div>
                                                         <div
                                                             style="padding: 15px 0px;text-transform: uppercase;font-size: 11px;letter-spacing: 1px;">
                                                             <a href="javascript:void(0)"
-                                                                style="color: #ffffff;text-decoration:none; border-radius:10px;; background:#5c61f2; padding: 8px 12px;">SHOP
-                                                                NOW</a></div>
+                                                                style="color: #ffffff;text-decoration:none; border-radius:10px;; background:#009688; padding: 8px 12px;">SHOP
+                                                                NOW</a>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -543,7 +558,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td><a href="javascript:void(0)"
-                                                            style="color: #5c61f2;font-size:14px;text-transform: capitalize;font-weight:600;">Want
+                                                            style="color: #009688;font-size:14px;text-transform: capitalize;font-weight:600;">Want
                                                             to change how you receive these emails?</a></td>
                                                 </tr>
                                                 <tr>
@@ -554,7 +569,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td><a href="javascript:void(0)"
-                                                            style="color: #5c61f2;font-size: 14px;text-transform: capitalize;font-weight:600; margin:0;">Unsubscribe</a>
+                                                            style="color: #009688;font-size: 14px;text-transform: capitalize;font-weight:600; margin:0;">Unsubscribe</a>
                                                     </td>
                                                 </tr>
                                             </tbody>

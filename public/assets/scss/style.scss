@@ -101,10 +101,12 @@
 // *** utils ***
 @import "utils/variables";
 @import "utils/theme-font";
+
 :root {
-    --theme-deafult:#5c61f2;
+    --theme-deafult: #009688;
     --theme-secondary: #eeb82f;
 }
+
 // *** base ***
 @import "base/reset";
 @import "base/typography";

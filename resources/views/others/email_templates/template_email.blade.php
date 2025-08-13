@@ -116,13 +116,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #5c61f2;
-            border: 1px solid #5c61f2;
+            color: #009688;
+            border: 1px solid #009688;
             transition: all 0.5s ease;
         }
 
         .temp-social td i:hover {
-            background-color: #5c61f2;
+            background-color: #009688;
             color: #ffffff;
         }
 
@@ -307,10 +307,14 @@
                                         src="{{ asset('assets/images/logo/logo2.png') }}"></td>
                                 <td class="menu" align="right" style="padding-right:15px;">
                                     <ul>
-                                        <li style="display: inline-block;text-decoration: unset"><a href="{{ route('dashboard') }}">Home</a></li>
-                                        <li style="display: inline-block;text-decoration: unset"><a href="{{ route('list_wish') }}">Whishlist</a></li>
-                                        <li style="display: inline-block;text-decoration: unset"><a href="{{ route('cart') }}">My cart</a></li>
-                                        <li style="display: inline-block;text-decoration: unset"><a href="{{ route('contacts') }}">Contact</a></li>
+                                        <li style="display: inline-block;text-decoration: unset"><a
+                                                href="{{ route('dashboard') }}">Home</a></li>
+                                        <li style="display: inline-block;text-decoration: unset"><a
+                                                href="{{ route('list_wish') }}">Whishlist</a></li>
+                                        <li style="display: inline-block;text-decoration: unset"><a
+                                                href="{{ route('cart') }}">My cart</a></li>
+                                        <li style="display: inline-block;text-decoration: unset"><a
+                                                href="{{ route('contacts') }}">Contact</a></li>
                                     </ul>
                                 </td>
                             </tr>
@@ -319,8 +323,8 @@
                     <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
                         <tbody>
                             <tr>
-                                <td><img class="img-fluid" src="{{ asset('assets/images/email-template/1.jpg') }}" alt=""
-                                        style="width: 100%;"></td>
+                                <td><img class="img-fluid" src="{{ asset('assets/images/email-template/1.jpg') }}"
+                                        alt="" style="width: 100%;"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -336,7 +340,8 @@
                                 <td>
                                     <div class="product-box hover">
                                         <div class="product border-theme"><img class="img-fluid"
-                                                src="{{ asset('assets/images/email-template/2.png') }}" alt="product"></div>
+                                                src="{{ asset('assets/images/email-template/2.png') }}" alt="product">
+                                        </div>
                                         <div class="product-info">
                                             <div class="rating" style="margin-bottom:5px;"><i class="fa fa-star"
                                                     style="color:#e6c830;"></i><i class="fa fa-star"
@@ -354,7 +359,8 @@
                                 <td>
                                     <div class="product-box hover">
                                         <div class="product border-theme"><img class="img-fluid"
-                                                src="{{ asset('assets/images/email-template/7.png') }}" alt="product"></div>
+                                                src="{{ asset('assets/images/email-template/7.png') }}" alt="product">
+                                        </div>
                                         <div class="product-info">
                                             <div class="rating" style="margin-bottom:5px;"><i class="fa fa-star"
                                                     style="color:#e6c830;"></i><i class="fa fa-star"
@@ -372,7 +378,8 @@
                                 <td>
                                     <div class="product-box hover">
                                         <div class="product border-theme br-0"><img class="img-fluid"
-                                                src="{{ asset('assets/images/email-template/8.png') }}" alt="product"></div>
+                                                src="{{ asset('assets/images/email-template/8.png') }}" alt="product">
+                                        </div>
                                         <div class="product-info">
                                             <div class="rating" style="margin-bottom:5px;"><i class="fa fa-star"
                                                     style="color:#e6c830;"></i><i class="fa fa-star"
@@ -400,7 +407,7 @@
                                 <td><img class="img-fluid" style="border-radius:10px;"
                                         src="{{ asset('assets/images/email-template/3.png') }}"></td>
                                 <td>
-                                    <div style="border-top:1px solid #5c61f2; mso-line-height-rule: exactly;"
+                                    <div style="border-top:1px solid #009688; mso-line-height-rule: exactly;"
                                         data-border-bottom-color="Week Border"></div><a href="javascript:void(0)">
                                         <div class="Heading" align="center"
                                             style="color:#333333;font-weight:600; font-size:23px; letter-spacing:1px; line-height:35px; mso-line-height-rule: exactly; margin-top: 15px;"
@@ -411,7 +418,7 @@
                                             data-color="Week Heading" data-size="Week Heading" data-min="15"
                                             data-max="45">Save Up To 50%</div>
                                     </a>
-                                    <div style="border-bottom:1px solid #5c61f2; mso-line-height-rule: exactly;"
+                                    <div style="border-bottom:1px solid #009688; mso-line-height-rule: exactly;"
                                         data-border-bottom-color="Week Border"></div>
                                 </td>
                             </tr>
@@ -424,7 +431,8 @@
                         <tbody>
                             <tr align="center">
                                 <td><a href="javascript:void(0)"><img class="img-fluid"
-                                            src="{{ asset('assets/images/email-template/cosmetic.jpg') }}" style="width:100%;"></a>
+                                            src="{{ asset('assets/images/email-template/cosmetic.jpg') }}"
+                                            style="width:100%;"></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -434,10 +442,12 @@
                         <tbody>
                             <tr class="add-with-banner" align="center">
                                 <td><a href="javascript:void(0)"><img class="img-fluid"
-                                            src="{{ asset('assets/images/email-template/6.png') }}" style="border-radius:10px;"></a>
+                                            src="{{ asset('assets/images/email-template/6.png') }}"
+                                            style="border-radius:10px;"></a>
                                 </td>
                                 <td><a href="javascript:void(0)"><img class="img-fluid"
-                                            src="{{ asset('assets/images/email-template/5.png') }}" style="border-radius:10px;"></a>
+                                            src="{{ asset('assets/images/email-template/5.png') }}"
+                                            style="border-radius:10px;"></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -472,7 +482,7 @@
                                         <tbody>
                                             <tr>
                                                 <td><a href="javascript:void(0)"
-                                                        style="color: #5c61f2;font-size:14px;text-transform: capitalize;font-weight:600;">Want
+                                                        style="color: #009688;font-size:14px;text-transform: capitalize;font-weight:600;">Want
                                                         to change how you receive these emails?</a></td>
                                             </tr>
                                             <tr>
@@ -483,7 +493,7 @@
                                             </tr>
                                             <tr>
                                                 <td><a href="javascript:void(0)"
-                                                        style="color: #5c61f2;font-size: 14px;text-transform: capitalize;font-weight:600; margin:0;">Unsubscribe</a>
+                                                        style="color: #009688;font-size: 14px;text-transform: capitalize;font-weight:600; margin:0;">Unsubscribe</a>
                                                 </td>
                                             </tr>
                                         </tbody>

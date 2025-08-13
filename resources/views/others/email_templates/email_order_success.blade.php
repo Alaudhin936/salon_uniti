@@ -94,13 +94,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #5c61f2;
-            border: 1px solid #5c61f2;
+            color: #009688;
+            border: 1px solid #009688;
             transition: all 0.5s ease;
         }
 
         .temp-social td i:hover {
-            background-color: #5c61f2;
+            background-color: #009688;
             color: #ffffff;
         }
 
@@ -141,7 +141,7 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background-color: #5c61f2;
+            background-color: #009688;
         }
 
         .deliver-status li:first-child::before,
@@ -181,7 +181,7 @@
         }
 
         .deliver-status li .order-icon.active {
-            background-color: #5c61f2;
+            background-color: #009688;
         }
 
         .deliver-status li .order-icon.active i {
@@ -354,8 +354,9 @@
                         <table align="center" border="0" cellpadding="0" cellspacing="0">
                             <tbody>
                                 <tr>
-                                    <td><img class="img-fluid" src="{{ asset('assets/images/email-template/delivery.png') }}"
-                                            alt="" style=";margin-bottom: 30px; border-radius:10px;"></td>
+                                    <td><img class="img-fluid"
+                                            src="{{ asset('assets/images/email-template/delivery.png') }}" alt=""
+                                            style=";margin-bottom: 30px; border-radius:10px;"></td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -437,8 +438,8 @@
                                     <th>PRICE </th>
                                 </tr>
                                 <tr>
-                                    <td><img class="img-fluid" src="{{ asset('assets/images/email-template/4.png') }}" alt=""
-                                            width="130"></td>
+                                    <td><img class="img-fluid" src="{{ asset('assets/images/email-template/4.png') }}"
+                                            alt="" width="130"></td>
                                     <td valign="top" style="padding-left: 15px;">
                                         <h5 style="margin-top: 15px;">AirPods Pro Case, Soft Silicone Skin Case.</h5>
                                     </td>
@@ -450,8 +451,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><img class="img-fluid" src="{{ asset('assets/images/email-template/1.png') }}" alt=""
-                                            width="130"></td>
+                                    <td><img class="img-fluid" src="{{ asset('assets/images/email-template/1.png') }}"
+                                            alt="" width="130"></td>
                                     <td valign="top" style="padding-left: 15px;">
                                         <h5 style="margin-top: 15px;">Black Mobile Vision 1 Pro with No Cost EMI/Additional
                                             Exchange Offers.</h5>
@@ -469,7 +470,8 @@
                                         Total:</td>
                                     <td class="price" colspan="3"
                                         style="line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right;border-left: unset;">
-                                        <b>$6000.00</b></td>
+                                        <b>$6000.00</b>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"
@@ -477,7 +479,8 @@
                                         Discount :</td>
                                     <td class="price" colspan="3"
                                         style="line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right; border-left:unset;">
-                                        <b>$10</b></td>
+                                        <b>$10</b>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"
@@ -485,7 +488,8 @@
                                         Gift Wripping: </td>
                                     <td class="price" colspan="3"
                                         style="line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right; border-left:unset;">
-                                        <b>$60</b></td>
+                                        <b>$60</b>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"
@@ -493,7 +497,8 @@
                                         Shipping :</td>
                                     <td class="price" colspan="3"
                                         style="                  line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right;border-left: unset;">
-                                        <b>$30</b></td>
+                                        <b>$30</b>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"
@@ -501,7 +506,8 @@
                                         TOTAL PAID :</td>
                                     <td class="price" colspan="3"
                                         style="line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right;border-left: unset;">
-                                        <b>$6100</b></td>
+                                        <b>$6100</b>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -520,8 +526,8 @@
                                             IN 47150</p>
                                     </td>
                                     <td class="user-info" width="57" height="25"><img class="img-fluid"
-                                            src="{{ asset('assets/images/email-template/space.jpg') }}" alt=" " height="25"
-                                            width="57"></td>
+                                            src="{{ asset('assets/images/email-template/space.jpg') }}" alt=" "
+                                            height="25" width="57"></td>
                                     <td class="user-info"
                                         style="font-size: 13px; font-weight: 400; color: #444444; letter-spacing: 0.2px;width: 50%; border: 1px solid #eeeeee ;border-radius:10px;">
                                         <h5
@@ -567,7 +573,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td><a href="javascript:void(0)"
-                                                            style="color: #5c61f2;font-size:14px;text-transform: capitalize;font-weight:600;">Want
+                                                            style="color: #009688;font-size:14px;text-transform: capitalize;font-weight:600;">Want
                                                             to change how you receive these emails?</a></td>
                                                 </tr>
                                                 <tr>
@@ -578,7 +584,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td><a href="javascript:void(0)"
-                                                            style="color: #5c61f2;font-size: 14px;text-transform: capitalize;font-weight:600; margin:0;">Unsubscribe</a>
+                                                            style="color: #009688;font-size: 14px;text-transform: capitalize;font-weight:600; margin:0;">Unsubscribe</a>
                                                     </td>
                                                 </tr>
                                             </tbody>
