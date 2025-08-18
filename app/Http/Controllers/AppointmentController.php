@@ -15,15 +15,18 @@ class AppointmentController extends Controller
     public function index()
     {
         $currentYear = Carbon::now()->year;
-
+        $today = Carbon::today();
         $monthlyEarnings = DB::table('appointments')
             ->join('services', 'appointments.service_id', '=', 'services.id')
+            ->join('users as vendors', 'services.vendor_id', '=', 'vendors.id')
+            ->where('vendors.id', auth()->id()) // filter by logged-in vendor
             ->whereYear('appointments.created_at', $currentYear)
             ->where('appointments.status', 'completed')
-            ->selectRaw('MONTH(appointments.created_at) as month, SUM(services.price) as total')
+            ->selectRaw('MONTH(appointments.date) as month, SUM(services.price) as total')
             ->groupBy('month')
             ->orderBy('month')
             ->pluck('total', 'month');
+
 
         $appointments = DB::table('appointments')
             ->join('services', 'appointments.service_id', '=', 'services.id')
@@ -39,14 +42,36 @@ class AppointmentController extends Controller
             ->get()
             ->groupBy('date');
 
-        return view('admin_unique_layout.box_dashboard', compact('appointments','monthlyEarnings'));
+        $todaysAppointments = DB::table('appointments')
+            ->join('services', 'appointments.service_id', '=', 'services.id')
+            ->join('users as customers', 'appointments.user_id', '=', 'customers.id')
+            ->join('users as vendors', 'services.vendor_id', '=', 'vendors.id')
+            ->where('vendors.id', auth()->id())
+            ->whereDate('appointments.date', $today)
+            ->select(
+                'appointments.*',
+                'services.name as service_name',
+                'customers.name as customer_name'
+            )
+            ->orderBy('appointments.slot_start', 'asc')
+            ->get();
+
+        $todaysRevenue = DB::table('appointments')
+            ->join('services', 'appointments.service_id', '=', 'services.id')
+            ->join('users as vendors', 'services.vendor_id', '=', 'vendors.id')
+            ->where('vendors.id', auth()->id())
+            ->whereDate('appointments.date', $today)
+            ->where('appointments.status', 'completed')
+            ->sum('services.price');
+
+        return view('admin_unique_layout.box_dashboard', compact('appointments', 'monthlyEarnings', 'todaysAppointments', 'todaysRevenue'));
     }
 
     public function appointments()
     {
 
         $users = DB::table('users')->where('role_id', 3)->get();
-        $services = DB::table('services')->where('vendor_id', auth()->id())->get();
+        $services = DB::table('services')->where('vendor_id', auth()->id())->where('is_active', 1)->get();
         $appointments = DB::table('appointments')
             ->join('services', 'appointments.service_id', '=', 'services.id')
             ->join('users as customers', 'appointments.user_id', '=', 'customers.id')

@@ -17,12 +17,16 @@ class ServiceController extends Controller
 
     public function store(Request $request)
     {
-
+        if ($request->hasFile('service_img')) {
+            $path = $request->file('service_img')->store('service_img', 'public');
+        };
+        
         $id = Service::create([
             'vendor_id' => auth()->user()->id,
             'name' => $request->name,
             'price' => $request->price,
-            'duration' => $request->duration
+            'duration' => $request->duration,
+            'service_img' => isset($path) ? $path : ''
         ]);
 
         return response()->json(['status' => 'success', 'services' => $id]);
@@ -41,11 +45,16 @@ class ServiceController extends Controller
     {
         $service = Service::findOrFail($id);
 
+        if ($request->hasFile('service_img')) {
+            $path = $request->file('service_img')->store('service_img', 'public');
+        }
+
         $service->update([
             'name' => $request->name,
             'price' => $request->price,
             'duration' => $request->duration,
-            'is_active' => $request->is_active
+            'is_active' => $request->is_active,
+            'service_img' => isset($path) ? $path : ''
         ]);
 
         return response()->json([

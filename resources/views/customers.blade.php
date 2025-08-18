@@ -26,11 +26,11 @@
 
             <div class="container mt-4">
                 <div class="card shadow-sm">
-                       <div class="card-header bg-primary text-white py-2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                Customers
-                            </div>
+                    <div class="card-header bg-primary text-white py-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            Customers
                         </div>
+                    </div>
                     <div class="card-body">
                         @if ($allCustomers->isEmpty())
                             <div class="alert alert-info mb-0">
@@ -45,8 +45,7 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
-                                            <th>Bookings and details
-                                            <th>
+                                            <th class="text-center">Bookings and details</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -56,10 +55,11 @@
                                                 <td>{{ $customer->name }}</td>
                                                 <td>{{ $customer->email }}</td>
                                                 <td>{{ $customer->phone }}</td>
-                                                <td>
-                                                    <i class="fa fa-info-circle text-primary customer-info-btn"
+                                                <td class="text-center">
+                                                    <i class="fa fa-eye text-primary customer-info-btn"
                                                         style="cursor:pointer;" data-customer-id="{{ $customer->id }}">
                                                     </i>
+
                                                 </td>
                                             </tr>
                                         @endforeach

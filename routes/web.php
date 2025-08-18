@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ServiceController;
@@ -52,8 +53,18 @@ Route::get('/logout', function () {
 
 Route::middleware('role:1')->group(function () {
     Route::get('/salons', [AdminController::class, 'index'])->name('salons');
+    Route::get('/banners', [BannerController::class, 'index'])->name('banners');
     Route::post('/salon/store', [AdminController::class, 'registerSalon'])->name('salons.store');
     Route::post('/salonDetails/{id}', [AdminController::class, 'showVendorDetails'])->name('salon.details');
+    Route::post('/banner/store', [BannerController::class, 'store'])->name('admin.banners.store');
+    Route::post('/banner/update/{id}', [BannerController::class, 'update'])->name('admin.banner.update');
+    Route::post('/banner/delete/{id}', [BannerController::class, 'delete'])->name('admin.banner.delete');
+    Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
+    Route::post('/settings/store', [AdminController::class, 'storeSettings'])->name('admin.settings.store');
+    Route::get('/salon-types', [AdminController::class, 'salonTypes'])->name('admin.salon.types');
+    Route::post('/salon-types/store', [AdminController::class, 'storeSalonType'])->name('admin.salon.types.store');
+    Route::post('/salon-types/edit/{id}', [AdminController::class, 'updateSalonType'])->name('admin.salon.types.edit');
+    Route::post('/salon-types/delete/{id}', [AdminController::class, 'destroySalonType'])->name('admin.salon.types.delete');
 });
 
 Route::prefix('salonweb')->group(function () {
@@ -87,7 +98,7 @@ Route::prefix('salonweb')->group(function () {
         Route::post('/vendor/breaks/{id}', [VendorScheduleController::class, 'editBreak'])->name('vendor.break.update');
         Route::post('/vendor/schedule/status/{id}', [VendorScheduleController::class, 'statusUpdate'])->name('vendor.schedule.status');
         Route::post('/vendor/schedule/time/{id}', [VendorScheduleController::class, 'timeUpdate'])->name('vendor.schedule.updateTime');
-       ;
+        Route::post('/get-day-start-slot', [VendorScheduleController::class, 'getDaySlots'])->name('vendor.date.validate');;
     });
 });
 

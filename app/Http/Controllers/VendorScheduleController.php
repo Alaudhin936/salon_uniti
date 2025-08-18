@@ -6,6 +6,7 @@ use App\Models\VendorBreak;
 use App\Models\VendorScheduleException;
 use App\Models\VendorWeeklySchedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VendorScheduleController extends Controller
 {
@@ -132,8 +133,23 @@ class VendorScheduleController extends Controller
         ]);
     }
 
+    public function getDaySlots(Request $request)
+    {
+        $date = $request->input('date');
+        $dayIndex = \Carbon\Carbon::parse($date)->dayOfWeek;
+
+        $timeslot = DB::table('vendor_weekly_schedule')
+            ->where('day_of_week', $dayIndex)
+            ->first();
+
+        return response()->json([
+            'start_slot' => $timeslot ? $timeslot->open_time : null,
+            'end_slot' => $timeslot ? $timeslot->close_time : null
+        ]);
+    }
     public function timeUpdate(Request $request, $id)
     {
+
         $request->validate([
             'field' => 'required|in:open_time,close_time',
             'value' => 'required'

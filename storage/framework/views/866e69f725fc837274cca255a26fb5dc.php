@@ -160,50 +160,7 @@
     <?php endif; ?>
 
     
-    <?php if($exceptions->isEmpty()): ?>
-        <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
-            data-bs-target="#addExceptionModal">
-            <i class="fas fa-plus-circle me-2 text-primary"></i> Add Exception
-        </button>
-    <?php else: ?>
-        <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
-            <h5>Exceptions</h5>
-            <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
-                data-bs-target="#addExceptionModal">
-                <i class="fas fa-plus-circle me-2 text-primary"></i> Add Exception
-            </button>
-        </div>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Open Time</th>
-                    <th>Close Time</th>
-                    <th>Breaks</th>
-                    <th >Status</th>
-                    <th>Note</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php $__currentLoopData = $exceptions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $exception): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <tr>
-                        <td><?php echo e($exception->date); ?></td>
-                        <td><?php echo e($exception->open_time ?? '-'); ?></td>
-                        <td><?php echo e($exception->close_time ?? '-'); ?></td>
-                        <td><?php echo e($exception->breaks_count); ?></td>
-                        <td>
-                            <?php if($exception->is_closed): ?>
-                                <span class="badge bg-danger">Closed</span>
-                            <?php else: ?>
-                                <span class="badge bg-success">Open</span>
-                            <?php endif; ?>
-                        </td>
-                        <td><?php echo e($exception->note ?? '-'); ?></td>
-                    </tr>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            </tbody>
-        </table>
-    <?php endif; ?>
+    
 
 
     <div class="modal fade" id="addBreakModal" tabindex="-1" aria-hidden="true">

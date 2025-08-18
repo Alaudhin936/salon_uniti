@@ -83,34 +83,35 @@
                         </li>
 
                         <li class="sidebar-list">
-                            <i class="fa fa-thumb-tack"></i>
                             <a class="sidebar-link sidebar-title" href="<?php echo e(route('dashboard')); ?>">
                                 <i data-feather="home"></i><span class="lan-3"></span>
                             </a>
                         </li>
 
                         <li class="sidebar-list">
-                            <i class="fa fa-thumb-tack"></i>
                             <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('salons')); ?>">
                                 <i data-feather="scissors"></i><span>Salonss</span>
                             </a>
                         </li>
 
                         <li class="sidebar-list">
-                            <i class="fa fa-thumb-tack"></i>
-                            <a class="sidebar-link sidebar-title link-nav" href="">
-                                <i data-feather="percent"></i><span>Offers</span>
+                            <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('banners')); ?>">
+                                <i data-feather="flag"></i><span>Banner</span>
                             </a>
                         </li>
 
                         <li class="sidebar-list">
-                            <i class="fa fa-thumb-tack"></i>
-                            <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('support_ticket')); ?>">
+                            <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('admin.salon.types')); ?>">
                                 <i data-feather="layers"></i><span>Salon Type</span>
                             </a>
                         </li>
+
                         <li class="sidebar-list">
-                            <i class="fa fa-thumb-tack"></i>
+                            <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('admin.settings')); ?>">
+                                <i data-feather="settings"></i><span>Settings & Privacy</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-list">
                             <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('support_ticket')); ?>">
                                 <i data-feather="log-out"></i><span>Logout</span>
                             </a>

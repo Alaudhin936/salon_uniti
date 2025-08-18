@@ -21,4 +21,6 @@
   <!-- Template js-->
   <script src="{{ asset('assets/js/script.js') }}"></script>
   <script src="{{ asset('assets/js/theme-customizer/customizer.js') }}"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- login js-->

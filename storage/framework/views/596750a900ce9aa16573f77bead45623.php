@@ -122,7 +122,7 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <span
-                                                        class="badge fs-6 px-3 py-2
+                                                        class="badge fs-7 px-2 py-1
                                         <?php if($appointment->status == 'booked'): ?> bg-success
                                         <?php elseif($appointment->status == 'cancelled'): ?> bg-danger
                                         <?php elseif($appointment->status == 'completed'): ?> bg-primary
@@ -218,9 +218,9 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="user_id" class="form-label">Select User</label>
+                            <label for="user_id" class="form-label">Select Customer</label>
                             <select class="form-control" name="user_id" required>
-                                <option value="">-- Choose User --</option>
+                                <option value="">-- Choose Customer --</option>
                                 <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <option value="<?php echo e($user->id); ?>"><?php echo e($user->name); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -244,7 +244,8 @@
                         <!-- Date -->
                         <div class="mb-3">
                             <label for="date" class="form-label">Date</label>
-                            <input type="date" class="form-control" name="date" required>
+                            <input type="date" min="<?php echo e(\Carbon\Carbon::today()->format('Y-m-d')); ?>"
+                                class="form-control" name="date" required>
                         </div>
 
                         <!-- Slot Start -->
@@ -256,7 +257,7 @@
                         <!-- Slot End -->
                         <div class="mb-3">
                             <label for="slot_end" class="form-label">Slot End</label>
-                            <input type="time" class="form-control" name="slot_end" required>
+                            <input type="time" class="form-control" name="slot_end" readonly>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -311,6 +312,39 @@
                     $('input[name="slot_end"]').val(`${formattedHours}:${formattedMinutes}`);
                 }
             }
+
+            function setMinStartTime(date) {
+                if (!date) return;
+                let duration = $('select[name="service_id"] option:selected').data('duration');
+                $.ajax({
+                    url: "<?php echo e(route('vendor.date.validate')); ?>",
+                    method: "POST",
+                    data: {
+                        date: date,
+                        _token: '<?php echo e(csrf_token()); ?>'
+                    },
+                    success: function(response) {
+                        if (response.start_slot) {
+                            $('input[name="slot_start"]').attr('min', response.start_slot);
+                            let [endHours, endMinutes] = response.end_slot.split(':').map(Number);
+                            let totalEndMinutes = endHours * 60 + endMinutes;
+
+                            let adjustedEndMinutes = totalEndMinutes - duration;
+
+                            let adjHours = Math.floor(adjustedEndMinutes / 60);
+                            let adjMinutes = adjustedEndMinutes % 60;
+                            let formattedEnd = String(adjHours).padStart(2, '0') + ':' + String(
+                                adjMinutes).padStart(2, '0');
+
+                            $('input[name="slot_start"]').attr('max', formattedEnd);
+                        }
+                    }
+                });
+            };
+
+            $('input[name="date"]').on('change', function() {
+                setMinStartTime($(this).val());
+            });
             $('select[name="service_id"], input[name="slot_start"]').on('change', calculateEndTime);
             $('#bookAppointmentForm').on('submit', function(e) {
                 e.preventDefault();

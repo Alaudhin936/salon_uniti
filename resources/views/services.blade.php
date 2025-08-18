@@ -45,8 +45,10 @@
                         <th>Service Name</th>
                         <th>Price</th>
                         <th>Duration</th>
+                        <th>Service Image</th>
                         <th>Status</th>
                         <th class="text-center">Actions</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -73,6 +75,16 @@
                                 </span>
                             </td>
                             <td>
+                                @if ($service->service_img)
+                                    <div>
+                                        <img src="{{ asset('storage/' . $service->service_img) }}" alt="Cover Photo"
+                                            class="img-fluid rounded" style="max-height: 100px;">
+                                    </div>
+                                @else
+                                    <div>No Image for service</div>
+                                @endif
+                            </td>
+                            <td>
                                 @if ($service->is_active)
                                     <span class="badge bg-primary">Active</span>
                                 @else
@@ -82,8 +94,9 @@
                             <td class="text-center">
                                 <div class="btn-group btn-group-sm">
                                     <button class="btn btn-outline-warning edit-service" data-id="{{ $service->id }}"
-                                        data-name="{{ $service->name }}" data-status={{ $service->is_active }}
-                                        data-duration="{{ $service->duration }}" data-price="{{ $service->price }}">
+                                        data-img="{{ $service->service_img }}" data-name="{{ $service->name }}"
+                                        data-status={{ $service->is_active }} data-duration="{{ $service->duration }}"
+                                        data-price="{{ $service->price }}">
                                         <i class="fa fa-edit" style="color:#0a566d"></i>
                                     </button>
                                     <button class="btn btn-outline-danger delete-service" data-id="{{ $service->id }}">
@@ -91,6 +104,7 @@
                                     </button>
                                 </div>
                             </td>
+
                         </tr>
                     @empty
                         <tr>
@@ -120,7 +134,7 @@
                     <h5 class="modal-title" id="addServiceLabel">Add New Service</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="addServiceForm" method="POST">
+                <form id="addServiceForm" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
@@ -134,6 +148,11 @@
                         <div class="mb-3">
                             <label for="serviceDuration" class="form-label">Duration (minutes)</label>
                             <input type="number" class="form-control" id="serviceDuration" name="duration" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="addServiceImage" class="form-label">Service Image</label>
+                            <input type="file" class="form-control" id="addServiceImage" name="service_img"
+                                accept="image/*">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -154,7 +173,7 @@
     <div class="modal fade" id="editServiceModal" tabindex="-1" aria-labelledby="editServiceModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
-            <form id="editServiceForm" method="POST">
+            <form id="editServiceForm" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="service_id" id="editServiceId">
                 <div class="modal-content">
@@ -163,19 +182,23 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+
                         <div class="mb-3">
                             <label for="editServiceName" class="form-label">Service Name</label>
                             <input type="text" class="form-control" id="editServiceName" name="name" required>
                         </div>
+
                         <div class="mb-3">
                             <label for="editServicePrice" class="form-label">Price</label>
                             <input type="number" class="form-control" id="editServicePrice" name="price" required>
                         </div>
+
                         <div class="mb-3">
                             <label for="editServiceDuration" class="form-label">Duration (mins)</label>
                             <input type="number" class="form-control" id="editServiceDuration" name="duration"
                                 required>
                         </div>
+
                         <div class="mb-3">
                             <label for="is_active" class="form-label">Status</label>
                             <select id="is_active" name="is_active" class="form-select">
@@ -183,6 +206,17 @@
                                 <option value="0">Inactive</option>
                             </select>
                         </div>
+
+                        <!-- Image Upload -->
+                        <div class="mb-3">
+                            <label for="editServiceImage" class="form-label">Service Image</label>
+                            <input type="file" class="form-control" id="editServiceImage" name="service_img"
+                                accept="image/*">
+
+                            <!-- Preview existing image -->
+
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -197,6 +231,7 @@
             </form>
         </div>
     </div>
+
 
 
     <!-- Toast container -->
@@ -239,14 +274,16 @@
             $("#addServiceForm").submit(function(e) {
                 e.preventDefault();
                 let btn = $('#storeBtn');
-
+                let formData = new FormData(this);
                 // Disable button
                 btn.prop('disabled', true);
                 btn.find('.btn-text').text('Saving...');
                 $.ajax({
                     url: "{{ route('services.store') }}",
                     type: "POST",
-                    data: $(this).serialize(),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
                     success: function(response) {
                         $("#addServiceModal").modal('hide');
 
@@ -349,12 +386,14 @@
                 let price = $(this).data('price');
                 let duration = $(this).data('duration');
                 let status = $(this).data('status');
+                let service_img = $(this).data('img');
 
                 $('#editServiceId').val(id);
                 $('#editServiceName').val(name);
                 $('#editServicePrice').val(price);
                 $('#editServiceDuration').val(duration);
                 $('#is_active').val(status);
+                $('#serviceImagePreview').attr('src', '{{ asset('storage') }}/' + service_img);
 
                 $('#editServiceModal').modal('show');
             });
@@ -363,8 +402,7 @@
             $('#editServiceForm').submit(function(e) {
                 e.preventDefault();
                 let btn = $('#saveBtn');
-
-                // Disable button
+                let formData = new FormData(this);
                 btn.prop('disabled', true);
                 btn.find('.btn-text').text('Saving...');
                 let id = $('#editServiceId').val();
@@ -372,24 +410,22 @@
                 $.ajax({
                     url: url_1,
                     type: 'POST',
-                    data: $(this).serialize(),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
                     success: function(response) {
                         if (response.status) {
                             let tableRow = $(`.edit-service[data-id="${id}"]`).closest('tr');
 
-                            // Update service name in the second colum
                             tableRow.find('td:nth-child(2) strong').text(response.service.name);
 
-                            // Update price badge in the third column
                             tableRow.find('td:nth-child(3) .badge').html(`
         <i class="fa fa-rupee-sign me-1"></i>${response.service.price}
     `);
 
-                            // Update duration in the fourth column
                             tableRow.find('td:nth-child(4) span').html(`
         <i class="fa fa-clock me-1"></i>${response.service.duration} min
     `);
-
 
                             let statusText = response.service.is_active ? 'Active' :
                                 'In-Active';
@@ -398,9 +434,9 @@
 
                             let statusBadge = tableRow.find('td:nth-child(5) span');
                             statusBadge
-                                .removeClass('bg-primary bg-danger') // remove old classes
-                                .addClass(statusClass) // add new class
-                                .text(statusText); // update text
+                                .removeClass('bg-primary bg-danger')
+                                .addClass(statusClass)
+                                .text(statusText);
 
                             tableRow.find('.edit-service')
                                 .attr('data-name', response.service.name)
@@ -431,7 +467,6 @@
 
                         if (xhr.status === 422) {
                             let errors = xhr.responseJSON.errors;
-                            // alert("Validation error: " + Object.values(errors).join(", "));
                         } else {
                             // alert("Something went wrong!");
                         }
@@ -449,11 +484,9 @@
 
                     $.ajax({
                         url: url,
-                        type: 'POST', // use POST if route is POST
+                        type: 'POST',
                         data: {
                             _token: '{{ csrf_token() }}'
-                            // If using DELETE route instead, add:
-                            // _method: 'DELETE'
                         },
                         success: function(response) {
                             if (response.status) {
@@ -464,13 +497,12 @@
                                     text: 'Service Deleted Successfully',
                                     confirmButtonColor: '#3085d6',
                                     confirmButtonText: 'OK'
-                                }).then(function(result){
-                                    if(result.isConfirmed){
+                                }).then(function(result) {
+                                    if (result.isConfirmed) {
                                         window.location.reload();
                                     }
                                 });
 
-                                // Show success toast
                                 let toastEl = document.getElementById('successToast');
                                 let toast = new bootstrap.Toast(toastEl);
                                 toast.show();

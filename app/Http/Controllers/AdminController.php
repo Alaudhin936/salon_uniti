@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminSetting;
+use App\Models\SalonType;
 use App\Models\User;
 use App\Models\VendorDetail;
 use Illuminate\Http\Request;
@@ -102,7 +104,7 @@ class AdminController extends Controller
             ->where('appointments.status', 'completed')
             ->sum('services.price');
 
-       $vendor['total_revenue'] = $totalRevenue;
+        $vendor['total_revenue'] = $totalRevenue;
 
         if (!$vendor) {
             return response()->json([
@@ -113,4 +115,92 @@ class AdminController extends Controller
 
         return response()->json($vendor);
     }
+
+    public function settings()
+    {
+        $settings = AdminSetting::first();
+        return view('settings', compact('settings'));
+    }
+
+    public function storeSettings(Request $request)
+    {
+        $validated = $request->validate([
+            'site_name' => 'nullable|string|max:255',
+            'email' => 'nullable|email',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+            'site_logo' => 'nullable|image|mimes:png,jpg,jpeg,svg|max:2048',
+            'favicon' => 'nullable|image|mimes:png,jpg,jpeg,ico|max:1024',
+            'privacy_policy' => 'nullable',
+            'terms_conditions' => 'nullable',
+        ]);
+
+        // Get existing settings (first row) OR create new
+        $settings = AdminSetting::first();
+
+        // Handle site logo
+        if ($request->hasFile('site_logo')) {
+            if ($settings && $settings->site_logo && Storage::exists('public/' . $settings->site_logo)) {
+                Storage::delete('public/' . $settings->site_logo);
+            }
+            $validated['site_logo'] = $request->file('site_logo')->store('logos', 'public');
+        }
+
+        // Handle favicon
+        if ($request->hasFile('favicon')) {
+            if ($settings && $settings->favicon && Storage::exists('public/' . $settings->favicon)) {
+                Storage::delete('public/' . $settings->favicon);
+            }
+            $validated['favicon'] = $request->file('favicon')->store('favicons', 'public');
+        }
+
+        // Use updateOrCreate → if row exists update, else insert new
+        $settings = AdminSetting::updateOrCreate(
+            ['id' => $settings->id ?? null], // match by ID if exists
+            $validated
+        );
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Settings saved successfully!',
+            'data' => $settings
+        ]);
+    }
+
+    public function salonTypes() {
+        $salonTypes = SalonType::all();
+        return view('salon_types', compact('salonTypes'));
+    }
+
+    public function updateSalonType(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $salonType = SalonType::findOrFail($id);
+        $salonType->update($validated);
+
+        return response()->json(['success' => true, 'data' => $salonType]);
+    }
+
+    public function storeSalonType(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $salonType = SalonType::create($validated);
+
+        return response()->json(['success' => true, 'data' => $salonType]);
+    }
+
+    public function destroySalonType($id)
+    {
+        $salonType = SalonType::findOrFail($id);
+        $salonType->delete();
+
+        return response()->json(['success' => true]);
+    }
+
 }

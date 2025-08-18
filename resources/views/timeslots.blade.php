@@ -189,7 +189,7 @@
     @endif
 
     {{-- Exceptions --}}
-    @if ($exceptions->isEmpty())
+    {{-- @if ($exceptions->isEmpty())
         <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
             data-bs-target="#addExceptionModal">
             <i class="fas fa-plus-circle me-2 text-primary"></i> Add Exception
@@ -232,7 +232,7 @@
                 @endforeach
             </tbody>
         </table>
-    @endif
+    @endif --}}
 
 
     <div class="modal fade" id="addBreakModal" tabindex="-1" aria-hidden="true">
