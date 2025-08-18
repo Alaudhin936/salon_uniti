@@ -9,7 +9,7 @@
         <div class="page-title">
             <div class="row align-items-center">
                 <div class="col-sm-6">
-                    <h3 style="color: #0a566d">All Appointments</h3>
+                    <h3 style="color: #0a566d">Bookings</h3>
                 </div>
                 <div class="col-sm-6 text-sm-end text-start">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookAppointmentModal">
@@ -24,10 +24,28 @@
                             <a href="{{ route('dashboard') }}"><i data-feather="home"></i></a>
                         </li>
                         <li class="breadcrumb-item">Apps</li>
-                        <li class="breadcrumb-item active">Appointments</li>
+                        <li class="breadcrumb-item active">Bookings</li>
                     </ol>
                 </div>
             </div>
+
+            <div class="d-flex justify-content-center my-3 ">
+                <ul class="nav nav-pills d-flex gap-3" id="appointmentFilter">
+                    <li class="nav-item">
+                        <button class="btn active nav-link" data-filter="all">All</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn nav-link" data-filter="upcoming">Upcoming</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn nav-link" data-filter="completed">Completed</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn nav-link" data-filter="cancelled">Cancelled</button>
+                    </li>
+                </ul>
+            </div>
+
 
             <div class="container-fluid mt-5">
                 @foreach ($appointments as $date => $bookings)
@@ -63,7 +81,8 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($bookings as $index => $appointment)
-                                            <tr class="align-middle">
+                                            <tr class="align-middle appointment-row"
+                                                data-status="{{ strtolower($appointment->status) }}">
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center me-3"
@@ -129,7 +148,7 @@
                                                         <i style="cursor: {{ $appointment->status === 'completed' ? 'not-allowed' : 'pointer' }};"
                                                             data-appointment-id="{{ $appointment->id }}"
                                                             data-status="disable"
-                                                            class="fa fa-check-circle text-success fa-lg appointment-mark-done 
+                                                            class="fa fa-check-circle text-success fa-lg appointment-mark-done
                {{ $appointment->status === 'completed' ? 'disabled-icon disabled' : '' }}">
                                                         </i>
 
@@ -137,7 +156,7 @@
                                                         <i style="cursor: {{ $appointment->status === 'cancelled' ? 'not-allowed' : 'pointer' }};"
                                                             data-appointment-id="{{ $appointment->id }}"
                                                             data-status="enable"
-                                                            class="fa fa-times-circle text-danger fa-lg appointment-mark-reject 
+                                                            class="fa fa-times-circle text-danger fa-lg appointment-mark-reject
                {{ $appointment->status === 'cancelled' ? 'disabled-icon disabled' : '' }}">
                                                         </i>
                                                     </div>
@@ -265,10 +284,9 @@
                     pageLength: 5,
                     lengthMenu: [5, 10, 25, 50],
                     columnDefs: [{
-                            orderable: false,
-                            targets: [3]
-                        } // Disable sorting on Status column
-                    ]
+                        orderable: false,
+                        targets: [3]
+                    }]
                 });
             });
 
@@ -313,7 +331,6 @@
                         });
                     },
                     error: function(xhr) {
-                        debugger
                         if (xhr.status === 422) {
                             let errors = xhr.responseJSON.errors;
                             alert("Validation error: " + Object.values(errors).join(", "));
@@ -324,6 +341,44 @@
                 });
 
             });
+
+
+            $('#appointmentFilter button').on('click', function() {
+                const filter = $(this).data('filter');
+
+                // Update active button style
+                $('#appointmentFilter .nav-link').removeClass('active');
+                $(this).addClass('active');
+
+                // Loop over each card
+                $('.card').each(function() {
+                    const $card = $(this);
+                    let hasVisibleRows = false;
+
+                    // Loop over each appointment row inside the card
+                    $card.find('.appointment-row').each(function() {
+                        const status = $(this).data('status');
+
+                        // Check if row matches filter
+                        const matches =
+                            filter === 'all' ||
+                            (filter === 'upcoming' && (status === 'booked' || status ===
+                                'pending')) ||
+                            status === filter;
+
+                        // Show or hide the row
+                        $(this).toggle(matches);
+
+                        if (matches) {
+                            hasVisibleRows = true;
+                        }
+                    });
+
+                    // Show card only if it has matching rows
+                    $card.toggle(hasVisibleRows);
+                });
+            });
+
 
             $('.appointment-mark-done, .appointment-mark-reject').on('click', (e) => {
                 let appointmentId = $(e.target).data('appointment-id');
@@ -343,7 +398,7 @@
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Success',
-                                text: 'Appointment Booked Successfully',
+                                text: `Service ${response.data} Successfully`,
                                 confirmButtonColor: '#3085d6',
                                 confirmButtonText: 'OK'
                             }).then(function(result) {

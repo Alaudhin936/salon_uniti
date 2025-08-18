@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use App\Models\Service;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,6 +14,17 @@ class AppointmentController extends Controller
 
     public function index()
     {
+        $currentYear = Carbon::now()->year;
+
+        $monthlyEarnings = DB::table('appointments')
+            ->join('services', 'appointments.service_id', '=', 'services.id')
+            ->whereYear('appointments.created_at', $currentYear)
+            ->where('appointments.status', 'completed')
+            ->selectRaw('MONTH(appointments.created_at) as month, SUM(services.price) as total')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->pluck('total', 'month');
+
         $appointments = DB::table('appointments')
             ->join('services', 'appointments.service_id', '=', 'services.id')
             ->join('users as customers', 'appointments.user_id', '=', 'customers.id')
@@ -27,7 +39,7 @@ class AppointmentController extends Controller
             ->get()
             ->groupBy('date');
 
-        return view('admin_unique_layout.box_dashboard', compact('appointments'));
+        return view('admin_unique_layout.box_dashboard', compact('appointments','monthlyEarnings'));
     }
 
     public function appointments()
@@ -61,6 +73,12 @@ class AppointmentController extends Controller
             'slot_start' => 'required',
             'slot_end' => 'required',
         ]);
+
+
+        // $bufferTiming = DB::table('services')
+        //     ->join('vendor_details', 'services.vendor_id', '=', 'vendor_details.vendor_id')
+        //     ->where('services.id', $request->service_id)
+        //     ->value('vendor_details.buffer_timing');
 
         $exists = DB::table('appointments')
             ->where('service_id', $request->service_id)
@@ -126,15 +144,22 @@ class AppointmentController extends Controller
         return view('customers', compact('allCustomers'));
     }
 
-    public function markAsDone(Request $request, $id, $status) {
-        
-        $appointment = Appointment::where('id',$id)->update([
-            'status' => 'completed'
-        ]);
-
-        if($appointment){
-            return response()->json(['status' => 200]);
+    public function markAsDone(Request $request, $id, $status)
+    {
+        if ($status == "disable") {
+            $appointment = Appointment::where('id', $id)->update([
+                'status' => 'completed'
+            ]);
+            $data = "completed";
+        } else if ($status == "enable") {
+            $appointment = Appointment::where('id', $id)->update([
+                'status' => 'cancelled'
+            ]);
+            $data = "cancelled";
         }
 
+        if ($appointment) {
+            return response()->json(['status' => 200, "data" => $data]);
+        }
     }
 }

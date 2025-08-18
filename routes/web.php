@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\VendorScheduleController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,7 @@ Route::get('/logout', function () {
 Route::middleware('role:1')->group(function () {
     Route::get('/salons', [AdminController::class, 'index'])->name('salons');
     Route::post('/salon/store', [AdminController::class, 'registerSalon'])->name('salons.store');
+    Route::post('/salonDetails/{id}', [AdminController::class, 'showVendorDetails'])->name('salon.details');
 });
 
 Route::prefix('salonweb')->group(function () {
@@ -68,7 +70,6 @@ Route::prefix('salonweb')->group(function () {
     Route::post('/store', [ServiceController::class, 'store'])->name('services.store');
 
     Route::middleware('role:2')->group(function () {
-        // Route::post('/salonDetails/{id}',[AdminController::class, 'showVendorDetails'])->name('salon.details');
         Route::post('/appointment/markdone/{id}/{status}', [AppointmentController::class, 'markAsDone'])->name('appointments.markdone');
         Route::get('/dashboard', [AppointmentController::class, 'index'])->name('vendor_dashboard');
         Route::get('/appointments', [AppointmentController::class, 'appointments'])->name('appointments');
@@ -79,6 +80,14 @@ Route::prefix('salonweb')->group(function () {
         Route::post('/services/{id}', [ServiceController::class, 'update'])->name('services.update');
         Route::post('/services/{id}/delete', [ServiceController::class, 'delete'])->name('services.destroy');
         Route::get('/edit-profile', [ServiceController::class, 'editProfile'])->name('salon.editprofile');
+        Route::post('/vendor/shcedule/store', [VendorScheduleController::class, 'storeSchedule'])->name("vendor.schedule.store");
+        Route::post('/vendor/exception/store', [VendorScheduleController::class, 'storeException'])->name("vendor.exception.store");
+        Route::post('/vendor/breaks/store', [VendorScheduleController::class, 'storeBreak'])->name("vendor.breaks.store");
+        Route::get('/timeslots', [VendorScheduleController::class, 'timeSlots'])->name('salon.timeslots');
+        Route::post('/vendor/breaks/{id}', [VendorScheduleController::class, 'editBreak'])->name('vendor.break.update');
+        Route::post('/vendor/schedule/status/{id}', [VendorScheduleController::class, 'statusUpdate'])->name('vendor.schedule.status');
+        Route::post('/vendor/schedule/time/{id}', [VendorScheduleController::class, 'timeUpdate'])->name('vendor.schedule.updateTime');
+       ;
     });
 });
 

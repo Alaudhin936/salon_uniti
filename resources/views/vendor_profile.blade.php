@@ -8,10 +8,9 @@
     <div class="container">
         <h2 class="mb-4" style="color: #0a566d;">Your Profile</h2>
 
-        <form id="vendorForm" method="POST">
+        <form id="vendorForm" method="POST" enctype="multipart/form-data">
             @csrf
 
-            {{-- Vendor Details --}}
             <div class="card mb-4 shadow-sm">
                 <div class="card-header bg-primary text-white py-2">
                     <div class="d-flex justify-content-between align-items-center">
@@ -52,6 +51,16 @@
                 </div>
                 <div class="card-body">
                     <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="cover_photo" class="form-label">Cover Photo</label>
+                            <input type="file" id="cover_photo" name="cover_photo" class="form-control" accept="image/*">
+                            @if ($vendor->cover_photo)
+                                <div class="mt-2">
+                                    <img src="{{ asset('storage/' . $vendor->cover_photo) }}" alt="Cover Photo"
+                                        class="img-fluid rounded" style="max-height: 150px;">
+                                </div>
+                            @endif
+                        </div>
                         <div class="col-md-6">
                             <label for="business_name" class="form-label">Business Name</label>
                             <input type="text" id="business_name" name="business_name"
@@ -103,7 +112,7 @@
 
             {{-- Submit --}}
             <div class="text-end">
-                <button type="submit" class="btn btn-success px-4" id="saveBtn">
+                <button type="submit" class="btn btn-primary px-4" id="saveBtn">
                     <i class="fa fa-save me-2"></i>
                     <span class="btn-text">Save Changes</span>
                     <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
@@ -125,14 +134,18 @@
             e.preventDefault();
             let btn = $('#saveBtn');
 
-            // Disable button
             btn.prop('disabled', true);
             btn.find('.btn-text').text('Saving...');
             btn.find('.spinner-border').removeClass('d-none');
+
+            let formData = new FormData(this);
+
             $.ajax({
                 url: "{{ route('salon.profileupdate') }}",
                 type: "POST",
-                data: $(this).serialize(),
+                data: formData,
+                processData: false,
+                contentType: false,
                 headers: {
                     'X-CSRF-TOKEN': $('input[name="_token"]').val()
                 },
@@ -143,17 +156,21 @@
                         text: 'Business Details saved successfully!',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'OK'
+                    }).then(function() {
+                        if (response.reload) {
+                            window.location.reload();
+                        }
                     });
+
                     btn.prop('disabled', false);
                     btn.find('.btn-text').text('Save Changes');
                     btn.find('.spinner-border').addClass('d-none');
                 },
                 error: function(xhr) {
-                    alert("Error: " + xhr.responseText);
-                     Swal.fire({
+                    Swal.fire({
                         icon: 'error',
                         title: 'Error!',
-                        text: 'Something Went Wrong',
+                        text: 'Something went wrong',
                         confirmButtonColor: 'red',
                         confirmButtonText: 'OK'
                     });

@@ -19,6 +19,7 @@ class VendorDetail extends Model
         'lattitude',
         'longitude',
         'shop_open',
-        'shop_close'
+        'shop_close',
+        'buffer_timing'
     ];
 }

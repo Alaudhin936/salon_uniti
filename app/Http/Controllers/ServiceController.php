@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\User;
 use App\Models\VendorDetail;
+use App\Models\VendorScheduleException;
+use App\Models\VendorWeeklySchedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -97,7 +99,9 @@ class ServiceController extends Controller
         if ($request->filled('password')) {
             $updateData['password'] = Hash::make($request->password);
         }
-
+        if ($request->hasFile('cover_photo')) {
+            $path = $request->file('cover_photo')->store('cover_photos', 'public');
+        }
         $user->update($updateData);
 
         VendorDetail::where('vendor_id', $user->id)->update([
@@ -108,10 +112,11 @@ class ServiceController extends Controller
             'shop_open' => $request->shop_open,
             'shop_close' => $request->shop_close,
             'gst_number' => $request->gst_number,
-            'is_active' => $request->is_active
+            'is_active' => $request->is_active,
+            'cover_photo' => isset($path) ? $path : ''
         ]);
 
-        return response()->json(['message' => 'Profile updated successfully!']);
+        return response()->json(['message' => 'Profile updated successfully!', 'reload' => isset($path) ? true : false]);
     }
 
     public function customerServices(Request $request)

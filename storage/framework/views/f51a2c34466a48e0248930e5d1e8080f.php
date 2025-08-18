@@ -21,9 +21,7 @@
                 <div class="col-12">
                     <div class="card shadow-sm">
                         <div class="card-header bg-primary text-white py-2">
-
                             <i class="fas fa-cut me-2"></i> All Vendor Lists
-
                         </div>
                         <div class="card-body p-4">
                             <div class="table-responsive">
@@ -55,7 +53,6 @@
 
                                                     </div>
                                                 </td>
-                                                
                                                 <td class="text-center">
                                                     <span class="badge bg-secondary rounded-pill"><?php echo e($salon->type); ?></span>
                                                 </td>
@@ -111,30 +108,169 @@
     </div>
 
 
-    <div class="modal fade" id="salonModal" tabindex="-1" aria-labelledby="salonModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="salonModalLabel">Salon Details</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+
+<div class="modal fade" id="salonModal" tabindex="-1" aria-labelledby="salonModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content shadow-lg border-0">
+            <div class="modal-header text-white bg-primary position-relative">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h3 class="modal-title fw-bold mb-1" id="salonModalLabel">Salon Details</h3>
+                        <p class="mb-0 text-white-50 fs-5">business information</p>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <p><strong>Vendor Name:</strong> <span id="salonName"></span></p>
-                    <p><strong>Email:</strong> <span id="salonEmail"></span></p>
-                    <p><strong>Type:</strong> <span id="salonType"></span></p>
-                    <p><strong>Phone:</strong> <span id="salonPhone"></span></p>
-                    <p><strong>Location:</strong> <span id="salonLocation"></span></p>
-                    <p><strong>GST Number:</strong> <span id="salonGst"></span></p>
-                    <p><strong>Location:</strong> <span id="salonLocation"></span></p>
-                    <p><strong>Shop Open:</strong> <span id="salonOpen"></span></p>
-                    <p><strong>Shop Close:</strong> <span id="salonClose"></span></p>
-                    <p><strong>Total Revenue:</strong> <span id="salonRevenue"></span></p>
+                <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 mt-3 me-3 fs-4" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Enhanced Body -->
+            <div class="modal-body p-0">
+                <!-- Cover Photo Section -->
+                <div class="position-relative mb-3" style="height: 200px; background: linear-gradient(45deg, #f8f9fa, #e9ecef);">
+                    <img id="salonCoverPhoto" src="https://via.placeholder.com/600x150/667eea/ffffff?text=Salon+Cover+Photo"
+                         alt="Cover Photo" class="w-100 h-100" style="object-fit: cover;">
+                    <div class="position-absolute bottom-0 start-0 p-2">
+                        <div class="bg-white rounded-pill px-2 py-1 shadow-sm">
+                            <i class="fas fa-camera text-primary me-1"></i>
+                            <small class="text-muted fw-semibold">Cover</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Grid -->
+                <div class="container-fluid px-4 pb-4">
+                    <div class="row g-3">
+                        <!-- Vendor Information -->
+                        <div class="col-md-6">
+                            <div class="info-item bg-light rounded-3 p-3 h-100 shadow-sm">
+                                <div class="d-flex align-items-center mb-2">
+
+                                    <div>
+                                        <h6 class="fw-bold text-primary mb-0">Vendor</h6>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-2 p-2 border">
+                                    <span class="text-dark fw-semibold" id="salonName">John Doe</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div class="col-md-6">
+                            <div class="info-item bg-light rounded-3 p-3 h-100 shadow-sm">
+                                <div class="d-flex align-items-center mb-2">
+
+                                    <div>
+                                        <h6 class="fw-bold  text-success mb-0">Email</h6>
+                                    </div>
+                                </div>
+                                <div class="bg-white text-dark rounded-2 p-2 border">
+                                    <span class="fw-semibold" id="salonEmail">salon@example.com</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Business Type & Phone -->
+                        <div class="col-md-6">
+                            <div class="info-item bg-light rounded-3 p-3 h-100 shadow-sm">
+                                <div class="d-flex align-items-center mb-2">
+
+                                    <div>
+                                        <h6 class="fw-bold text-info mb-0">Type</h6>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-2 p-2 border">
+                                    <span class="badge bg-info rounded-pill" id="salonType">Premium Salon</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="col-md-6">
+                            <div class="info-item bg-light rounded-3 p-3 h-100 shadow-sm">
+                                <div class="d-flex align-items-center mb-2">
+
+                                    <div>
+                                        <h6 class="fw-bold text-warning mb-0">Phone</h6>
+                                    </div>
+                                </div>
+                                <div class="bg-white text-dark rounded-2 p-2 border">
+                                    <span class="fw-semibold" id="salonPhone">+1 234 567 8900</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="col-12">
+                            <div class="info-item bg-light rounded-3 p-3 shadow-sm">
+                                <div class="d-flex align-items-center mb-2">
+
+                                    <div>
+                                        <h6 class="fw-bold text-danger mb-0">Location</h6>
+                                    </div>
+                                </div>
+                                <div class="bg-white rounded-2 p-2 border">
+                                    <span class="fw-semibold text-dark" id="salonLocation">123 Main Street, City, State</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Business Details Row -->
+                        <div class="col-md-4">
+                            <div class="info-item bg-white rounded-3 p-3 h-100 shadow-sm border">
+                                <div class="text-center">
+
+                                    <h6 class="text-muted mb-1 small">GST Number</h6>
+                                    <span class="fw-bold text-dark small" id="salonGst">GST123456789</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="info-item bg-white rounded-3 p-3 h-100 shadow-sm border">
+                                <div class="text-center">
+
+                                    <h6 class="text-muted mb-1 small">Hours</h6>
+                                    <div class="d-flex justify-content-center gap-1">
+                                        <span class="badge bg-success small" id="salonOpen">9:00 AM</span>
+                                        <span class="badge bg-danger small" id="salonClose">8:00 PM</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="info-item bg-primary rounded-3 p-3 h-100 shadow-sm text-white">
+                                <div class="text-center">
+
+                                    <h6 class="text-white-50 mb-1 small">Revenue</h6>
+                                    <span class="fw-bold text-white" id="salonRevenue">$25,450</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-
+ <style>
+        .modal-content {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .modal-header {
+            border-bottom: none;
+        }
+        .info-item {
+            transition: all 0.3s ease;
+        }
+        .info-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
 
     <div class="modal fade" id="registerSalonModal" tabindex="-1" aria-labelledby="registerSalonModalLabel"
         aria-hidden="true">
@@ -150,37 +286,31 @@
                     <?php echo csrf_field(); ?>
                     <div class="modal-body">
                         <div class="row">
-                            <!-- Vendor Name -->
                             <div class="col-md-6 mb-3">
                                 <label for="name" class="form-label">Vendor Name</label>
                                 <input type="text" name="name" class="form-control" required>
                             </div>
 
-                            <!-- Email -->
                             <div class="col-md-6 mb-3">
                                 <label for="email" class="form-label">Vendor Email</label>
                                 <input type="email" name="email" class="form-control" required>
                             </div>
 
-                            <!-- Phone -->
                             <div class="col-md-6 mb-3">
                                 <label for="phone" class="form-label">Phone</label>
                                 <input type="text" name="phone" class="form-control" required>
                             </div>
 
-                            <!-- Business Name -->
                             <div class="col-md-6 mb-3">
                                 <label for="business_name" class="form-label">Business Name</label>
                                 <input type="text" name="business_name" class="form-control" required>
                             </div>
 
-                            <!-- Slogan -->
                             <div class="col-md-6 mb-3">
                                 <label for="slogan" class="form-label">Slogan</label>
                                 <input type="text" name="slogan" class="form-control">
                             </div>
 
-                            <!-- Type -->
                             <div class="col-md-6 mb-3">
                                 <label for="type" class="form-label">Type</label>
                                 <select name="type" class="form-select" required>
@@ -190,13 +320,11 @@
                                 </select>
                             </div>
 
-                            <!-- Location -->
                             <div class="col-md-12 mb-3">
                                 <label for="location" class="form-label">Location</label>
                                 <input type="text" name="location" class="form-control" required>
                             </div>
 
-                            <!-- GST -->
                             <div class="col-md-6 mb-3">
                                 <label for="gst_number" class="form-label">GST Number (optional)</label>
                                 <input type="text" name="gst_number" class="form-control">
@@ -216,14 +344,11 @@
                                 <input type="time" name="shop_close" class="form-control">
                             </div>
 
-
-                            <!-- Latitude -->
                             <div class="col-md-3 mb-3">
                                 <label for="lattitude" class="form-label">Latitude (Optional)</label>
                                 <input type="text" name="lattitude" class="form-control">
                             </div>
 
-                            <!-- Longitude -->
                             <div class="col-md-3 mb-3">
                                 <label for="longitude" class="form-label">Longitude (Optional)</label>
                                 <input type="text" name="longitude" class="form-control">
@@ -251,10 +376,10 @@
     <script>
         $(document).ready(function() {
             $('#salonTable').DataTable({
-                "pageLength": 10, // Pagination limit
-                "ordering": true, // Enable column sorting
-                "searching": true, // Enable search box
-                "lengthChange": true, // Show rows per page dropdown
+                "pageLength": 10,
+                "ordering": true,
+                "searching": true,
+                "lengthChange": true,
                 "language": {
                     "search": "Search Salon:",
                     "lengthMenu": "Show _MENU_ entries",
@@ -262,7 +387,6 @@
                 }
             });
 
-            // Ajax form submission for adding new salon
             $('#registerSalonForm').submit(function(e) {
                 e.preventDefault();
                 $.ajax({
@@ -288,16 +412,23 @@
                 let myUrl = "<?php echo e(route('salon.details', ':id')); ?>".replace(':id', salonId);
                 $.ajax({
                     url: myUrl,
-                    type: 'GET',
+                    type: 'POST',
+                    data: {
+                        _token: '<?php echo e(csrf_token()); ?>',
+                    },
                     success: function(response) {
-                        // Fill modal with salon data
                         $('#salonName').text(response.business_name);
                         $('#salonEmail').text(response.email);
+                        $('#salonType').text(response.type);
                         $('#salonPhone').text(response.phone);
                         $('#salonLocation').text(response.location);
-                        $('#salonType').text(response.type);
+                        $('#salonGst').text(response.gst_number);
+                        $('#salonOpen').text(response.shop_open);
+                        $('#salonClose').text(response.shop_close);
+                        $('#salonRevenue').text('₹' + response.total_revenue);
+                        $('#salonCoverPhoto').attr('src', '<?php echo e(asset('storage')); ?>/' + response
+                            .cover_photo);
 
-                        // Show modal
                         $('#salonModal').modal('show');
                     }
                 });

@@ -27,7 +27,7 @@
                     <ul class="sidebar-links list-unstyled px-2" id="simple-bar">
                         <li class="sidebar-list mb-2">
                             <a class="sidebar-link sidebar-title" href="<?php echo e(route('vendor_dashboard')); ?>">
-                                <i data-feather="scissors"></i><span class="ms-2">Salon</span>
+                                <i data-feather="scissors"></i><span class="ms-2">Dashboard</span>
                             </a>
                         </li>
 
@@ -36,7 +36,7 @@
                                 <i data-feather="calendar"></i><span class="ms-2">Appointments</span>
                             </a>
                         </li>
-                        
+
                         <li class="sidebar-list mb-2">
                             <a class="sidebar-link sidebar-title" href="<?php echo e(route('customers')); ?>">
                                 <i data-feather="users"></i><span class="ms-2">Customers</span>
@@ -44,7 +44,7 @@
                         </li>
 
                         <li class="sidebar-list mb-2">
-                            <a class="sidebar-link sidebar-title" href="<?php echo e(route('support_ticket')); ?>">
+                            <a class="sidebar-link sidebar-title" href="<?php echo e(route('salon.timeslots')); ?>">
                                 <i data-feather="clock"></i><span class="ms-2">Time slots</span>
                             </a>
                         </li>
@@ -54,7 +54,6 @@
                                 <i data-feather="briefcase"></i><span class="ms-2">Services</span>
                             </a>
                         </li>
-
 
                         
                     </ul>
@@ -89,6 +88,7 @@
                                 <i data-feather="home"></i><span class="lan-3"></span>
                             </a>
                         </li>
+
                         <li class="sidebar-list">
                             <i class="fa fa-thumb-tack"></i>
                             <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('salons')); ?>">
@@ -96,6 +96,12 @@
                             </a>
                         </li>
 
+                        <li class="sidebar-list">
+                            <i class="fa fa-thumb-tack"></i>
+                            <a class="sidebar-link sidebar-title link-nav" href="">
+                                <i data-feather="percent"></i><span>Offers</span>
+                            </a>
+                        </li>
 
                         <li class="sidebar-list">
                             <i class="fa fa-thumb-tack"></i>

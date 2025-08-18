@@ -35,24 +35,7 @@
                                         <button class="btn btn-primary btn-block w-100" type="submit">Get Otp</button>
                                     </div>
                                 </div>
-
-                                {{-- Social Logins (Optional) --}}
-                                <div class="login-social-title">
-                                    <h6>Or Sign in with</h6>
-                                </div>
-                                <div class="form-group">
-                                    <ul class="login-social">
-                                        <li><a href="#"><i data-feather="linkedin"></i></a></li>
-                                        <li><a href="#"><i data-feather="twitter"></i></a></li>
-                                        <li><a href="#"><i data-feather="facebook"></i></a></li>
-                                        <li><a href="#"><i data-feather="instagram"></i></a></li>
-                                    </ul>
-                                </div>
-
-                                {{-- Sign Up Link --}}
-                                <p class="mt-4 mb-0 text-center">Don't have account?
-                                    <a class="ms-2" href="{{ route('sign_up') }}">Create Account</a>
-                                </p>
+                                
                             </form>
                         </div>
                     </div>

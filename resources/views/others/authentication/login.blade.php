@@ -43,11 +43,11 @@
 
                                 {{-- Remember Me & Forgot Password --}}
                                 <div class="form-group mb-0">
-                                    <div class="checkbox p-0">
+                                    {{-- <div class="checkbox p-0">
                                         <input id="checkbox1" type="checkbox" name="remember">
                                         <label class="text-muted" for="checkbox1">Remember password</label>
                                     </div>
-                                    <a class="link">Forgot password?</a>
+                                    <a class="link">Forgot password?</a> --}}
                                     <div class="text-end mt-3">
                                         <button class="btn btn-primary btn-block w-100" type="submit">Sign in</button>
                                     </div>

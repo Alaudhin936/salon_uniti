@@ -77,4 +77,40 @@ class AdminController extends Controller
             'data' => $data
         ]);
     }
+
+    public function showVendorDetails($id)
+    {
+        $vendor = User::join('vendor_details', 'users.id', '=', 'vendor_details.vendor_id')
+            ->where('users.id', $id)
+            ->select(
+                'users.name as vendor_name',
+                'users.email',
+                'users.phone',
+                'vendor_details.business_name',
+                'vendor_details.type',
+                'vendor_details.location',
+                'vendor_details.gst_number',
+                'vendor_details.shop_open',
+                'vendor_details.shop_close',
+                'vendor_details.cover_photo'
+            )
+            ->first();
+
+        $totalRevenue = DB::table('appointments')
+            ->join('services', 'appointments.service_id', '=', 'services.id')
+            ->where('services.vendor_id', $id)
+            ->where('appointments.status', 'completed')
+            ->sum('services.price');
+
+       $vendor['total_revenue'] = $totalRevenue;
+
+        if (!$vendor) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Vendor not found'
+            ], 404);
+        }
+
+        return response()->json($vendor);
+    }
 }

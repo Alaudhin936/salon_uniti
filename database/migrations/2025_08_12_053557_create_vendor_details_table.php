@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('location');
             $table->string('shop_open');
             $table->string('shop_close');
+            $table->string('buffer_timing');
+            $table->string('cover_photo')->nullable();
             $table->boolean('is_active')->default(1);
             $table->string('gst_number')->nullable();
             $table->string('lattitude')->nullable();

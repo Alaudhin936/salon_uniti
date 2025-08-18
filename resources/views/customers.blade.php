@@ -26,9 +26,11 @@
 
             <div class="container mt-4">
                 <div class="card shadow-sm">
-                    <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Your Customers</h4>
-                    </div>
+                       <div class="card-header bg-primary text-white py-2">
+                            <div class="d-flex justify-content-between align-items-center">
+                                Customers
+                            </div>
+                        </div>
                     <div class="card-body">
                         @if ($allCustomers->isEmpty())
                             <div class="alert alert-info mb-0">
@@ -111,7 +113,6 @@
                         _token: "{{ csrf_token() }}"
                     },
                     success: function(response) {
-                        debugger
                         if (response.status === 200) {
                             let rows = '';
                             response.data.forEach(service => {
