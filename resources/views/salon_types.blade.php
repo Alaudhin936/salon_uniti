@@ -6,10 +6,12 @@
 
 @section('main_content')
     <div class="container mt-4">
-        <h3>Salon Types</h3>
-        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addSalonTypeModal">
-            Add Salon Type
-        </button>
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <h3 class="mb-0">Salon Types</h3>
+            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addSalonTypeModal">
+                <i class="fas fa-plus"></i> Add New Type
+            </button>
+        </div>
 
         <table class="table table-bordered" id="salonTypesTable">
             <thead>
@@ -25,10 +27,14 @@
                         <td>{{ $type->id }}</td>
                         <td>{{ $type->name }}</td>
                         <td>
-                            <button class="btn btn-warning btn-sm editBtn" data-id="{{ $type->id }}"
-                                data-name="{{ $type->name }}" data-bs-toggle="modal"
-                                data-bs-target="#editSalonTypeModal">Edit</button>
-                            <button class="btn btn-danger btn-sm deleteBtn" data-id="{{ $type->id }}">Delete</button>
+                            <button class="btn btn-warning btn-xs py-1 editBtn" data-id="{{ $type->id }}"
+                                data-name="{{ $type->name }}" data-bs-toggle="modal" data-bs-target="#editSalonTypeModal">
+                                <i class="fas fa-edit"></i>
+                            </button>
+
+                            <button class="btn btn-danger btn-xs py-1 deleteBtn" data-id="{{ $type->id }}">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </td>
                     </tr>
                 @endforeach

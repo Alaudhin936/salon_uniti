@@ -70,11 +70,15 @@
                                 class="form-control">
                         </div>
                         <div class="col-md-6">
-                            <label for="type" class="form-label">Type</label>
-                            <select id="type" name="type" class="form-select">
-                                <option value="Unisex" <?php echo e($vendor->type == 'Unisex' ? 'selected' : ''); ?>>Unisex</option>
-                                <option value="Male" <?php echo e($vendor->type == 'Male' ? 'selected' : ''); ?>>Male</option>
-                                <option value="Female" <?php echo e($vendor->type == 'Female' ? 'selected' : ''); ?>>Female</option>
+                            <label for="salon_type_id" class="form-label">Type</label>
+                            <select id="salon_type_id" name="salon_type_id" class="form-select">
+                                <?php $__currentLoopData = $types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($type->id); ?>"
+                                        <?php echo e($vendor->salon_type_id == $type->id ? 'selected' : ''); ?>>
+                                        <?php echo e($type->name); ?>
+
+                                    </option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                         <div class="col-md-6">

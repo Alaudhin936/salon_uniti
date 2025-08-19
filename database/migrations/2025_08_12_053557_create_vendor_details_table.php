@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('vendor_id');
             $table->string('business_name');
             $table->string('slogan')->nullable();
-            $table->string('type')->nullable();
+            $table->unsignedBigInteger('salon_type_id');
             $table->string('location');
             $table->string('shop_open');
             $table->string('shop_close');
@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('lattitude')->nullable();
             $table->string('longitude')->nullable();
             $table->timestamps();
+
+            $table->foreign('salon_type_id')->references('id')->on('salon_types')->onDelete('cascade');
         });
     }
 

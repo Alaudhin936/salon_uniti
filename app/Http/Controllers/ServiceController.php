@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SalonType;
 use App\Models\Service;
 use App\Models\User;
 use App\Models\VendorDetail;
@@ -20,7 +21,7 @@ class ServiceController extends Controller
         if ($request->hasFile('service_img')) {
             $path = $request->file('service_img')->store('service_img', 'public');
         };
-        
+
         $id = Service::create([
             'vendor_id' => auth()->user()->id,
             'name' => $request->name,
@@ -80,7 +81,9 @@ class ServiceController extends Controller
 
         $vendor = \App\Models\VendorDetail::where('vendor_id', $user->id)->first();
 
-        return view('vendor_profile', compact('vendor', 'vendor'));
+        $types = SalonType::all();
+
+        return view('vendor_profile', compact('vendor', 'vendor','types'));
     }
 
     public function profileupdate(Request $request)
@@ -91,7 +94,7 @@ class ServiceController extends Controller
             'phone' => 'nullable|string|max:20',
             'business_name' => 'required|string|max:255',
             'slogan' => 'nullable|string|max:255',
-            'type' => 'nullable|string|max:100',
+            'salon_type_id' => 'required',
             'location' => 'nullable|string|max:255',
             'shop_open' => 'nullable',
             'shop_close' => 'nullable',
@@ -116,7 +119,7 @@ class ServiceController extends Controller
         VendorDetail::where('vendor_id', $user->id)->update([
             'business_name' => $request->business_name,
             'slogan' => $request->slogan,
-            'type' => $request->type,
+            'salon_type_id' => $request->salon_type_id,
             'location' => $request->location,
             'shop_open' => $request->shop_open,
             'shop_close' => $request->shop_close,

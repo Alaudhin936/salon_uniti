@@ -20,6 +20,7 @@ class VendorDetail extends Model
         'longitude',
         'shop_open',
         'shop_close',
-        'buffer_timing'
+        'buffer_timing',
+        'salon_type_id'
     ];
 }

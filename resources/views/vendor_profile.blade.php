@@ -72,11 +72,14 @@
                                 class="form-control">
                         </div>
                         <div class="col-md-6">
-                            <label for="type" class="form-label">Type</label>
-                            <select id="type" name="type" class="form-select">
-                                <option value="Unisex" {{ $vendor->type == 'Unisex' ? 'selected' : '' }}>Unisex</option>
-                                <option value="Male" {{ $vendor->type == 'Male' ? 'selected' : '' }}>Male</option>
-                                <option value="Female" {{ $vendor->type == 'Female' ? 'selected' : '' }}>Female</option>
+                            <label for="salon_type_id" class="form-label">Type</label>
+                            <select id="salon_type_id" name="salon_type_id" class="form-select">
+                                @foreach ($types as $type)
+                                    <option value="{{ $type->id }}"
+                                        {{ $vendor->salon_type_id == $type->id ? 'selected' : '' }}>
+                                        {{ $type->name }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">

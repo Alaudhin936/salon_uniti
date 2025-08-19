@@ -9,17 +9,47 @@ use App\Models\VendorDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        $salons = DB::table('vendor_details')
-            ->join('users', 'vendor_details.vendor_id', '=', 'users.id')
-            ->where('users.role_id', 2)
+        $salons = DB::table('vendor_details as vd')
+            ->join('users as u', 'vd.vendor_id', '=', 'u.id')
+            ->join('salon_types as st', 'vd.salon_type_id', '=', 'st.id')
+            ->where('u.role_id', 2)
+            ->select([
+                'u.id',
+                'vd.vendor_id',
+                'vd.business_name',
+                'vd.slogan',
+                'vd.location',
+                'vd.gst_number',
+                'vd.lattitude',
+                'vd.longitude',
+                'vd.created_at',
+                'vd.updated_at',
+                'vd.shop_open',
+                'vd.shop_close',
+                'vd.is_active',
+                'vd.buffer_timing',
+                'vd.cover_photo',
+                'vd.salon_type_id',
+                'st.name as salon_type_name',
+                'u.name as vendor_name',
+                'u.email',
+                'u.phone',
+                'u.otp',
+                'u.role_id',
+                'u.email_verified_at',
+                'u.password',
+                'u.remember_token'
+            ])
             ->get();
 
-        return view('salons', compact('salons'));
+        $types = SalonType::all();
+        return view('salons', compact('salons', 'types'));
     }
 
     public function registerSalon(Request $request)
@@ -30,7 +60,7 @@ class AdminController extends Controller
             'phone'         => 'required|string|max:20',
             'business_name' => 'required|string|max:255',
             'slogan'        => 'nullable|string|max:255',
-            'type'          => 'required|string|max:50',
+            'salon_type_id'          => 'required',
             'location'      => 'required|string|max:255',
             'gst_number'    => 'nullable|string|max:50',
             'lattitude'     => 'nullable|numeric',
@@ -52,7 +82,7 @@ class AdminController extends Controller
             'vendor_id'     => $vendor->id,
             'business_name' => $request->business_name,
             'slogan'        => $request->slogan,
-            'type'          => $request->type,
+            'salon_type_id' => $request->salon_type_id,
             'location'      => $request->location,
             'gst_number'    => $request->gst_number,
             'shop_open'     => $request->shop_open,
@@ -60,28 +90,17 @@ class AdminController extends Controller
             'lattitude'     => $request->lattitude,
             'longitude'     => $request->longitude,
         ]);
-
-        $data = [
-            'name'          => $vendor->name,
-            'email'         => $vendor->email,
-            'phone'         => $vendor->phone,
-            'business_name' => $vendorDetails->business_name,
-            'slogan'        => $vendorDetails->slogan,
-            'type'          => $vendorDetails->type,
-            'location'      => $vendorDetails->location,
-            'shop_open'     => $vendorDetails->shop_open,
-            'shop_close'    => $vendorDetails->shop_close,
-        ];
+        dd($vendorDetails);
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Salon registered successfully',
-            'data' => $data
+            'message' => 'Salon registered successfully'
         ]);
     }
 
     public function showVendorDetails($id)
     {
+
         $vendor = User::join('vendor_details', 'users.id', '=', 'vendor_details.vendor_id')
             ->where('users.id', $id)
             ->select(
@@ -89,13 +108,13 @@ class AdminController extends Controller
                 'users.email',
                 'users.phone',
                 'vendor_details.business_name',
-                'vendor_details.type',
                 'vendor_details.location',
                 'vendor_details.gst_number',
                 'vendor_details.shop_open',
                 'vendor_details.shop_close',
+                'salon_types.name',
                 'vendor_details.cover_photo'
-            )
+            )->join('salon_types', 'vendor_details.salon_type_id', '=', 'salon_types.id')
             ->first();
 
         $totalRevenue = DB::table('appointments')
@@ -167,7 +186,8 @@ class AdminController extends Controller
         ]);
     }
 
-    public function salonTypes() {
+    public function salonTypes()
+    {
         $salonTypes = SalonType::all();
         return view('salon_types', compact('salonTypes'));
     }
@@ -202,5 +222,4 @@ class AdminController extends Controller
 
         return response()->json(['success' => true]);
     }
-
 }

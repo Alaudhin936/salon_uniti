@@ -54,7 +54,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
-                                                    <span class="badge bg-secondary rounded-pill"><?php echo e($salon->type); ?></span>
+                                                    <span
+                                                        class="badge bg-secondary rounded-pill"><?php echo e($salon->salon_type_name); ?></span>
                                                 </td>
                                                 <td><i
                                                         class="fas fa-map-marker-alt text-danger me-1"></i><?php echo e($salon->location); ?>
@@ -64,10 +65,10 @@
                                                     <div class="d-flex align-items-center">
                                                         <div class="bg-success rounded-circle d-flex align-items-center justify-content-center me-2"
                                                             style="width: 24px; height: 24px; font-size: 10px; color: white;">
-                                                            <?php echo e(strtoupper(substr($salon->name, 0, 1))); ?>
+                                                            <?php echo e(strtoupper(substr($salon->vendor_name, 0, 1))); ?>
 
                                                         </div>
-                                                        <?php echo e($salon->name); ?>
+                                                        <?php echo e($salon->vendor_name); ?>
 
                                                     </div>
                                                 </td>
@@ -78,6 +79,7 @@
                                                             class="fas fa-envelope me-1"></i><small><?php echo e($salon->email); ?></small>
                                                     </a>
                                                 </td>
+
                                                 <td class="text-center">
                                                     <button class="btn btn-primary btn-sm viewSalonBtn"
                                                         style="padding: 2px 8px; font-size: 12px;"
@@ -109,141 +111,146 @@
 
 
 
-<div class="modal fade" id="salonModal" tabindex="-1" aria-labelledby="salonModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content shadow-lg border-0">
-            <div class="modal-header text-white bg-primary position-relative">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <h3 class="modal-title fw-bold mb-1" id="salonModalLabel">Salon Details</h3>
-                        <p class="mb-0 text-white-50 fs-5">business information</p>
-                    </div>
-                </div>
-                <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 mt-3 me-3 fs-4" data-bs-dismiss="modal"></button>
-            </div>
-
-            <!-- Enhanced Body -->
-            <div class="modal-body p-0">
-                <!-- Cover Photo Section -->
-                <div class="position-relative mb-3" style="height: 200px; background: linear-gradient(45deg, #f8f9fa, #e9ecef);">
-                    <img id="salonCoverPhoto" src="https://via.placeholder.com/600x150/667eea/ffffff?text=Salon+Cover+Photo"
-                         alt="Cover Photo" class="w-100 h-100" style="object-fit: cover;">
-                    <div class="position-absolute bottom-0 start-0 p-2">
-                        <div class="bg-white rounded-pill px-2 py-1 shadow-sm">
-                            <i class="fas fa-camera text-primary me-1"></i>
-                            <small class="text-muted fw-semibold">Cover</small>
+    <div class="modal fade" id="salonModal" tabindex="-1" aria-labelledby="salonModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content shadow-lg border-0">
+                <div class="modal-header text-white bg-primary position-relative">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h3 class="modal-title fw-bold mb-1" id="salonModalLabel">Salon Details</h3>
+                            <p class="mb-0 text-white-50 fs-5">business information</p>
                         </div>
                     </div>
+                    <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 mt-3 me-3 fs-4"
+                        data-bs-dismiss="modal"></button>
                 </div>
 
-                <!-- Information Grid -->
-                <div class="container-fluid px-4 pb-4">
-                    <div class="row g-3">
-                        <!-- Vendor Information -->
-                        <div class="col-md-6">
-                            <div class="info-item bg-light rounded-3 p-3 h-100 shadow-sm">
-                                <div class="d-flex align-items-center mb-2">
+                <!-- Enhanced Body -->
+                <div class="modal-body p-0">
+                    <!-- Cover Photo Section -->
+                    <div class="position-relative mb-3"
+                        style="height: 200px; background: linear-gradient(45deg, #f8f9fa, #e9ecef);">
+                        <img id="salonCoverPhoto"
+                            src="https://via.placeholder.com/600x150/667eea/ffffff?text=Salon+Cover+Photo" alt="Cover Photo"
+                            class="w-100 h-100" style="object-fit: cover;">
+                        <div class="position-absolute bottom-0 start-0 p-2">
+                            <div class="bg-white rounded-pill px-2 py-1 shadow-sm">
+                                <i class="fas fa-camera text-primary me-1"></i>
+                                <small class="text-muted fw-semibold">Cover</small>
+                            </div>
+                        </div>
+                    </div>
 
-                                    <div>
-                                        <h6 class="fw-bold text-primary mb-0">Vendor</h6>
+                    <!-- Information Grid -->
+                    <div class="container-fluid px-4 pb-4">
+                        <div class="row g-3">
+                            <!-- Vendor Information -->
+                            <div class="col-md-6">
+                                <div class="info-item bg-light rounded-3 p-3 h-100 shadow-sm">
+                                    <div class="d-flex align-items-center mb-2">
+
+                                        <div>
+                                            <h6 class="fw-bold text-primary mb-0">Vendor</h6>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="bg-white rounded-2 p-2 border">
-                                    <span class="text-dark fw-semibold" id="salonName">John Doe</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Contact Information -->
-                        <div class="col-md-6">
-                            <div class="info-item bg-light rounded-3 p-3 h-100 shadow-sm">
-                                <div class="d-flex align-items-center mb-2">
-
-                                    <div>
-                                        <h6 class="fw-bold  text-success mb-0">Email</h6>
-                                    </div>
-                                </div>
-                                <div class="bg-white text-dark rounded-2 p-2 border">
-                                    <span class="fw-semibold" id="salonEmail">salon@example.com</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Business Type & Phone -->
-                        <div class="col-md-6">
-                            <div class="info-item bg-light rounded-3 p-3 h-100 shadow-sm">
-                                <div class="d-flex align-items-center mb-2">
-
-                                    <div>
-                                        <h6 class="fw-bold text-info mb-0">Type</h6>
-                                    </div>
-                                </div>
-                                <div class="bg-white rounded-2 p-2 border">
-                                    <span class="badge bg-info rounded-pill" id="salonType">Premium Salon</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Phone Number -->
-                        <div class="col-md-6">
-                            <div class="info-item bg-light rounded-3 p-3 h-100 shadow-sm">
-                                <div class="d-flex align-items-center mb-2">
-
-                                    <div>
-                                        <h6 class="fw-bold text-warning mb-0">Phone</h6>
-                                    </div>
-                                </div>
-                                <div class="bg-white text-dark rounded-2 p-2 border">
-                                    <span class="fw-semibold" id="salonPhone">+1 234 567 8900</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Location -->
-                        <div class="col-12">
-                            <div class="info-item bg-light rounded-3 p-3 shadow-sm">
-                                <div class="d-flex align-items-center mb-2">
-
-                                    <div>
-                                        <h6 class="fw-bold text-danger mb-0">Location</h6>
-                                    </div>
-                                </div>
-                                <div class="bg-white rounded-2 p-2 border">
-                                    <span class="fw-semibold text-dark" id="salonLocation">123 Main Street, City, State</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Business Details Row -->
-                        <div class="col-md-4">
-                            <div class="info-item bg-white rounded-3 p-3 h-100 shadow-sm border">
-                                <div class="text-center">
-
-                                    <h6 class="text-muted mb-1 small">GST Number</h6>
-                                    <span class="fw-bold text-dark small" id="salonGst">GST123456789</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="info-item bg-white rounded-3 p-3 h-100 shadow-sm border">
-                                <div class="text-center">
-
-                                    <h6 class="text-muted mb-1 small">Hours</h6>
-                                    <div class="d-flex justify-content-center gap-1">
-                                        <span class="badge bg-success small" id="salonOpen">9:00 AM</span>
-                                        <span class="badge bg-danger small" id="salonClose">8:00 PM</span>
+                                    <div class="bg-white rounded-2 p-2 border">
+                                        <span class="text-dark fw-semibold" id="salonName">John Doe</span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-4">
-                            <div class="info-item bg-primary rounded-3 p-3 h-100 shadow-sm text-white">
-                                <div class="text-center">
+                            <!-- Contact Information -->
+                            <div class="col-md-6">
+                                <div class="info-item bg-light rounded-3 p-3 h-100 shadow-sm">
+                                    <div class="d-flex align-items-center mb-2">
 
-                                    <h6 class="text-white-50 mb-1 small">Revenue</h6>
-                                    <span class="fw-bold text-white" id="salonRevenue">$25,450</span>
+                                        <div>
+                                            <h6 class="fw-bold  text-success mb-0">Email</h6>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white text-dark rounded-2 p-2 border">
+                                        <span class="fw-semibold" id="salonEmail">salon@example.com</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Business Type & Phone -->
+                            <div class="col-md-6">
+                                <div class="info-item bg-light rounded-3 p-3 h-100 shadow-sm">
+                                    <div class="d-flex align-items-center mb-2">
+
+                                        <div>
+                                            <h6 class="fw-bold text-info mb-0">Type</h6>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-2 p-2 border">
+                                        <span class="badge bg-info rounded-pill" id="salonType">Premium Salon</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phone Number -->
+                            <div class="col-md-6">
+                                <div class="info-item bg-light rounded-3 p-3 h-100 shadow-sm">
+                                    <div class="d-flex align-items-center mb-2">
+
+                                        <div>
+                                            <h6 class="fw-bold text-warning mb-0">Phone</h6>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white text-dark rounded-2 p-2 border">
+                                        <span class="fw-semibold" id="salonPhone">+1 234 567 8900</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Location -->
+                            <div class="col-12">
+                                <div class="info-item bg-light rounded-3 p-3 shadow-sm">
+                                    <div class="d-flex align-items-center mb-2">
+
+                                        <div>
+                                            <h6 class="fw-bold text-danger mb-0">Location</h6>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-2 p-2 border">
+                                        <span class="fw-semibold text-dark" id="salonLocation">123 Main Street, City,
+                                            State</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Business Details Row -->
+                            <div class="col-md-4">
+                                <div class="info-item bg-white rounded-3 p-3 h-100 shadow-sm border">
+                                    <div class="text-center">
+
+                                        <h6 class="text-muted mb-1 small">GST Number</h6>
+                                        <span class="fw-bold text-dark small" id="salonGst">GST123456789</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="info-item bg-white rounded-3 p-3 h-100 shadow-sm border">
+                                    <div class="text-center">
+
+                                        <h6 class="text-muted mb-1 small">Hours</h6>
+                                        <div class="d-flex justify-content-center gap-1">
+                                            <span class="badge bg-success small" id="salonOpen">9:00 AM</span>
+                                            <span class="badge bg-danger small" id="salonClose">8:00 PM</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="info-item bg-primary rounded-3 p-3 h-100 shadow-sm text-white">
+                                    <div class="text-center">
+
+                                        <h6 class="text-white-50 mb-1 small">Revenue</h6>
+                                        <span class="fw-bold text-white" id="salonRevenue">$25,450</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -252,23 +259,25 @@
             </div>
         </div>
     </div>
-</div>
 
- <style>
+    <style>
         .modal-content {
             border: none;
             border-radius: 20px;
             overflow: hidden;
         }
+
         .modal-header {
             border-bottom: none;
         }
+
         .info-item {
             transition: all 0.3s ease;
         }
+
         .info-item:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
     </style>
 
@@ -312,11 +321,15 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="type" class="form-label">Type</label>
-                                <select name="type" class="form-select" required>
-                                    <option value="Men">Men</option>
-                                    <option value="Women">Women</option>
-                                    <option value="Unisex">Unisex</option>
+                                <label for="salon_type_id" class="form-label">Type</label>
+                                <select id="salon_type_id" name="salon_type_id" class="form-select">
+                                    <?php $__currentLoopData = $types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($type->id); ?>"
+                                           >
+                                            <?php echo e($type->name); ?>
+
+                                        </option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
 
@@ -395,7 +408,17 @@
                     data: $(this).serialize(),
                     success: function(response) {
                         if (response.status === 'success') {
-                            location.reload();
+                           Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: `Service ${response.data} Successfully`,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK'
+                            }).then(function(result) {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
                         } else {
                             alert('Error saving salon.');
                         }
@@ -419,7 +442,7 @@
                     success: function(response) {
                         $('#salonName').text(response.business_name);
                         $('#salonEmail').text(response.email);
-                        $('#salonType').text(response.type);
+                        // $('#salonType').text(response.type);
                         $('#salonPhone').text(response.phone);
                         $('#salonLocation').text(response.location);
                         $('#salonGst').text(response.gst_number);
