@@ -17,7 +17,7 @@
   {{-- scripts includes --}}
   @yield('scripts')
   {{-- end scripts includes --}}
-
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <!-- Template js-->
   <script src="{{ asset('assets/js/script.js') }}"></script>
   <script src="{{ asset('assets/js/theme-customizer/customizer.js') }}"></script>

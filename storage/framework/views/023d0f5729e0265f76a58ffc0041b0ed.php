@@ -76,8 +76,8 @@
                             <td>
                                 <?php if($service->service_img): ?>
                                     <div>
-                                        <img src="<?php echo e(asset('storage/' . $service->service_img)); ?>" alt="Cover Photo"
-                                            class="img-fluid rounded" style="max-height: 100px;">
+                                        <img src="<?php echo e(asset('storage/' . $service->service_img)); ?>"  alt="Cover Photo"
+                                            class="img-fluid rounded" style="height: 100px;width:100px">
                                     </div>
                                 <?php else: ?>
                                     <div>No Image for service</div>
@@ -297,55 +297,19 @@
                                 $("tbody").empty(); // Remove empty state row
                             }
 
-                            $("tbody").append(`
-        <tr class="align-middle">
-            <td class="fw-bold text-primary">${currentCount + 1}</td>
-            <td>
-                <div class="d-flex align-items-center">
-                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 35px; height: 35px;">
-                        <i class="fa fa-scissors text-white small"></i>
-                    </div>
-                    <strong class="text-dark">${$('#serviceName').val()}</strong>
-                </div>
-            </td>
-            <td>
-                <span class="badge bg-success">
-                    <i class="fa fa-rupee-sign me-1"></i>${$('#servicePrice').val()}
-                </span>
-            </td>
-            <td>
-                <span class="text-muted">
-                    <i class="fa fa-clock me-1"></i>${$('#serviceDuration').val()} min
-                </span>
-            </td>
-            <td>
-                <span class="badge bg-primary">Active</span>
-            </td>
-            <td class="text-center">
-                <div class="btn-group btn-group-sm">
-                    <button class="btn btn-outline-warning edit-service"
-                        data-id="${response.services.id}"
-                        data-name="${$('#serviceName').val()}"
-                        data-duration="${$('#serviceDuration').val()}"
-                        data-price="${$('#servicePrice').val()}">
-                        <i class="fa fa-edit" style="color:#0a566d"></i>
-                    </button>
-                    <button class="btn btn-outline-danger delete-service" data-id="${response.services.id}">
-                        <i class="fa fa-trash" style="color:#0a566d"></i>
-                    </button>
-                </div>
-            </td>
-        </tr>
-    `);
+
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Success',
                                 text: 'New Service Created Successfully!',
                                 confirmButtonColor: '#3085d6',
                                 confirmButtonText: 'OK'
+                            }).then((result)=>{
+                                if(result.isConfirmed) {
+                                    window.location.reload();
+                                }
                             });
 
-                            // Update footer count
                             let newCount = $("tbody tr").length;
                             if ($(".card-footer").length > 0) {
                                 $(".card-footer small").html(
@@ -414,42 +378,16 @@
                     contentType: false,
                     success: function(response) {
                         if (response.status) {
-                            let tableRow = $(`.edit-service[data-id="${id}"]`).closest('tr');
-
-                            tableRow.find('td:nth-child(2) strong').text(response.service.name);
-
-                            tableRow.find('td:nth-child(3) .badge').html(`
-        <i class="fa fa-rupee-sign me-1"></i>${response.service.price}
-    `);
-
-                            tableRow.find('td:nth-child(4) span').html(`
-        <i class="fa fa-clock me-1"></i>${response.service.duration} min
-    `);
-
-                            let statusText = response.service.is_active ? 'Active' :
-                                'In-Active';
-                            let statusClass = response.service.is_active ? 'bg-primary' :
-                                'bg-danger';
-
-                            let statusBadge = tableRow.find('td:nth-child(5) span');
-                            statusBadge
-                                .removeClass('bg-primary bg-danger')
-                                .addClass(statusClass)
-                                .text(statusText);
-
-                            tableRow.find('.edit-service')
-                                .attr('data-name', response.service.name)
-                                .attr('data-price', response.service.price)
-                                .attr('data-duration', response.service.duration);
-                            btn.prop('disabled', false);
-                            btn.find('.btn-text').text('Save Changes');
-                            btn.find('.spinner-border').addClass('d-none');
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Success',
                                 text: 'Service Updated Successfully!',
                                 confirmButtonColor: '#3085d6',
                                 confirmButtonText: 'OK'
+                            }).then((result)=>{
+                                if(result.isConfirmed) {
+                                    window.location.reload();
+                                }
                             });
 
                             $('#editServiceModal').modal('hide');
@@ -467,7 +405,7 @@
                         if (xhr.status === 422) {
                             let errors = xhr.responseJSON.errors;
                         } else {
-                            // alert("Something went wrong!");
+
                         }
                     }
                 });

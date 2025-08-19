@@ -17,7 +17,7 @@
   
   <?php echo $__env->yieldContent('scripts'); ?>
   
-
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <!-- Template js-->
   <script src="<?php echo e(asset('assets/js/script.js')); ?>"></script>
   <script src="<?php echo e(asset('assets/js/theme-customizer/customizer.js')); ?>"></script>

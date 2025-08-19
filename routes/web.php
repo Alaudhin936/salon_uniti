@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ServiceController;
@@ -54,6 +55,10 @@ Route::get('/logout', function () {
 Route::middleware('role:1')->group(function () {
     Route::get('/salons', [AdminController::class, 'index'])->name('salons');
     Route::get('/banners', [BannerController::class, 'index'])->name('banners');
+    Route::get('/payments', [AdminController::class, 'paymentIndex'])->name('admin.payments');
+    Route::post('/payments/store', [AdminController::class, 'storePaymentType'])->name('admin.payment.types.store');
+    Route::post('/payments/update/{id}', [AdminController::class, 'updatePaymentType'])->name('admin.payment.types.update');
+    Route::post('/payments/destroy/{id}', [AdminController::class, 'destroyPaymentType'])->name('admin.payment.types.delete');
     Route::post('/salon/store', [AdminController::class, 'registerSalon'])->name('salons.store');
     Route::post('/salonDetails/{id}', [AdminController::class, 'showVendorDetails'])->name('salon.details');
     Route::post('/banner/store', [BannerController::class, 'store'])->name('admin.banners.store');
@@ -83,6 +88,11 @@ Route::prefix('salonweb')->group(function () {
     Route::middleware('role:2')->group(function () {
         Route::post('/appointment/markdone/{id}/{status}', [AppointmentController::class, 'markAsDone'])->name('appointments.markdone');
         Route::get('/dashboard', [AppointmentController::class, 'index'])->name('vendor_dashboard');
+        Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+        Route::post('/bookings/store', [BookingController::class, 'store'])->name('bookings.store');
+        Route::get('/bookings/payments/create', [BookingController::class, 'createPayment'])->name('payments.create');
+        Route::post('/bookings/payments/confirm', [BookingController::class, 'createBooking'])->name('payments.bookings.create');
+
         Route::get('/appointments', [AppointmentController::class, 'appointments'])->name('appointments');
         Route::get('/customers', [AppointmentController::class, 'customers'])->name('customers');
         Route::post('/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');

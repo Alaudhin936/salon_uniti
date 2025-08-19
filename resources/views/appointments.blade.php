@@ -209,7 +209,7 @@
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form id="bookAppointmentForm">
+                <form id="bookAppointmentForm" method="GET" action="{{ route('bookings.index') }}">
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="bookAppointmentModalLabel">Book Appointment</h5>
@@ -242,11 +242,12 @@
                         <!-- Date -->
                         <div class="mb-3">
                             <label for="date" class="form-label">Date</label>
-                            <input type="date" min="{{ \Carbon\Carbon::today()->format('Y-m-d') }}"
-                                class="form-control" name="date" required>
+                            <input type="text" class="form-control datepicker" name="date" id="date"
+                                placeholder="Select Date" required
+                                data-mindate="{{ \Carbon\Carbon::today()->format('Y-m-d') }}">
                         </div>
 
-                        <!-- Slot Start -->
+                        {{-- <!-- Slot Start -->
                         <div class="mb-3">
                             <label for="slot_start" class="form-label">Slot Start</label>
                             <input type="time" class="form-control" name="slot_start" required>
@@ -256,10 +257,10 @@
                         <div class="mb-3">
                             <label for="slot_end" class="form-label">Slot End</label>
                             <input type="time" class="form-control" name="slot_end" readonly>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Book</button>
+                        <button type="submit" class="btn btn-success">Proceed</button>
                     </div>
                 </form>
             </div>
@@ -275,7 +276,18 @@
     <script src="{{ asset('assets/js/support-ticket-custom.js') }}"></script>
     <script>
         $(document).ready(function() {
-
+            flatpickr(".datepicker", {
+                dateFormat: "Y-m-d",
+                minDate: "today",
+                disable: [
+                    function(date) {
+                        return;
+                    }
+                ],
+                locale: {
+                    firstDayOfWeek: 1
+                }
+            });
             $("table[id^='appointmentsTable_']").each(function() {
                 $(this).DataTable({
                     paging: true,
@@ -344,37 +356,37 @@
                 setMinStartTime($(this).val());
             });
             $('select[name="service_id"], input[name="slot_start"]').on('change', calculateEndTime);
-            $('#bookAppointmentForm').on('submit', function(e) {
-                e.preventDefault();
+            // $('#bookAppointmentForm').on('submit', function(e) {
+            //     e.preventDefault();
 
-                $.ajax({
-                    url: "{{ route('appointments.store') }}",
-                    type: "POST",
-                    data: $(this).serialize(),
-                    success: function(response) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success',
-                            text: 'Service Competed Successfully',
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK'
-                        }).then(function(result) {
-                            if (result.isConfirmed) {
-                                window.location.reload();
-                            }
-                        });
-                    },
-                    error: function(xhr) {
-                        if (xhr.status === 422) {
-                            let errors = xhr.responseJSON.errors;
-                            alert("Validation error: " + Object.values(errors).join(", "));
-                        } else {
-                            alert("Server error!");
-                        }
-                    }
-                });
+            //     $.ajax({
+            //         url: "{{ route('appointments.store') }}",
+            //         type: "POST",
+            //         data: $(this).serialize(),
+            //         success: function(response) {
+            //             Swal.fire({
+            //                 icon: 'success',
+            //                 title: 'Success',
+            //                 text: 'Service Competed Successfully',
+            //                 confirmButtonColor: '#3085d6',
+            //                 confirmButtonText: 'OK'
+            //             }).then(function(result) {
+            //                 if (result.isConfirmed) {
+            //                     window.location.reload();
+            //                 }
+            //             });
+            //         },
+            //         error: function(xhr) {
+            //             if (xhr.status === 422) {
+            //                 let errors = xhr.responseJSON.errors;
+            //                 alert("Validation error: " + Object.values(errors).join(", "));
+            //             } else {
+            //                 alert("Server error!");
+            //             }
+            //         }
+            //     });
 
-            });
+            // });
 
 
             $('#appointmentFilter button').on('click', function() {

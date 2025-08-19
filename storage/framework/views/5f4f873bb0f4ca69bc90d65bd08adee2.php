@@ -54,8 +54,6 @@
                                 <i data-feather="briefcase"></i><span class="ms-2">Services</span>
                             </a>
                         </li>
-
-                        
                     </ul>
                 </div>
             </nav>
@@ -108,11 +106,17 @@
 
                         <li class="sidebar-list">
                             <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('admin.settings')); ?>">
-                                <i data-feather="settings"></i><span>Settings & Privacy</span>
+                                <i data-feather="settings"></i><span>Settings</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-list">
+                            <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('admin.payments')); ?>">
+                                <i data-feather="credit-card"></i><span>Payment Methods</span>
                             </a>
                         </li>
                         <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('support_ticket')); ?>">
+                            <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('logout')); ?>">
                                 <i data-feather="log-out"></i><span>Logout</span>
                             </a>
                         </li>

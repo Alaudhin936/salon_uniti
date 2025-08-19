@@ -54,12 +54,6 @@
                                 <i data-feather="briefcase"></i><span class="ms-2">Services</span>
                             </a>
                         </li>
-
-                        {{-- <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title" href="{{ route('support_ticket') }}">
-                                <i data-feather="settings"></i><span class="ms-2">Settings</span>
-                            </a>
-                        </li> --}}
                     </ul>
                 </div>
             </nav>
@@ -99,7 +93,7 @@
                         </li>
 
                         <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav" href="{{route('banners')}}">
+                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('banners') }}">
                                 <i data-feather="flag"></i><span>Banner</span>
                             </a>
                         </li>
@@ -112,11 +106,17 @@
 
                         <li class="sidebar-list">
                             <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.settings') }}">
-                                <i data-feather="settings"></i><span>Settings & Privacy</span>
+                                <i data-feather="settings"></i><span>Settings</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-list">
+                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.payments') }}">
+                                <i data-feather="credit-card"></i><span>Payment Methods</span>
                             </a>
                         </li>
                         <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('support_ticket') }}">
+                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('logout') }}">
                                 <i data-feather="log-out"></i><span>Logout</span>
                             </a>
                         </li>

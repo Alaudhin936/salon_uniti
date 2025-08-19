@@ -147,12 +147,15 @@
             $(document).on("click", ".deleteBtn", function() {
                 let id = $(this).data("id");
                 let myUrl = "<?php echo e(route('admin.salon.types.delete', ':id')); ?>".replace(':id', id);
+
+
                 Swal.fire({
-                    icon: 'alert',
-                    title: 'Alert',
-                    text: `Are You Sure Wanted To delete This Type?`,
+                    text:'Are Your Sure Wanted to delete this Type',
+                    icon: 'question',
+                    showCancelButton: true,
                     confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Delete!'
                 }).then(function(result) {
                     if (result.isConfirmed) {
 

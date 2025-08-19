@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdminSetting;
+use App\Models\PaymentMethod;
 use App\Models\SalonType;
 use App\Models\User;
 use App\Models\VendorDetail;
@@ -49,6 +50,7 @@ class AdminController extends Controller
             ->get();
 
         $types = SalonType::all();
+
         return view('salons', compact('salons', 'types'));
     }
 
@@ -90,7 +92,6 @@ class AdminController extends Controller
             'lattitude'     => $request->lattitude,
             'longitude'     => $request->longitude,
         ]);
-        dd($vendorDetails);
 
         return response()->json([
             'status' => 'success',
@@ -154,10 +155,8 @@ class AdminController extends Controller
             'terms_conditions' => 'nullable',
         ]);
 
-        // Get existing settings (first row) OR create new
         $settings = AdminSetting::first();
 
-        // Handle site logo
         if ($request->hasFile('site_logo')) {
             if ($settings && $settings->site_logo && Storage::exists('public/' . $settings->site_logo)) {
                 Storage::delete('public/' . $settings->site_logo);
@@ -165,7 +164,6 @@ class AdminController extends Controller
             $validated['site_logo'] = $request->file('site_logo')->store('logos', 'public');
         }
 
-        // Handle favicon
         if ($request->hasFile('favicon')) {
             if ($settings && $settings->favicon && Storage::exists('public/' . $settings->favicon)) {
                 Storage::delete('public/' . $settings->favicon);
@@ -221,5 +219,52 @@ class AdminController extends Controller
         $salonType->delete();
 
         return response()->json(['success' => true]);
+    }
+
+    public function paymentIndex()
+    {
+        $paymentTypes = PaymentMethod::all();
+        return view('payments', compact('paymentTypes'));
+    }
+
+
+    public function storePaymentType(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $salonType = PaymentMethod::create($validated);
+
+        return response()->json(['status' => 200]);
+    }
+
+    public function updatePaymentType(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        $salonType = PaymentMethod::findOrFail($id);
+
+        $salonType->update($validated);
+        if ($request->is_active) {
+            $salonType->update([
+                'is_active' => 1
+            ]);
+        } else {
+            $salonType->update([
+                'is_active' => 0
+            ]);
+        }
+        return response()->json(['status' => 200]);
+    }
+
+
+    public function destroyPaymentType(Request $request, $id)
+    {
+        $paymentType = PaymentMethod::findOrFail($id);
+        $paymentType->delete();
+
+        return response()->json(['status' => 200]);
     }
 }

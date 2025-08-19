@@ -55,7 +55,7 @@ class ServiceController extends Controller
             'price' => $request->price,
             'duration' => $request->duration,
             'is_active' => $request->is_active,
-            'service_img' => isset($path) ? $path : ''
+            'service_img' => isset($path) ? $path : $service->service_img
         ]);
 
         return response()->json([
