@@ -35,11 +35,11 @@
 }
 
 .todo .action-box.large .icon .icon-trash {
-    color: #009688
+    color: #28d5ed
 }
 
 .todo .action-box.large .icon .icon-check {
-    color: #009688
+    color: #28d5ed
 }
 
 .todo .todo-list-wrapper {
@@ -129,7 +129,7 @@
 }
 
 .todo .todo-list-wrapper #todo-list li.completed .task-container .complete-btn {
-    border: 1px solid #009688;
+    border: 1px solid #28d5ed;
     border-radius: 4px
 }
 
@@ -152,7 +152,7 @@
 
 .todo .todo-list-wrapper #todo-list li.completed .task-container .task-label {
     text-decoration: line-through;
-    color: #009688
+    color: #28d5ed
 }
 
 .todo .todo-list-wrapper #todo-list li.new .task-container {

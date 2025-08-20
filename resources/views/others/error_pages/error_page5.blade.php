@@ -23,11 +23,11 @@
                         }
 
                         .shp3 {
-                            fill: #009688
+                            fill: #28d5ed
                         }
 
                         .shp4 {
-                            fill: #009688;
+                            fill: #28d5ed;
                             opacity: 0.5
                         }
 

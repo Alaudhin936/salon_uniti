@@ -26,11 +26,14 @@ return new class extends Migration
             $table->string('gst_number')->nullable();
             $table->string('lattitude')->nullable();
             $table->string('longitude')->nullable();
+
             $table->timestamps();
 
             $table->foreign('salon_type_id')->references('id')->on('salon_types')->onDelete('cascade');
         });
     }
+
+
 
     /**
      * Reverse the migrations.

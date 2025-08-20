@@ -76,8 +76,8 @@
                                     <div class="row g-3">
                                         <?php $__currentLoopData = $paymentTypes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $method): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div class="col-md-4 col-sm-6">
-                                                <input type="radio" name="payment_method" id="method<?php echo e($method->id); ?>"
-                                                    value="<?php echo e($method->name); ?>" class="d-none payment-method-radio"
+                                                <input type="radio" name="payment_method_id" id="method<?php echo e($method->id); ?>"
+                                                    value="<?php echo e($method->id); ?>" data-name=<?php echo e($method->name); ?> class="d-none payment-method-radio"
                                                     <?php echo e($loop->first ? 'checked' : ''); ?>>
                                                 <label for="method<?php echo e($method->id); ?>"
                                                     class="payment-method-card w-100 h-100 d-flex flex-column align-items-center justify-content-center text-decoration-none">
@@ -145,7 +145,8 @@
                                     </button>
                                 </div>
                                 <div class="col-12">
-                                    <a href="<?php echo e(route('appointments')); ?>" class="btn btn-outline-secondary btn-lg w-100 py-2 rounded-3">
+                                    <a href="<?php echo e(url()->previous()); ?>"
+                                        class="btn btn-outline-secondary btn-lg w-100 py-2 rounded-3">
                                         <i class="fas fa-arrow-left me-2"></i>
                                         Back to Booking
                                     </a>
@@ -344,84 +345,84 @@
 <?php $__env->startSection('scripts'); ?>
     <script>
         $(document).ready(function() {
-                    $('.payment-method-radio').change(function() {
-                        const methodName = $(this).val();
-                        $('.payment-detail').addClass('d-none');
-                        if (methodName.toLowerCase() === 'gpay') {
-                            $('.upi-details').removeClass('d-none');
+            $('.payment-method-radio').change(function() {
+                const methodName = $(this).data('name');
+                $('.payment-detail').addClass('d-none');
+                if (methodName.toLowerCase() === 'gpay') {
+                    $('.upi-details').removeClass('d-none');
+                } else {
+                    $('.upi-details').addClass('d-none');
+                }
+            });
+
+            $('#paymentForm').submit(function(e) {
+                e.preventDefault();
+
+                const form = $(this);
+                const submitBtn = form.find('[type="submit"]');
+                const originalText = submitBtn.html();
+
+                submitBtn.prop('disabled', true)
+                    .html('<i class="fas fa-spinner fa-spin me-2"></i> Processing Payment...');
+
+                $.ajax({
+                    url: "<?php echo e(route('payments.bookings.create')); ?>",
+                    method: "POST",
+                    data: form.serialize(),
+                    success: function(response) {
+                        if (response.status == 200) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Payment Successful!',
+                                text: 'Appointment Have been booked Successfully!'+ 'Your Payment ID is' + response.payment_id,
+                                confirmButtonColor: '#198754'
+                            }).then(() => {
+                                window.location.href = "<?php echo e(route('appointments')); ?>";
+                            });
                         } else {
-                            $('.card-details').removeClass('d-none');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Payment Failed',
+                                text: response.message ||
+                                    'Something went wrong, Please try again.'
+                            });
                         }
-                    });
-
-                    $('#paymentForm').submit(function(e) {
-                        e.preventDefault();
-
-                        const form = $(this);
-                        const submitBtn = form.find('[type="submit"]');
-                        const originalText = submitBtn.html();
-
-                        submitBtn.prop('disabled', true)
-                            .html('<i class="fas fa-spinner fa-spin me-2"></i> Processing Payment...');
-
-                        $.ajax({
-                            url: "<?php echo e(route('payments.bookings.create')); ?>",
-                            method: "POST",
-                            data: form.serialize(),
-                            success: function(response) {
-                                if (response.status == 200) {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Payment Successful!',
-                                        text: response.message,
-                                        confirmButtonColor: '#198754'
-                                    }).then(() => {
-                                        window.location.href = "<?php echo e(route('appointments')); ?>";
-                                    });
-                                } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Payment Failed',
-                                        text: response.message ||
-                                            'Something went wrong, Please try again.'
-                                    });
-                                }
-                            },
-                            error: function(xhr) {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Server Error',
-                                    text: xhr.responseJSON?.message ||
-                                        'Unable to process payment'
-                                });
-                            },
-                            complete: function() {
-                                submitBtn.prop('disabled', false).html(originalText);
-                            }
+                    },
+                    error: function(xhr) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Server Error',
+                            text: xhr.responseJSON?.message ||
+                                'Unable to process payment'
                         });
-
-                        // Card number formatting
-                        $('#card_number').on('input', function() {
-                            let value = $(this).val().replace(/\s/g, '');
-                            let formattedValue = value.replace(/(.{4})/g, '$1 ').trim();
-                            $(this).val(formattedValue);
-                        });
-
-                        // Expiry date formatting
-                        $('#expiry').on('input', function() {
-                            let value = $(this).val().replace(/\D/g, '');
-                            if (value.length >= 2) {
-                                value = value.substring(0, 2) + '/' + value.substring(2, 4);
-                            }
-                            $(this).val(value);
-                        });
-
-                        // CVV restriction
-                        $('#cvv').on('input', function() {
-                            $(this).val($(this).val().replace(/\D/g, ''));
-                        });
-                    });
+                    },
+                    complete: function() {
+                        submitBtn.prop('disabled', false).html(originalText);
+                    }
                 });
+
+                // Card number formatting
+                $('#card_number').on('input', function() {
+                    let value = $(this).val().replace(/\s/g, '');
+                    let formattedValue = value.replace(/(.{4})/g, '$1 ').trim();
+                    $(this).val(formattedValue);
+                });
+
+                // Expiry date formatting
+                $('#expiry').on('input', function() {
+                    let value = $(this).val().replace(/\D/g, '');
+                    if (value.length >= 2) {
+                        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                    }
+                    $(this).val(value);
+                });
+
+                // CVV restriction
+                $('#cvv').on('input', function() {
+                    $(this).val($(this).val().replace(/\D/g, ''));
+                });
+            });
+        });
     </script>
 <?php $__env->stopSection(); ?>
 

@@ -77,7 +77,7 @@
                             <!-- Page Sidebar Ends-->
 
 
-                            <div class="page-body">
+                            <div class="page-body" style="padding: 30px">
                                 @yield('main_content')
                                 <!-- Container-fluid Ends-->
                             </div>

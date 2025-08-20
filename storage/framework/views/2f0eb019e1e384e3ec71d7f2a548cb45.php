@@ -3,11 +3,11 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('main_content'); ?>
-    <div class="container mt-4">
+    <div class="container mt-4" style="padding:30px;background-color:white;">
         <div class="d-flex align-items-center justify-content-between mb-3">
-            <h3 class="mb-0">Salon Types</h3>
-            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addSalonTypeModal">
-                <i class="fas fa-plus"></i> Add New Type
+            <h3 style="color: #0a566d" class="underlined-heading mb-4">Salon Types</h3>
+            <button class="btn btn-light btn-md px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal" data-bs-target="#addSalonTypeModal">
+                <i class="fas fa-plus me-2 text-success"></i> Add New Type
             </button>
         </div>
 

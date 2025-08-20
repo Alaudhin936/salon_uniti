@@ -37169,7 +37169,7 @@ body[class*="dark-"] .horizontal-wrapper .for-light {
 }
 
 .customizer-contain .customizer-body .color-layout>div {
-    background-color: #009688;
+    background-color: #28d5ed;
     height: 100%;
     width: 100%;
     border-radius: 30px
@@ -42911,7 +42911,7 @@ html[dir="rtl"] body.dark-only .page-wrapper .page-body-wrapper .page-body .card
 
 .popover .popover-header {
     background-color: #eae8ff;
-    color: #009688;
+    color: #28d5ed;
     border-bottom: none
 }
 
@@ -42992,7 +42992,7 @@ span.twitter-typeahead .tt-suggestion:active {
 
 .tooltip .tooltip-inner {
     background-color: #eae8ff;
-    color: #009688
+    color: #28d5ed
 }
 
 .tooltip .tooltip-arrow:before {
@@ -43096,15 +43096,15 @@ span.twitter-typeahead .tt-suggestion:active {
 }
 
 .border-tab .nav-tabs .nav-item .nav-link.active {
-    border-bottom: 2px solid #009688
+    border-bottom: 2px solid #28d5ed
 }
 
 .border-tab .nav-tabs .nav-item .nav-link.show {
-    border-bottom: 2px solid #009688
+    border-bottom: 2px solid #28d5ed
 }
 
 .border-tab .nav-tabs .nav-item .nav-link:focus {
-    border-bottom: 2px solid #009688
+    border-bottom: 2px solid #28d5ed
 }
 
 .tabbed-card .nav-tabs .nav-item .nav-link {
@@ -43121,7 +43121,7 @@ span.twitter-typeahead .tt-suggestion:active {
 
 .card-header.note-toolbar .dropdown-menu.note-check a.dropdown-item i.note-icon-menu-check {
     visibility: visible;
-    color: #009688
+    color: #28d5ed
 }
 
 .card-header.note-toolbar .dropdown-menu.note-check a.dropdown-item~i.note-icon-menu-check {

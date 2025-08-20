@@ -11,7 +11,7 @@
                         }
 
                         .shp0 {
-                            fill: #009688
+                            fill: #28d5ed
                         }
 
                         .shp1 {
@@ -33,12 +33,12 @@
 
                         .shp5 {
                             opacity: 0.300;
-                            fill: #009688
+                            fill: #28d5ed
                         }
 
                         .shp6 {
                             opacity: 0.2;
-                            fill: #009688
+                            fill: #28d5ed
                         }
 
                         .shp7 {

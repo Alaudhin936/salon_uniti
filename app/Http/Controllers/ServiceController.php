@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
@@ -83,7 +84,7 @@ class ServiceController extends Controller
 
         $types = SalonType::all();
 
-        return view('vendor_profile', compact('vendor', 'vendor','types'));
+        return view('vendor_profile', compact('vendor', 'vendor', 'types'));
     }
 
     public function profileupdate(Request $request)
@@ -98,9 +99,20 @@ class ServiceController extends Controller
             'location' => 'nullable|string|max:255',
             'shop_open' => 'nullable',
             'shop_close' => 'nullable',
+            'cover_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120'
         ]);
 
         $user = User::where('id', auth()->user()->id)->first();
+        $vendorDetail = VendorDetail::where('vendor_id', $user->id)->first();
+
+        $coverPhotoPath = null;
+        if ($request->hasFile('cover_photo')) {
+            if ($vendorDetail->cover_photo && Storage::disk('public')->exists($vendorDetail->cover_photo)) {
+                Storage::disk('public')->delete($vendorDetail->cover_photo);
+            }
+
+            $coverPhotoPath = $request->file('cover_photo')->store('cover_photos', 'public');
+        }
 
         $updateData = [
             'name' => $request->name,
@@ -111,12 +123,10 @@ class ServiceController extends Controller
         if ($request->filled('password')) {
             $updateData['password'] = Hash::make($request->password);
         }
-        if ($request->hasFile('cover_photo')) {
-            $path = $request->file('cover_photo')->store('cover_photos', 'public');
-        }
+
         $user->update($updateData);
 
-        VendorDetail::where('vendor_id', $user->id)->update([
+        $vendorUpdateData = [
             'business_name' => $request->business_name,
             'slogan' => $request->slogan,
             'salon_type_id' => $request->salon_type_id,
@@ -125,10 +135,18 @@ class ServiceController extends Controller
             'shop_close' => $request->shop_close,
             'gst_number' => $request->gst_number,
             'is_active' => $request->is_active,
-            'cover_photo' => isset($path) ? $path : ''
-        ]);
+        ];
 
-        return response()->json(['message' => 'Profile updated successfully!', 'reload' => isset($path) ? true : false]);
+        if ($coverPhotoPath) {
+            $vendorUpdateData['cover_photo'] = $coverPhotoPath;
+        }
+
+        VendorDetail::where('vendor_id', $user->id)->update($vendorUpdateData);
+
+        return response()->json([
+            'message' => 'Profile updated successfully!',
+            'reload' => $coverPhotoPath ? true : false
+        ]);
     }
 
     public function customerServices(Request $request)

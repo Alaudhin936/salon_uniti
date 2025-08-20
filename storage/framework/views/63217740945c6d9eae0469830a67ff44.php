@@ -3,1198 +3,549 @@
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vendors/chartist.css')); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vendors/prism.css')); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vendors/vector-map.css')); ?>">
+
+    <!-- DataTables Bootstrap 5 + Responsive -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
+
+    <style>
+        .underlined-heading {
+            position: relative;
+            display: inline-block
+        }
+
+        .underlined-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: #0a566d;
+            border-radius: 2px
+        }
+
+        .profile-greeting {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: #fff;
+            border: none;
+            transition: transform .3s ease
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px)
+        }
+
+        /* ---------- DataTables polish ---------- */
+        /* Put toolbar in one line using Bootstrap grid via DOM option, then small spacing tweaks */
+        .dataTables_wrapper .dt-header,
+        .dataTables_wrapper .dt-footer {
+            margin: .25rem 0 .75rem 0;
+            padding: 0 30px 0 30px;
+        }
+
+        .dataTables_wrapper {
+            padding: 20px !important;
+        }
+
+        .dataTables_wrapper .dataTables_length label,
+        .dataTables_wrapper .dataTables_filter label {
+            margin-bottom: 0;
+            /* remove extra label spacing */
+            font-weight: 500;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+            border-radius: 10px;
+            padding: 8px 12px;
+            border: 1px solid #0a566d;
+            outline: none;
+            width: 220px;
+            /* consistent width */
+            max-width: 100%;
+            margin-left: .5rem;
+            /* space after "Search" (we'll hide the word via language below) */
+        }
+
+        .dataTables_wrapper .dataTables_length select {
+            border-radius: 8px;
+            padding: 6px 10px;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: .35rem .6rem !important;
+            margin: 0 .15rem !important;
+            border-radius: .5rem !important;
+        }
+
+        .dataTables_wrapper .dataTables_info {
+            padding-top: .6rem
+        }
+
+        /* Table look & cell spacing */
+        .table.dataTable {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .08)
+        }
+
+        .table.dataTable thead th {
+            background: #0a566d !important;
+            color: #fff !important;
+            text-align: center;
+            padding: 14px 16px !important;
+            font-size: 14px;
+            vertical-align: middle;
+            opacity: 1 !important;
+            /* force visible if any theme sets opacity */
+        }
+
+        .table.dataTable tbody td {
+            padding: 12px 16px !important;
+            vertical-align: middle;
+            font-size: 14px;
+        }
+
+        .table.dataTable tbody tr:hover {
+            background: #f1faff
+        }
+
+        /* If any theme overrides header again, keep it blue */
+        .table thead th {
+            background: #0a566d !important;
+            border-color: #0a566d !important;
+            color: #fff !important;
+            font-weight: 600;
+            letter-spacing: .5px;
+            opacity: 1 !important;
+        }
+    </style>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('main_content'); ?>
     <div class="container-fluid">
+        <!-- Page Header -->
         <div class="page-title">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3>Default</h3>
+                    <h3 style="color:#0a566d" class="underlined-heading mb-4 fw-bold">Master Admin Dashboard</h3>
                 </div>
                 <div class="col-sm-6">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?php echo e(route('dashboard')); ?>"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Dashboard</li>
-                        <li class="breadcrumb-item active">Default</li>
+                    <ol class="breadcrumb float-end">
+                        <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
+                        <li class="breadcrumb-item active text-primary">Dashboard</li>
                     </ol>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Container-fluid starts-->
-    <div class="container-fluid dashboard-default">
-        <div class="row">
-            <div class="col-xxl-6 col-xl-5 col-lg-6 dash-45 box-col-40">
-                <div class="card profile-greeting">
-                    <div class="card-body">
-                        <div class="d-sm-flex d-block justify-content-between">
-                            <div class="flex-grow-1">
-                                <div class="weather d-flex">
-                                    <h2 class="f-w-400"> <span>28<sup><i class="fa fa-circle-o f-10"></i></sup>C </span>
-                                    </h2>
-                                    <div class="span sun-bg"><i class="icofont icofont-sun font-primary"></i></div>
-                                </div><span class="font-primary f-w-700">Sunny Day</span>
-                                <p>Beautiful Sunny Day Walk</p>
-                            </div>
-                            <div class="badge-group">
-                                <div class="badge badge-light-primary f-12"> <i class="fa fa-clock-o"></i><span
-                                        id="txt"></span>
-                                </div>
-                            </div>
-                        </div>
+
+        <!-- Welcome Card -->
+        <div class="row ">
+            <div class="col-12">
+                <div class="card profile-greeting shadow-lg border-0 rounded-4">
+                    <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
+                        <div class=""><i class="fas fa-user-shield fa-3x text-white opacity-75"></i></div>
                         <div class="greeting-user">
-                            <div class="profile-vector">
-                                <ul class="dots-images">
-                                    <li class="dot-small bg-info dot-1"></li>
-                                    <li class="dot-medium bg-primary dot-2"></li>
-                                    <li class="dot-medium bg-info dot-3"></li>
-                                    <li class="semi-medium bg-primary dot-4"></li>
-                                    <li class="dot-small bg-info dot-5"></li>
-                                    <li class="dot-big bg-info dot-6"></li>
-                                    <li class="dot-small bg-primary dot-7"></li>
-                                    <li class="semi-medium bg-primary dot-8"></li>
-                                    <li class="dot-big bg-info dot-9"></li>
-                                </ul><img class="img-fluid" src="<?php echo e('assets/images/dashboard/default/profile.png'); ?>"
-                                    alt="">
-                                <ul class="vector-image">
-                                    <li> <img src="<?php echo e('assets/images/dashboard/default/ribbon1.png'); ?>" alt="">
-                                    </li>
-                                    <li> <img src="<?php echo e('assets/images/dashboard/default/ribbon3.png'); ?>" alt="">
-                                    </li>
-                                    <li> <img src="<?php echo e('assets/images/dashboard/default/ribbon4.png'); ?>" alt="">
-                                    </li>
-                                    <li> <img src="<?php echo e('assets/images/dashboard/default/ribbon5.png'); ?>" alt="">
-                                    </li>
-                                    <li> <img src="<?php echo e('assets/images/dashboard/default/ribbon6.png'); ?>" alt="">
-                                    </li>
-                                    <li> <img src="<?php echo e('assets/images/dashboard/default/ribbon7.png'); ?>" alt="">
-                                    </li>
-                                </ul>
-                            </div>
-                            <h4><a href="user-profile.html"><span>Welcome Back</span> <?php echo e(auth()->user()->name); ?> </a><span class="right-circle"><i
-                                        class="fa fa-check-circle font-primary f-14 middle"></i></span></h4>
-                            <div><span class="badge badge-primary">Your 5</span><span
-                                    class="font-primary f-12 middle f-w-500 ms-2"> Task Is Pending</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-6 col-md-6 box-col-25">
-                <div class="card total-revenue overflow-hidden">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between">
-                            <div class="flex-grow-1">
-                                <p class="square-after f-w-600 header-text-primary">Total Revenue<i
-                                        class="fa fa-circle"></i>
-                                </p>
-                                <h4>96.564%</h4>
-                            </div>
-                            <div class="setting-list">
-                                <ul class="list-unstyled setting-option">
-                                    <li>
-                                        <div class="setting-light"><i class="icon-layout-grid2"></i></div>
-                                    </li>
-                                    <li><i class="view-html fa fa-code font-white"></i></li>
-                                    <li><i class="icofont icofont-maximize full-card font-white"></i></li>
-                                    <li><i class="icofont icofont-minus minimize-card font-white"></i></li>
-                                    <li><i class="icofont icofont-refresh reload-card font-white"></i></li>
-                                    <li><i class="icofont icofont-error close-card font-white"> </i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="revenue-chart" id="revenue-chart"></div>
-                        <div class="code-box-copy">
-                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#revenue"><i
-                                    class="icofont icofont-copy-alt"></i></button>
-                            <pre><code class="language-html" id="revenue">&lt;div class="card total-revenue overflow-hidden"&gt;
-&lt;div class="card-header"&gt;
-&lt;div class="d-flex justify-content-between"&gt;
-&lt;div class="flex-grow-1"&gt;
-  &lt;p class="square-after f-w-600 header-text-primary"&gt;Total Revenue
-    &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
-  &lt;/p&gt;
-  &lt;h4&gt; 96.564%&lt;/h4&gt;
-&lt;/div&gt;
-&lt;div class="setting-list"&gt;
-  &lt;ul class="list-unstyled setting-option"&gt;
-    &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="card-body p-0"&gt;
-&lt;div class="revenue-chart" id="revenue-chart"&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                        </div>
-                    </div>
-                </div>
-                <div class="card total-investment">
-                    <div class="card-header pb-0">
-                        <div class="d-flex justify-content-between">
-                            <div class="flex-grow-1">
-                                <p class="square-after f-w-600 header-text-primary">Total Investment<i
-                                        class="fa fa-circle"> </i>
-                                </p>
-                                <h4>96.564%</h4>
-                            </div>
-                            <div class="setting-list">
-                                <ul class="list-unstyled setting-option">
-                                    <li>
-                                        <div class="setting-light"><i class="icon-layout-grid2"></i></div>
-                                    </li>
-                                    <li><i class="view-html fa fa-code font-white"></i></li>
-                                    <li><i class="icofont icofont-maximize full-card font-white"></i></li>
-                                    <li><i class="icofont icofont-minus minimize-card font-white"></i></li>
-                                    <li><i class="icofont icofont-refresh reload-card font-white"></i></li>
-                                    <li><i class="icofont icofont-error close-card font-white"> </i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="progress sm-progress-bar">
-                            <div class="progress-colors" role="progressbar" style="width: 100%" aria-valuenow="100"
-                                aria-valuemin="0" aria-valuemax="100">
-                                <div class="bg-secondary progress-1"></div>
-                                <div class="bg-primary progress-2"></div>
-                            </div>
-                        </div>
-                        <div class="bottom-progress"><span class="badge round-badge-primary font-worksans">3.56% <i
-                                    class="fa fa-caret-up"></i></span><span
-                                class="pull-right font-primary font-worksans f-w-700">75%</span></div>
-                        <div class="code-box-copy">
-                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#investment"><i
-                                    class="icofont icofont-copy-alt"></i></button>
-                            <pre><code class="language-html" id="investment">&lt;div class="card total-investment"&gt;
-&lt;div class="card-header pb-0"&gt;
-&lt;div class="d-flex justify-content-between"&gt;
-&lt;div class="flex-grow-1"&gt;
-  &lt;p class="square-after f-w-600 header-text-primary"&gt; Total Investment
-    &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
-  &lt;/p&gt;
-  &lt;h4&gt; 96.564%&lt;/h4&gt;
-&lt;/div&gt;
-&lt;div class="setting-list"&gt;
-  &lt;ul class="list-unstyled setting-option"&gt;
-    &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="card-body p-0"&gt;
-&lt;div class="progress sm-progress-bar"&gt;
-&lt;div class="progress-colors" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"&gt;
-  &lt;div class="bg-secondary.progress-1"&gt;&lt;/div&gt;
-  &lt;div class="bg-primary.progress-2"&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-3 col-xl-4 col-md-6 dash-30 box-col-35">
-                <div class="card our-user">
-                    <div class="card-header pb-0">
-                        <div class="d-flex justify-content-between">
-                            <div class="flex-grow-1">
-                                <p class="square-after f-w-600 header-text-primary">Our Total Users<i
-                                        class="fa fa-circle"></i>
-                                </p>
-                                <h4>96.564%</h4>
-                            </div>
-                            <div class="setting-list">
-                                <ul class="list-unstyled setting-option">
-                                    <li>
-                                        <div class="setting-light"><i class="icon-layout-grid2"></i></div>
-                                    </li>
-                                    <li><i class="view-html fa fa-code font-white"></i></li>
-                                    <li><i class="icofont icofont-maximize full-card font-white"></i></li>
-                                    <li><i class="icofont icofont-minus minimize-card font-white"></i></li>
-                                    <li><i class="icofont icofont-refresh reload-card font-white"></i></li>
-                                    <li><i class="icofont icofont-error close-card font-white"> </i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="user-chart">
-                            <div id="user-chart"></div>
-                            <div class="icon-donut"><i data-feather="arrow-up-circle"></i></div>
-                        </div>
-                        <ul>
-                            <li>
-                                <p class="f-w-600 font-primary f-12">Desktop</p><span class="f-w-600">96.564%</span>
-                            </li>
-                            <li>
-                                <p class="f-w-600 font-primary f-12">Mobile </p><span class="f-w-600">92.624%</span>
-                            </li>
-                            <li>
-                                <p class="f-w-600 font-primary f-12">Tablet </p><span class="f-w-600">46.564%</span>
-                            </li>
-                        </ul>
-                        <div class="code-box-copy">
-                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#users"><i
-                                    class="icofont icofont-copy-alt"></i></button>
-                            <pre><code class="language-html" id="users">&lt;div class="card our-user"&gt;
-&lt;div class="card-header pb-0"&gt;
-&lt;div class="d-flex justify-content-between"&gt;
-&lt;div class="flex-grow-1"&gt;
-  &lt;p class="square-after f-w-600 header-text-primary"&gt; Our Total Users
-    &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
-  &lt;/p&gt;
-  &lt;h4&gt; 96.564% &lt;/h4&gt;
-&lt;/div&gt;
-&lt;div class="setting-list"&gt;
-  &lt;ul class="list-unstyled setting-option"&gt;
-    &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="card-body"&gt;
-&lt;div class="user-chart"&gt;
-&lt;div id="user-chart"&gt;&lt;/div&gt;
-&lt;div class="icon-donut"&gt;
-  &lt;i class="feather feather-arrow-up-circle"&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;
-  &lt;p class="f-w-600 font-primary f-12"&gt; Desktop &lt;/p&gt;
-  &lt;span class="f-w-600"&gt; 96.564% &lt;/span&gt;
-&lt;/li&gt;
-&lt;li&gt;
-  &lt;p class="f-w-600 font-primary f-12"&gt; Mobile &lt;/p&gt;
-  &lt;span class="f-w-600"&gt; 92.624% &lt;/span&gt;
-&lt;/li&gt;
-&lt;li&gt;
-  &lt;p class="f-w-600 font-primary f-12"&gt; Tablet &lt;/p&gt;
-  &lt;span class="f-w-600"&gt; 46.564% &lt;/span&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-6 box-col-30 xl-30">
-                <div class="card our-earning">
-                    <div class="card-header pb-0">
-                        <div class="d-flex justify-content-between">
-                            <div class="flex-grow-1">
-                                <p class="square-after f-w-600 header-text-primary">Our Total Earning<i
-                                        class="fa fa-circle"> </i>
-                                </p>
-                                <h4>96.564%</h4>
-                                <div class="setting-list">
-                                    <ul class="list-unstyled setting-option">
-                                        <li>
-                                            <div class="setting-light"><i class="icon-layout-grid2"></i></div>
-                                        </li>
-                                        <li><i class="view-html fa fa-code font-white"></i></li>
-                                        <li><i class="icofont icofont-maximize full-card font-white"></i></li>
-                                        <li><i class="icofont icofont-minus minimize-card font-white"></i></li>
-                                        <li><i class="icofont icofont-refresh reload-card font-white"></i></li>
-                                        <li><i class="icofont icofont-error close-card font-white"> </i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="earning-chart">
-                            <div id="earning-chart"></div>
-                        </div>
-                        <div class="code-box-copy">
-                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#earning"><i
-                                    class="icofont icofont-copy-alt"></i></button>
-                            <pre><code class="language-html" id="earning">&lt;div class="card our-earning"&gt;
-&lt;div class="card-header pb-0"&gt;
-&lt;div class="d-flex justify-content-between"&gt;
-&lt;div class="flex-grow-1"&gt;
-  &lt;p class="square-after f-w-600 header-text-primary"&gt; Our Total Earning
-    &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
-  &lt;/p&gt;
-  &lt;h4&gt; 96.564% &lt;/h4&gt;
-&lt;/div&gt;
-&lt;div class="setting-list"&gt;
-  &lt;ul class="list-unstyled setting-option"&gt;
-    &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="card-body p-0"&gt;
-&lt;div class="earning-chart"&gt;
-&lt;div id="earning-chart"&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="card-footer"&gt;
-&lt;ul class="d-sm-flex d-block"&gt;
-&lt;li&gt;
-  &lt;p class="f-w-600 font-primary f-12"&gt; Daily Earning
-  &lt;span class="f-w-600"&gt; 96.564% &lt;/span&gt;
-&lt;/li&gt;
-&lt;li&gt;
-  &lt;p class="f-w-600 font-primary f-12"&gt; Monthly Earning
-  &lt;span class="f-w-600"&gt; 96.564% &lt;/span&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <ul class="d-sm-flex d-block">
-                            <li>
-                                <p class="f-w-600 font-primary f-12">Daily Earning</p><span class="f-w-600">96.564%</span>
-                            </li>
-                            <li>
-                                <p class="f-w-600 font-primary f-12">Monthly Earning </p><span
-                                    class="f-w-600">96.564%</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-md-6 box-col-40 xl-40">
-                <div class="card appointment-detail">
-                    <div class="card-header pb-0">
-                        <div class="d-flex justify-content-between">
-                            <div class="flex-grow-1">
-                                <p class="square-after f-w-600 header-text-primary">total appointment<i
-                                        class="fa fa-circle"> </i>
-                                </p>
-                                <h4>12 meet</h4>
-                            </div>
-                            <div class="setting-list">
-                                <ul class="list-unstyled setting-option">
-                                    <li>
-                                        <div class="setting-light"><i class="icon-layout-grid2"></i></div>
-                                    </li>
-                                    <li><i class="view-html fa fa-code font-white"></i></li>
-                                    <li><i class="icofont icofont-maximize full-card font-white"></i></li>
-                                    <li><i class="icofont icofont-minus minimize-card font-white"></i></li>
-                                    <li><i class="icofont icofont-refresh reload-card font-white"></i></li>
-                                    <li><i class="icofont icofont-error close-card font-white"> </i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive theme-scrollbar">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex"><img class="img-fluid align-top circle"
-                                                    src="<?php echo e('assets/images/dashboard/default/01.png'); ?>"
-                                                    alt="">
-                                                <div class="flex-grow-1"><a
-                                                        href="<?php echo e(route('user_profile')); ?>"><span>Ossim keter</span></a>
-                                                    <p class="mb-0">1 Hour</p>
-                                                </div>
-                                                <div class="active-status active-online"></div>
-                                            </div>
-                                        </td>
-                                        <td>16 August </td>
-                                        <td class="text-end">
-                                            <button class="btn btn-primary" type="button"
-                                                onclick="document.location='user-cards.html'">Pending</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex"><img class="img-fluid align-top circle"
-                                                    src="<?php echo e('assets/images/dashboard/default/02.png'); ?>"
-                                                    alt="">
-                                                <div class="flex-grow-1"><a
-                                                        href="<?php echo e(route('user_profile')); ?>"><span>Venter loren</span></a>
-                                                    <p class="mb-0">Now</p>
-                                                </div>
-                                                <div class="active-status active-busy"></div>
-                                            </div>
-                                        </td>
-                                        <td>21 September </td>
-                                        <td class="text-end">
-                                            <button class="btn btn-secondary" type="button"
-                                                onclick="document.location='user-cards.html'">Done<i
-                                                    class="fa fa-check-circle"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex"><img class="img-fluid align-top circle"
-                                                    src="<?php echo e('assets/images/dashboard/default/03.png'); ?>"
-                                                    alt="">
-                                                <div class="flex-grow-1"><a href="<?php echo e(route('user_profile')); ?>"><span>Fran
-                                                            loain</span></a>
-                                                    <p class="mb-0">2 Day After</p>
-                                                </div>
-                                                <div class="active-status active-offline"></div>
-                                            </div>
-                                        </td>
-                                        <td>06 March</td>
-                                        <td class="text-end">
-                                            <button class="btn btn-success" type="button"
-                                                onclick="document.location='user-cards.html'">Pending</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex"><img class="img-fluid align-top circle"
-                                                    src="<?php echo e('assets/images/dashboard/default/04.png'); ?>"
-                                                    alt="">
-                                                <div class="flex-grow-1"><a
-                                                        href="<?php echo e(route('user_profile')); ?>"><span>Loften Horen</span></a>
-                                                    <p class="mb-0">Day End</p>
-                                                </div>
-                                                <div class="active-status active-online"></div>
-                                            </div>
-                                        </td>
-                                        <td>12 February</td>
-                                        <td class="text-end">
-                                            <button class="btn btn-info" type="button"
-                                                onclick="document.location='user-cards.html'">Pending</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex"><img class="img-fluid align-top circle"
-                                                    src="<?php echo e('assets/images/dashboard/default/05.png'); ?>"
-                                                    alt="">
-                                                <div class="flex-grow-1"><a href="<?php echo e(route('user_profile')); ?>"><span>Loie
-                                                            fenter</span></a>
-                                                    <p class="mb-0">2 Day After</p>
-                                                </div>
-                                                <div class="active-status active-offline"></div>
-                                            </div>
-                                        </td>
-                                        <td>06 March</td>
-                                        <td class="text-end">
-                                            <button class="btn btn-danger" type="button"
-                                                onclick="document.location='user-cards.html'">Pending</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="code-box-copy">
-                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#appoinment"><i
-                                    class="icofont icofont-copy-alt"></i></button>
-                            <pre><code class="language-html" id="appoinment">&lt;div class="card appointment-detail"&gt;
-&lt;div class="card-header pb-0"&gt;
-&lt;div class="d-flex justify-content-between"&gt;
-&lt;div class="flex-grow-1"&gt;
-  &lt;p class="square-after f-w-600 header-text-primary"&gt; total appointment
-    &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
-  &lt;/p&gt;
-  &lt;h4&gt; 12 meet &lt;/h4&gt;
-&lt;/div&gt;
-&lt;div class="setting-list"&gt;
-  &lt;ul class="list-unstyled setting-option"&gt;
-    &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="card-body"&gt;
-&lt;div class="table-responsive theme-scrollbar"&gt;
-&lt;table class="table"&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;
-        &lt;div class="d-flex"&gt;
-          &lt;img class="img-fluid align-top circle" src="../assets/images/dashboard/default/01.png" alt=""&gt;&lt;/img&gt;
-          &lt;div class="flex-grow-1"&gt;
-            &lt;a  href="user-profile.html"&gt;
-              &lt;span&gt;Ossim keter&lt;/span&gt;
-            &lt;/a&gt;
-            &lt;p class="mb-0"&gt; 1 Hour &lt;/p&gt;
-          &lt;/div&gt;
-          &lt;div class="active-status active-online"&gt;&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/td&gt;
-      &lt;td&gt; 16 august &lt;/td&gt;
-      &lt;td class="text-end"&gt;
-        &lt;button class="btn btn-primary" type="button" onclick="document.location='user-cards.html'"&gt; Pending &lt;/button&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;
-        &lt;div class="d-flex"&gt;
-          &lt;img class="img-fluid align-top circle" src="../assets/images/dashboard/default/02.png" alt=""&gt;&lt;/img&gt;
-          &lt;div class="flex-grow-1"&gt;
-            &lt;a href="user-profile.html"&gt;
-              &lt;span&gt;Venter loren&lt;/span&gt;
-            &lt;/a&gt;
-            &lt;p class="mb-0"&gt; Now &lt;/p&gt;
-          &lt;/div&gt;
-          &lt;div class="active-status active-busy"&gt;&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/td&gt;
-      &lt;td&gt; 21 September &lt;/td&gt;
-      &lt;td class="text-end"&gt;
-        &lt;button class="btn btn-secondary" type="button" onclick="document.location='user-cards.html'"&gt; Done
-          &lt;i class="fa fa-check-circle"&gt;
-        &lt;/button&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;
-        &lt;div class="d-flex"&gt;
-          &lt;img class="img-fluid align-top circle" src="../assets/images/dashboard/default/03.png" alt=""&gt;&lt;/img&gt;
-          &lt;div class="flex-grow-1"&gt;
-            &lt;a href="user-profile.html"&gt;
-              &lt;span&gt;Fran loain&lt;/span&gt;
-            &lt;/a&gt;
-            &lt;p class="mb-0"&gt; 2 Day After &lt;/p&gt;
-          &lt;/div&gt;
-          &lt;div class="active-status active-online"&gt;&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/td&gt;
-      &lt;td&gt; 06 March &lt;/td&gt;
-      &lt;td class="text-end"&gt;
-        &lt;button class="btn btn-success" type="button" onclick="document.location='user-cards.html'"&gt; Pending &lt;/button&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;
-        &lt;div class="d-flex"&gt;
-          &lt;img class="img-fluid align-top circle" src="../assets/images/dashboard/default/04.png" alt=""&gt;&lt;/img&gt;
-          &lt;div class="flex-grow-1"&gt;
-            &lt;a href="user-profile.html"&gt;
-              &lt;span&gt;Loften Horen&lt;/span&gt;
-            &lt;/a&gt;
-            &lt;p class="mb-0"&gt; Day End &lt;/p&gt;
-          &lt;/div&gt;
-          &lt;div class="active-status active-online"&gt;&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/td&gt;
-      &lt;td&gt; 12 February &lt;/td&gt;
-      &lt;td class="text-end"&gt;
-        &lt;button class="btn btn-info" type="button" onclick="document.location='user-cards.html'"&gt; Pending &lt;/button&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;
-        &lt;div class="d-flex"&gt;
-          &lt;img class="img-fluid align-top circle" src="../assets/images/dashboard/default/05.png" alt=""&gt;&lt;/img&gt;
-          &lt;div class="flex-grow-1"&gt;
-            &lt;a href="user-profile.html"&gt;
-              &lt;span&gt;Loie fenter&lt;/span&gt;
-            &lt;/a&gt;
-            &lt;p class="mb-0"&gt; 2 Day After &lt;/p&gt;
-          &lt;/div&gt;
-          &lt;div class="active-status active-offline"&gt;&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/td&gt;
-      &lt;td&gt; 06 March &lt;/td&gt;
-      &lt;td class="text-end"&gt;
-        &lt;button class="btn btn-danger" type="button" onclick="document.location='user-cards.html'"&gt; Pending &lt;/button&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-md-6 box-col-30 xl-30">
-                <div class="card use-country">
-                    <div class="card-header pb-0">
-                        <div class="d-flex justify-content-between">
-                            <div class="flex-grow-1">
-                                <p class="square-after f-w-600 header-text-primary">User By Country<i
-                                        class="fa fa-circle"> </i>
-                                </p>
-                                <h4>96.564%</h4>
-                            </div>
-                            <div class="setting-list">
-                                <ul class="list-unstyled setting-option">
-                                    <li>
-                                        <div class="setting-light"><i class="icon-layout-grid2"></i></div>
-                                    </li>
-                                    <li><i class="view-html fa fa-code font-white"></i></li>
-                                    <li><i class="icofont icofont-maximize full-card font-white"></i></li>
-                                    <li><i class="icofont icofont-minus minimize-card font-white"></i></li>
-                                    <li><i class="icofont icofont-refresh reload-card font-white"></i></li>
-                                    <li><i class="icofont icofont-error close-card font-white"> </i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="jvector-map-height" id="asia"></div>
-                        <div class="code-box-copy">
-                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#country"><i
-                                    class="icofont icofont-copy-alt"></i></button>
-                            <pre><code class="language-html" id="country">&lt;div class="card use-country"&gt;
-&lt;div class="card-header pb-0"&gt;
-&lt;div class="d-flex justify-content-between"&gt;
-&lt;div class="flex-grow-1"&gt;
-  &lt;p class="square-after f-w-600 header-text-primary"&gt; User By Country
-    &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
-  &lt;/p&gt;
-  &lt;h4&gt; 96.564%&lt;/h4&gt;
-&lt;/div&gt;
-&lt;div class="setting-list"&gt;
-  &lt;ul class="list-unstyled setting-option"&gt;
-    &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="card-body p-0"&gt;
-&lt;div class="jvector-map-height" id="asia"&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-12 box-col-12">
-                <div class="card total-growth">
-                    <div class="card-header pb-0">
-                        <div class="d-flex justify-content-between">
-                            <div class="flex-grow-1">
-                                <p class="square-after f-w-600 header-text-primary">Our Total Growth<i
-                                        class="fa fa-circle"> </i>
-                                </p>
-                                <h4>96.564%</h4>
-                            </div>
-                            <div class="setting-list">
-                                <ul class="list-unstyled setting-option">
-                                    <li>
-                                        <div class="setting-light"><i class="icon-layout-grid2"></i></div>
-                                    </li>
-                                    <li><i class="view-html fa fa-code font-white"></i></li>
-                                    <li><i class="icofont icofont-maximize full-card font-white"></i></li>
-                                    <li><i class="icofont icofont-minus minimize-card font-white"></i></li>
-                                    <li><i class="icofont icofont-refresh reload-card font-white"></i></li>
-                                    <li><i class="icofont icofont-error close-card font-white"> </i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body pb-0">
-                        <div class="growth-chart">
-                            <div id="growth-chart"></div>
-                        </div>
-                        <div class="code-box-copy">
-                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#growth"><i
-                                    class="icofont icofont-copy-alt"></i></button>
-                            <pre><code class="language-html" id="growth">&lt;div class="card total-growth"&gt;
-&lt;div class="card-header pb-0"&gt;
-&lt;div class="d-flex justify-content-between"&gt;
-&lt;div class="flex-grow-1"&gt;
-  &lt;p class="square-after f-w-600 header-text-primary"&gt; Our Total Growth
-    &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
-  &lt;/p&gt;
-  &lt;h4&gt; 96.564%&lt;/h4&gt;
-&lt;/div&gt;
-&lt;div class="setting-list"&gt;
-  &lt;ul class="list-unstyled setting-option"&gt;
-    &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="card-body p-0"&gt;
-&lt;div class="growth-chart"&gt;
-&lt;div id="growth-chart"&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-md-6 box-col-33">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <div class="d-flex justify-content-between">
-                            <div class="flex-grow-1">
-                                <p class="square-after f-w-600 header-text-primary">Recent Activity<i
-                                        class="fa fa-circle"> </i>
-                                </p>
-                                <h4>New & Update</h4>
-                            </div>
-                            <div class="setting-list">
-                                <ul class="list-unstyled setting-option">
-                                    <li>
-                                        <div class="setting-light"><i class="icon-layout-grid2"></i></div>
-                                    </li>
-                                    <li><i class="view-html fa fa-code font-white"></i></li>
-                                    <li><i class="icofont icofont-maximize full-card font-white"></i></li>
-                                    <li><i class="icofont icofont-minus minimize-card font-white"></i></li>
-                                    <li><i class="icofont icofont-refresh reload-card font-white"></i></li>
-                                    <li><i class="icofont icofont-error close-card font-white"> </i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="activity-timeline">
-                            <div class="d-flex">
-                                <div class="activity-line"></div>
-                                <div class="activity-dot-primary"></div>
-                                <div class="flex-grow-1"><span class="f-w-600 d-block">Updated Product</span>
-                                    <p class="mb-0">Quisque a consequat ante Sit amet magna at volutapt enim.</p>
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="activity-dot-primary"></div>
-                                <div class="flex-grow-1"><span class="f-w-600 d-block">You liked James products</span>
-                                    <p class="mb-0">Aenean sit amet magna vel magna fringilla ferme.</p>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-start">
-                                <div class="activity-dot-secondary"></div>
-                                <div class="flex-grow-1"><span class="f-w-600 d-block">James just like your product</span>
-                                    <p class="mb-0">Quisque a consequat ante Sit amet magna at volutapt enim.</p>
-                                </div><i class="fa fa-circle circle-dot-primary"></i>
-                            </div>
-                            <div class="d-flex">
-                                <div class="activity-dot-primary"></div>
-                                <div class="flex-grow-1"><span class="f-w-600 d-block">Jenna commented on your
-                                        product</span>
-                                    <p class="mb-0">Curabitur egestas consequat lorem.</p>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-start">
-                                <div class="activity-dot-secondary"></div>
-                                <div class="flex-grow-1"><span class="f-w-600 d-block">Jihan Doe just like your
-                                        product</span>
-                                    <p class="mb-0">Vestibulum nec mi suscipit, dapibus purus a consequat ane.Curabitur
-                                        egestas
-                                        consequat lorem.</p>
-                                </div><i class="fa fa-circle circle-dot-secondary"></i>
-                            </div>
-                        </div>
-                        <div class="code-box-copy">
-                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#activity"><i
-                                    class="icofont icofont-copy-alt"></i></button>
-                            <pre><code class="language-html" id="activity">&lt;div class="card"&gt;
-&lt;div class="card-header pb-0"&gt;
-&lt;div class="d-flex justify-content-between"&gt;
-&lt;div class="flex-grow-1"&gt;
-  &lt;p class="square-after f-w-600 header-text-primary"&gt; Recent Activity
-    &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
-  &lt;/p&gt;
-  &lt;h4&gt; New & Update &lt;/h4&gt;
-&lt;/div&gt;
-&lt;div class="setting-list"&gt;
-  &lt;ul class="list-unstyled setting-option"&gt;
-    &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="card-body p-0"&gt;
-&lt;div class="activity-timeline"&gt;
-&lt;div class="d-flex"&gt;
-  &lt;div class="activity-line"&gt;&lt;/div&gt;
-  &lt;div class="activity-dot-primary"&gt;&lt;/div&gt;
-  &lt;div class="flex-grow-1"&gt;
-    &lt;span class="f-w-600 d-block"&gt; Updated Product &lt;/span &gt;
-    &lt;p class="mb-0"&gt; Quisque a consequat ante Sit amet magna at volutapt enim.&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="d-flex"&gt;
-  &lt;div class="activity-dot-primary"&gt;&lt;/div&gt;
-  &lt;div class="flex-grow-1"&gt;
-    &lt;span class="f-w-600 d-block"&gt; You liked James products &lt;/span &gt;
-    &lt;p class="mb-0"&gt; Aenean sit amet magna vel magna fringilla ferme.&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="d-flex align-items-start"&gt;
-  &lt;div class="activity-dot-secondary"&gt;&lt;/div&gt;
-  &lt;div class="flex-grow-1"&gt;
-    &lt;span class="f-w-600 d-block"&gt; James just like your product &lt;/span &gt;
-    &lt;p class="mb-0"&gt; Quisque a consequat ante Sit amet magna at volutapt enim.&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="d-flex"&gt;
-  &lt;div class="activity-dot-primary"&gt;&lt;/div&gt;
-  &lt;div class="flex-grow-1"&gt;
-    &lt;span class="f-w-600 d-block"&gt; Jenna commented on your product &lt;/span &gt;
-    &lt;p class="mb-0"&gt;Curabitur egestas consequat lorem.&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="d-flex align-items-start"&gt;
-  &lt;div class="activity-dot-secondary"&gt;&lt;/div&gt;
-  &lt;div class="flex-grow-1"&gt;
-    &lt;span class="f-w-600 d-block"&gt; James just like your product &lt;/span &gt;
-    &lt;p class="mb-0"&gt;Vestibulum nec mi suscipit, dapibus purus a consequat ane.Curabitur egestas consequat lorem.&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt; </code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 proorder box-col-33">
-                <div class="card user-chat">
-                    <div class="card-header pb-0">
-                        <div class="d-flex justify-content-between">
-                            <div class="flex-grow-1">
-                                <p class="square-after f-w-600 header-text-primary">Chat With Our Users<i
-                                        class="fa fa-circle">
-                                    </i></p>
-                                <h4>Chat</h4>
-                            </div>
-                            <div class="setting-list">
-                                <ul class="list-unstyled setting-option">
-                                    <li>
-                                        <div class="setting-light"><i class="icon-layout-grid2"></i></div>
-                                    </li>
-                                    <li><i class="view-html fa fa-code font-white"></i></li>
-                                    <li><i class="icofont icofont-maximize full-card font-white"></i></li>
-                                    <li><i class="icofont icofont-minus minimize-card font-white"></i></li>
-                                    <li><i class="icofont icofont-refresh reload-card font-white"></i></li>
-                                    <li><i class="icofont icofont-error close-card font-white"> </i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body chat-box">
-                        <div class="d-flex left-chat">
-                            <div class="flex-grow-1">
-                                <div class="message-main">
-                                    <p class="mb-0">Hii</p>
-                                </div>
-                                <div class="sub-message message-main">
-                                    <p class="mb-0">Good Evening, My Friend</p>
-                                </div>
-                            </div>
-                            <p class="f-w-500 mb-0 px-0">7:28 PM</p>
-                        </div>
-                        <div class="d-flex right-chat">
-                            <div class="flex-grow-1 text-end">
-                                <div class="message-main pull-right">
-                                    <p class="text-start mb-0">What can do for you</p>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex left-chat">
-                            <div class="flex-grow-1">
-                                <div class="sub-message message-main mt-0">
-                                    <p class="mb-0">Can i Borrow some money</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <input class="form-control" id="mail" type="text" placeholder="Type Your Message"
-                                name="text">
-                            <div class="send-msg"><i data-feather="send"></i></div>
-                        </div>
-                        <div class="code-box-copy">
-                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#chat"><i
-                                    class="icofont icofont-copy-alt"></i></button>
-                            <pre><code class="language-html" id="chat">&lt;div class="card user-chat"&gt;
-&lt;div class="card-header pb-0"&gt;
-&lt;div class="d-flex justify-content-between"&gt;
-&lt;div class="flex-grow-1"&gt;
-  &lt;p class="square-after f-w-600 header-text-primary"&gt; Chat With Our Users
-    &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
-  &lt;/p&gt;
-  &lt;h4&gt; Chat&lt;/h4&gt;
-&lt;/div&gt;
-&lt;div class="setting-list"&gt;
-  &lt;ul class="list-unstyled setting-option"&gt;
-    &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="card-body chat-box"&gt;
-&lt;div class="d-flex left-chat"&gt;
-&lt;div class="flex-grow-1"&gt;
-  &lt;div class="message-main"&gt;
-    &lt;p class="mb-0"&gt; Hii &lt;/p&gt;
-  &lt;/div &gt;
-  &lt;div class="sub-message message-main"&gt;
-    &lt;p class="mb-0"&gt; Good Evening, My Friend &lt;/p&gt;
-  &lt;/div &gt;
-&lt;/div&gt;
-&lt;p class="f-w-500 mb-0 px-0"&gt; 7:28 PM &lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="d-flex right-chat"&gt;
-&lt;div class="flex-grow-1 text-end"&gt;
-  &lt;div class="message-main pull-right"&gt;
-    &lt;p class="text-start mb-0"&gt; What can do for you &lt;/p&gt;
-    &lt;div class="clearfix"&gt;&lt;/div&gt;
-  &lt;/div &gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="d-flex left-chat"&gt;
-&lt;div class="flex-grow-1"&gt;
-  &lt;div class="sub-message message-main mt-0"&gt;
-    &lt;p class="mb-0"&gt; Can i Borrow some money &lt;/p&gt;
-  &lt;/div &gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="input-group"&gt;
-&lt;input id="mail" class="form-control" type="text" placeholder="Type Your Message" name="text"/&gt;
-&lt;div class="send-msg"&gt;
-  &lt;i class="feather feather-send"&gt;&lt;/i&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-md-6 box-col-33">
-                <div class="card our-todolist">
-                    <div class="card-header pb-0">
-                        <div class="d-flex justify-content-between">
-                            <div class="flex-grow-1">
-                                <p class="square-after f-w-600 header-text-primary">Our To-Do List<i class="fa fa-circle">
-                                    </i>
-                                </p>
-                                <h4>Todo List</h4>
-                            </div>
-                            <div class="setting-list">
-                                <ul class="list-unstyled setting-option">
-                                    <li>
-                                        <div class="setting-light"><i class="icon-layout-grid2"></i></div>
-                                    </li>
-                                    <li><i class="view-html fa fa-code font-white"></i></li>
-                                    <li><i class="icofont icofont-maximize full-card font-white"></i></li>
-                                    <li><i class="icofont icofont-minus minimize-card font-white"></i></li>
-                                    <li><i class="icofont icofont-refresh reload-card font-white"></i></li>
-                                    <li><i class="icofont icofont-error close-card font-white"> </i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="activity-timeline todo-timeline">
-                            <div class="d-flex">
-                                <div class="activity-line"></div>
-                                <div class="activity-dot-primary"></div>
-                                <div class="flex-grow-1">
-                                    <p class="mt-0 todo-font"><span class="font-primary">20-04-2022 </span>Today</p>
-                                    <div class="d-flex mt-0"><img class="img-fluid img-30"
-                                            src="<?php echo e(asset('assets/images/dashboard/default/todo.png')); ?>" alt="">
-                                        <div class="flex-grow-1"><span class="f-w-600">New Order $2340<i
-                                                    class="fa fa-circle circle-dot-primary pull-right"></i></span>
-                                            <p class="mb-0">Update New Product Pdf And Delivery Product</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="activity-dot-secondary"></div>
-                                <div class="flex-grow-1">
-                                    <p class="mt-0 todo-font"><span class="font-primary">20-04-2022 </span>Today<span
-                                            class="badge badge-primary ms-2">New</span></p><span class="f-w-600">James
-                                        just like your
-                                        product<i class="fa fa-circle circle-dot-secondary pull-right"></i></span>
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="activity-dot-primary"></div>
-                                <div class="flex-grow-1">
-                                    <p class="mt-0 todo-font"><span class="font-primary">20-04-2022 </span>Today</p><span
-                                        class="f-w-600">Jihan Doe just like your product</span>
-                                    <p class="mb-0">Vestibulum nec mi suscipit, dapibus purus a consequat ane.Quisque a
-                                        consequat
-                                        ante.....</p>
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="activity-dot-primary"></div>
-                                <div class="flex-grow-1">
-                                    <p class="mt-0 todo-font"><span class="font-primary">20-04-2022 </span>Today</p><span
-                                        class="f-w-600">Take Our Client Metting<i
-                                            class="fa fa-circle circle-dot-primary pull-right"></i></span>
-                                    <p class="mb-0">Vestibulum nec mi suscipit.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="code-box-copy">
-                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#to-do"><i
-                                    class="icofont icofont-copy-alt"></i></button>
-                            <pre><code class="language-html" id="to-do">&lt;div class="card our-todolist"&gt;
-&lt;div class="card-header pb-0"&gt;
-&lt;div class="d-flex justify-content-between"&gt;
-&lt;div class="flex-grow-1"&gt;
-  &lt;p class="square-after f-w-600 header-text-primary"&gt; Our To-Do List
-    &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
-  &lt;/p&gt;
-  &lt;h4&gt; Todo List &lt;/h4&gt;
-&lt;/div&gt;
-&lt;div class="setting-list"&gt;
-  &lt;ul class="list-unstyled setting-option"&gt;
-    &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="card-body p-0"&gt;
-&lt;div class="activity-timeline"&gt;
-&lt;div class="d-flex"&gt;
-  &lt;div class="activity-line"&gt;&lt;/div&gt;
-  &lt;div class="activity-dot-primary"&gt;&lt;/div&gt;
-  &lt;div class="flex-grow-1"&gt;
-    &lt;p class="todo-font mt-0"&gt;
-      &lt;span class="font-primary"&gt; 20-04-2022 &lt;/span&gt;
-      Today
-    &lt;/p &gt;
-    &lt;div class="d-flex mt-0"&gt;
-      &lt;img class="img-fluid img-30" src="../assets/images/dashboard/default/todo.png" alt=""/&gt;
-      &lt;div class="flex-grow-1"&gt;
-        &lt;span class="f-w-600"&gt; New Order $2340
-          New Order $2340
-          &lt;i class="fa fa-circle circle-dot-primary pull-right"&gt;
-        &lt;/span&gt;
-        &lt;p class="mb-0"&gt; Update New Product Pdf And Delivery Product &lt;/p&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="d-flex"&gt;
-  &lt;div class="activity-dot-secondary"&gt;&lt;/div&gt;
-  &lt;div class="flex-grow-1"&gt;
-    &lt;p class="todo-font mt-0"&gt;
-      &lt;span class="font-primary"&gt; 20-04-2022 &lt;/span&gt;
-      Today
-      &lt;span class="badge badge-primary ms-2"&gt; New &lt;/span&gt;
-    &lt;/p &gt;
-    &lt;span class="f-w-600"&gt; James just like your product
-      &lt;i class="fa fa-circle circle-dot-secondary pull-right"&gt;&lt;/i&gt;
-    &lt;/span&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="d-flex"&gt;
-  &lt;div class="activity-dot-primary"&gt;&lt;/div&gt;
-  &lt;div class="flex-grow-1"&gt;
-    &lt;p class="mt-0 todo-font"&gt;
-      &lt;span class="font-primary"&gt; 20-04-2022 &lt;/span&gt;
-      Today
-    &lt;/p &gt;
-    &lt;span class="f-w-600"&gt; Jihan Doe just like your product
-    &lt;/span&gt;
-    &lt;p class="mb-0"&gt; Vestibulum nec mi suscipit, dapibus purus a consequat ane.Quisque a consequat ante..... &lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="d-flex"&gt;
-  &lt;div class="activity-dot-primary"&gt;&lt;/div&gt;
-  &lt;div class="flex-grow-1"&gt;
-    &lt;p class="todo-font mt-0"&gt;
-      &lt;span class="font-primary"&gt; 20-04-2022 &lt;/span&gt;
-      Today
-    &lt;/p &gt;
-    &lt;span class="f-w-600"&gt; Take Our Client Metting
-      &lt;i class="fa fa-circle circle-dot-primary pull-right"&gt;&lt;/i&gt;
-    &lt;/span&gt;
-    &lt;p class="mb-0"&gt; Vestibulum nec mi suscipit. &lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt; </code></pre>
+                            <h4 class="">
+                                <span class="fw-light">Welcome Back,</span>
+                                <span class="fw-bold" style="color: #0a566d"><?php echo e(auth()->user()->name); ?></span>
+                                <i class="fas fa-check-circle text-success ms-2"></i>
+                            </h4>
+                            <p class="text-white-50 mb-0">Manage your platform efficiently</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-6 mb-4">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-header bg-gradient text-dark border-0 rounded-top-4 py-3" style="background:#407788 !important">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-white bg-opacity-20 rounded-circle p-2 me-3">
+                                <i class="fas fa-star text-dark fa-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-0 fw-bold">Top Rated Salons</h5>
+                                <small class="opacity-75">Customer favorites based on reviews</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <?php $__empty_1 = true; $__currentLoopData = $topRatedSalons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $salon): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                            <div
+                                class="d-flex justify-content-between align-items-center p-3 border-bottom <?php echo e($loop->last ? 'border-0' : ''); ?> hover-bg-light">
+                                <div class="d-flex align-items-center flex-grow-1">
+                                    <!-- Ranking Badge -->
+                                    <div class="me-3">
+                                        <?php if($index == 0): ?>
+                                            <span class="badge bg-warning text-dark fw-bold px-2 py-2 rounded-circle">
+                                                <i class="fas fa-crown"></i>
+                                            </span>
+                                        <?php elseif($index == 1): ?>
+                                            <span class="badge bg-secondary fw-bold px-2 py-2 rounded-circle">2</span>
+                                        <?php elseif($index == 2): ?>
+                                            <span class="badge bg-danger fw-bold px-2 py-2 rounded-circle">3</span>
+                                        <?php else: ?>
+                                            <span
+                                                class="badge bg-light text-dark fw-bold px-2 py-2 rounded-circle"><?php echo e($index + 1); ?></span>
+                                        <?php endif; ?>
+                                    </div>
+
+                                    <!-- Salon Info -->
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1 fw-semibold text-primary"><?php echo e($salon->business_name); ?></h6>
+                                        <div class="d-flex align-items-center text-muted">
+                                            <i class="fas fa-map-marker-alt me-1 text-danger"></i>
+                                            <small><?php echo e($salon->location); ?></small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Rating Section -->
+                                <div class="text-end">
+                                    <div class="d-flex align-items-center justify-content-end mb-1">
+                                        <?php for($i = 1; $i <= 5; $i++): ?>
+                                            <?php if($i <= floor($salon->avg_rating)): ?>
+                                                <i class="fas fa-star text-warning me-1"></i>
+                                            <?php elseif($i - 0.5 <= $salon->avg_rating): ?>
+                                                <i class="fas fa-star-half-alt text-warning me-1"></i>
+                                            <?php else: ?>
+                                                <i class="far fa-star text-muted me-1"></i>
+                                            <?php endif; ?>
+                                        <?php endfor; ?>
+                                    </div>
+                                    <div>
+                                        <span
+                                            class="fw-bold text-dark"><?php echo e(number_format($salon->avg_rating, 1)); ?>/5</span>
+                                        <small class="text-muted ms-1">(<?php echo e($salon->total_reviews); ?> reviews)</small>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                            <div class="card-body text-center py-5">
+                                <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                                    style="width: 60px; height: 60px;">
+                                    <i class="fas fa-star-o fa-2x text-muted"></i>
+                                </div>
+                                <h6 class="text-muted mb-1">No Ratings Available</h6>
+                                <p class="text-muted small mb-0">Salons will appear here once they receive customer reviews
+                                </p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <?php if(!$topRatedSalons->isEmpty()): ?>
+                        <div class="card-footer bg-light border-0 text-center py-2">
+                            <small class="text-muted">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Ratings updated in upto date
+                            </small>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-header bg-white border-0 rounded-top-4 py-4">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-warning bg-opacity-10 rounded-circle p-3 me-3">
+                                <i class="fas fa-trophy text-warning fa-lg"></i>
+                            </div>
+                            <div>
+                                <h4 style="color:#0a566d" class="mb-1 fw-bold">Top Performing Salons</h4>
+                                <p class="text-muted mb-0">Revenue leaders and customer favorites</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php if($salons->isEmpty()): ?>
+                        <div class="card-body text-center py-5">
+                            <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center"
+                                style="width:80px;height:80px;">
+                                <i class="fas fa-chart-line fa-2x text-muted"></i>
+                            </div>
+                            <h5 class="mt-3 mb-2">No Performance Data</h5>
+                            <p class="text-muted">No completed appointments found to display performance metrics.</p>
+                        </div>
+                    <?php else: ?>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table id="salonsTable" class="table table-hover align-middle mb-0 nowrap"
+                                    style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="ps-4">Rank</th>
+                                            <th>Salon Details</th>
+                                            <th>Vendor</th>
+                                            <th class="text-center">Total Visits</th>
+                                            <th class="text-center">Revenue</th>
+                                            <th class="pe-4 text-center">Performance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $__currentLoopData = $salons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $salon): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <?php if($index < 3): ?>
+                                                        <div class="d-flex align-items-center">
+                                                            <?php if($index == 0): ?>
+                                                                <i class="fas fa-crown text-warning fa-lg me-2"></i>
+                                                                <span class="badge bg-warning text-dark fw-bold">1st</span>
+                                                            <?php elseif($index == 1): ?>
+                                                                <i class="fas fa-medal text-secondary fa-lg me-2"></i>
+                                                                <span class="badge bg-secondary fw-bold">2nd</span>
+                                                            <?php else: ?>
+                                                                <i class="fas fa-award text-danger fa-lg me-2"></i>
+                                                                <span class="badge bg-danger fw-bold">3rd</span>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    <?php else: ?>
+                                                        <span class="badge bg-light text-dark"><?php echo e($index + 1); ?></span>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="bg-success bg-opacity-10 rounded-circle p-2 me-3">
+                                                            <i class="fas fa-cut text-success"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="mb-1 fw-semibold"><?php echo e($salon->business_name); ?></h6>
+                                                            <small class="text-muted">Professional Salon</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="bg-info bg-opacity-10 rounded-circle p-2 me-3">
+                                                            <i class="fas fa-user-tie text-info"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="mb-1"><?php echo e($salon->business_name); ?></h6>
+                                                            <small class="text-muted">Salon Owner</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex flex-column align-items-center">
+                                                        <span
+                                                            class="h5 mb-1 text-primary fw-bold"><?php echo e($salon->total_visits); ?></span>
+                                                        <small class="text-muted">visits</small>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex flex-column align-items-center">
+                                                        <span
+                                                            class="h5 mb-1 text-success fw-bold">₹<?php echo e(number_format($salon->total_revenue)); ?></span>
+                                                        <small class="text-muted">total revenue</small>
+                                                    </div>
+                                                </td>
+                                                <td class="pe-4 text-center">
+                                                    <?php
+                                                        $avgPerVisit =
+                                                            $salon->total_visits > 0
+                                                                ? $salon->total_revenue / $salon->total_visits
+                                                                : 0;
+                                                    ?>
+                                                    <div class="d-flex flex-column align-items-center">
+                                                        <span
+                                                            class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-1">
+                                                            ₹<?php echo e(number_format($avgPerVisit)); ?>/visit
+                                                        </span>
+                                                        <?php if($index < 3): ?>
+                                                            <small class="text-success fw-semibold">Top Performer</small>
+                                                        <?php else: ?>
+                                                            <small class="text-muted">Good Performance</small>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+        <!-- Vendors Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <?php if($users->isEmpty()): ?>
+                    <div class="alert alert-info border-0 rounded-4 shadow-sm d-flex align-items-center">
+                        <i class="fas fa-info-circle fa-2x text-info me-3"></i>
+                        <div>
+                            <h6 class="alert-heading mb-1">No Recent Vendors</h6>
+                            <p class="mb-0">No vendors were onboarded this week.</p>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div class="card shadow-lg border-0 rounded-4">
+                        <div class="card-header bg-white border-0 rounded-top-4 py-4">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary bg-opacity-10 rounded-circle p-3 me-3">
+                                    <i class="fas fa-store text-primary fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 style="color:#0a566d" class="mb-1 fw-bold">Latest Vendor Onboards</h4>
+                                    <p class="text-muted mb-0">Vendors registered in the last 7 days</p>
+                                </div>
+                                <div class="ms-auto">
+                                    <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill">
+                                        <?php echo e($users->count()); ?> New Vendors
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table id="vendorsTable" class="table table-hover align-middle mb-0 nowrap"
+                                    style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="ps-4">ID</th>
+                                            <th>Vendor Details</th>
+                                            <th>Contact</th>
+                                            <th>Business Info</th>
+                                            <th>Registration Date</th>
+                                            <th class="pe-4">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <span
+                                                        class="badge bg-light text-dark fw-bold">#<?php echo e($user->id); ?></span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                                                            <i class="fas fa-user text-primary"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="mb-1 fw-semibold"><?php echo e($user->name); ?></h6>
+                                                            <small class="text-muted"><?php echo e($user->email); ?></small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="mb-1"><i
+                                                            class="fas fa-envelope text-muted me-2"></i><small><?php echo e($user->email); ?></small>
+                                                    </div>
+                                                    <div><i
+                                                            class="fas fa-phone text-muted me-2"></i><small><?php echo e($user->phone ?? 'Not provided'); ?></small>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mb-1 text-primary">
+                                                        <?php echo e($user->business_name ?? 'Not specified'); ?></h6>
+                                                    <small class="text-muted">Vendor since
+                                                        <?php echo e(\Carbon\Carbon::parse($user->vendor_created_at ?? $user->created_at)->format('M Y')); ?></small>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="fw-semibold">
+                                                        <?php echo e(\Carbon\Carbon::parse($user->created_at)->format('d M Y')); ?>
+
+                                                    </div>
+                                                    <small
+                                                        class="text-muted"><?php echo e(\Carbon\Carbon::parse($user->created_at)->diffForHumans()); ?></small>
+                                                </td>
+                                                <td class="pe-4">
+                                                    <span
+                                                        class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill">
+                                                        <i class="fas fa-check-circle me-1"></i>Active
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+
+
+
+        <style>
+            .hover-bg-light:hover {
+                background-color: #f8f9fa !important;
+                transition: background-color 0.2s ease;
+            }
+
+            .bg-gradient {
+                background: linear-gradient(135deg, #ffc107 0%, #ffeb3b 100%) !important;
+            }
+        </style>
+
+        <!-- Top Performing Salons -->
+
     </div>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
-    <script src="<?php echo e(asset('assets/js/chart/chartist/chartist.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/chart/chartist/chartist-plugin-tooltip.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/chart/apex-chart/apex-chart.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/chart/apex-chart/stock-prices.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/prism/prism.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/clipboard/clipboard.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/custom-card/custom-card.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/notify/bootstrap-notify.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/vector-map/jquery-jvectormap-2.0.2.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/vector-map/map/jquery-jvectormap-world-mill-en.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/vector-map/map/jquery-jvectormap-us-aea-en.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/vector-map/map/jquery-jvectormap-uk-mill-en.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/vector-map/map/jquery-jvectormap-au-mill.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/vector-map/map/jquery-jvectormap-chicago-mill-en.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/vector-map/map/jquery-jvectormap-in-mill.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/vector-map/map/jquery-jvectormap-asia-mill.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/dashboard/default.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/notify/index.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/typeahead/handlebars.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/typeahead/typeahead.bundle.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/typeahead/typeahead.custom.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/typeahead-search/handlebars.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/typeahead-search/typeahead-custom.js')); ?>"></script>
+    <!-- jQuery (ensure this is before DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables + Bootstrap 5 + Responsive -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
+
+    <script>
+        $(function() {
+            const commonOpts = {
+                responsive: true,
+                pageLength: 10,
+                lengthMenu: [5, 10, 25, 50],
+                language: {
+                    search: "", // hide the "Search:" text
+                    searchPlaceholder: "Search...", // nice placeholder
+                    lengthMenu: "Show _MENU_ entries"
+                },
+                /* Bootstrap grid layout: header row with length (left) + search (right),
+                   footer row with info (left) + pagination (right) */
+                dom: "<'dt-header row g-2 align-items-center'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6 text-md-end'f>>" +
+                    "rt" +
+                    "<'dt-footer row g-2 align-items-center'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 text-md-end'p>>"
+            };
+
+            $('#vendorsTable').DataTable({
+                ...commonOpts,
+                order: [
+                    [4, 'desc']
+                ],
+                columnDefs: [{
+                    orderable: false,
+                    targets: [0, 5]
+                }]
+            });
+
+            $('#salonsTable').DataTable({
+                ...commonOpts,
+                order: [
+                    [4, 'desc']
+                ],
+                columnDefs: [{
+                    orderable: false,
+                    targets: [0, 5]
+                }]
+            });
+        });
+    </script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layout.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp8.2\htdocs\salon_unitiii\resources\views/dashboards/default_dashboard.blade.php ENDPATH**/ ?>

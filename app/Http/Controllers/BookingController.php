@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\PaymentDetail;
 use App\Models\PaymentMethod;
 use App\Models\Service;
 use App\Models\User;
 use App\Models\VendorWeeklySchedule;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class BookingController extends Controller
 {
@@ -143,7 +145,7 @@ class BookingController extends Controller
             return redirect()->back()->with('error', 'Booking session expired or not found');
         }
 
-        $paymentTypes = PaymentMethod::where('is_active',1)->get();
+        $paymentTypes = PaymentMethod::where('is_active', 1)->get();
         $service = Service::find($booking['service_id']);
         $user = User::find($booking['user_id']);
 
@@ -152,6 +154,7 @@ class BookingController extends Controller
 
     public function createBooking(Request $request)
     {
+
         $booking = $request->session()->pull('pending_booking');
 
         if (!$booking) {
@@ -164,11 +167,23 @@ class BookingController extends Controller
             'date' => $booking['date'],
             'slot_start' => $booking['slot_start'],
             'slot_end' => $booking['slot_end'],
-            'status' => 'booked',
-            // 'payment_method' => $validated['payment_method'],
-            // 'payment_status' => 'paid'
+            'status' => 'booked'
         ]);
 
-        return response()->json(['status' => 200]);
+        do {
+            $paymentId = rand(100, 999) . Str::upper(Str::random(3));
+        } while (PaymentDetail::where('payment_id', $paymentId)->exists());
+
+        $paymentDetail = PaymentDetail::create([
+            'payment_id' => $paymentId,
+            'appointment_id' => $appointment->id,
+            'payment_method_id' => $request->payment_method_id,
+            'status' => 'completed'
+        ]);
+        $appointment->payment_id = $paymentDetail->id;
+        $appointment->save();
+
+
+        return response()->json(['status' => 200 , 'payment_id' => $paymentDetail->payment_id]);
     }
 }

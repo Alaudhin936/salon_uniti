@@ -32,6 +32,7 @@
 @vite(['public/assets/scss/style.scss','resources/js/app.js']);
 
 <link id="color" rel="stylesheet" href="{{ asset('assets/css/color-1.css') }}" media="screen">
+<link id="color" rel="stylesheet" href="{{ asset('assets/css/common1.css') }}" media="screen">
 
 <!-- Responsive css-->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">

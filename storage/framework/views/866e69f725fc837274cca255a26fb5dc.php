@@ -3,162 +3,163 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('main_content'); ?>
-    <?php if($weeklySchedules->isEmpty()): ?>
-        <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
-            data-bs-target="#addScheduleModal">
-            <i class="fas fa-plus-circle me-2 text-primary"></i>
-            Add New Schedule
-        </button>
-    <?php else: ?>
-        <div class="d-flex justify-content-between align-items-center mb-2">
-            <h5>Weekly Schedule</h5>
+    <div class="container-fluid" style="padding:30px;background-color:white;">
+        <?php if($weeklySchedules->isEmpty()): ?>
             <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
                 data-bs-target="#addScheduleModal">
-                <i class="fas fa-plus-circle me-2 text-primary"></i> Add Schedule
+                <i class="fas fa-plus-circle me-2 text-primary"></i>
+                Add New Schedule
             </button>
-        </div>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Day</th>
-                    <th>Open Time</th>
-                    <th>Close Time</th>
-                    
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php $__currentLoopData = $weeklySchedules; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $schedule): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php else: ?>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4 style="color: #0a566d" class="underlined-heading">Weekly Schedule</h4>
+                <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
+                    data-bs-target="#addScheduleModal">
+                    <i class="fas fa-plus-circle me-2 text-primary"></i> Add Schedule
+                </button>
+            </div>
+            <table class="table table-bordered">
+                <thead>
                     <tr>
-                        <td><?php echo e($daysOfWeek[$schedule->day_of_week]); ?></td>
-                        <td class="editable-time position-relative" data-field="open_time"
-                            data-schedule-id="<?php echo e($schedule->id); ?>">
-                            <span class="time-display"><?php echo e($schedule->open_time); ?></span>
-                            <button class="btn text-dark btn-xs btn-outline-success edit-time-btn">
-                                Edit
-                            </button>
-                        </td>
-
-
-                        <td class="editable-time position-relative" data-field="close_time"
-                            data-schedule-id="<?php echo e($schedule->id); ?>">
-                            <span class="time-display"><?php echo e($schedule->close_time); ?></span>
-                            <button class="btn btn-xs text-dark btn-outline-success edit-time-btn">
-                                Edit
-                            </button>
-                        </td>
-                        <style>
-                            .editable-time:hover .edit-time-btn {
-                                display: inline-block;
-                                position: absolute;
-                                right: 5px;
-                                top: 50%;
-                                transform: translateY(-50%);
-                            }
-
-                            .edit-time-btn {
-                                display: none;
-                            }
-                        </style>
+                        <th>Day</th>
+                        <th>Open Time</th>
+                        <th>Close Time</th>
                         
-                        <style>
-                            .breaks-cell .add-break-btn {
-                                display: none;
-                                position: absolute;
-                                right: 5px;
-                                bottom: 5px;
-                                font-size: 0.75rem;
-                                padding: 2px 6px;
-                            }
-
-                            .breaks-cell:hover .add-break-btn {
-                                display: inline-block;
-                            }
-                        </style>
-
-
-                        <td class="text-center align-middle">
-                            <div class="d-flex flex-column align-items-center justify-content-center gap-2">
-                                <!-- Modern Toggle Switch -->
-                                <label class="switch m-0">
-                                    <input type="checkbox" class="schedule-status-toggle"
-                                        data-schedule-id="<?php echo e($schedule->id); ?>"
-                                        <?php echo e($schedule->is_closed ? '' : 'checked'); ?>>
-                                    <span class="slider round"></span>
-                                </label>
-
-                                <!-- Status Badge -->
-                                <span
-                                    class="badge status-badge <?php echo e($schedule->is_closed ? 'bg-danger' : 'bg-success'); ?> text-white px-2 py-1 rounded-pill"
-                                    style="font-size: 0.65rem; min-width: 60px;">
-                                    <?php echo e($schedule->is_closed ? 'Closed' : 'Open'); ?>
-
-                                </span>
-                            </div>
-                        </td>
-                        <style>
-                            /* Custom Switch Styling */
-                            .switch {
-                                position: relative;
-                                display: inline-block;
-                                width: 42px;
-                                height: 22px;
-                            }
-
-                            .switch input {
-                                opacity: 0;
-                                width: 0;
-                                height: 0;
-                            }
-
-                            .slider {
-                                position: absolute;
-                                cursor: pointer;
-                                top: 0;
-                                left: 0;
-                                right: 0;
-                                bottom: 0;
-                                background-color: #dc3545;
-                                /* Danger color when off */
-                                transition: .4s;
-                            }
-
-                            .slider:before {
-                                position: absolute;
-                                content: "";
-                                height: 16px;
-                                width: 16px;
-                                left: 3px;
-                                bottom: 3px;
-                                background-color: white;
-                                transition: .4s;
-                            }
-
-                            input:checked+.slider {
-                                background-color: #28a745;
-                                /* Success color when on */
-                            }
-
-                            input:checked+.slider:before {
-                                transform: translateX(20px);
-                            }
-
-                            .slider.round {
-                                border-radius: 34px;
-                            }
-
-                            .slider.round:before {
-                                border-radius: 50%;
-                            }
-                        </style>
-
-
+                        <th>Status</th>
                     </tr>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            </tbody>
-        </table>
-    <?php endif; ?>
+                </thead>
+                <tbody>
+                    <?php $__currentLoopData = $weeklySchedules; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $schedule): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <tr>
+                            <td><?php echo e($daysOfWeek[$schedule->day_of_week]); ?></td>
+                            <td class="editable-time position-relative" data-field="open_time"
+                                data-schedule-id="<?php echo e($schedule->id); ?>">
+                                <span class="time-display"><?php echo e($schedule->open_time); ?></span>
+                                <button class="btn text-dark btn-xs btn-outline-success edit-time-btn">
+                                    Edit
+                                </button>
+                            </td>
 
+
+                            <td class="editable-time position-relative" data-field="close_time"
+                                data-schedule-id="<?php echo e($schedule->id); ?>">
+                                <span class="time-display"><?php echo e($schedule->close_time); ?></span>
+                                <button class="btn btn-xs text-dark btn-outline-success edit-time-btn">
+                                    Edit
+                                </button>
+                            </td>
+                            <style>
+                                .editable-time:hover .edit-time-btn {
+                                    display: inline-block;
+                                    position: absolute;
+                                    right: 5px;
+                                    top: 50%;
+                                    transform: translateY(-50%);
+                                }
+
+                                .edit-time-btn {
+                                    display: none;
+                                }
+                            </style>
+                            
+                            <style>
+                                .breaks-cell .add-break-btn {
+                                    display: none;
+                                    position: absolute;
+                                    right: 5px;
+                                    bottom: 5px;
+                                    font-size: 0.75rem;
+                                    padding: 2px 6px;
+                                }
+
+                                .breaks-cell:hover .add-break-btn {
+                                    display: inline-block;
+                                }
+                            </style>
+
+
+                            <td class="text-center align-middle">
+                                <div class="d-flex flex-column align-items-center justify-content-center gap-2">
+                                    <!-- Modern Toggle Switch -->
+                                    <label class="switch m-0">
+                                        <input type="checkbox" class="schedule-status-toggle"
+                                            data-schedule-id="<?php echo e($schedule->id); ?>"
+                                            <?php echo e($schedule->is_closed ? '' : 'checked'); ?>>
+                                        <span class="slider round"></span>
+                                    </label>
+
+                                    <!-- Status Badge -->
+                                    <span
+                                        class="badge status-badge <?php echo e($schedule->is_closed ? 'bg-danger' : 'bg-success'); ?> text-white px-2 py-1 rounded-pill"
+                                        style="font-size: 0.65rem; min-width: 60px;">
+                                        <?php echo e($schedule->is_closed ? 'Closed' : 'Open'); ?>
+
+                                    </span>
+                                </div>
+                            </td>
+                            <style>
+                                /* Custom Switch Styling */
+                                .switch {
+                                    position: relative;
+                                    display: inline-block;
+                                    width: 42px;
+                                    height: 22px;
+                                }
+
+                                .switch input {
+                                    opacity: 0;
+                                    width: 0;
+                                    height: 0;
+                                }
+
+                                .slider {
+                                    position: absolute;
+                                    cursor: pointer;
+                                    top: 0;
+                                    left: 0;
+                                    right: 0;
+                                    bottom: 0;
+                                    background-color: #dc3545;
+                                    /* Danger color when off */
+                                    transition: .4s;
+                                }
+
+                                .slider:before {
+                                    position: absolute;
+                                    content: "";
+                                    height: 16px;
+                                    width: 16px;
+                                    left: 3px;
+                                    bottom: 3px;
+                                    background-color: white;
+                                    transition: .4s;
+                                }
+
+                                input:checked+.slider {
+                                    background-color: #28a745;
+                                    /* Success color when on */
+                                }
+
+                                input:checked+.slider:before {
+                                    transform: translateX(20px);
+                                }
+
+                                .slider.round {
+                                    border-radius: 34px;
+                                }
+
+                                .slider.round:before {
+                                    border-radius: 50%;
+                                }
+                            </style>
+
+
+                        </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+    </div>
     
     
 
@@ -363,7 +364,7 @@
                 $td.html(`
         <div class="d-flex align-items-center gap-1">
             <input type="time" class="form-control form-control-sm new-time-input" value="${currentTime}">
-            <button class="btn btn-sm btn-success save-time-btn">Save</button>
+            <button class="btn btn-sm btn-success text-center save-time-btn">Save</button>
             <button class="btn btn-sm text-dark btn-light cancel-time-btn">Cancel</button>
         </div>
     `);

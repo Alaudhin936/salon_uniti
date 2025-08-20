@@ -5,8 +5,13 @@
 @endsection
 
 @section('main_content')
-    <div class="container mt-4">
-        <h3 class="mb-4">Admin Settings</h3>
+    <style>
+        input {
+            border: 1px solid #d8f3d9 !important;
+        }
+    </style>
+    <div class="container mt-4" style="padding:30px;background-color:white;">
+        <h3 style="color: #0a566d" class="underlined-heading mb-4">Admin Settings</h3>
 
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>

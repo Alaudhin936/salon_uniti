@@ -20,9 +20,9 @@
                         </p>
                     </div>
                     <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                        <a href="<?php echo e(url()->previous()); ?>" class="btn btn-outline-secondary">
+                        <a href="<?php echo e(route('appointments')); ?>" class="btn btn-outline-secondary">
                             <i class="fas fa-arrow-left me-1"></i>
-                            Back to Calendar
+                            Back to Appointments
                         </a>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                                 <small class="text-muted">Available</small>
                             </div>
                             <div class="d-flex align-items-center">
-                                <div class="bg-secondary rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                <div class= "rounded-circle me-2" style="background:#dc2626;width: 12px; height: 12px;"></div>
                                 <small class="text-muted">Booked</small>
                             </div>
                             <div class="ms-auto text-muted">
@@ -51,7 +51,104 @@
                         </div>
                     </div>
                 </div>
+                <style>
+                    .btn.btn-time-slot {
+                        border-radius: 10px;
+                        width: 50px !important;
+                        height: 50px !important;
+                    }
 
+                    .btn-time-slot {
+                        min-width: 68px;
+                        max-width: 72px;
+                        height: 36px;
+                        padding: 2px 6px;
+                        border-radius: 6px;
+                        border: 1px solid #e2e8f0;
+                        transition: all 0.15s ease;
+                        position: relative;
+                        font-size: 0.7rem;
+                        font-weight: 500;
+                        letter-spacing: 0.2px;
+                        background: white;
+                        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                    }
+
+                    .btn-time-slot:not(:disabled):hover {
+                        transform: translateY(-1px);
+                        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+                        border-color: #cbd5e1;
+                    }
+
+                    .btn-time-slot:not(:disabled):active {
+                        transform: translateY(0);
+                        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                    }
+
+                    /* Available slots - BookMyShow style blue */
+                    .btn-time-slot.btn-success {
+                        background: #42f168 !important;
+                        border-color: #42f168 !important;
+                        color: white;
+                    }
+
+                    .btn-time-slot.btn-success:hover {
+                        background: #09f514 !important;
+                        border-color: #09f514 !important;
+                        box-shadow: 0 2px 6px rgba(30, 64, 175, 0.2);
+                    }
+
+                    /* Booked slots - Light gray with red accent */
+                    .btn-time-slot.btn-secondary {
+                        background: #fef2f2 !important;
+                        border-color: #fecaca !important;
+                        color: #dc2626 !important;
+                    }
+
+                    /* Past/Expired slots - Neutral gray */
+                    .btn-time-slot.btn-dark {
+                        background: #f8fafc;
+                        border-color: #e2e8f0;
+                        color: #64748b;
+                    }
+
+                    .btn-time-slot:disabled {
+                        opacity: 0.8;
+                        cursor: not-allowed;
+                    }
+
+                    .time-main {
+                        font-weight: 600;
+                        font-size: 0.7rem;
+                        line-height: 1;
+                        margin-bottom: 2px;
+                    }
+
+                    .time-duration {
+                        font-size: 0.55rem;
+                        font-weight: 400;
+                        opacity: 0.85;
+                        line-height: 1;
+                        text-transform: capitalize;
+                        letter-spacing: 0.3px;
+                    }
+
+                    .d-flex.flex-wrap.gap-3 {
+                        gap: 0.4rem !important;
+                    }
+
+                    .text-center.py-5 {
+                        padding: 2rem 0;
+                    }
+
+                    .fa-calendar-times {
+                        opacity: 0.7;
+                    }
+
+                    .fs-5 {
+                        font-size: 1.1rem !important;
+                    }
+                </style>
                 <div class="row">
                     <div class="col-12">
                         <div class="d-flex flex-wrap gap-3">
@@ -99,10 +196,122 @@
                                 <p class="mb-0 text-muted" id="selectedSlotText"></p>
                             </div>
                             <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                                <button id="bookSlotBtn" class="btn btn-primary">
-                                    <i class="fas fa-calendar-check me-1"></i>
-                                    Proceed ->
+                                <style>
+                                    #bookSlotBtn {
+                                        background: #5cce5c !important;
+                                        border: none;
+                                        color: white;
+                                        padding: 0.875rem 2.5rem;
+                                        font-size: 1rem;
+                                        font-weight: 600;
+                                        border-radius: 12px;
+                                        box-shadow: 0 4px 12px rgba(30, 64, 175, 0.15);
+                                        transition: all 0.3s ease;
+                                        position: relative;
+                                        overflow: hidden;
+                                        letter-spacing: 0.025em;
+                                        min-width: 160px;
+                                    }
+
+                                    #bookSlotBtn::before {
+                                        content: '';
+                                        position: absolute;
+                                        top: 0;
+                                        left: -100%;
+                                        width: 100%;
+                                        height: 100%;
+                                        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                                        transition: all 0.3s ease;
+                                    }
+
+                                    #bookSlotBtn:hover {
+                                        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+                                        transform: translateY(-2px);
+                                        box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+                                        color: white;
+                                    }
+
+                                    #bookSlotBtn:hover::before {
+                                        left: 100%;
+                                    }
+
+                                    #bookSlotBtn:active {
+                                        transform: translateY(0);
+                                        box-shadow: 0 2px 8px rgba(30, 64, 175, 0.2);
+                                    }
+
+                                    #bookSlotBtn i {
+                                        font-size: 0.9rem;
+                                        transition: transform 0.3s ease;
+                                    }
+
+                                    #bookSlotBtn:hover i {
+                                        transform: translateX(4px);
+                                    }
+
+                                    /* Focus state for accessibility */
+                                    #bookSlotBtn:focus {
+                                        outline: none;
+                                        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+                                    }
+
+                                    /* Loading state (optional) */
+                                    #bookSlotBtn.loading {
+                                        pointer-events: none;
+                                        opacity: 0.8;
+                                    }
+
+                                    #bookSlotBtn.loading i {
+                                        animation: spin 1s linear infinite;
+                                    }
+
+                                    @keyframes spin {
+                                        from {
+                                            transform: rotate(0deg);
+                                        }
+
+                                        to {
+                                            transform: rotate(360deg);
+                                        }
+                                    }
+
+                                    /* Alternative styles for different contexts */
+                                    .btn-proceed-alt {
+                                        background: white;
+                                        border: 2px solid #3b82f6;
+                                        color: #3b82f6;
+                                        padding: 0.875rem 2.5rem;
+                                        font-size: 1rem;
+                                        font-weight: 600;
+                                        border-radius: 12px;
+                                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+                                        transition: all 0.3s ease;
+                                        min-width: 160px;
+                                    }
+
+                                    .btn-proceed-alt:hover {
+                                        background: #3b82f6;
+                                        color: white;
+                                        transform: translateY(-2px);
+                                        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.25);
+                                    }
+
+                                    .demo-container {
+                                        background: white;
+                                        padding: 2rem;
+                                        border-radius: 16px;
+                                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                                        margin-bottom: 2rem;
+                                    }
+                                </style>
+                                <button id="bookSlotBtn"
+                                    class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold"
+                                    data-bs-toggle="modal" data-bs-target="#bookAppointmentModal">
+                                    <i class="fas fa-arrow-right me-2"></i>
+                                    Proceed
                                 </button>
+
+
                             </div>
                         </div>
                     </div>

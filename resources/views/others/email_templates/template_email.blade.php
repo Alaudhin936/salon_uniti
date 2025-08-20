@@ -116,13 +116,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #009688;
-            border: 1px solid #009688;
+            color: #28d5ed;
+            border: 1px solid #28d5ed;
             transition: all 0.5s ease;
         }
 
         .temp-social td i:hover {
-            background-color: #009688;
+            background-color: #28d5ed;
             color: #ffffff;
         }
 
@@ -407,7 +407,7 @@
                                 <td><img class="img-fluid" style="border-radius:10px;"
                                         src="{{ asset('assets/images/email-template/3.png') }}"></td>
                                 <td>
-                                    <div style="border-top:1px solid #009688; mso-line-height-rule: exactly;"
+                                    <div style="border-top:1px solid #28d5ed; mso-line-height-rule: exactly;"
                                         data-border-bottom-color="Week Border"></div><a href="javascript:void(0)">
                                         <div class="Heading" align="center"
                                             style="color:#333333;font-weight:600; font-size:23px; letter-spacing:1px; line-height:35px; mso-line-height-rule: exactly; margin-top: 15px;"
@@ -418,7 +418,7 @@
                                             data-color="Week Heading" data-size="Week Heading" data-min="15"
                                             data-max="45">Save Up To 50%</div>
                                     </a>
-                                    <div style="border-bottom:1px solid #009688; mso-line-height-rule: exactly;"
+                                    <div style="border-bottom:1px solid #28d5ed; mso-line-height-rule: exactly;"
                                         data-border-bottom-color="Week Border"></div>
                                 </td>
                             </tr>
@@ -482,7 +482,7 @@
                                         <tbody>
                                             <tr>
                                                 <td><a href="javascript:void(0)"
-                                                        style="color: #009688;font-size:14px;text-transform: capitalize;font-weight:600;">Want
+                                                        style="color: #28d5ed;font-size:14px;text-transform: capitalize;font-weight:600;">Want
                                                         to change how you receive these emails?</a></td>
                                             </tr>
                                             <tr>
@@ -493,7 +493,7 @@
                                             </tr>
                                             <tr>
                                                 <td><a href="javascript:void(0)"
-                                                        style="color: #009688;font-size: 14px;text-transform: capitalize;font-weight:600; margin:0;">Unsubscribe</a>
+                                                        style="color: #28d5ed;font-size: 14px;text-transform: capitalize;font-weight:600; margin:0;">Unsubscribe</a>
                                                 </td>
                                             </tr>
                                         </tbody>

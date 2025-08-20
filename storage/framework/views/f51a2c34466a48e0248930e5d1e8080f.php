@@ -3,15 +3,15 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('main_content'); ?>
-    <div class="container-fluid">
+    <div class="container-fluid" style="padding:30px;background-color:white;">
         <div class="page-title">
             <div class="row align-items-center">
                 <div class="col-sm-6">
-                    <h3>All Salons</h3>
+                    <h3 style="color: #0a566d" class="underlined-heading">All Salons</h3>
                 </div>
                 <div class="col-sm-6 text-sm-end text-start">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerSalonModal">
-                        <i class="fa fa-plus"></i> Register New Salon
+                    <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal" data-bs-target="#registerSalonModal">
+                        <i class="fas fa-plus me-2 text-success"></i> Register New Salon
                     </button>
                 </div>
             </div>
@@ -20,9 +20,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card shadow-sm">
-                        <div class="card-header bg-primary text-white py-2">
-                            <i class="fas fa-cut me-2"></i> All Vendor Lists
-                        </div>
+                        <h5 class="card-header bg-primary text-white py-2">
+                            <i class="fas fa-cut me-2"></i>Vendor Lists
+                        </h5>
                         <div class="card-body p-4">
                             <div class="table-responsive">
                                 <table id="salonTable" class="table table-striped table-hover table-bordered mb-0">
@@ -118,7 +118,7 @@
                     <div class="d-flex align-items-center">
                         <div>
                             <h3 class="modal-title fw-bold mb-1" id="salonModalLabel">Salon Details</h3>
-                            <p class="mb-0 text-white-50 fs-5">business information</p>
+                            <p class="mb-0 text-dark fs-5">business information</p>
                         </div>
                     </div>
                     <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 mt-3 me-3 fs-4"
@@ -245,7 +245,7 @@
                             </div>
 
                             <div class="col-md-4">
-                                <div class="info-item bg-primary rounded-3 p-3 h-100 shadow-sm text-white">
+                                <div class="info-item bg-success rounded-3 p-3 h-100 shadow-sm text-white">
                                     <div class="text-center">
 
                                         <h6 class="text-white-50 mb-1 small">Revenue</h6>
@@ -440,9 +440,10 @@
                         _token: '<?php echo e(csrf_token()); ?>',
                     },
                     success: function(response) {
+                        debugger
                         $('#salonName').text(response.business_name);
                         $('#salonEmail').text(response.email);
-                        // $('#salonType').text(response.type);
+                        $('#salonType').text(response.name);
                         $('#salonPhone').text(response.phone);
                         $('#salonLocation').text(response.location);
                         $('#salonGst').text(response.gst_number);

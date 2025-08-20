@@ -37,9 +37,7 @@ Route::get('/', function () {
     }
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboards.default_dashboard');
-})->name('dashboard')->middleware('role:1');
+Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard')->middleware('role:1');
 
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
@@ -53,7 +51,7 @@ Route::get('/logout', function () {
 })->name('logout');
 
 Route::middleware('role:1')->group(function () {
-    Route::get('/salons', [AdminController::class, 'index'])->name('salons');
+    Route::get('/salons', [AdminController::class, 'salons'])->name('salons');
     Route::get('/banners', [BannerController::class, 'index'])->name('banners');
     Route::get('/payments', [AdminController::class, 'paymentIndex'])->name('admin.payments');
     Route::post('/payments/store', [AdminController::class, 'storePaymentType'])->name('admin.payment.types.store');

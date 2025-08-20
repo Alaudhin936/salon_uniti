@@ -446,7 +446,7 @@ function addPolygonToMap(map) {
     new H.map.Polygon(lineString, {
       style: {
         fillColor: '#FFFFCC',
-        strokeColor: '#009688',
+        strokeColor: '#28d5ed',
         lineWidth: 8
       }
     })

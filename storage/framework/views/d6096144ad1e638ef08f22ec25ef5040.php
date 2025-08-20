@@ -77,7 +77,7 @@
                             <!-- Page Sidebar Ends-->
 
 
-                            <div class="page-body">
+                            <div class="page-body" style="padding: 30px">
                                 <?php echo $__env->yieldContent('main_content'); ?>
                                 <!-- Container-fluid Ends-->
                             </div>

@@ -6,7 +6,7 @@
 
 @section('main_content')
     <div class="container">
-        <h2 class="mb-4" style="color: #0a566d;">Your Profile</h2>
+        <h2 class="mb-4 underlined-heading" style="color: #0a566d;">Your Profile</h2>
 
         <form id="vendorForm" method="POST" enctype="multipart/form-data">
             @csrf

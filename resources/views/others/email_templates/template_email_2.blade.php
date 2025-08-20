@@ -121,13 +121,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #009688;
-            border: 1px solid #009688;
+            color: #28d5ed;
+            border: 1px solid #28d5ed;
             transition: all 0.5s ease;
         }
 
         .temp-social td i:hover {
-            background-color: #009688;
+            background-color: #28d5ed;
             color: #ffffff;
         }
 
@@ -321,7 +321,7 @@
                                     <th align="center" width="40%"><img class="img-fluid"
                                             src="{{ asset('assets/images/email-template/slider.jpg') }}" alt="">
                                     </th>
-                                    <th width="60%" style="background-color:#009688; padding: 30px;">
+                                    <th width="60%" style="background-color:#28d5ed; padding: 30px;">
                                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
                                             <tbody>
                                                 <tr>
@@ -346,10 +346,10 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="text-button white-button"
-                                                        style="font-size:14px; line-height:18px; text-align:center; text-transform:uppercase; padding:0.6rem 1.75rem; background:#ffffff; color:#009688; font-weight:bold; border-radius:30px;">
+                                                        style="font-size:14px; line-height:18px; text-align:center; text-transform:uppercase; padding:0.6rem 1.75rem; background:#ffffff; color:#28d5ed; font-weight:bold; border-radius:30px;">
                                                         <a href="javascript:void(0)" target="_blan"
                                                             style="color:#4e54cb; text-decoration:none;"><span
-                                                                style="color:#009688; text-decoration:none;">shop
+                                                                style="color:#28d5ed; text-decoration:none;">shop
                                                                 now</span></a>
                                                     </td>
                                                 </tr>
@@ -445,7 +445,7 @@
                                                         style="background-color: #fafafa;width: 60%; border-top-right-radius:10px; padding: 12px;">
                                                         <h3 style="margin: 0; font-size: 18px;">Product One</h3>
                                                         <div
-                                                            style="color:#009688; font-weight:600; font-size:16px; line-height:27px; letter-spacing:1px;margin: 4px;">
+                                                            style="color:#28d5ed; font-weight:600; font-size:16px; line-height:27px; letter-spacing:1px;margin: 4px;">
                                                             <span class="txt-price1"
                                                                 style="color:#666666; font-weight:600; font-size:15px; line-height:25px; letter-spacing:1px;"
                                                                 data-color="Price1" data-size="Price1" data-min="10"
@@ -456,7 +456,7 @@
                                                         <div
                                                             style="padding: 15px 0px;text-transform: uppercase;font-size: 11px;letter-spacing: 1px;">
                                                             <a href="javascript:void(0)"
-                                                                style="color: #ffffff;text-decoration:none; border-radius:10px;; background:#009688; padding: 8px 12px;">SHOP
+                                                                style="color: #ffffff;text-decoration:none; border-radius:10px;; background:#28d5ed; padding: 8px 12px;">SHOP
                                                                 NOW</a>
                                                         </div>
                                                     </td>
@@ -471,7 +471,7 @@
                                                         style="background-color: #fafafa;width: 60%; padding: 12px;">
                                                         <h3 style="margin: 0; font-size: 18px;">Product One</h3>
                                                         <div
-                                                            style="color:#009688; font-weight:600; font-size:16px; line-height:27px; letter-spacing: 1px; margin: 4px;">
+                                                            style="color:#28d5ed; font-weight:600; font-size:16px; line-height:27px; letter-spacing: 1px; margin: 4px;">
                                                             <span class="txt-price1"
                                                                 style="color:#666666; font-weight:600; font-size:15px; line-height:25px; letter-spacing:1px;"
                                                                 data-color="Price1" data-size="Price1" data-min="10"
@@ -482,7 +482,7 @@
                                                         <div
                                                             style="padding: 15px 0px;text-transform: uppercase;font-size: 11px;letter-spacing: 1px;">
                                                             <a href="javascript:void(0)"
-                                                                style="color: #ffffff;text-decoration:none; border-radius:10px;; background:#009688; padding: 8px 12px;">SHOP
+                                                                style="color: #ffffff;text-decoration:none; border-radius:10px;; background:#28d5ed; padding: 8px 12px;">SHOP
                                                                 NOW</a>
                                                         </div>
                                                     </td>
@@ -505,7 +505,7 @@
                                                         style="background-color: #fafafa;width: 60%; border-bottom-right-radius:10px; padding: 12px;">
                                                         <h3 style="margin: 0; font-size: 18px;">Product One</h3>
                                                         <div
-                                                            style="color:#009688; font-weight:600; font-size:16px; line-height:27px; letter-spacing:1px; margin: 4px;">
+                                                            style="color:#28d5ed; font-weight:600; font-size:16px; line-height:27px; letter-spacing:1px; margin: 4px;">
                                                             <span class="txt-price1"
                                                                 style="color:#666666; font-weight:600; font-size:15px; line-height:25px; letter-spacing:1px;"
                                                                 data-color="Price1" data-size="Price1" data-min="10"
@@ -516,7 +516,7 @@
                                                         <div
                                                             style="padding: 15px 0px;text-transform: uppercase;font-size: 11px;letter-spacing: 1px;">
                                                             <a href="javascript:void(0)"
-                                                                style="color: #ffffff;text-decoration:none; border-radius:10px;; background:#009688; padding: 8px 12px;">SHOP
+                                                                style="color: #ffffff;text-decoration:none; border-radius:10px;; background:#28d5ed; padding: 8px 12px;">SHOP
                                                                 NOW</a>
                                                         </div>
                                                     </td>
@@ -558,7 +558,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td><a href="javascript:void(0)"
-                                                            style="color: #009688;font-size:14px;text-transform: capitalize;font-weight:600;">Want
+                                                            style="color: #28d5ed;font-size:14px;text-transform: capitalize;font-weight:600;">Want
                                                             to change how you receive these emails?</a></td>
                                                 </tr>
                                                 <tr>
@@ -569,7 +569,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td><a href="javascript:void(0)"
-                                                            style="color: #009688;font-size: 14px;text-transform: capitalize;font-weight:600; margin:0;">Unsubscribe</a>
+                                                            style="color: #28d5ed;font-size: 14px;text-transform: capitalize;font-weight:600; margin:0;">Unsubscribe</a>
                                                     </td>
                                                 </tr>
                                             </tbody>

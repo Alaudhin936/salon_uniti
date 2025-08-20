@@ -10,7 +10,7 @@
                 <div class="d-flex align-items-center">
                     <div class="back-btn me-2"><i data-feather="arrow-left-circle"></i></div>
                     <div class="toggle-sidebar icon-box-sidebar"><i class="status_toggle middle sidebar-toggle"
-                            data-feather="menu"></i></div>
+                      data-feather="menu"></i></div>
                 </div>
             </div>
 
@@ -27,7 +27,7 @@
                     <ul class="sidebar-links list-unstyled px-2" id="simple-bar">
                         <li class="sidebar-list mb-2">
                             <a class="sidebar-link sidebar-title" href="<?php echo e(route('vendor_dashboard')); ?>">
-                                <i data-feather="scissors"></i><span class="ms-2">Dashboard</span>
+                                <i data-feather="home"></i><span class="ms-2">Dashboard</span>
                             </a>
                         </li>
 
@@ -51,7 +51,7 @@
 
                         <li class="sidebar-list mb-2">
                             <a class="sidebar-link sidebar-title" href="<?php echo e(route('services')); ?>">
-                                <i data-feather="briefcase"></i><span class="ms-2">Services</span>
+                                <i data-feather="scissors"></i><span class="ms-2">Services</span>
                             </a>
                         </li>
                     </ul>

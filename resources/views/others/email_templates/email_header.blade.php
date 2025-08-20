@@ -100,7 +100,7 @@
                                         <p>you forgot your password for Tivo Admin. If this is true, click below to reset
                                             your password.</p>
                                         <p style="text-align: center"><a href="{{ route('reset_password') }}"
-                                                style="padding: 10px; background-color:#009688; color: #fff; display: inline-block; border-radius:30px; font-weight:700; padding:0.6rem 1.75rem;">Reset
+                                                style="padding: 10px; background-color:#28d5ed; color: #fff; display: inline-block; border-radius:30px; font-weight:700; padding:0.6rem 1.75rem;">Reset
                                                 Password</a></p>
                                         <p>If you have remember your password you can safely ignore his email.</p>
                                         <p>Good luck! Hope it works.</p>
@@ -117,7 +117,7 @@
                                         <p style="color: #999; margin-bottom: 0">333 Woodland Rd. Baldwinsville, NY 13027
                                         </p>
                                         <p style="color: #999; margin-bottom: 0">Don't Like These Emails?<a href="#"
-                                                style="color: #009688">Unsubscribe</a></p>
+                                                style="color: #28d5ed">Unsubscribe</a></p>
                                         <p style="color: #999; margin-bottom: 0">Powered By Tivo Admin</p>
                                     </td>
                                 </tr>

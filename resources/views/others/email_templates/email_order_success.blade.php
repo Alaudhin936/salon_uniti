@@ -94,13 +94,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #009688;
-            border: 1px solid #009688;
+            color: #28d5ed;
+            border: 1px solid #28d5ed;
             transition: all 0.5s ease;
         }
 
         .temp-social td i:hover {
-            background-color: #009688;
+            background-color: #28d5ed;
             color: #ffffff;
         }
 
@@ -141,7 +141,7 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background-color: #009688;
+            background-color: #28d5ed;
         }
 
         .deliver-status li:first-child::before,
@@ -181,7 +181,7 @@
         }
 
         .deliver-status li .order-icon.active {
-            background-color: #009688;
+            background-color: #28d5ed;
         }
 
         .deliver-status li .order-icon.active i {
@@ -573,7 +573,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td><a href="javascript:void(0)"
-                                                            style="color: #009688;font-size:14px;text-transform: capitalize;font-weight:600;">Want
+                                                            style="color: #28d5ed;font-size:14px;text-transform: capitalize;font-weight:600;">Want
                                                             to change how you receive these emails?</a></td>
                                                 </tr>
                                                 <tr>
@@ -584,7 +584,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td><a href="javascript:void(0)"
-                                                            style="color: #009688;font-size: 14px;text-transform: capitalize;font-weight:600; margin:0;">Unsubscribe</a>
+                                                            style="color: #28d5ed;font-size: 14px;text-transform: capitalize;font-weight:600; margin:0;">Unsubscribe</a>
                                                     </td>
                                                 </tr>
                                             </tbody>

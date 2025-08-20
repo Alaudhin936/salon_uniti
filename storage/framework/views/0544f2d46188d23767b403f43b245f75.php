@@ -4,7 +4,24 @@
 
 <?php $__env->startSection('main_content'); ?>
     <div class="container">
-        <h2 class="mb-4" style="color: #0a566d;">Your Profile</h2>
+        <style>
+            .underlined-heading {
+                position: relative;
+                display: inline-block;
+            }
+
+            .underlined-heading::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 50%;
+                height: 3px;
+                background: #0a566d;
+                border-radius: 2px;
+            }
+        </style>
+        <h2 class="mb-4 underlined-heading" style="color: #0a566d;">Your Profile</h2>
 
         <form id="vendorForm" method="POST" enctype="multipart/form-data">
             <?php echo csrf_field(); ?>

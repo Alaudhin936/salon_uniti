@@ -1155,7 +1155,7 @@
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         justify-content: center;
-        background-color: #009688;
+        background-color: #28d5ed;
         -webkit-transition: all 0.5s ease;
         transition: all 0.5s ease
     }
@@ -2813,7 +2813,7 @@
         width: 170px;
         padding: 7px 15px;
         background-color: #f6f8fc;
-        border: 1px solid #009688;
+        border: 1px solid #28d5ed;
         border-radius: 30px !important;
         visibility: hidden;
         opacity: 0;
@@ -2838,7 +2838,7 @@
     }
 
     .left-header .input-group .input-group-prepend .input-group-text:hover {
-        background-color: #009688
+        background-color: #28d5ed
     }
 
     .left-header .input-group .input-group-prepend .input-group-text:hover i {
@@ -2893,7 +2893,7 @@
         margin-left: 10px;
         border-radius: 5px;
         background-color: rgba(92, 97, 242, 0.05);
-        color: #009688
+        color: #28d5ed
     }
 
     .feature-products span.f-w-600 {
@@ -5250,7 +5250,7 @@
         margin-left: 10px;
         border-radius: 5px;
         background-color: rgba(92, 97, 242, 0.05);
-        color: #009688
+        color: #28d5ed
     }
 
     .feature-products .filter-toggle h6 {
@@ -5303,7 +5303,7 @@
         margin-left: 10px;
         border-radius: 5px;
         background-color: rgba(92, 97, 242, 0.05);
-        color: #009688
+        color: #28d5ed
     }
 
     .feature-products .filter-toggle h6 {

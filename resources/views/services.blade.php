@@ -5,34 +5,28 @@
 @endsection
 
 @section('main_content')
-    <div class="container-fluid">
+    <div class="container-fluid" style="padding:30px;background-color:white;">
         <div class="page-title">
             <div class="row align-items-center">
                 <!-- Left: Heading -->
-                <div class="col-md-4 d-flex align-items-center">
-                    <h3 class="mb-0" style="color: #0a566d">Your Services</h3>
+                <div class="col-md-6 d-flex align-items-center">
+                    <h3 class="mb-0 underlined-heading" style="color: #0a566d">Your Services</h3>
                 </div>
 
                 <!-- Center: Breadcrumb -->
-                <div class="col-md-4">
-                    <ol class="breadcrumb mb-0 justify-content-center">
-                        <li class="breadcrumb-item">
-                            <a href="{{ route('dashboard') }}"><i data-feather="home"></i></a>
-                        </li>
-                        <li class="breadcrumb-item">Apps</li>
-                        <li class="breadcrumb-item active">Services</li>
-                    </ol>
-                </div>
+
 
                 <!-- Right: Button -->
-                <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addServiceModal">
-                        <i class="fa fa-plus me-2"></i>Add Service
+                <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                    <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
+                        data-bs-target="#addServiceModal">
+                        <i class="fas fa-plus-circle me-2 text-primary"></i> Add Service
                     </button>
                 </div>
+
             </div>
         </div>
-    </div>
+
 
 
     <div class="card-body support-ticket-font p-0">
@@ -57,7 +51,7 @@
                             <td class="fw-bold text-primary">{{ $index + 1 }}</td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3"
+                                    <div class="bg-success rounded-circle d-flex align-items-center justify-content-center me-3"
                                         style="width: 35px; height: 35px;">
                                         <i class="fa fa-scissors text-white small"></i>
                                     </div>
@@ -77,7 +71,7 @@
                             <td>
                                 @if ($service->service_img)
                                     <div>
-                                        <img src="{{ asset('storage/' . $service->service_img) }}"  alt="Cover Photo"
+                                        <img src="{{ asset('storage/' . $service->service_img) }}" alt="Cover Photo"
                                             class="img-fluid rounded" style="height: 100px;width:100px">
                                     </div>
                                 @else
@@ -86,7 +80,7 @@
                             </td>
                             <td>
                                 @if ($service->is_active)
-                                    <span class="badge bg-primary">Active</span>
+                                    <span class="badge bg-success">Active</span>
                                 @else
                                     <span class="badge bg-danger">In-Active</span>
                                 @endif
@@ -126,7 +120,7 @@
         </div>
     </div>
 
-
+   </div>
     <div class="modal fade" id="addServiceModal" tabindex="-1" aria-labelledby="addServiceLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -305,8 +299,8 @@
                                 text: 'New Service Created Successfully!',
                                 confirmButtonColor: '#3085d6',
                                 confirmButtonText: 'OK'
-                            }).then((result)=>{
-                                if(result.isConfirmed) {
+                            }).then((result) => {
+                                if (result.isConfirmed) {
                                     window.location.reload();
                                 }
                             });
@@ -385,8 +379,8 @@
                                 text: 'Service Updated Successfully!',
                                 confirmButtonColor: '#3085d6',
                                 confirmButtonText: 'OK'
-                            }).then((result)=>{
-                                if(result.isConfirmed) {
+                            }).then((result) => {
+                                if (result.isConfirmed) {
                                     window.location.reload();
                                 }
                             });

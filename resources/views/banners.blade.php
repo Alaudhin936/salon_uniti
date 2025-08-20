@@ -5,11 +5,11 @@
 @endsection
 
 @section('main_content')
-    <div class="container">
+    <div class="container" style="padding:30px;background-color:white;">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4>Banners</h4>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBannerModal">
-                <i class="fa fa-plus me-1"></i> Add Banner
+            <h4 style="color: #0a566d" class="underlined-heading">Banners</h4>
+            <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal" data-bs-target="#addBannerModal">
+                <i class="fas fa-plus me-2 text-success"></i> Add Banner
             </button>
         </div>
 

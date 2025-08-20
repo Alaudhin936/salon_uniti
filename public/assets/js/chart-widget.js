@@ -691,7 +691,7 @@
     },
     fill: {
       opacity: 0.9,
-      colors: ["#009688"],
+      colors: ["#28d5ed"],
     },
     series: [
       {

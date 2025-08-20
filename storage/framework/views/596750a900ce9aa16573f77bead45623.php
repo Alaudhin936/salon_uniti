@@ -3,27 +3,17 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('main_content'); ?>
-    <div class="container-fluid">
+    <div class="container-fluid" style="padding:30px;background-color:white;">
         <div class="page-title">
             <div class="row align-items-center">
                 <div class="col-sm-6">
-                    <h3 style="color: #0a566d">Bookings</h3>
+                    <h3 style="color: #0a566d" class="underlined-heading">Bookings</h3>
                 </div>
                 <div class="col-sm-6 text-sm-end text-start">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookAppointmentModal">
-                        <i class="fa fa-plus me-1"></i> Book Appointment
+                    <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
+                        data-bs-target="#bookAppointmentModal">
+                        <i class="fa fa-plus  me-2 text-success "></i> Book Appointment
                     </button>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-sm-12">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="<?php echo e(route('dashboard')); ?>"><i data-feather="home"></i></a>
-                        </li>
-                        <li class="breadcrumb-item">Apps</li>
-                        <li class="breadcrumb-item active">Bookings</li>
-                    </ol>
                 </div>
             </div>
 
@@ -45,7 +35,7 @@
             </div>
 
 
-            <div class="container-fluid mt-5">
+            <div class="container-fluid mt-5" >
                 <?php $__currentLoopData = $appointments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $date => $bookings): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php
                         $tableId = 'appointmentsTable_' . \Carbon\Carbon::parse($date)->format('Y_m_d');
@@ -102,7 +92,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex align-items-center">
-                                                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3"
+                                                        <div class="bg-success rounded-circle d-flex align-items-center justify-content-center me-3"
                                                             style="width: 30px; height: 30px;">
                                                             <i class="fa fa-scissors text-white"
                                                                 style="font-size: 12px;"></i>
@@ -125,7 +115,7 @@
                                                         class="badge fs-7 px-2 py-1
                                         <?php if($appointment->status == 'booked'): ?> bg-success
                                         <?php elseif($appointment->status == 'cancelled'): ?> bg-danger
-                                        <?php elseif($appointment->status == 'completed'): ?> bg-primary
+                                        <?php elseif($appointment->status == 'completed'): ?> bg-success
                                         <?php elseif($appointment->status == 'pending'): ?> bg-warning text-dark
                                         <?php else: ?> bg-secondary <?php endif; ?>">
                                                         <?php if($appointment->status == 'booked'): ?>
@@ -252,7 +242,7 @@
                         
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Proceed</button>
+                        <button type="submit" class="btn btn-primary" style="border-radius:8px">> Proceed</button>
                     </div>
                 </form>
             </div>

@@ -7,6 +7,7 @@ use App\Models\PaymentMethod;
 use App\Models\SalonType;
 use App\Models\User;
 use App\Models\VendorDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -15,6 +16,56 @@ use Illuminate\Support\Facades\Storage;
 class AdminController extends Controller
 {
     public function index()
+    {
+        $startOfWeek = Carbon::now()->startOfWeek();
+        $endOfWeek   = Carbon::now()->endOfWeek();
+
+
+
+        $users = User::where('role_id', 2)
+            ->whereBetween('users.created_at', [$startOfWeek, $endOfWeek])
+            ->join('vendor_details', 'users.id', '=', 'vendor_details.vendor_id')
+            ->select('users.*', 'vendor_details.*')->limit(5)
+            ->get();
+
+        $salons = DB::table('appointments')
+            ->join('services', 'appointments.service_id', '=', 'services.id')
+            ->join('users', 'users.id', '=', 'services.vendor_id')->join(
+                'vendor_details',
+                'vendor_details.vendor_id',
+                '=',
+                'users.id'
+            )
+            ->where('appointments.status', 'completed')
+            ->select(
+                'vendor_details.business_name',
+                DB::raw('COUNT(appointments.id) as total_visits'),
+                DB::raw('SUM(services.price) as total_revenue')
+            )
+            ->groupBy('vendor_details.business_name', 'users.name')
+            ->orderByDesc('total_visits')
+            ->limit(5)
+            ->get();
+
+        $topRatedSalons = DB::table('salon_ratings')
+            ->join('vendor_details', 'salon_ratings.salon_id', '=', 'vendor_details.id')
+            ->select(
+                'vendor_details.id as salon_id',
+                'vendor_details.location',
+                'vendor_details.business_name',
+                DB::raw('ROUND(AVG(salon_ratings.rating),1) as avg_rating'),
+                DB::raw('COUNT(salon_ratings.id) as total_reviews')
+            )
+            ->groupBy('vendor_details.id', 'vendor_details.location', 'vendor_details.business_name')
+            ->orderByDesc('avg_rating')
+            ->orderByDesc('total_reviews')
+            ->limit(5)
+            ->get();
+
+        return view('dashboards.default_dashboard', compact('users', 'salons', 'topRatedSalons'));
+    }
+
+    public function salons()
     {
         $salons = DB::table('vendor_details as vd')
             ->join('users as u', 'vd.vendor_id', '=', 'u.id')
@@ -109,7 +160,6 @@ class AdminController extends Controller
                 'users.email',
                 'users.phone',
                 'vendor_details.business_name',
-                'vendor_details.location',
                 'vendor_details.gst_number',
                 'vendor_details.shop_open',
                 'vendor_details.shop_close',
@@ -171,9 +221,8 @@ class AdminController extends Controller
             $validated['favicon'] = $request->file('favicon')->store('favicons', 'public');
         }
 
-        // Use updateOrCreate → if row exists update, else insert new
         $settings = AdminSetting::updateOrCreate(
-            ['id' => $settings->id ?? null], // match by ID if exists
+            ['id' => $settings->id ?? null],
             $validated
         );
 

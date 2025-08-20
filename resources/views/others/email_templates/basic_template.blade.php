@@ -91,7 +91,7 @@
                                                         <p>Sometimes you just want to send a simple HTML email with a simple
                                                             design and clear call to action.</p>
                                                         <div class="text-center"><a href="{{ route('contacts') }}"
-                                                                style="padding: 10px; background-color: #009688; color: #fff; display: inline-block; border-radius:30px; margin-bottom:18px; font-weight:600; padding:0.6rem 1.75rem;">Call
+                                                                style="padding: 10px; background-color: #28d5ed; color: #fff; display: inline-block; border-radius:30px; margin-bottom:18px; font-weight:600; padding:0.6rem 1.75rem;">Call
                                                                 To Action </a></div>
                                                         <p>This is a really simple email template. It's sole purpose is to
                                                             get the recipient to click the button with no distractions.</p>
@@ -107,7 +107,7 @@
                                                         <p style="color: #999; margin-bottom: 0">333 Woodland Rd.
                                                             Baldwinsville, NY 13027</p>
                                                         <p style="color: #999; margin-bottom: 0">Don't Like These Emails?<a
-                                                                href="#" style="color: #009688">Unsubscribe</a></p>
+                                                                href="#" style="color: #28d5ed">Unsubscribe</a></p>
                                                         <p style="color: #999; margin-bottom: 0">Powered By Tivo Admin</p>
                                                     </td>
                                                 </tr>

@@ -11,7 +11,7 @@
                         }
 
                         .shp0 {
-                            fill: #009688
+                            fill: #28d5ed
                         }
 
                         .shp1 {

@@ -33,7 +33,7 @@
                             <div class="chart-clock-main">
                                 <div class="clock-large">
                                     <input class="knob hour" data-min="0" data-max="24" data-bgcolor="#eeeeee"
-                                        data-fgcolor="#009688" data-displayinput="false" data-width="300" data-height="300"
+                                        data-fgcolor="#28d5ed" data-displayinput="false" data-width="300" data-height="300"
                                         data-thickness=".2">
                                 </div>
                                 <div class="clock-medium">
@@ -59,7 +59,7 @@
                     <div class="card-body">
                         <div class="knob-block text-center">
                             <input class="knob" data-width="295" data-height="295" data-angleoffset="180"
-                                data-fgcolor="#009688" data-skin="tron" data-thickness=".1" value="35">
+                                data-fgcolor="#28d5ed" data-skin="tron" data-thickness=".1" value="35">
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                     <div class="card-body">
                         <div class="knob-block text-center">
                             <input class="knob" data-width="200" data-thickness=".1" data-angleoffset="90"
-                                data-fgcolor="#009688" data-linecap="round" value="35">
+                                data-fgcolor="#28d5ed" data-linecap="round" value="35">
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="card-body">
                         <div class="knob-block text-center knob-input-disable">
-                            <input class="knob" data-width="200" data-thickness=".1" data-fgcolor="#009688"
+                            <input class="knob" data-width="200" data-thickness=".1" data-fgcolor="#28d5ed"
                                 data-displayinput="false" value="35">
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                     </div>
                     <div class="card-body">
                         <div class="knob-block text-center">
-                            <input class="knob" data-width="200" data-cursor="true" data-fgcolor="#009688"
+                            <input class="knob" data-width="200" data-cursor="true" data-fgcolor="#28d5ed"
                                 data-thickness=".1" value="29">
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                     </div>
                     <div class="card-body">
                         <div class="knob-block text-center">
-                            <input class="knob" data-width="200" data-thickness=".1" data-fgcolor="#009688"
+                            <input class="knob" data-width="200" data-thickness=".1" data-fgcolor="#28d5ed"
                                 data-min="-100" data-displayprevious="true" value="44">
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                     </div>
                     <div class="card-body">
                         <div class="knob-block text-center">
-                            <input class="knob" data-angleoffset="-125" data-anglearc="250" data-fgcolor="#009688"
+                            <input class="knob" data-angleoffset="-125" data-anglearc="250" data-fgcolor="#28d5ed"
                                 data-thickness=".1" data-rotation="anticlockwise" value="35">
                         </div>
                     </div>
@@ -136,7 +136,7 @@
                     </div>
                     <div class="card-body">
                         <div class="knob-block text-center">
-                            <input class="knob" data-min="-10000" data-thickness=".1" data-fgcolor="#009688"
+                            <input class="knob" data-min="-10000" data-thickness=".1" data-fgcolor="#28d5ed"
                                 data-displayprevious="true" data-max="10000" data-step=".1" value="0">
                         </div>
                     </div>
