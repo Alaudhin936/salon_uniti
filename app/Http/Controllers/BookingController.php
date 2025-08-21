@@ -25,6 +25,17 @@ class BookingController extends Controller
 
         $dayOfWeek = strtolower(Carbon::parse($date)->dayOfWeek);
 
+        $is_open = VendorWeeklySchedule::where('day_of_week', $dayOfWeek)->first();
+
+        if (isset($is_open->is_closed) && $is_open->is_closed) {
+            return view('bookings', [
+                'slots'     => [],
+                'userId'    => $userId,
+                'serviceId' => $serviceId,
+                'date'      => $date,
+                'message'   => 'The Shop Is Closed On Your Selected Day'
+            ]);
+        }
         $schedule = VendorWeeklySchedule::where('day_of_week', $dayOfWeek)->first();
 
         if (!$schedule) {
@@ -121,15 +132,6 @@ class BookingController extends Controller
             'status' => 'pending_payment'
         ]);
 
-        // $booking = Appointment::create([
-        //     'user_id' => $validated['user_id'],
-        //     'service_id' => $validated['service_id'],
-        //     'date' => $validated['date'],
-        //     'slot_start' => $validated['slot_start'],
-        //     'slot_end' => $validated['slot_end'],
-        //     'status' => 'booked'
-        // ]);
-
         return response()->json([
             'success' => true,
             'message' => 'Booking successful',
@@ -180,10 +182,8 @@ class BookingController extends Controller
             'payment_method_id' => $request->payment_method_id,
             'status' => 'completed'
         ]);
-        $appointment->payment_id = $paymentDetail->id;
-        $appointment->save();
 
 
-        return response()->json(['status' => 200 , 'payment_id' => $paymentDetail->payment_id]);
+        return response()->json(['status' => 200, 'payment_id' => $paymentDetail->payment_id]);
     }
 }

@@ -5,121 +5,105 @@
 <?php $__env->startSection('main_content'); ?>
     <div class="container-fluid" style="padding:30px;background-color:white;">
         <div class="page-title">
-            <div class="row align-items-center">
-                <!-- Left: Heading -->
-                <div class="col-md-6 d-flex align-items-center">
-                    <h3 class="mb-0 underlined-heading" style="color: #0a566d">Your Services</h3>
-                </div>
-
-                <!-- Center: Breadcrumb -->
-
-
-                <!-- Right: Button -->
-                <div class="col-md-6 text-md-end mt-3 mt-md-0">
-                    <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
-                        data-bs-target="#addServiceModal">
-                        <i class="fas fa-plus-circle me-2 text-primary"></i> Add Service
-                    </button>
-                </div>
-
+            <div class="p-4 card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h4 class="mb-0 underlined-heading fw-bold" style="color: #0a566d">Services</h4>
+                <button class="btn btn-light btn-md px-3 py-2 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
+                    data-bs-target="#addServiceModal">
+                    <i class="fas fa-plus-circle me-2 text-primary"></i> Add Service
+                </button>
             </div>
         </div>
 
 
 
-    <div class="card-body support-ticket-font p-0">
-        <div class="table-responsive">
-            <table id="servicesTable" class="table table-hover mb-0">
-                <thead class="table-light">
+        <div class="card-body support-ticket-font p-0">
+            <div class="table-responsive">
+                <table id="servicesTable" class="table table-hover mb-0">
+                    <thead class="table-light">
 
-                    <tr>
-                        <th>#</th>
-                        <th>Service Name</th>
-                        <th>Price</th>
-                        <th>Duration</th>
-                        <th>Service Image</th>
-                        <th>Status</th>
-                        <th class="text-center">Actions</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $__empty_1 = true; $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                        <tr class="align-middle">
-                            <td class="fw-bold text-primary"><?php echo e($index + 1); ?></td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="bg-success rounded-circle d-flex align-items-center justify-content-center me-3"
-                                        style="width: 35px; height: 35px;">
-                                        <i class="fa fa-scissors text-white small"></i>
-                                    </div>
-                                    <strong class="text-dark"><?php echo e($service->name); ?></strong>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="badge bg-success">
-                                    <i class="fa fa-rupee-sign me-1"></i><?php echo e($service->price); ?>
-
-                                </span>
-                            </td>
-                            <td>
-                                <span class="text-muted">
-                                    <i class="fa fa-clock me-1"></i><?php echo e($service->duration); ?> min
-                                </span>
-                            </td>
-                            <td>
-                                <?php if($service->service_img): ?>
-                                    <div>
-                                        <img src="<?php echo e(asset('storage/' . $service->service_img)); ?>" alt="Cover Photo"
-                                            class="img-fluid rounded" style="height: 100px;width:100px">
-                                    </div>
-                                <?php else: ?>
-                                    <div>No Image for service</div>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if($service->is_active): ?>
-                                    <span class="badge bg-success">Active</span>
-                                <?php else: ?>
-                                    <span class="badge bg-danger">In-Active</span>
-                                <?php endif; ?>
-                            </td>
-                            <td class="text-center">
-                                <div class="btn-group btn-group-sm">
-                                    <button class="btn btn-outline-warning edit-service" data-id="<?php echo e($service->id); ?>"
-                                        data-img="<?php echo e($service->service_img); ?>" data-name="<?php echo e($service->name); ?>"
-                                        data-status=<?php echo e($service->is_active); ?> data-duration="<?php echo e($service->duration); ?>"
-                                        data-price="<?php echo e($service->price); ?>">
-                                        <i class="fa fa-edit" style="color:#0a566d"></i>
-                                    </button>
-                                    <button class="btn btn-outline-danger delete-service" data-id="<?php echo e($service->id); ?>">
-                                        <i class="fa fa-trash" style="color:#0a566d"></i>
-                                    </button>
-                                </div>
-                            </td>
-
-                        </tr>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                         <tr>
-                            <td colspan="6" class="text-center py-5">
-                                <div class="text-muted">
-                                    <i class="fa fa-cut mb-3 display-4 opacity-25"></i>
-                                    <h6 class="text-muted">No services available</h6>
-                                    <p class="small mb-3">Add your first service to get started</p>
-                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#addServiceModal">
-                                        <i class="fa fa-plus me-2"></i>Add Service
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
+                            <th>#</th>
+                            <th>Service Name</th>
+                            <th>Price</th>
+                            <th>Duration</th>
+                            <th>Service Image</th>
+                            <th>Status</th>
+                            <th class="text-center">Actions</th>
 
-   </div>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $__empty_1 = true; $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                            <tr class="align-middle">
+                                <td class="fw-bold text-primary"><?php echo e($index + 1); ?></td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-success rounded-circle d-flex align-items-center justify-content-center me-3"
+                                            style="width: 35px; height: 35px;">
+                                            <i class="fa fa-scissors text-white small"></i>
+                                        </div>
+                                        <strong class="text-dark"><?php echo e($service->name); ?></strong>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-success">
+                                        <i class="fa fa-rupee-sign me-1"></i><?php echo e($service->price); ?>
+
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="text-muted">
+                                        <i class="fa fa-clock me-1"></i><?php echo e($service->duration); ?> min
+                                    </span>
+                                </td>
+                                <td>
+                                    <?php if($service->service_img): ?>
+                                        <div>
+                                            <img src="<?php echo e(asset('storage/' . $service->service_img)); ?>" alt="Cover Photo"
+                                                class="img-fluid rounded" style="height: 100px;width:100px">
+                                        </div>
+                                    <?php else: ?>
+                                        <div>No Image for service</div>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if($service->is_active): ?>
+                                        <span class="badge bg-success">Active</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-danger">In-Active</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group btn-group-sm">
+                                        <button class="btn btn-outline-warning edit-service"
+                                            data-category_id=<?php echo e($service->service_category_id); ?>
+
+                                            data-id="<?php echo e($service->id); ?>" data-img="<?php echo e($service->service_img); ?>"
+                                            data-name="<?php echo e($service->name); ?>" data-status=<?php echo e($service->is_active); ?>
+
+                                            data-duration="<?php echo e($service->duration); ?>" data-price="<?php echo e($service->price); ?>">
+                                            <i class="fa fa-edit" style="color:#0a566d"></i>
+                                        </button>
+                                        <button class="btn btn-outline-danger delete-service"
+                                            data-id="<?php echo e($service->id); ?>">
+                                            <i class="fa fa-trash" style="color:#0a566d"></i>
+                                        </button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+
+
+                                    
+
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
     <div class="modal fade" id="addServiceModal" tabindex="-1" aria-labelledby="addServiceLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -127,7 +111,7 @@
                     <h5 class="modal-title" id="addServiceLabel">Add New Service</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="addServiceForm" method="POST" enctype="multipart/form-data">
+                <form id="addServiceForm" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
                     <div class="modal-body">
                         <div class="mb-3">
@@ -137,6 +121,15 @@
                         <div class="mb-3">
                             <label for="servicePrice" class="form-label">Price</label>
                             <input type="number" class="form-control" id="servicePrice" name="price" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="service_category_id" class="form-label">Service Category</label>
+                            <select class="form-select" id="service_category_id" name="service_category_id" required>
+                                <option value="">-- Select Category --</option>
+                                <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="serviceDuration" class="form-label">Duration (minutes)</label>
@@ -190,6 +183,16 @@
                             <label for="editServiceDuration" class="form-label">Duration (mins)</label>
                             <input type="number" class="form-control" id="editServiceDuration" name="duration"
                                 required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="editServiceCategory" class="form-label">Service Category</label>
+                            <select id="editServiceCategory" name="service_category_id" class="form-select" required>
+                                <option value="">-- Select Category --</option>
+                                <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
                         </div>
 
                         <div class="mb-3">
@@ -250,7 +253,7 @@
     <script src="<?php echo e(asset('assets/js/support-ticket-custom.js')); ?>"></script>
     <script>
         $(document).ready(function() {
-
+            debugger
             $('#servicesTable').DataTable({
                 paging: true,
                 searching: true,
@@ -265,12 +268,14 @@
                 ]
             });
             $("#addServiceForm").submit(function(e) {
+                debugger
                 e.preventDefault();
                 let btn = $('#storeBtn');
                 let formData = new FormData(this);
                 // Disable button
                 btn.prop('disabled', true);
                 btn.find('.btn-text').text('Saving...');
+
                 $.ajax({
                     url: "<?php echo e(route('services.store')); ?>",
                     type: "POST",
@@ -303,24 +308,6 @@
                                     window.location.reload();
                                 }
                             });
-
-                            let newCount = $("tbody tr").length;
-                            if ($(".card-footer").length > 0) {
-                                $(".card-footer small").html(
-                                    `Total: <strong>${newCount}</strong> services`);
-                            } else {
-                                // Add footer if it doesn't exist
-                                $(".card").append(`
-            <div class="card-footer bg-light">
-                <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">Total: <strong>${newCount}</strong> services</small>
-                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addServiceModal">
-                        <i class="fa fa-plus me-2"></i>Add Another Service
-                    </button>
-                </div>
-            </div>
-        `);
-                            }
                         }
                         $("#addServiceForm")[0].reset();
 
@@ -344,12 +331,14 @@
                 let duration = $(this).data('duration');
                 let status = $(this).data('status');
                 let service_img = $(this).data('img');
+                let category_id = $(this).data('category_id');
 
                 $('#editServiceId').val(id);
                 $('#editServiceName').val(name);
                 $('#editServicePrice').val(price);
                 $('#editServiceDuration').val(duration);
                 $('#is_active').val(status);
+                $('#editServiceCategory').val(category_id);
                 $('#serviceImagePreview').attr('src', '<?php echo e(asset('storage')); ?>/' + service_img);
 
                 $('#editServiceModal').modal('show');
@@ -410,40 +399,52 @@
             $(document).on('click', '.delete-service', function() {
                 let id = $(this).data('id');
 
-                if (confirm('Are you sure you want to delete this service?')) {
-                    let url = "<?php echo e(route('services.destroy', ':id')); ?>".replace(':id', id);
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "This Service will be deleted permanently!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let url = "<?php echo e(route('services.destroy', ':id')); ?>".replace(':id', id);
 
-                    $.ajax({
-                        url: url,
-                        type: 'POST',
-                        data: {
-                            _token: '<?php echo e(csrf_token()); ?>'
-                        },
-                        success: function(response) {
-                            if (response.status) {
-                                // Remove from DOM
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Success',
-                                    text: 'Service Deleted Successfully',
-                                    confirmButtonColor: '#3085d6',
-                                    confirmButtonText: 'OK'
-                                }).then(function(result) {
-                                    if (result.isConfirmed) {
-                                        window.location.reload();
-                                    }
-                                });
+                        $.ajax({
+                            url: url,
+                            type: 'POST',
+                            data: {
+                                _token: '<?php echo e(csrf_token()); ?>'
+                            },
+                            success: function(response) {
+                                if (response.status) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Success',
+                                        text: 'Service Deleted Successfully',
+                                        confirmButtonColor: '#3085d6',
+                                        confirmButtonText: 'OK'
+                                    }).then(function(result) {
+                                        if (result.isConfirmed) {
+                                            window.location.reload();
+                                        }
+                                    });
 
-                                let toastEl = document.getElementById('successToast');
-                                let toast = new bootstrap.Toast(toastEl);
-                                toast.show();
+                                    let toastEl = document.getElementById(
+                                        'successToast');
+                                    let toast = new bootstrap.Toast(toastEl);
+                                    toast.show();
+                                }
+                            },
+                            error: function() {
+                                alert('Something went wrong while deleting!');
                             }
-                        },
-                        error: function() {
-                            alert('Something went wrong while deleting!');
-                        }
-                    });
-                }
+                        });
+                    }
+
+                })
+
             });
 
         });

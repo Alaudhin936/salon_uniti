@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AdminSetting;
 use App\Models\PaymentMethod;
 use App\Models\SalonType;
+use App\Models\ServiceCategory;
 use App\Models\User;
 use App\Models\VendorDetail;
 use Carbon\Carbon;
@@ -20,11 +21,9 @@ class AdminController extends Controller
         $startOfWeek = Carbon::now()->startOfWeek();
         $endOfWeek   = Carbon::now()->endOfWeek();
 
-
-
         $users = User::where('role_id', 2)
-            ->whereBetween('users.created_at', [$startOfWeek, $endOfWeek])
             ->join('vendor_details', 'users.id', '=', 'vendor_details.vendor_id')
+            ->whereBetween('vendor_details.created_at', [$startOfWeek, $endOfWeek])
             ->select('users.*', 'vendor_details.*')->limit(5)
             ->get();
 
@@ -62,7 +61,23 @@ class AdminController extends Controller
             ->limit(5)
             ->get();
 
-        return view('dashboards.default_dashboard', compact('users', 'salons', 'topRatedSalons'));
+        $trendingServices = DB::table('appointments')
+            ->join('services', 'appointments.service_id', '=', 'services.id')
+            ->join('vendor_details', 'services.vendor_id', '=', 'vendor_details.id')
+            ->select(
+                'services.id',
+                'services.name',
+                'vendor_details.business_name',
+                DB::raw('COUNT(appointments.id) as total_bookings')
+            )
+            ->where('appointments.status', 'booked')
+            ->groupBy('services.id', 'services.name', 'vendor_details.business_name')
+            ->orderByDesc('total_bookings')
+            ->take(5)
+            ->get();
+
+
+        return view('dashboards.default_dashboard', compact('users', 'salons', 'topRatedSalons','trendingServices'));
     }
 
     public function salons()
@@ -82,8 +97,6 @@ class AdminController extends Controller
                 'vd.longitude',
                 'vd.created_at',
                 'vd.updated_at',
-                'vd.shop_open',
-                'vd.shop_close',
                 'vd.is_active',
                 'vd.buffer_timing',
                 'vd.cover_photo',
@@ -119,8 +132,6 @@ class AdminController extends Controller
             'lattitude'     => 'nullable|numeric',
             'longitude'     => 'nullable|numeric',
             'password'   => 'required|string|min:6',
-            'shop_open'  => 'required',
-            'shop_close' => 'required'
         ]);
 
         $vendor = User::create([
@@ -138,14 +149,13 @@ class AdminController extends Controller
             'salon_type_id' => $request->salon_type_id,
             'location'      => $request->location,
             'gst_number'    => $request->gst_number,
-            'shop_open'     => $request->shop_open,
-            'shop_close'    => $request->shop_close,
             'lattitude'     => $request->lattitude,
             'longitude'     => $request->longitude,
         ]);
 
         return response()->json([
             'status' => 'success',
+            'data'  => 'created',
             'message' => 'Salon registered successfully'
         ]);
     }
@@ -161,8 +171,6 @@ class AdminController extends Controller
                 'users.phone',
                 'vendor_details.business_name',
                 'vendor_details.gst_number',
-                'vendor_details.shop_open',
-                'vendor_details.shop_close',
                 'salon_types.name',
                 'vendor_details.cover_photo'
             )->join('salon_types', 'vendor_details.salon_type_id', '=', 'salon_types.id')
@@ -276,7 +284,6 @@ class AdminController extends Controller
         return view('payments', compact('paymentTypes'));
     }
 
-
     public function storePaymentType(Request $request)
     {
         $validated = $request->validate([
@@ -315,5 +322,53 @@ class AdminController extends Controller
         $paymentType->delete();
 
         return response()->json(['status' => 200]);
+    }
+
+    public function serviceCatagoryIndex(Request $request)
+    {
+        $categories = ServiceCategory::all();
+        return view('service_categories', compact('categories'));
+    }
+
+    public function updateServiceCategory(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $category = ServiceCategory::findOrFail($id);
+
+        $category->name = $request->name;
+        $category->save();
+
+        return redirect()->back()->with('success', 'Service category updated successfully!');
+    }
+
+    public function destroyServiceCategory($id)
+    {
+        $category = ServiceCategory::findOrFail($id);
+        $category->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Service Category deleted successfully.'
+        ]);
+    }
+
+    public function storeServiceCategory(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:service_categories,name',
+        ]);
+
+        $category = new ServiceCategory();
+        $category->name = $validated['name'];
+        $category->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Service category added successfully!',
+            'data' => $category
+        ]);
     }
 }

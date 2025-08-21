@@ -10,7 +10,7 @@
                 <div class="d-flex align-items-center">
                     <div class="back-btn me-2"><i data-feather="arrow-left-circle"></i></div>
                     <div class="toggle-sidebar icon-box-sidebar"><i class="status_toggle middle sidebar-toggle"
-                      data-feather="menu"></i></div>
+                            data-feather="menu"></i></div>
                 </div>
             </div>
 
@@ -25,33 +25,38 @@
             <nav class="sidebar-main">
                 <div id="sidebar-menu">
                     <ul class="sidebar-links list-unstyled px-2" id="simple-bar">
-                        <li class="sidebar-list mb-2">
+                        <li class="sidebar-list mb-3">
                             <a class="sidebar-link sidebar-title" href="<?php echo e(route('vendor_dashboard')); ?>">
                                 <i data-feather="home"></i><span class="ms-2">Dashboard</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-list mb-2">
+                        <li class="sidebar-list mb-3">
                             <a class="sidebar-link sidebar-title" href="<?php echo e(route('appointments')); ?>">
                                 <i data-feather="calendar"></i><span class="ms-2">Appointments</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-list mb-2">
+                        <li class="sidebar-list mb-3">
                             <a class="sidebar-link sidebar-title" href="<?php echo e(route('customers')); ?>">
                                 <i data-feather="users"></i><span class="ms-2">Customers</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-list mb-2">
+                        <li class="sidebar-list mb-3">
                             <a class="sidebar-link sidebar-title" href="<?php echo e(route('salon.timeslots')); ?>">
                                 <i data-feather="clock"></i><span class="ms-2">Time slots</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-list mb-2">
+                        <li class="sidebar-list mb-3">
                             <a class="sidebar-link sidebar-title" href="<?php echo e(route('services')); ?>">
                                 <i data-feather="scissors"></i><span class="ms-2">Services</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-list mb-3">
+                            <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('logout')); ?>">
+                                <i data-feather="log-out"></i><span>Logout</span>
                             </a>
                         </li>
                     </ul>
@@ -75,47 +80,53 @@
                 <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
                 <div id="sidebar-menu">
                     <ul class="sidebar-links" id="simple-bar">
-                        <li class="back-btn">
+                        <li class="back-btn mb-3" >
                             <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2"
                                     aria-hidden="true"></i></div>
                         </li>
 
-                        <li class="sidebar-list">
+                        <li class="sidebar-list mb-3">
                             <a class="sidebar-link sidebar-title" href="<?php echo e(route('dashboard')); ?>">
                                 <i data-feather="home"></i><span class="lan-3"></span>
                             </a>
                         </li>
 
-                        <li class="sidebar-list">
+                        <li class="sidebar-list mb-3">
                             <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('salons')); ?>">
                                 <i data-feather="scissors"></i><span>Salonss</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-list">
+                        <li class="sidebar-list mb-3">
                             <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('banners')); ?>">
                                 <i data-feather="flag"></i><span>Banner</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-list">
+                        <li class="sidebar-list mb-3">
                             <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('admin.salon.types')); ?>">
                                 <i data-feather="layers"></i><span>Salon Type</span>
                             </a>
                         </li>
+                        <li class="sidebar-list mb-3">
+                            <a class="sidebar-link sidebar-title link-nav"
+                                href="<?php echo e(route('admin.salon.service.categories')); ?>">
+                                <i data-feather="tag"></i><span>Service Catagories</span>
+                            </a>
+                        </li>
 
-                        <li class="sidebar-list">
+                        <li class="sidebar-list mb-3">
                             <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('admin.settings')); ?>">
                                 <i data-feather="settings"></i><span>Settings</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-list">
+                        <li class="sidebar-list mb-3">
                             <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('admin.payments')); ?>">
                                 <i data-feather="credit-card"></i><span>Payment Methods</span>
                             </a>
                         </li>
-                        <li class="sidebar-list">
+                        <li class="sidebar-list mb-3">
                             <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('logout')); ?>">
                                 <i data-feather="log-out"></i><span>Logout</span>
                             </a>

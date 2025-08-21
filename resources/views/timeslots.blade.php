@@ -13,14 +13,15 @@
                 Add New Schedule
             </button>
         @else
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <h4 style="color: #0a566d" class="underlined-heading">Weekly Schedule</h4>
-                <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
+
+            <div class="p-4 mb-3 card-header text-white d-flex justify-content-between align-items-center">
+                <h4 class="mb-0 underlined-heading fw-bold" style="color: #0a566d">Weekly Schedule</h4>
+                <button class="btn btn-light btn-md px-3 py-2 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
                     data-bs-target="#addScheduleModal">
-                    <i class="fas fa-plus-circle me-2 text-primary"></i> Add Schedule
+                    <i class="fas fa-plus-circle me-2 text-primary"></i>Add Schedule
                 </button>
             </div>
-            <table class="table table-bordered">
+            <table class="p-3 table table-bordered">
                 <thead>
                     <tr>
                         <th>Day</th>

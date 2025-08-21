@@ -4,23 +4,6 @@
 
 <?php $__env->startSection('main_content'); ?>
     <div class="container">
-        <style>
-            .underlined-heading {
-                position: relative;
-                display: inline-block;
-            }
-
-            .underlined-heading::after {
-                content: '';
-                position: absolute;
-                bottom: -5px;
-                left: 0;
-                width: 50%;
-                height: 3px;
-                background: #0a566d;
-                border-radius: 2px;
-            }
-        </style>
         <h2 class="mb-4 underlined-heading" style="color: #0a566d;">Your Profile</h2>
 
         <form id="vendorForm" method="POST" enctype="multipart/form-data">
@@ -69,7 +52,7 @@
                         <div class="col-md-6">
                             <label for="cover_photo" class="form-label">Cover Photo</label>
                             <input type="file" id="cover_photo" name="cover_photo" class="form-control" accept="image/*">
-                            <?php if($vendor->cover_photo): ?>
+                            <?php if(isset($vendor->cover_photo) && $vendor->cover_photo): ?>
                                 <div class="mt-2">
                                     <img src="<?php echo e(asset('storage/' . $vendor->cover_photo)); ?>" alt="Cover Photo"
                                         class="img-fluid rounded" style="max-height: 150px;">
@@ -79,50 +62,48 @@
                         <div class="col-md-6">
                             <label for="business_name" class="form-label">Business Name</label>
                             <input type="text" id="business_name" name="business_name"
-                                value="<?php echo e($vendor->business_name); ?>" class="form-control">
+                                value="<?php echo e(isset($vendor->business_name) ? $vendor->business_name : ''); ?>" class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label for="slogan" class="form-label">Slogan</label>
-                            <input type="text" id="slogan" name="slogan" value="<?php echo e($vendor->slogan); ?>"
+                            <input type="text" id="slogan" name="slogan" value="<?php echo e(isset($vendor->slogan) ? $vendor->slogan : ''); ?>"
                                 class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label for="salon_type_id" class="form-label">Type</label>
                             <select id="salon_type_id" name="salon_type_id" class="form-select">
+
                                 <?php $__currentLoopData = $types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($type->id); ?>"
-                                        <?php echo e($vendor->salon_type_id == $type->id ? 'selected' : ''); ?>>
+                                <option value="">---chose type---</option>
+                                    <option value="<?php echo e($type->id); ?>" <?php if(isset($vendor->salon_type_id)): ?>
+                                        <?php echo e($vendor->salon_type_id == $type->id ? 'selected' : ''); ?>
+
+                                        <?php else: ?>
+                                        <?php endif; ?>
+                                        >
                                         <?php echo e($type->name); ?>
 
                                     </option>
+
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="location" class="form-label">Location</label>
-                            <input type="text" id="location" name="location" value="<?php echo e($vendor->location); ?>"
+                            <input type="text" id="location" name="location" value="<?php echo e(isset($vendor->location) ? $vendor->location : ''); ?>"
                                 class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label for="gst_number" class="form-label">GST Number</label>
                             <input type="text" id="gst_number" placeholder="ABCDE1234F" name="gst_number"
-                                value="<?php echo e($vendor->gst_number); ?>" class="form-control">
+                                value="<?php echo e(isset($vendor->gst_number) ? $vendor->gst_number : ''); ?>" class="form-control">
                         </div>
-                        <div class="col-md-6">
-                            <label for="shop_open" class="form-label">Shop Open Time</label>
-                            <input type="time" id="shop_open" name="shop_open" value="<?php echo e($vendor->shop_open); ?>"
-                                class="form-control">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="shop_close" class="form-label">Shop Close Time</label>
-                            <input type="time" id="shop_close" name="shop_close" value="<?php echo e($vendor->shop_close); ?>"
-                                class="form-control">
-                        </div>
+                        
                         <div class="col-md-6">
                             <label for="is_active" class="form-label">Status</label>
                             <select id="is_active" name="is_active" class="form-select">
-                                <option value="1" <?php echo e($vendor->is_active ? 'selected' : ''); ?>>Active</option>
-                                <option value="0" <?php echo e(!$vendor->is_active ? 'selected' : ''); ?>>Inactive</option>
+                                <option value="1" <?php echo e(isset($vendor->is_active) && $vendor->is_active ? 'selected' : ''); ?>>Active</option>
+                                <option value="0" <?php echo e(isset($vendor->is_active) && !$vendor->is_active ? 'selected' : ''); ?>>Inactive</option>
                             </select>
                         </div>
                     </div>

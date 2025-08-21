@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('slogan')->nullable();
             $table->unsignedBigInteger('salon_type_id');
             $table->string('location');
-            $table->string('shop_open');
-            $table->string('shop_close');
-            $table->string('buffer_timing');
+            // $table->string('shop_open');
+            // $table->string('shop_close');
+            $table->string('buffer_timing')->nullable();
             $table->string('cover_photo')->nullable();
             $table->boolean('is_active')->default(1);
             $table->string('gst_number')->nullable();

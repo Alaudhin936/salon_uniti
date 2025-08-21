@@ -62,110 +62,124 @@
                                 </div>
                             </div>
                         </div>
+                        <?php if(!count($paymentTypes)): ?>
+                            <div class="card border-0 shadow-sm text-center p-5 my-3">
+                                <div class="card-body">
+                                    <i class="fa fa-credit-card display-4 text-muted mb-3"></i>
+                                    <h5 class="fw-bold text-muted">No Payment Methods Found</h5>
+                                    <p class="text-secondary small">Please add a payment method to continue.</p>
 
-                        <form id="paymentForm" action="" method="POST" enctype="multipart/form-data">
-                            <?php echo csrf_field(); ?>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <form id="paymentForm" action="" method="POST" enctype="multipart/form-data">
+                                <?php echo csrf_field(); ?>
 
-                            <div class="mb-4">
-                                <h5 class="fw-bold mb-3 text-dark">
-                                    <i class="fas fa-wallet me-2 text-primary"></i>
-                                    Select Payment Method
-                                </h5>
+                                <div class="mb-4">
+                                    <h5 class="fw-bold mb-3 text-dark">
+                                        <i class="fas fa-wallet me-2 text-primary"></i>
+                                        Select Payment Method
+                                    </h5>
 
-                                <div class="payment-methods">
-                                    <div class="row g-3">
-                                        <?php $__currentLoopData = $paymentTypes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $method): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <div class="col-md-4 col-sm-6">
-                                                <input type="radio" name="payment_method_id" id="method<?php echo e($method->id); ?>"
-                                                    value="<?php echo e($method->id); ?>" data-name=<?php echo e($method->name); ?> class="d-none payment-method-radio"
-                                                    <?php echo e($loop->first ? 'checked' : ''); ?>>
-                                                <label for="method<?php echo e($method->id); ?>"
-                                                    class="payment-method-card w-100 h-100 d-flex flex-column align-items-center justify-content-center text-decoration-none">
+                                    <div class="payment-methods">
+                                        <div class="row g-3">
+                                            <?php $__currentLoopData = $paymentTypes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $method): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <div class="col-md-4 col-sm-6">
+                                                    <input type="radio" name="payment_method_id"
+                                                        id="method<?php echo e($method->id); ?>" value="<?php echo e($method->id); ?>"
+                                                        data-name=<?php echo e($method->name); ?> class="d-none payment-method-radio"
+                                                        <?php echo e($loop->first ? 'checked' : ''); ?>>
+                                                    <label for="method<?php echo e($method->id); ?>"
+                                                        class="payment-method-card w-100 h-100 d-flex flex-column align-items-center justify-content-center text-decoration-none">
 
-                                                    <div class="svg-icon">
-                                                        <?php echo $method->logo_svg; ?>
+                                                        <div class="svg-icon">
+                                                            <?php echo $method->logo_svg; ?>
+
+                                                        </div>
+
+                                                        <style>
+                                                            .svg-icon svg {
+                                                                width: 70px;
+                                                                height: auto;
+                                                            }
+                                                        </style>
+
+                                                    </label>
+                                                    <div class="method-name fw-semibold text-center"><?php echo e($method->name); ?>
 
                                                     </div>
 
-                                                    <style>
-                                                        .svg-icon svg {
-                                                            width: 70px;
-                                                            height: auto;
-                                                        }
-                                                    </style>
-
-                                                </label>
-                                                <div class="method-name fw-semibold text-center"><?php echo e($method->name); ?></div>
-
-                                            </div>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </div>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="mb-4 mt-5">
-                                <div id="paymentDetails">
-                                    <div class="payment-detail upi-details">
-                                        <div class="card border-0 bg-light rounded-3">
-                                            <div class="card-body p-4">
-                                                <h6 class="fw-bold mb-3 text-primary">
-                                                    <i class="fab fa-google-pay me-2"></i>
-                                                    UPI Payment Details
-                                                </h6>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="form-floating mb-3">
-                                                            <input type="text" class="form-control form-control-lg"
-                                                                id="upi_id" name="upi_id" placeholder="yourname@upi">
-                                                            <label for="upi_id">
-                                                                <i class="fas fa-at me-1"></i>
-                                                                UPI ID
-                                                            </label>
+                                <div class="mb-4 mt-5">
+                                    <div id="paymentDetails">
+                                        <div class="payment-detail upi-details">
+                                            <div class="card border-0 bg-light rounded-3">
+                                                <div class="card-body p-4">
+                                                    <h6 class="fw-bold mb-3 text-primary">
+                                                        <i class="fab fa-google-pay me-2"></i>
+                                                        UPI Payment Details
+                                                    </h6>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-floating mb-3">
+                                                                <input type="text" class="form-control form-control-lg"
+                                                                    id="upi_id" name="upi_id"
+                                                                    placeholder="yourname@upi">
+                                                                <label for="upi_id">
+                                                                    <i class="fas fa-at me-1"></i>
+                                                                    UPI ID
+                                                                </label>
+                                                            </div>
+                                                            <small class="text-muted">
+                                                                <i class="fas fa-info-circle me-1"></i>
+                                                                Enter your UPI ID (e.g., yourname@paytm, yourname@gpay)
+                                                            </small>
                                                         </div>
-                                                        <small class="text-muted">
-                                                            <i class="fas fa-info-circle me-1"></i>
-                                                            Enter your UPI ID (e.g., yourname@paytm, yourname@gpay)
-                                                        </small>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    
-                                </div>
-                            </div>
-
-                            <div class="row g-3 mt-5">
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-success btn-lg w-100 py-3 rounded-3 fw-bold">
-                                        <i class="fas fa-check-circle me-2"></i>
-                                        Confirm Payment ₹<?php echo e(number_format($service->price, 2)); ?>
-
-                                    </button>
-                                </div>
-                                <div class="col-12">
-                                    <a href="<?php echo e(url()->previous()); ?>"
-                                        class="btn btn-outline-secondary btn-lg w-100 py-2 rounded-3">
-                                        <i class="fas fa-arrow-left me-2"></i>
-                                        Back to Booking
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="mt-4 p-3 bg-light rounded-3 border">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <i class="fas fa-shield-check fa-2x text-success"></i>
-                                    </div>
-                                    <div class="col">
-                                        <h6 class="mb-1 fw-bold">Secure Payment</h6>
-                                        <small class="text-muted">Your payment information is protected with
-                                            industry-standard encryption</small>
+                                        
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+
+                                <div class="row g-3 mt-5">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-success btn-lg w-100 py-3 rounded-3 fw-bold">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            Confirm Payment ₹<?php echo e(number_format($service->price, 2)); ?>
+
+                                        </button>
+                                    </div>
+                                    <div class="col-12">
+                                        <a href="<?php echo e(url()->previous()); ?>"
+                                            class="btn btn-outline-secondary btn-lg w-100 py-2 rounded-3">
+                                            <i class="fas fa-arrow-left me-2"></i>
+                                            Back to Booking
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 p-3 bg-light rounded-3 border">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <i class="fas fa-shield-check fa-2x text-success"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="mb-1 fw-bold">Secure Payment</h6>
+                                            <small class="text-muted">Your payment information is protected with
+                                                industry-standard encryption</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -345,6 +359,12 @@
 <?php $__env->startSection('scripts'); ?>
     <script>
         $(document).ready(function() {
+            let methodName1 = $('.payment-method-radio').data('name');
+            if (methodName1.toLowerCase() === 'gpay') {
+                $('.upi-details').removeClass('d-none');
+            } else {
+                $('.upi-details').addClass('d-none');
+            }
             $('.payment-method-radio').change(function() {
                 const methodName = $(this).data('name');
                 $('.payment-detail').addClass('d-none');
@@ -374,7 +394,8 @@
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Payment Successful!',
-                                text: 'Appointment Have been booked Successfully!'+ 'Your Payment ID is' + response.payment_id,
+                                text: 'Appointment Have been booked Successfully!' +
+                                    'Your Payment ID is' + response.payment_id,
                                 confirmButtonColor: '#198754'
                             }).then(() => {
                                 window.location.href = "<?php echo e(route('appointments')); ?>";

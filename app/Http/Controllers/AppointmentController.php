@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use App\Models\Service;
 use App\Models\User;
+use App\Models\VendorDetail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,7 @@ class AppointmentController extends Controller
     {
         $currentYear = Carbon::now()->year;
         $today = Carbon::today();
+        $vendor = VendorDetail::where('vendor_id', auth()->user()->id)->first();
         $monthlyEarnings = DB::table('appointments')
             ->join('services', 'appointments.service_id', '=', 'services.id')
             ->join('users as vendors', 'services.vendor_id', '=', 'vendors.id')
@@ -64,7 +66,7 @@ class AppointmentController extends Controller
             ->where('appointments.status', 'completed')
             ->sum('services.price');
 
-        return view('admin_unique_layout.box_dashboard', compact('appointments', 'monthlyEarnings', 'todaysAppointments', 'todaysRevenue'));
+        return view('admin_unique_layout.box_dashboard', compact('appointments', 'vendor', 'monthlyEarnings', 'todaysAppointments', 'todaysRevenue'));
     }
 
     public function appointments()

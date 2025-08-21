@@ -99,7 +99,6 @@
                         box-shadow: 0 2px 6px rgba(30, 64, 175, 0.2);
                     }
 
-                    /* Booked slots - Light gray with red accent */
                     .btn-time-slot.btn-secondary {
                         background: #fef2f2 !important;
                         border-color: #fecaca !important;
@@ -248,7 +247,6 @@
                                         transform: translateX(4px);
                                     }
 
-                                    /* Focus state for accessibility */
                                     #bookSlotBtn:focus {
                                         outline: none;
                                         box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
@@ -274,7 +272,6 @@
                                         }
                                     }
 
-                                    /* Alternative styles for different contexts */
                                     .btn-proceed-alt {
                                         background: white;
                                         border: 2px solid #3b82f6;

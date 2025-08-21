@@ -6,10 +6,19 @@
 
 @section('main_content')
     <div class="container" style="padding:30px;background-color:white;">
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        {{-- <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 style="color: #0a566d" class="underlined-heading">Banners</h4>
-            <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal" data-bs-target="#addBannerModal">
+            <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
+                data-bs-target="#addBannerModal">
                 <i class="fas fa-plus me-2 text-success"></i> Add Banner
+            </button>
+        </div> --}}
+
+        <div class="card-header p-4 text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0 underlined-heading fw-bold" style="color: #0a566d">Banners</h4>
+            <button class="btn btn-light btn-md px-3 py-2 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
+                data-bs-target="#addBannerModal">
+                <i class="fas fa-plus-circle me-2 text-primary"></i>Add Banner
             </button>
         </div>
 
@@ -62,8 +71,7 @@
                                         data-banner='@json($banner)'>
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <button class="btn btn-xs btn-danger deleteBannerBtn"
-                                        data-id="{{ $banner->id }}">
+                                    <button class="btn btn-xs btn-danger deleteBannerBtn" data-id="{{ $banner->id }}">
                                         <i class="fa fa-trash"></i>
                                     </button>
 
@@ -126,7 +134,8 @@
             </form>
         </div>
     </div>
-    <div class="modal fade" id="editBannerModal" tabindex="-1" aria-labelledby="editBannerModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editBannerModal" tabindex="-1" aria-labelledby="editBannerModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <form id="editBannerForm" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -186,8 +195,6 @@
         </div>
     </div>
 @endsection
-
-
 
 
 
@@ -291,7 +298,7 @@
                                 }
                             });
 
-                            $('#bannersTable').DataTable().ajax.reload();
+                            // $('#bannersTable').DataTable().ajax.reload();
                         } else {
                             alert('Something went wrong!');
                         }
@@ -316,10 +323,6 @@
             $(document).on("click", ".deleteBannerBtn", function() {
                 let bannerId = $(this).data("id");
                 let myUrl = "{{ route('admin.banner.delete', ':id') }}".replace(':id', bannerId);
-                // if (!confirm("Are you sure you want to delete this banner?")) {
-                //     return;
-                // }
-
                 Swal.fire({
                     icon: 'alert',
                     title: 'Alert',

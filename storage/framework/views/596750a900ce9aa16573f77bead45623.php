@@ -5,16 +5,13 @@
 <?php $__env->startSection('main_content'); ?>
     <div class="container-fluid" style="padding:30px;background-color:white;">
         <div class="page-title">
-            <div class="row align-items-center">
-                <div class="col-sm-6">
-                    <h3 style="color: #0a566d" class="underlined-heading">Bookings</h3>
-                </div>
-                <div class="col-sm-6 text-sm-end text-start">
-                    <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
-                        data-bs-target="#bookAppointmentModal">
-                        <i class="fa fa-plus  me-2 text-success "></i> Book Appointment
-                    </button>
-                </div>
+
+            <div class="card-header p-4 text-white d-flex justify-content-between align-items-center">
+                <h4 class="mb-0 underlined-heading fw-bold" style="color: #0a566d">Bookings</h4>
+                <button class="btn btn-light btn-md px-3 py-2 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
+                    data-bs-target="#bookAppointmentModal">
+                    <i class="fas fa-plus-circle me-2 text-primary"></i>Book Appointment
+                </button>
             </div>
 
             <div class="d-flex justify-content-center my-3 ">
@@ -35,7 +32,7 @@
             </div>
 
 
-            <div class="container-fluid mt-5" >
+            <div class="container-fluid mt-5">
                 <?php $__currentLoopData = $appointments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $date => $bookings): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php
                         $tableId = 'appointmentsTable_' . \Carbon\Carbon::parse($date)->format('Y_m_d');

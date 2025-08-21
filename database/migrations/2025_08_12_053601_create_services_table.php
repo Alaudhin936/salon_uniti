@@ -17,9 +17,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('price');
             $table->string('duration');
+            $table->boolean('is_active')->default(1);
+            $table->string('discount_percentage')->nullable();
+            $table->string('service_img');
+            $table->unsignedBigInteger('service_category_id');
             $table->boolean('services')->default(1);
             $table->timestamps();
 
+            $table->foreign('service_category_id')->on('service_categories')->references('id')->onDelete('cascade');
             $table->foreign('vendor_id')->on('users')->references('id')->onDelete('cascade');
         });
     }

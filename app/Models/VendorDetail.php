@@ -18,8 +18,8 @@ class VendorDetail extends Model
         'gst_number',
         'lattitude',
         'longitude',
-        'shop_open',
-        'shop_close',
+        // 'shop_open',
+        // 'shop_close',
         'buffer_timing',
         'salon_type_id'
     ];

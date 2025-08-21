@@ -344,14 +344,14 @@
                                 <input type="password" name="password" class="form-control">
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            {{-- <div class="col-md-6 mb-3">
                                 <label for="shop_open" class="form-label">Shop Opening Time</label>
                                 <input type="time" name="shop_open" class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="shop_close" class="form-label">Shop Closing Time</label>
                                 <input type="time" name="shop_close" class="form-control">
-                            </div>
+                            </div> --}}
 
                             <div class="col-md-3 mb-3">
                                 <label for="lattitude" class="form-label">Latitude (Optional)</label>
@@ -442,8 +442,8 @@
                         $('#salonPhone').text(response.phone);
                         $('#salonLocation').text(response.location);
                         $('#salonGst').text(response.gst_number);
-                        $('#salonOpen').text(response.shop_open);
-                        $('#salonClose').text(response.shop_close);
+                        // $('#salonOpen').text(response.shop_open);
+                        // $('#salonClose').text(response.shop_close);
                         $('#salonRevenue').text('₹' + response.total_revenue);
                         $('#salonCoverPhoto').attr('src', '{{ asset('storage') }}/' + response
                             .cover_photo);

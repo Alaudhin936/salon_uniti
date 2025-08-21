@@ -37,7 +37,7 @@ Route::get('/', function () {
     }
 });
 
-Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard')->middleware('role:1');
+Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard')->middleware('role:1');
 
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
@@ -55,6 +55,10 @@ Route::middleware('role:1')->group(function () {
     Route::get('/banners', [BannerController::class, 'index'])->name('banners');
     Route::get('/payments', [AdminController::class, 'paymentIndex'])->name('admin.payments');
     Route::post('/payments/store', [AdminController::class, 'storePaymentType'])->name('admin.payment.types.store');
+    Route::post('/service-catagory/update/{id}', [AdminController::class, 'updateServiceCategory'])->name('services.categories.update');
+    Route::post('/service-catagory/delete/{id}', [AdminController::class, 'destroyServiceCategory'])->name('services.categories.destroy');
+    Route::post('/service-catagory/store', [AdminController::class, 'storeServiceCategory'])->name('services.categories.store');
+    Route::get('/service-catagories', [AdminController::class, 'serviceCatagoryIndex'])->name('admin.salon.service.categories');
     Route::post('/payments/update/{id}', [AdminController::class, 'updatePaymentType'])->name('admin.payment.types.update');
     Route::post('/payments/destroy/{id}', [AdminController::class, 'destroyPaymentType'])->name('admin.payment.types.delete');
     Route::post('/salon/store', [AdminController::class, 'registerSalon'])->name('salons.store');
@@ -81,7 +85,7 @@ Route::prefix('salonweb')->group(function () {
     Route::post('/salonLoginSubmit', [LoginController::class, 'salonLoginSubmit'])->name('salonWebLogin');
     Route::post('/get-customer-services', [ServiceController::class, 'customerServices'])->name('vendor.customer.services');
 
-    Route::post('/store', [ServiceController::class, 'store'])->name('services.store');
+
 
     Route::middleware('role:2')->group(function () {
         Route::post('/appointment/markdone/{id}/{status}', [AppointmentController::class, 'markAsDone'])->name('appointments.markdone');
@@ -95,6 +99,7 @@ Route::prefix('salonweb')->group(function () {
         Route::get('/customers', [AppointmentController::class, 'customers'])->name('customers');
         Route::post('/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
         Route::get('/services', [ServiceController::class, 'index'])->name('services');
+        Route::post('/store', [ServiceController::class, 'store'])->name('services.store');
         Route::post('/profile-update', [ServiceController::class, 'profileUpdate'])->name('salon.profileupdate');
         Route::post('/services/{id}', [ServiceController::class, 'update'])->name('services.update');
         Route::post('/services/{id}/delete', [ServiceController::class, 'delete'])->name('services.destroy');

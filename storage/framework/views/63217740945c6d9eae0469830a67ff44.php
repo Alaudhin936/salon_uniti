@@ -166,7 +166,8 @@
         <div class="row">
             <div class="col-6 mb-4">
                 <div class="card shadow-lg border-0 rounded-4">
-                    <div class="card-header bg-gradient text-dark border-0 rounded-top-4 py-3" style="background:#407788 !important">
+                    <div class="card-header bg-gradient text-dark border-0 rounded-top-4 py-3"
+                        style="background:#73a0ad !important">
                         <div class="d-flex align-items-center">
                             <div class="bg-white bg-opacity-20 rounded-circle p-2 me-3">
                                 <i class="fas fa-star text-dark fa-lg"></i>
@@ -222,8 +223,7 @@
                                         <?php endfor; ?>
                                     </div>
                                     <div>
-                                        <span
-                                            class="fw-bold text-dark"><?php echo e(number_format($salon->avg_rating, 1)); ?>/5</span>
+                                        <span class="fw-bold text-dark"><?php echo e(number_format($salon->avg_rating, 1)); ?>/5</span>
                                         <small class="text-muted ms-1">(<?php echo e($salon->total_reviews); ?> reviews)</small>
                                     </div>
                                 </div>
@@ -251,6 +251,70 @@
                     <?php endif; ?>
                 </div>
             </div>
+            <div class="col-6 mb-4">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-header bg-gradient text-dark border-0 rounded-top-4 py-3"
+                        style="background:#73a0ad !important">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-white bg-opacity-20 rounded-circle p-2 me-3">
+                                <i class="fas fa-fire text-dark fa-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-0 fw-bold">Trending Services</h5>
+                                <small class="opacity-75">Most booked services this week</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <?php $__empty_1 = true; $__currentLoopData = $trendingServices; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                            <div
+                                class="d-flex align-items-center justify-content-between p-3 border-bottom <?php echo e($loop->last ? 'border-0' : ''); ?>">
+
+                                <!-- Rank -->
+                                <div class="me-3">
+                                    <span class="badge bg-primary rounded-circle px-3 py-2 fw-bold">
+                                        <?php echo e($index + 1); ?>
+
+                                    </span>
+                                </div>
+
+                                <!-- Service Info -->
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-0 fw-semibold text-dark"><?php echo e($service->name); ?></h6>
+                                    <small class="text-muted"><?php echo e($service->business_name); ?></small>
+                                </div>
+
+                                <!-- Booking Count -->
+                                <div class="text-end">
+                                    <span class="fw-bold text-dark"><?php echo e($service->total_bookings); ?></span>
+                                    <small class="text-muted">bookings</small>
+                                </div>
+                            </div>
+
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                            <div class="card-body text-center py-5">
+                                <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                                    style="width: 60px; height: 60px;">
+                                    <i class="fas fa-fire fa-2x text-muted"></i>
+                                </div>
+                                <h6 class="text-muted mb-1">No Trending Services</h6>
+                                <p class="text-muted small mb-0">Services will appear here once customers book frequently.
+                                </p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <?php if(!$trendingServices->isEmpty()): ?>
+                        <div class="card-footer bg-light border-0 text-center py-2">
+                            <small class="text-muted">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Based on bookings in the last 7 days
+                            </small>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+
         </div>
         <div class="row">
             <div class="col-12">
@@ -462,8 +526,10 @@
                                                 </td>
                                                 <td class="pe-4">
                                                     <span
-                                                        class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill">
-                                                        <i class="fas fa-check-circle me-1"></i>Active
+                                                        class="badge  bg-opacity-10 <?php if($user->is_active): ?> bg-success text-success <?php else: ?> bg-danger text-danger <?php endif; ?> px-3 py-2 rounded-pill">
+                                                        <i
+                                                            class="fas fa-check-circle me-1"></i><?php echo e($user->is_active ? 'Active' : 'In-active'); ?>
+
                                                     </span>
                                                 </td>
                                             </tr>

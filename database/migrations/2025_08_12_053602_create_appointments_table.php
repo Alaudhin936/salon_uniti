@@ -19,10 +19,8 @@ return new class extends Migration
             $table->string('slot_end');
             $table->string('date');
             $table->enum('status',['booked','cancelled','completed']);
-            $table->unsignedBigInteger('payment_id');
             $table->timestamps();
 
-            $table->foreign('payment_id')->on('payment_details')->references('id')->onDelete('cascade');
             $table->foreign('service_id')->on('services')->references('id')->onDelete('cascade');
             $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
         });

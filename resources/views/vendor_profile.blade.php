@@ -54,7 +54,7 @@
                         <div class="col-md-6">
                             <label for="cover_photo" class="form-label">Cover Photo</label>
                             <input type="file" id="cover_photo" name="cover_photo" class="form-control" accept="image/*">
-                            @if ($vendor->cover_photo)
+                            @if (isset($vendor->cover_photo) && $vendor->cover_photo)
                                 <div class="mt-2">
                                     <img src="{{ asset('storage/' . $vendor->cover_photo) }}" alt="Cover Photo"
                                         class="img-fluid rounded" style="max-height: 150px;">
@@ -64,49 +64,55 @@
                         <div class="col-md-6">
                             <label for="business_name" class="form-label">Business Name</label>
                             <input type="text" id="business_name" name="business_name"
-                                value="{{ $vendor->business_name }}" class="form-control">
+                                value="{{ isset($vendor->business_name) ? $vendor->business_name : ''}}" class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label for="slogan" class="form-label">Slogan</label>
-                            <input type="text" id="slogan" name="slogan" value="{{ $vendor->slogan }}"
+                            <input type="text" id="slogan" name="slogan" value="{{ isset($vendor->slogan) ? $vendor->slogan : '' }}"
                                 class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label for="salon_type_id" class="form-label">Type</label>
                             <select id="salon_type_id" name="salon_type_id" class="form-select">
+
                                 @foreach ($types as $type)
-                                    <option value="{{ $type->id }}"
-                                        {{ $vendor->salon_type_id == $type->id ? 'selected' : '' }}>
+                                <option value="">---chose type---</option>
+                                    <option value="{{ $type->id }}" @if(isset($vendor->salon_type_id))
+                                        {{ $vendor->salon_type_id == $type->id ? 'selected' : '' }}
+                                        @else
+                                        @endif
+                                        >
                                         {{ $type->name }}
                                     </option>
+
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="location" class="form-label">Location</label>
-                            <input type="text" id="location" name="location" value="{{ $vendor->location }}"
+                            <input type="text" id="location" name="location" value="{{ isset($vendor->location) ? $vendor->location : '' }}"
                                 class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label for="gst_number" class="form-label">GST Number</label>
                             <input type="text" id="gst_number" placeholder="ABCDE1234F" name="gst_number"
-                                value="{{ $vendor->gst_number }}" class="form-control">
+                                value="{{ isset($vendor->gst_number) ? $vendor->gst_number : '' }}" class="form-control">
                         </div>
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <label for="shop_open" class="form-label">Shop Open Time</label>
-                            <input type="time" id="shop_open" name="shop_open" value="{{ $vendor->shop_open }}"
+                            <input type="time" id="shop_open" name="shop_open" value="{{ isset($vendor->shop_open) ? $vendor->shop_open : '' }}"
                                 class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label for="shop_close" class="form-label">Shop Close Time</label>
-                            <input type="time" id="shop_close" name="shop_close" value="{{ $vendor->shop_close }}"
+                            <input type="time" id="shop_close" name="shop_close" value="{{ isset($vendor->shop_close) ? $vendor->shop_close : '' }}"
                                 class="form-control">
-                        </div>
+                        </div> --}}
                         <div class="col-md-6">
                             <label for="is_active" class="form-label">Status</label>
                             <select id="is_active" name="is_active" class="form-select">
-                                <option value="1" {{ $vendor->is_active ? 'selected' : '' }}>Active</option>
-                                <option value="0" {{ !$vendor->is_active ? 'selected' : '' }}>Inactive</option>
+                                <option value="1" {{ isset($vendor->is_active) && $vendor->is_active ? 'selected' : '' }}>Active</option>
+                                <option value="0" {{ isset($vendor->is_active) && !$vendor->is_active ? 'selected' : '' }}>Inactive</option>
                             </select>
                         </div>
                     </div>

@@ -70,7 +70,6 @@
 
         .btn-close:hover {
             opacity: 1;
-            background: rgba(255, 255, 255, 0.1);
             transform: rotate(90deg);
         }
 
@@ -131,6 +130,9 @@
             margin-bottom: 1.5rem;
         }
 
+        input, textarea{
+            border: 0.5px solid #bde2e7 !important;
+        }
         .mb-3::after {
             content: '';
             position: absolute;
@@ -361,6 +363,7 @@
         }
 
         .badge.bg-success {
+            font-size: 0.8rem;
             background: var(--success-light) !important;
             color: var(--success-text) !important;
         }

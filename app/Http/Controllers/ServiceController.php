@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SalonType;
 use App\Models\Service;
+use App\Models\ServiceCategory;
 use App\Models\User;
 use App\Models\VendorDetail;
 use App\Models\VendorScheduleException;
@@ -28,6 +29,7 @@ class ServiceController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'duration' => $request->duration,
+            'service_category_id' => $request->service_category_id,
             'service_img' => isset($path) ? $path : ''
         ]);
 
@@ -37,9 +39,15 @@ class ServiceController extends Controller
     public function index(Request $request)
     {
         $vendor_id = auth()->user()->id;
-        $services = Service::where('vendor_id', $vendor_id)->get();
 
-        return view('services', compact('services'));
+        $services = Service::where('services.vendor_id', $vendor_id)
+            ->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')
+            ->select('services.*', 'service_categories.name as category_name')
+            ->get();
+
+        $categories = ServiceCategory::all();
+
+        return view('services', compact('services', 'categories'));
     }
 
 
@@ -55,6 +63,7 @@ class ServiceController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'duration' => $request->duration,
+            'service_category_id' => $request->service_category_id,
             'is_active' => $request->is_active,
             'service_img' => isset($path) ? $path : $service->service_img
         ]);
@@ -83,12 +92,12 @@ class ServiceController extends Controller
         $vendor = \App\Models\VendorDetail::where('vendor_id', $user->id)->first();
 
         $types = SalonType::all();
-
         return view('vendor_profile', compact('vendor', 'vendor', 'types'));
     }
 
     public function profileupdate(Request $request)
     {
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
@@ -97,8 +106,6 @@ class ServiceController extends Controller
             'slogan' => 'nullable|string|max:255',
             'salon_type_id' => 'required',
             'location' => 'nullable|string|max:255',
-            'shop_open' => 'nullable',
-            'shop_close' => 'nullable',
             'cover_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120'
         ]);
 
@@ -107,7 +114,7 @@ class ServiceController extends Controller
 
         $coverPhotoPath = null;
         if ($request->hasFile('cover_photo')) {
-            if ($vendorDetail->cover_photo && Storage::disk('public')->exists($vendorDetail->cover_photo)) {
+            if (isset($vendorDetail->cover_photo) && $vendorDetail->cover_photo && Storage::disk('public')->exists($vendorDetail->cover_photo)) {
                 Storage::disk('public')->delete($vendorDetail->cover_photo);
             }
 
@@ -131,14 +138,21 @@ class ServiceController extends Controller
             'slogan' => $request->slogan,
             'salon_type_id' => $request->salon_type_id,
             'location' => $request->location,
-            'shop_open' => $request->shop_open,
-            'shop_close' => $request->shop_close,
             'gst_number' => $request->gst_number,
             'is_active' => $request->is_active,
         ];
 
         if ($coverPhotoPath) {
             $vendorUpdateData['cover_photo'] = $coverPhotoPath;
+        }
+
+        if (!VendorDetail::where('vendor_id', $user->id)->first()) {
+            VendorDetail::updateOrCreate(
+                ['vendor_id' => $user->id],
+                $vendorUpdateData
+            );
+        } else {
+            VendorDetail::where('vendor_id', $user->id)->first();
         }
 
         VendorDetail::where('vendor_id', $user->id)->update($vendorUpdateData);

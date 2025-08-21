@@ -24,6 +24,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+            $table->unique(['vendor_id', 'day_of_week']);
         });
     }
 

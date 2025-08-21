@@ -6,14 +6,16 @@
 
 @section('main_content')
     <div class="container mt-4" style="padding:30px;background-color:white;">
-        <div class="d-flex align-items-center justify-content-between mb-3">
-            <h3 style="color: #0a566d" class="underlined-heading mb-4">Salon Types</h3>
-            <button class="btn btn-light btn-md px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal" data-bs-target="#addSalonTypeModal">
-                <i class="fas fa-plus me-2 text-success"></i> Add New Type
+
+        <div class="card-header mb-5 p-4 text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0 underlined-heading fw-bold" style="color: #0a566d">Salon Types</h4>
+            <button class="btn btn-light btn-md px-3 py-2 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
+                data-bs-target="#addSalonTypeModal">
+                <i class="fas fa-plus-circle me-2 text-primary"></i>Add Catagory
             </button>
         </div>
 
-        <table class="table table-bordered" id="salonTypesTable">
+        <table class="table table-bordered mt-5 p-5" id="salonTypesTable">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -152,7 +154,7 @@
 
 
                 Swal.fire({
-                    text:'Are Your Sure Wanted to delete this Type',
+                    text: 'Are Your Sure Wanted to delete this Type',
                     icon: 'question',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
