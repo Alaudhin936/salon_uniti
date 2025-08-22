@@ -184,6 +184,6 @@ class BookingController extends Controller
         ]);
 
 
-        return response()->json(['status' => 200, 'payment_id' => $paymentDetail->payment_id]);
+        return response()->json(['status' => 200, 'appointment_id' => $appointment->id]);
     }
 }

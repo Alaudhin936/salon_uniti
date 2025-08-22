@@ -26,31 +26,31 @@
                 <div id="sidebar-menu">
                     <ul class="sidebar-links list-unstyled px-2" id="simple-bar">
                         <li class="sidebar-list mb-3">
-                            <a class="sidebar-link sidebar-title" href="{{ route('vendor_dashboard') }}">
+                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('vendor_dashboard') }}">
                                 <i data-feather="home"></i><span class="ms-2">Dashboard</span>
                             </a>
                         </li>
 
                         <li class="sidebar-list mb-3">
-                            <a class="sidebar-link sidebar-title" href="{{ route('appointments') }}">
+                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('appointments') }}">
                                 <i data-feather="calendar"></i><span class="ms-2">Appointments</span>
                             </a>
                         </li>
 
                         <li class="sidebar-list mb-3">
-                            <a class="sidebar-link sidebar-title" href="{{ route('customers') }}">
+                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('customers') }}">
                                 <i data-feather="users"></i><span class="ms-2">Customers</span>
                             </a>
                         </li>
 
                         <li class="sidebar-list mb-3">
-                            <a class="sidebar-link sidebar-title" href="{{ route('salon.timeslots') }}">
+                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('salon.timeslots') }}">
                                 <i data-feather="clock"></i><span class="ms-2">Time slots</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-list mb-3">
-                            <a class="sidebar-link sidebar-title" href="{{ route('services') }}">
+                        <li class="sidebar-list mb-3 ">
+                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('services') }}">
                                 <i data-feather="scissors"></i><span class="ms-2">Services</span>
                             </a>
                         </li>
@@ -85,48 +85,48 @@
                                     aria-hidden="true"></i></div>
                         </li>
 
-                        <li class="sidebar-list mb-3">
+                        <li class="sidebar-list mb-3 link-nav">
                             <a class="sidebar-link sidebar-title" href="{{ route('dashboard') }}">
                                 <i data-feather="home"></i><span class="lan-3"></span>
                             </a>
                         </li>
 
-                        <li class="sidebar-list mb-3">
+                        <li class="sidebar-list mb-3 link-nav">
                             <a class="sidebar-link sidebar-title link-nav" href="{{ route('salons') }}">
                                 <i data-feather="scissors"></i><span>Salonss</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-list mb-3">
+                        <li class="sidebar-list mb-3 link-nav">
                             <a class="sidebar-link sidebar-title link-nav" href="{{ route('banners') }}">
                                 <i data-feather="flag"></i><span>Banner</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-list mb-3">
+                        <li class="sidebar-list mb-3 link-nav">
                             <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.salon.types') }}">
                                 <i data-feather="layers"></i><span>Salon Type</span>
                             </a>
                         </li>
-                        <li class="sidebar-list mb-3">
+                        <li class="sidebar-list mb-3 link-nav">
                             <a class="sidebar-link sidebar-title link-nav"
                                 href="{{ route('admin.salon.service.categories') }}">
                                 <i data-feather="tag"></i><span>Service Catagories</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-list mb-3">
+                        <li class="sidebar-list mb-3 link-nav">
                             <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.settings') }}">
                                 <i data-feather="settings"></i><span>Settings</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-list mb-3">
+                        <li class="sidebar-list mb-3 link-nav">
                             <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.payments') }}">
                                 <i data-feather="credit-card"></i><span>Payment Methods</span>
                             </a>
                         </li>
-                        <li class="sidebar-list mb-3">
+                        <li class="sidebar-list mb-3 link-nav">
                             <a class="sidebar-link sidebar-title link-nav" href="{{ route('logout') }}">
                                 <i data-feather="log-out"></i><span>Logout</span>
                             </a>

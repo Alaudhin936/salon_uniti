@@ -395,7 +395,7 @@
                                 icon: 'success',
                                 title: 'Payment Successful!',
                                 text: 'Appointment Have been booked Successfully!' +
-                                    'Your Payment ID is' + response.payment_id,
+                                    'Appointment ID is ' + response.appointment_id,
                                 confirmButtonColor: '#198754'
                             }).then(() => {
                                 window.location.href = "<?php echo e(route('appointments')); ?>";

@@ -17,16 +17,17 @@
             <div class="d-flex justify-content-center my-3 ">
                 <ul class="nav nav-pills d-flex gap-3" id="appointmentFilter">
                     <li class="nav-item">
-                        <button class="btn active nav-link" data-filter="all">All</button>
+                        <button class="btn active nav-link" data-filter="upcoming">Upcoming</button>
                     </li>
-                    <li class="nav-item">
-                        <button class="btn nav-link" data-filter="upcoming">Upcoming</button>
-                    </li>
+
                     <li class="nav-item">
                         <button class="btn nav-link" data-filter="completed">Completed</button>
                     </li>
                     <li class="nav-item">
                         <button class="btn nav-link" data-filter="cancelled">Cancelled</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn nav-link" data-filter="all">All</button>
                     </li>
                 </ul>
             </div>
@@ -235,8 +236,6 @@
                                 placeholder="Select Date" required
                                 data-mindate="<?php echo e(\Carbon\Carbon::today()->format('Y-m-d')); ?>">
                         </div>
-
-                        
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" style="border-radius:8px">> Proceed</button>
@@ -255,6 +254,11 @@
     <script src="<?php echo e(asset('assets/js/support-ticket-custom.js')); ?>"></script>
     <script>
         $(document).ready(function() {
+            filterAppointments('upcoming');
+            $('#appointmentFilter button').on('click', function() {
+                const filter = $(this).data('filter');
+                filterAppointments(filter);
+            });
             flatpickr(".datepicker", {
                 dateFormat: "Y-m-d",
                 minDate: "today",
@@ -282,116 +286,24 @@
                 });
             });
 
-            function calculateEndTime() {
-                let startTime = $('input[name="slot_start"]').val();
-                let duration = $('select[name="service_id"] option:selected').data('duration');
-
-                if (startTime && duration) {
-                    let [hours, minutes] = startTime.split(':').map(Number);
-                    let endMinutes = minutes + parseInt(duration);
-
-                    // Add minutes properly
-                    hours += Math.floor(endMinutes / 60);
-                    minutes = endMinutes % 60;
-
-                    // Format back to HH:MM
-                    let formattedHours = String(hours).padStart(2, '0');
-                    let formattedMinutes = String(minutes).padStart(2, '0');
-
-                    $('input[name="slot_end"]').val(`${formattedHours}:${formattedMinutes}`);
-                }
-            }
-
-            function setMinStartTime(date) {
-                if (!date) return;
-                let duration = $('select[name="service_id"] option:selected').data('duration');
-                $.ajax({
-                    url: "<?php echo e(route('vendor.date.validate')); ?>",
-                    method: "POST",
-                    data: {
-                        date: date,
-                        _token: '<?php echo e(csrf_token()); ?>'
-                    },
-                    success: function(response) {
-                        if (response.start_slot) {
-                            $('input[name="slot_start"]').attr('min', response.start_slot);
-                            let [endHours, endMinutes] = response.end_slot.split(':').map(Number);
-                            let totalEndMinutes = endHours * 60 + endMinutes;
-
-                            let adjustedEndMinutes = totalEndMinutes - duration;
-
-                            let adjHours = Math.floor(adjustedEndMinutes / 60);
-                            let adjMinutes = adjustedEndMinutes % 60;
-                            let formattedEnd = String(adjHours).padStart(2, '0') + ':' + String(
-                                adjMinutes).padStart(2, '0');
-
-                            $('input[name="slot_start"]').attr('max', formattedEnd);
-                        }
-                    }
-                });
-            };
-
-            $('input[name="date"]').on('change', function() {
-                setMinStartTime($(this).val());
-            });
-            $('select[name="service_id"], input[name="slot_start"]').on('change', calculateEndTime);
-            // $('#bookAppointmentForm').on('submit', function(e) {
-            //     e.preventDefault();
-
-            //     $.ajax({
-            //         url: "<?php echo e(route('appointments.store')); ?>",
-            //         type: "POST",
-            //         data: $(this).serialize(),
-            //         success: function(response) {
-            //             Swal.fire({
-            //                 icon: 'success',
-            //                 title: 'Success',
-            //                 text: 'Service Competed Successfully',
-            //                 confirmButtonColor: '#3085d6',
-            //                 confirmButtonText: 'OK'
-            //             }).then(function(result) {
-            //                 if (result.isConfirmed) {
-            //                     window.location.reload();
-            //                 }
-            //             });
-            //         },
-            //         error: function(xhr) {
-            //             if (xhr.status === 422) {
-            //                 let errors = xhr.responseJSON.errors;
-            //                 alert("Validation error: " + Object.values(errors).join(", "));
-            //             } else {
-            //                 alert("Server error!");
-            //             }
-            //         }
-            //     });
-
-            // });
 
 
-            $('#appointmentFilter button').on('click', function() {
-                const filter = $(this).data('filter');
-
-                // Update active button style
+            function filterAppointments(filter) {
                 $('#appointmentFilter .nav-link').removeClass('active');
-                $(this).addClass('active');
+                $(`#appointmentFilter button[data-filter="${filter}"]`).addClass('active');
 
-                // Loop over each card
                 $('.card').each(function() {
                     const $card = $(this);
                     let hasVisibleRows = false;
 
-                    // Loop over each appointment row inside the card
                     $card.find('.appointment-row').each(function() {
                         const status = $(this).data('status');
-
-                        // Check if row matches filter
                         const matches =
                             filter === 'all' ||
                             (filter === 'upcoming' && (status === 'booked' || status ===
                                 'pending')) ||
                             status === filter;
 
-                        // Show or hide the row
                         $(this).toggle(matches);
 
                         if (matches) {
@@ -399,10 +311,9 @@
                         }
                     });
 
-                    // Show card only if it has matching rows
                     $card.toggle(hasVisibleRows);
                 });
-            });
+            }
 
 
             $('.appointment-mark-done, .appointment-mark-reject').on('click', (e) => {

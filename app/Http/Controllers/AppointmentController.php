@@ -18,10 +18,11 @@ class AppointmentController extends Controller
         $currentYear = Carbon::now()->year;
         $today = Carbon::today();
         $vendor = VendorDetail::where('vendor_id', auth()->user()->id)->first();
+
         $monthlyEarnings = DB::table('appointments')
             ->join('services', 'appointments.service_id', '=', 'services.id')
             ->join('users as vendors', 'services.vendor_id', '=', 'vendors.id')
-            ->where('vendors.id', auth()->id()) // filter by logged-in vendor
+            ->where('vendors.id', auth()->id())
             ->whereYear('appointments.created_at', $currentYear)
             ->where('appointments.status', 'completed')
             ->selectRaw('MONTH(appointments.date) as month, SUM(services.price) as total')
@@ -30,19 +31,6 @@ class AppointmentController extends Controller
             ->pluck('total', 'month');
 
 
-        $appointments = DB::table('appointments')
-            ->join('services', 'appointments.service_id', '=', 'services.id')
-            ->join('users as customers', 'appointments.user_id', '=', 'customers.id')
-            ->join('users as vendors', 'services.vendor_id', '=', 'vendors.id')
-            ->where('vendors.id', auth()->id())
-            ->select(
-                'appointments.*',
-                'services.name as service_name',
-                'customers.name as customer_name'
-            )
-            ->orderBy('appointments.date', 'asc')
-            ->get()
-            ->groupBy('date');
 
         $todaysAppointments = DB::table('appointments')
             ->join('services', 'appointments.service_id', '=', 'services.id')
@@ -66,7 +54,18 @@ class AppointmentController extends Controller
             ->where('appointments.status', 'completed')
             ->sum('services.price');
 
-        return view('admin_unique_layout.box_dashboard', compact('appointments', 'vendor', 'monthlyEarnings', 'todaysAppointments', 'todaysRevenue'));
+        $today = Carbon::today();
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
+        $monthlyRevenue = DB::table('appointments')
+            ->join('services', 'appointments.service_id', '=', 'services.id')
+            ->join('users as vendors', 'services.vendor_id', '=', 'vendors.id')
+            ->where('vendors.id', auth()->id())
+            ->whereBetween('appointments.date', [$startOfMonth, $endOfMonth])
+            ->where('appointments.status', 'completed')
+            ->sum('services.price');
+
+        return view('admin_unique_layout.box_dashboard', compact('monthlyRevenue', 'vendor', 'monthlyEarnings', 'todaysAppointments', 'todaysRevenue'));
     }
 
     public function appointments()

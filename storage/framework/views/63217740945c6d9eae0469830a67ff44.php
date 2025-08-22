@@ -167,7 +167,7 @@
             <div class="col-6 mb-4">
                 <div class="card shadow-lg border-0 rounded-4">
                     <div class="card-header bg-gradient text-dark border-0 rounded-top-4 py-3"
-                        style="background:#73a0ad !important">
+                        style="background:#00A08C !important">
                         <div class="d-flex align-items-center">
                             <div class="bg-white bg-opacity-20 rounded-circle p-2 me-3">
                                 <i class="fas fa-star text-dark fa-lg"></i>
@@ -254,7 +254,7 @@
             <div class="col-6 mb-4">
                 <div class="card shadow-lg border-0 rounded-4">
                     <div class="card-header bg-gradient text-dark border-0 rounded-top-4 py-3"
-                        style="background:#73a0ad !important">
+                        style="background:#00A08C !important">
                         <div class="d-flex align-items-center">
                             <div class="bg-white bg-opacity-20 rounded-circle p-2 me-3">
                                 <i class="fas fa-fire text-dark fa-lg"></i>
@@ -347,12 +347,16 @@
                                     style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th class="ps-4">Rank</th>
-                                            <th>Salon Details</th>
-                                            <th>Vendor</th>
-                                            <th class="text-center">Total Visits</th>
-                                            <th class="text-center">Revenue</th>
-                                            <th class="pe-4 text-center">Performance</th>
+                                            <style>
+                                            </style>
+                                            <th class="ps-4" style="background: #00A08C !important">Rank</th>
+                                            <th style="background: #00A08C !important">Salon Details</th>
+                                            <th style="background: #00A08C !important">Vendor</th>
+                                            <th style="background: #00A08C !important" class="text-center">Total Visits
+                                            </th>
+                                            <th style="background: #00A08C !important" class="text-center">Revenue</th>
+                                            <th style="background: #00A08C !important" class="pe-4 text-center">
+                                                Performance</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -476,12 +480,12 @@
                                     style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th class="ps-4">ID</th>
-                                            <th>Vendor Details</th>
-                                            <th>Contact</th>
-                                            <th>Business Info</th>
-                                            <th>Registration Date</th>
-                                            <th class="pe-4">Status</th>
+                                            <th class="ps-4" style="background: #00A08C !important">ID</th>
+                                            <th style="background: #00A08C !important">Business Info</th>
+                                            <th style="background: #00A08C !important">Contact</th>
+                                            <th style="background: #00A08C !important">Vendor Details</th>
+                                            <th style="background: #00A08C !important">Registration Date</th>
+                                            <th style="background: #00A08C !important" class="pe-4">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -492,15 +496,10 @@
                                                         class="badge bg-light text-dark fw-bold">#<?php echo e($user->id); ?></span>
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3">
-                                                            <i class="fas fa-user text-primary"></i>
-                                                        </div>
-                                                        <div>
-                                                            <h6 class="mb-1 fw-semibold"><?php echo e($user->name); ?></h6>
-                                                            <small class="text-muted"><?php echo e($user->email); ?></small>
-                                                        </div>
-                                                    </div>
+                                                    <h6 class="mb-1 text-primary">
+                                                        <?php echo e($user->business_name ?? 'Not specified'); ?></h6>
+                                                    <small class="text-muted">Vendor since
+                                                        <?php echo e(\Carbon\Carbon::parse($user->vendor_created_at ?? $user->created_at)->format('M Y')); ?></small>
                                                 </td>
                                                 <td>
                                                     <div class="mb-1"><i
@@ -510,11 +509,16 @@
                                                             class="fas fa-phone text-muted me-2"></i><small><?php echo e($user->phone ?? 'Not provided'); ?></small>
                                                     </div>
                                                 </td>
-                                                <td>
-                                                    <h6 class="mb-1 text-primary">
-                                                        <?php echo e($user->business_name ?? 'Not specified'); ?></h6>
-                                                    <small class="text-muted">Vendor since
-                                                        <?php echo e(\Carbon\Carbon::parse($user->vendor_created_at ?? $user->created_at)->format('M Y')); ?></small>
+                                               <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                                                            <i class="fas fa-user text-primary"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="mb-1 fw-semibold"><?php echo e($user->name); ?></h6>
+                                                            <small class="text-muted"><?php echo e($user->email); ?></small>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="fw-semibold">

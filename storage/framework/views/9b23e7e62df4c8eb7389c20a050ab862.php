@@ -42,46 +42,35 @@
         </div>
 
         <!-- Today's Revenue & Appointments -->
-        <div class="row">
+        <div class="row g-3">
 
-            <!-- Revenue Card -->
+            <!-- Today's Revenue -->
             <div class="col-xl-3 col-md-6">
-                <div class="card shadow-sm border-0 rounded-4 text-center py-3">
-                    <h6 class="text-primary fw-bold">Today's Revenue</h6>
-                    <h3 class="text-success fw-bold">₹ <?php echo e(number_format($todaysRevenue, 2)); ?></h3>
+                <div class="card shadow-sm border-0 rounded-4 text-center">
+                    <div class="card-body">
+                        <h6 class="text-primary fw-bold">Today's Revenue</h6>
+                        <h3 class="text-success fw-bold mt-2">₹ <?php echo e(number_format($todaysRevenue, 2)); ?></h3>
+                        <small class="text-muted">Completed appointments</small>
+                    </div>
                 </div>
             </div>
 
-            <!-- Today's Appointments Card -->
+            <!-- This Month's Earnings -->
             <div class="col-xl-9 col-md-6">
-                <div class="card shadow-sm border-0 rounded-4">
-                    <div class="card-body">
-                        <h6 class="fw-bold mb-3">Today's Appointments</h6>
-                        <?php if($todaysAppointments->isEmpty()): ?>
-                            <p class="text-muted">No appointments today.</p>
-                        <?php else: ?>
-                            <ul class="list-group list-group-flush">
-                                <?php $__currentLoopData = $todaysAppointments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $appointment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <li
-                                        class="list-group-item text-dark d-flex justify-content-between align-items-center rounded-3 mb-2 bg-light">
-                                        <div>
-                                            <strong><?php echo e($appointment->customer_name); ?></strong> has
-                                            <?php echo e($appointment->status); ?> <em><?php echo e($appointment->service_name); ?></em>
-                                        </div>
-                                        <span class="badge bg-info rounded-pill">
-                                            <?php echo e(\Carbon\Carbon::parse($appointment->slot_start)->format('H:i')); ?> -
-                                            <?php echo e(\Carbon\Carbon::parse($appointment->slot_end)->format('H:i')); ?>
+                <div class="card shadow-sm border-0 rounded-4 text-center">
+                    <div class="card-body d-flex flex-column justify-content-center">
+                        <h6 class="text-primary fw-bold mb-2">This Month's Earnings</h6>
+                        <h2 class="fw-bold text-success mb-2">
+                            ₹<?php echo e(number_format($monthlyRevenue, 2)); ?>
 
-                                        </span>
-                                    </li>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </ul>
-                        <?php endif; ?>
+                        </h2>
+                        <small class="text-muted">Total revenue from completed appointments</small>
                     </div>
                 </div>
             </div>
 
         </div>
+
 
         <!-- Today's Customers Table -->
         <div class="row">
