@@ -14,16 +14,20 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        $credentials = $request->validate([
+        $request->validate([
             'email'    => ['required', 'email'],
             'password' => ['required', 'string', 'min:6'],
+            'g-recaptcha-response' => 'required|captcha', // just validate
         ]);
+
+        $credentials = $request->only('email', 'password'); // only DB columns
 
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
-              if(auth()->user()->role_id == 2){
+
+            if (auth()->user()->role_id == 2) {
                 return redirect('/salonweb/dashboard');
-            }else if(auth()->user()->role_id == 1){
+            } else if (auth()->user()->role_id == 1) {
                 return redirect('/dashboard');
             }
         }
@@ -43,7 +47,7 @@ class LoginController extends Controller
 
         $phone = $request->input('ph_number');
         $otp = rand(1000, 9999);
-        $user = User::where('phone', $phone)->where('role_id',2)->first();
+        $user = User::where('phone', $phone)->where('role_id', 2)->first();
         FacadesSession::put('salondummyphone', $phone);
         if ($user) {
             $user->update([

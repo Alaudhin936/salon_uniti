@@ -10,7 +10,20 @@
             border: 1px solid #d8f3d9 !important;
         }
     </style>
-    <div class="container mt-4" style="padding:30px;background-color:white;">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-end">
+                    <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item active text-primary">Settings</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-0" style="padding:30px;background-color:white;">
         <h3 style="color: #0a566d" class="underlined-heading mb-4">Admin Settings</h3>
 
         @if (session('success'))

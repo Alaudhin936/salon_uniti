@@ -3,7 +3,20 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('main_content'); ?>
-    <div class="container mt-4" style="padding:30px;background-color:white;">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-end">
+                    <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item active text-primary">Salon Types</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-0" style="padding:30px;background-color:white;">
 
         <div class="card-header mb-5 p-4 text-white d-flex justify-content-between align-items-center">
             <h4 class="mb-0 underlined-heading fw-bold" style="color: #0a566d">Salon Types</h4>

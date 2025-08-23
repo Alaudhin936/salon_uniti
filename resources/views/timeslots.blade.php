@@ -5,6 +5,19 @@
 @endsection
 
 @section('main_content')
+    <div class="page-title">
+        <div class="row">
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-end">
+                    <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item active text-primary">Time Slots</li>
+                </ol>
+            </div>
+        </div>
+    </div>
     <div class="container-fluid" style="padding:30px;background-color:white;">
         @if ($weeklySchedules->isEmpty())
             <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
@@ -13,7 +26,6 @@
                 Add New Schedule
             </button>
         @else
-
             <div class="p-4 mb-3 card-header text-white d-flex justify-content-between align-items-center">
                 <h4 class="mb-0 underlined-heading fw-bold" style="color: #0a566d">Weekly Schedule</h4>
                 <button class="btn btn-light btn-md px-3 py-2 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"

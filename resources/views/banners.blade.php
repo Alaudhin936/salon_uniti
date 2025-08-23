@@ -5,6 +5,19 @@
 @endsection
 
 @section('main_content')
+    <div class="page-title">
+        <div class="row">
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-end">
+                    <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item active text-primary">Banners</li>
+                </ol>
+            </div>
+        </div>
+    </div>
     <div class="container" style="padding:30px;background-color:white;">
         {{-- <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 style="color: #0a566d" class="underlined-heading">Banners</h4>

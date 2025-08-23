@@ -5,10 +5,23 @@
 @endsection
 
 @section('main_content')
+    <div class="page-title">
+        <div class="row">
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-end">
+                    <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item active text-primary">Customers</li>
+                </ol>
+            </div>
+        </div>
+    </div>
     <div class="container-fluid" style="padding:30px;background-color:white;">
         <div class="page-title">
             <div class="row align-items-center">
-                <div >
+                <div>
                     <h3 style="color: #0a566d" class="underlined-heading"> Your Customers</h3>
                 </div>
             </div>

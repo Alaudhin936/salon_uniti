@@ -3,9 +3,10 @@
         <div class="sidebar-container">
             <!-- Logo & Top Controls -->
             <div class="logo-wrapper d-flex align-items-center justify-content-between px-3 py-2">
-                <a href="<?php echo e(route('vendor_dashboard')); ?>" style="height: 75px;width:75px" class="d-flex align-items-center">
-                    <img src="<?php echo e(asset('assets/images/Group 1552.svg')); ?>" alt="Salon Uniti Logo"
-                        class="img-fluid" style="max-height: 80px; width: auto;">
+                <a href="<?php echo e(route('vendor_dashboard')); ?>" style="height: 75px;width:75px"
+                    class="d-flex align-items-center">
+                    <img src="<?php echo e(asset('assets/images/Group 1552.svg')); ?>" alt="Salon Uniti Logo" class="img-fluid"
+                        style="max-height: 80px; width: auto;">
                 </a>
                 <div class="d-flex align-items-center">
                     <div class="back-btn me-2"><i data-feather="arrow-left-circle"></i></div>
@@ -66,9 +67,9 @@
     <?php elseif(auth()->user()->role_id == 1): ?>
         <div>
             <div class="logo-wrapper d-flex align-items-center justify-content-between px-3 py-2">
-                <a href="<?php echo e(route('vendor_dashboard')); ?>" style="height: 75px" class="d-flex align-items-center">
-                    <img src="<?php echo e(asset('assets/images/SALONUNITII LOGO-02 3.svg')); ?>" alt="Salon Uniti Logo"
-                        class="img-fluid" style="max-height: 80px; width: auto;">
+                <a href="<?php echo e(route('vendor_dashboard')); ?>" style="height: 75px;width:75px;" class="d-flex align-items-center">
+                    <img src="<?php echo e(asset('assets/images/Group 1552.svg')); ?>" alt="Salon Uniti Logo" class="img-fluid"
+                        style="max-height: 80px; width: auto;">
                 </a>
                 <div class="d-flex align-items-center">
                     <div class="back-btn me-2"><i data-feather="arrow-left-circle"></i></div>
@@ -80,13 +81,13 @@
                 <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
                 <div id="sidebar-menu">
                     <ul class="sidebar-links" id="simple-bar">
-                        <li class="back-btn mb-3" >
+                        <li class="back-btn mb-3">
                             <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2"
                                     aria-hidden="true"></i></div>
                         </li>
 
                         <li class="sidebar-list mb-3 link-nav">
-                            <a class="sidebar-link sidebar-title" href="<?php echo e(route('dashboard')); ?>">
+                            <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('dashboard')); ?>">
                                 <i data-feather="home"></i><span class="lan-3"></span>
                             </a>
                         </li>

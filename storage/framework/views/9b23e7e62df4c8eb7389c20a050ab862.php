@@ -14,11 +14,20 @@
     <div class="container-fluid py-4">
 
         <!-- Page Title & Breadcrumb -->
-        <div class="row mb-4 align-items-center">
-            <div class="col-sm-6">
-                <h3 class="fw-bold text-primary underlined-heading">Dashboard</h3>
+        <div class="page-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 style="color:#0a566d" class="underlined-heading mb-4 fw-bold">Dashboard</h3>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-end">
+                        <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
+                        <li class="breadcrumb-item active text-primary">Dashboard</li>
+                    </ol>
+                </div>
             </div>
         </div>
+
 
         <!-- Greeting Card -->
         <div class="row">

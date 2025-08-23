@@ -510,7 +510,7 @@
                                                             class="fas fa-phone text-muted me-2"></i><small>{{ $user->phone ?? 'Not provided' }}</small>
                                                     </div>
                                                 </td>
-                                               <td>
+                                                <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3">
                                                             <i class="fas fa-user text-primary"></i>

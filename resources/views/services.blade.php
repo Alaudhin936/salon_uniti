@@ -5,6 +5,19 @@
 @endsection
 
 @section('main_content')
+    <div class="page-title">
+        <div class="row">
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-end">
+                    <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item active text-primary">Services</li>
+                </ol>
+            </div>
+        </div>
+    </div>
     <div class="container-fluid" style="padding:30px;background-color:white;">
         <div class="page-title">
             <div class="p-4 card-header bg-primary text-white d-flex justify-content-between align-items-center">
@@ -155,16 +168,13 @@
     <style>
         .modal-body {
             max-height: calc(100vh - 200px);
-            /* ✅ Prevent modal from going off-screen */
             overflow-y: auto;
         }
     </style>
 
-    <!-- Edit Service Modal -->
-    <!-- Edit Service Modal -->
     <div class="modal fade" id="editServiceModal" tabindex="-1" aria-labelledby="editServiceModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable"> <!-- ✅ scrollable enabled -->
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <form id="editServiceForm" method="POST" enctype="multipart/form-data" class="modal-content">
                 @csrf
                 <input type="hidden" name="service_id" id="editServiceId">
@@ -174,7 +184,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <!-- ✅ Modal Body (scrollable area) -->
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="editServiceName" class="form-label">Service Name</label>
@@ -209,7 +218,6 @@
                         </select>
                     </div>
 
-                    <!-- ✅ Image Upload -->
                     <div class="mb-3">
                         <label for="editServiceImage" class="form-label">Service Image</label>
                         <input type="file" class="form-control" id="editServiceImage" name="service_img"
@@ -221,7 +229,6 @@
                     </div>
                 </div>
 
-                <!-- ✅ Modal Footer -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-success px-4" id="saveBtn">
