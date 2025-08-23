@@ -77,7 +77,7 @@ class AdminController extends Controller
             ->get();
 
 
-        return view('dashboards.default_dashboard', compact('users', 'salons', 'topRatedSalons','trendingServices'));
+        return view('dashboards.default_dashboard', compact('users', 'salons', 'topRatedSalons', 'trendingServices'));
     }
 
     public function salons()
@@ -149,6 +149,7 @@ class AdminController extends Controller
             'salon_type_id' => $request->salon_type_id,
             'location'      => $request->location,
             'gst_number'    => $request->gst_number,
+            'is_active' => (int) $request->is_active,
             'lattitude'     => $request->lattitude,
             'longitude'     => $request->longitude,
         ]);

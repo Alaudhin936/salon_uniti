@@ -3,8 +3,8 @@
         <div class="sidebar-container">
             <!-- Logo & Top Controls -->
             <div class="logo-wrapper d-flex align-items-center justify-content-between px-3 py-2">
-                <a href="<?php echo e(route('vendor_dashboard')); ?>" style="height: 75px" class="d-flex align-items-center">
-                    <img src="<?php echo e(asset('assets/images/SALONUNITII LOGO-02 3.svg')); ?>" alt="Salon Uniti Logo"
+                <a href="<?php echo e(route('vendor_dashboard')); ?>" style="height: 75px;width:75px" class="d-flex align-items-center">
+                    <img src="<?php echo e(asset('assets/images/Group 1552.svg')); ?>" alt="Salon Uniti Logo"
                         class="img-fluid" style="max-height: 80px; width: auto;">
                 </a>
                 <div class="d-flex align-items-center">
@@ -56,7 +56,7 @@
                         </li>
                         <li class="sidebar-list mb-3">
                             <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('logout')); ?>">
-                                <i data-feather="log-out"></i><span>Logout</span>
+                                <i data-feather="log-out"></i><span class="ms-2">Logout</span>
                             </a>
                         </li>
                     </ul>
@@ -128,7 +128,7 @@
                         </li>
                         <li class="sidebar-list mb-3 link-nav">
                             <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('logout')); ?>">
-                                <i data-feather="log-out"></i><span>Logout</span>
+                                <i data-feather="log-out"></i><span class="ms-2">Logout</span>
                             </a>
                         </li>
                     </ul>

@@ -136,7 +136,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 style="color:#0a566d" class="underlined-heading mb-4 fw-bold">Master Admin Dashboard</h3>
+                    <h3 style="color:#0a566d" class="underlined-heading mb-4 fw-bold">Dashboard</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-end">

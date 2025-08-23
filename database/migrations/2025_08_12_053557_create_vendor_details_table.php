@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('slogan')->nullable();
             $table->unsignedBigInteger('salon_type_id');
             $table->string('location');
-            // $table->string('shop_open');
-            // $table->string('shop_close');
+            $table->unsignedBigInteger('payment_type_id')->nullable();
             $table->string('buffer_timing')->nullable();
             $table->string('cover_photo')->nullable();
             $table->boolean('is_active')->default(1);
@@ -29,6 +28,7 @@ return new class extends Migration
 
             $table->timestamps();
 
+            $table->foreign('payment_type_id')->references('id')->on('payment_types')->onDelete('cascade');
             $table->foreign('salon_type_id')->references('id')->on('salon_types')->onDelete('cascade');
         });
     }

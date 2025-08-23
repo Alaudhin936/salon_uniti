@@ -23,5 +23,6 @@
   <script src="<?php echo e(asset('assets/js/theme-customizer/customizer.js')); ?>"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
   <!-- login js-->
 <?php /**PATH C:\xampp8.2\htdocs\salon_unitiii\resources\views/layout/script.blade.php ENDPATH**/ ?>

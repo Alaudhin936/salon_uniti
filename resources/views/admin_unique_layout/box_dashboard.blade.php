@@ -18,7 +18,7 @@
         <!-- Page Title & Breadcrumb -->
         <div class="row mb-4 align-items-center">
             <div class="col-sm-6">
-                <h3 class="fw-bold text-primary">Dashboard</h3>
+                <h3 class="fw-bold text-primary underlined-heading">Dashboard</h3>
             </div>
         </div>
 

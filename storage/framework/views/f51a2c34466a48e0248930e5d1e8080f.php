@@ -10,7 +10,8 @@
                     <h3 style="color: #0a566d" class="underlined-heading">All Salons</h3>
                 </div>
                 <div class="col-sm-6 text-sm-end text-start">
-                    <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal" data-bs-target="#registerSalonModal">
+                    <button class="btn btn-light btn-lg px-5 py-3 rounded-pill shadow-sm fw-semibold" data-bs-toggle="modal"
+                        data-bs-target="#registerSalonModal">
                         <i class="fas fa-plus me-2 text-success"></i> Register New Salon
                     </button>
                 </div>
@@ -324,8 +325,7 @@
                                 <label for="salon_type_id" class="form-label">Type</label>
                                 <select id="salon_type_id" name="salon_type_id" class="form-select">
                                     <?php $__currentLoopData = $types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($type->id); ?>"
-                                           >
+                                        <option value="<?php echo e($type->id); ?>">
                                             <?php echo e($type->name); ?>
 
                                         </option>
@@ -348,6 +348,20 @@
                                 <input type="password" name="password" class="form-control">
                             </div>
 
+
+                            <div class="col-md-6 mb-3">
+                                <label for="is_active" class="form-label">Type</label>
+                                <select id="is_active" name="is_active" class="form-select">
+
+                                    <option value=1>
+                                        Active
+                                    </option>
+                                    <option value=0>
+                                        In-Active
+                                    </option>
+
+                                </select>
+                            </div>
                             
 
                             <div class="col-md-3 mb-3">
@@ -401,10 +415,10 @@
                     data: $(this).serialize(),
                     success: function(response) {
                         if (response.status === 'success') {
-                           Swal.fire({
+                            Swal.fire({
                                 icon: 'success',
                                 title: 'Success',
-                                text: `Service ${response.data} Successfully`,
+                                text: `Salon ${response.data} Successfully`,
                                 confirmButtonColor: '#3085d6',
                                 confirmButtonText: 'OK'
                             }).then(function(result) {
@@ -413,14 +427,36 @@
                                 }
                             });
                         } else {
-                            alert('Error saving salon.');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: response.message || 'Error saving salon',
+                                confirmButtonColor: '#d33',
+                                confirmButtonText: 'OK'
+                            });
                         }
                     },
-                    error: function() {
-                        alert('Something went wrong.');
+                    error: function(xhr) {
+                        let errorText = 'Something went wrong.';
+
+                        if (xhr.status === 422) { // Validation errors
+                            const errors = xhr.responseJSON.errors;
+                            errorText = Object.values(errors).flat().join('\n');
+                        } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorText = xhr.responseJSON.message;
+                        }
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: errorText,
+                            confirmButtonColor: '#d33',
+                            confirmButtonText: 'OK'
+                        });
                     }
                 });
             });
+
 
 
             $(document).on('click', '.viewSalonBtn', function() {

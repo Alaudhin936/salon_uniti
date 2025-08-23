@@ -54,44 +54,47 @@
                         <div class="col-md-6">
                             <label for="cover_photo" class="form-label">Cover Photo</label>
                             <input type="file" id="cover_photo" name="cover_photo" class="form-control" accept="image/*">
+
+                            <div class="mt-2">
+                                <img id="profilePreview" class="img-fluid border"
+                                    style="max-height: 150px; width: 150px; object-fit: cover; display:none;" />
+                            </div>
                             @if (isset($vendor->cover_photo) && $vendor->cover_photo)
                                 <div class="mt-2">
-                                    <img src="{{ asset('storage/' . $vendor->cover_photo) }}" alt="Cover Photo"
-                                        class="img-fluid rounded" style="max-height: 150px;">
+                                    <img src="{{ asset('storage/' . $vendor->cover_photo) }}" id="cover_img"
+                                        alt="Cover Photo" class="img-fluid rounded" style="max-height: 150px;">
                                 </div>
                             @endif
                         </div>
                         <div class="col-md-6">
                             <label for="business_name" class="form-label">Business Name</label>
                             <input type="text" id="business_name" name="business_name"
-                                value="{{ isset($vendor->business_name) ? $vendor->business_name : ''}}" class="form-control">
+                                value="{{ isset($vendor->business_name) ? $vendor->business_name : '' }}"
+                                class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label for="slogan" class="form-label">Slogan</label>
-                            <input type="text" id="slogan" name="slogan" value="{{ isset($vendor->slogan) ? $vendor->slogan : '' }}"
-                                class="form-control">
+                            <input type="text" id="slogan" name="slogan"
+                                value="{{ isset($vendor->slogan) ? $vendor->slogan : '' }}" class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label for="salon_type_id" class="form-label">Type</label>
                             <select id="salon_type_id" name="salon_type_id" class="form-select">
 
                                 @foreach ($types as $type)
-                                <option value="">---chose type---</option>
-                                    <option value="{{ $type->id }}" @if(isset($vendor->salon_type_id))
-                                        {{ $vendor->salon_type_id == $type->id ? 'selected' : '' }}
-                                        @else
-                                        @endif
-                                        >
+                                    <option value="">---chose type---</option>
+                                    <option value="{{ $type->id }}"
+                                        @if (isset($vendor->salon_type_id)) {{ $vendor->salon_type_id == $type->id ? 'selected' : '' }}
+                                        @else @endif>
                                         {{ $type->name }}
                                     </option>
-
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="location" class="form-label">Location</label>
-                            <input type="text" id="location" name="location" value="{{ isset($vendor->location) ? $vendor->location : '' }}"
-                                class="form-control">
+                            <input type="text" id="location" name="location"
+                                value="{{ isset($vendor->location) ? $vendor->location : '' }}" class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label for="gst_number" class="form-label">GST Number</label>
@@ -111,9 +114,29 @@
                         <div class="col-md-6">
                             <label for="is_active" class="form-label">Status</label>
                             <select id="is_active" name="is_active" class="form-select">
-                                <option value="1" {{ isset($vendor->is_active) && $vendor->is_active ? 'selected' : '' }}>Active</option>
-                                <option value="0" {{ isset($vendor->is_active) && !$vendor->is_active ? 'selected' : '' }}>Inactive</option>
+                                <option value="1"
+                                    {{ isset($vendor->is_active) && $vendor->is_active ? 'selected' : '' }}>Active</option>
+                                <option value="0"
+                                    {{ isset($vendor->is_active) && !$vendor->is_active ? 'selected' : '' }}>Inactive
+                                </option>
                             </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="cropperModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"
+                data-bs-keyboard="false">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Crop Profile Photo</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img id="cropperImage" style="max-width:100%; max-height:500px;">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="cropButton" class="btn btn-success">Crop & Save</button>
                         </div>
                     </div>
                 </div>
@@ -139,6 +162,65 @@
     <script src="{{ asset('assets/js/support-ticket-custom.js') }}"></script>
 
     <script>
+        let cropper;
+        const input = $("#cover_photo")[0];
+        const modal = new bootstrap.Modal($("#cropperModal")[0]);
+        const cropperImage = $("#cropperImage")[0];
+        const preview = $("#profilePreview")[0];
+
+        // When selecting new file
+        $("#cover_photo").on("change", function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    cropperImage.src = reader.result;
+                    modal.show();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Init Cropper when modal opens
+        $("#cropperModal").on("shown.bs.modal", function() {
+            cropper = new Cropper(cropperImage, {
+                aspectRatio: 1, // square crop for profile
+                viewMode: 2,
+                autoCropArea: 1
+            });
+        }).on("hidden.bs.modal", function() {
+            if (cropper) {
+                cropper.destroy();
+                cropper = null;
+            }
+        });
+
+        // Crop & replace file input
+        $("#cropButton").on("click", function() {
+            const canvas = cropper.getCroppedCanvas({
+                width: 300,
+                height: 300,
+                imageSmoothingEnabled: true,
+                imageSmoothingQuality: 'high'
+            });
+
+            // Show preview
+            preview.src = canvas.toDataURL("image/png");
+            preview.style.display = "block";
+            $('#cover_img').hide();
+
+            // Replace file input with blob
+            canvas.toBlob(function(blob) {
+                const file = new File([blob], "profile.png", {
+                    type: "image/png"
+                });
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                input.files = dataTransfer.files;
+            }, "image/png", 1);
+
+            modal.hide();
+        });
         $('#vendorForm').on('submit', function(e) {
             e.preventDefault();
             let btn = $('#saveBtn');

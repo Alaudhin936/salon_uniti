@@ -53,15 +53,7 @@
                         @endif
                         <input type="file" class="form-control" name="site_logo">
                     </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label>Favicon</label>
-                        @if ($settings->favicon)
-                            <img src="{{ asset('storage/' . $settings->favicon) }}" alt="favicon" width="40"
-                                class="mb-2">
-                        @endif
-                        <input type="file" class="form-control" name="favicon">
-                    </div>
+                 
 
                     <div class="col-md-12 mb-3">
                         <label>About Us</label>
@@ -120,6 +112,23 @@
         @endif
     </div>
 
+    <div class="modal fade" id="cropperModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"
+        data-bs-keyboard="false">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crop Profile Photo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="cropperImage" style="max-width:100%; max-height:500px;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cropButton" class="btn btn-success">Crop & Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- Add Settings Modal --}}
     <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">

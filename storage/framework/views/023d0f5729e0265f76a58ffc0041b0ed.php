@@ -93,10 +93,6 @@
 
                             </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-
-
-                                    
-
                         <?php endif; ?>
                     </tbody>
                 </table>
@@ -105,7 +101,7 @@
 
     </div>
     <div class="modal fade" id="addServiceModal" tabindex="-1" aria-labelledby="addServiceLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog  modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addServiceLabel">Add New Service</h5>
@@ -139,6 +135,9 @@
                             <label for="addServiceImage" class="form-label">Service Image</label>
                             <input type="file" class="form-control" id="addServiceImage" name="service_img"
                                 accept="image/*">
+                            <div class="mt-3">
+                                <img id="previewAddCropped" style="max-width: 100%; display: none;" />
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -154,77 +153,104 @@
             </div>
         </div>
     </div>
+    <style>
+        .modal-body {
+            max-height: calc(100vh - 200px);
+            /* ✅ Prevent modal from going off-screen */
+            overflow-y: auto;
+        }
+    </style>
 
+    <!-- Edit Service Modal -->
     <!-- Edit Service Modal -->
     <div class="modal fade" id="editServiceModal" tabindex="-1" aria-labelledby="editServiceModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog">
-            <form id="editServiceForm" method="POST" enctype="multipart/form-data">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable"> <!-- ✅ scrollable enabled -->
+            <form id="editServiceForm" method="POST" enctype="multipart/form-data" class="modal-content">
                 <?php echo csrf_field(); ?>
                 <input type="hidden" name="service_id" id="editServiceId">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editServiceModalLabel">Edit Service</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editServiceModalLabel">Edit Service</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- ✅ Modal Body (scrollable area) -->
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="editServiceName" class="form-label">Service Name</label>
+                        <input type="text" class="form-control" id="editServiceName" name="name" required>
                     </div>
-                    <div class="modal-body">
 
-                        <div class="mb-3">
-                            <label for="editServiceName" class="form-label">Service Name</label>
-                            <input type="text" class="form-control" id="editServiceName" name="name" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="editServicePrice" class="form-label">Price</label>
-                            <input type="number" class="form-control" id="editServicePrice" name="price" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="editServiceDuration" class="form-label">Duration (mins)</label>
-                            <input type="number" class="form-control" id="editServiceDuration" name="duration"
-                                required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="editServiceCategory" class="form-label">Service Category</label>
-                            <select id="editServiceCategory" name="service_category_id" class="form-select" required>
-                                <option value="">-- Select Category --</option>
-                                <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="is_active" class="form-label">Status</label>
-                            <select id="is_active" name="is_active" class="form-select">
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
-                            </select>
-                        </div>
-
-                        <!-- Image Upload -->
-                        <div class="mb-3">
-                            <label for="editServiceImage" class="form-label">Service Image</label>
-                            <input type="file" class="form-control" id="editServiceImage" name="service_img"
-                                accept="image/*">
-
-                            <!-- Preview existing image -->
-
-                        </div>
-
+                    <div class="mb-3">
+                        <label for="editServicePrice" class="form-label">Price</label>
+                        <input type="number" class="form-control" id="editServicePrice" name="price" required>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-success px-4" id="saveBtn">
-                            <i class="fa fa-save me-2"></i>
-                            <span class="btn-text">Update Service</span>
-                            <span class="spinner-border spinner-border-sm d-none" role="status"
-                                aria-hidden="true"></span>
-                        </button>
+
+                    <div class="mb-3">
+                        <label for="editServiceDuration" class="form-label">Duration (mins)</label>
+                        <input type="number" class="form-control" id="editServiceDuration" name="duration" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="editServiceCategory" class="form-label">Service Category</label>
+                        <select id="editServiceCategory" name="service_category_id" class="form-select" required>
+                            <option value="">-- Select Category --</option>
+                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="is_active" class="form-label">Status</label>
+                        <select id="is_active" name="is_active" class="form-select">
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                    </div>
+
+                    <!-- ✅ Image Upload -->
+                    <div class="mb-3">
+                        <label for="editServiceImage" class="form-label">Service Image</label>
+                        <input type="file" class="form-control" id="editServiceImage" name="service_img"
+                            accept="image/*">
+                        <div class="mt-3">
+                            <img id="previewEditCropped" class="img-fluid border rounded"
+                                style="max-height:250px; display:none; object-fit:contain;" />
+                        </div>
                     </div>
                 </div>
+
+                <!-- ✅ Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success px-4" id="saveBtn">
+                        <i class="fa fa-save me-2"></i>
+                        <span class="btn-text">Update Service</span>
+                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </button>
+                </div>
             </form>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="cropperModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"
+        data-bs-keyboard="false">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crop Profile Photo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="cropperImage" style="max-width:100%; max-height:500px;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cropButton" class="btn btn-success">Crop & Save</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -253,7 +279,72 @@
     <script src="<?php echo e(asset('assets/js/support-ticket-custom.js')); ?>"></script>
     <script>
         $(document).ready(function() {
-            debugger
+            let cropper, currentInput, currentPreview;
+            const $modal = $('#cropperModal');
+            const $cropperImage = $('#cropperImage');
+            let bsModal = new bootstrap.Modal(document.getElementById('cropperModal'), {
+                backdrop: 'static',
+                keyboard: false
+            });
+
+            $('#addServiceImage, #editServiceImage').on('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    currentInput = this;
+                    currentPreview = (this.id === "addServiceImage") ? $("#previewAddCropped") : $(
+                        "#previewEditCropped");
+
+                    const reader = new FileReader();
+                    reader.onload = function() {
+                        $cropperImage.attr('src', reader.result);
+                        bsModal.show();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            $modal.on('shown.bs.modal', function() {
+                cropper = new Cropper($cropperImage[0], {
+                    aspectRatio: 200 / 200, // fixed ratio
+                    viewMode: 1,
+                    autoCropArea: 1,
+                    responsive: true,
+                    background: false,
+                    zoomable: true,
+                    scalable: true
+                });
+            }).on('hidden.bs.modal', function() {
+                if (cropper) {
+                    cropper.destroy();
+                    cropper = null;
+                }
+            });
+
+            $('#cropButton').on('click', function() {
+                if (!cropper) return;
+
+                const canvas = cropper.getCroppedCanvas({
+                    width: 200,
+                    height: 200,
+                    imageSmoothingEnabled: true,
+                    imageSmoothingQuality: 'high'
+                });
+
+                // Show cropped preview
+                currentPreview.attr('src', canvas.toDataURL("image/png", 1.0)).show();
+
+                // Replace input file with cropped version
+                canvas.toBlob(function(blob) {
+                    const file = new File([blob], "cropped_service.png", {
+                        type: "image/png"
+                    });
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    currentInput.files = dataTransfer.files;
+                }, "image/png", 1.0);
+
+                bsModal.hide();
+            });
             $('#servicesTable').DataTable({
                 paging: true,
                 searching: true,

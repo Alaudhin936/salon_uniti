@@ -21,19 +21,11 @@
                         src="{{ asset('assets/images/logo/logo.png') }}" alt=""></a></div>
         </div>
         <div class="left-header col horizontal-wrapper ps-0">
-            <div class="left-menu-header">
-                <ul class="app-list">
-                    <li class="onhover-dropdown">
-                        <div class="app-menu"> <i data-feather="folder-plus"></i></div>
-                        <ul class="onhover-show-div left-dropdown">
-                            <li> <a href="{{ route('file_manager') }}">File Manager</a></li>
-                            <li> <a href="{{ route('kanban') }}"> Kanban board</a></li>
-                            <li> <a href="{{ route('social_app') }}"> Social App</a></li>
-                            <li> <a href="{{ route('bookmark') }}"> Bookmark</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+            {{-- <div class="left-menu-header">
+
+            </div> --}}
+            <h5 class="fw-bold text-primary"> @if(auth()->user()->role_id == 2) Vendor Admin Panel @else Super Admin Panel @endif</h5>
+
         </div>
         <div class="nav-right col-6 pull-right right-header p-0">
             <ul class="nav-menus">
@@ -64,7 +56,8 @@
                     <ul class="profile-dropdown onhover-show-div">
                         <li>
                             @if (auth()->user()->role_id == 2)
-                                <a href="{{ route('salon.editprofile') }}"><i data-feather="user"></i><span>Update Profile</span></a>
+                                <a href="{{ route('salon.editprofile') }}"><i data-feather="user"></i><span>Update
+                                        Profile</span></a>
                             @endif
                         </li>
                         <li><a href="{{ route('logout') }}"><i data-feather="log-in"> </i><span>Log out</span></a></li>

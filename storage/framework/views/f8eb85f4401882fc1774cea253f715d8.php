@@ -21,19 +21,9 @@
                         src="<?php echo e(asset('assets/images/logo/logo.png')); ?>" alt=""></a></div>
         </div>
         <div class="left-header col horizontal-wrapper ps-0">
-            <div class="left-menu-header">
-                <ul class="app-list">
-                    <li class="onhover-dropdown">
-                        <div class="app-menu"> <i data-feather="folder-plus"></i></div>
-                        <ul class="onhover-show-div left-dropdown">
-                            <li> <a href="<?php echo e(route('file_manager')); ?>">File Manager</a></li>
-                            <li> <a href="<?php echo e(route('kanban')); ?>"> Kanban board</a></li>
-                            <li> <a href="<?php echo e(route('social_app')); ?>"> Social App</a></li>
-                            <li> <a href="<?php echo e(route('bookmark')); ?>"> Bookmark</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+            
+            <h5 class="fw-bold text-primary"> <?php if(auth()->user()->role_id == 2): ?> Vendor Admin Panel <?php else: ?> Super Admin Panel <?php endif; ?></h5>
+
         </div>
         <div class="nav-right col-6 pull-right right-header p-0">
             <ul class="nav-menus">
@@ -64,7 +54,8 @@
                     <ul class="profile-dropdown onhover-show-div">
                         <li>
                             <?php if(auth()->user()->role_id == 2): ?>
-                                <a href="<?php echo e(route('salon.editprofile')); ?>"><i data-feather="user"></i><span>Update Profile</span></a>
+                                <a href="<?php echo e(route('salon.editprofile')); ?>"><i data-feather="user"></i><span>Update
+                                        Profile</span></a>
                             <?php endif; ?>
                         </li>
                         <li><a href="<?php echo e(route('logout')); ?>"><i data-feather="log-in"> </i><span>Log out</span></a></li>
