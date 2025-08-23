@@ -121,11 +121,7 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-list mb-3 link-nav">
-                            <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('admin.payments')); ?>">
-                                <i data-feather="credit-card"></i><span>Payment Methods</span>
-                            </a>
-                        </li>
+                        
                         <li class="sidebar-list mb-3 link-nav">
                             <a class="sidebar-link sidebar-title link-nav" href="<?php echo e(route('logout')); ?>">
                                 <i data-feather="log-out"></i><span class="ms-2">Logout</span>

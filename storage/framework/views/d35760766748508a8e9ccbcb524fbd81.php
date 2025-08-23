@@ -44,21 +44,21 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label>Site Logo</label>
-                        <?php if($settings->site_logo): ?>
-                            <img src="<?php echo e(asset('storage/' . $settings->site_logo)); ?>" alt="logo" width="80"
-                                class="mb-2">
-                        <?php endif; ?>
-                        <input type="file" class="form-control" name="site_logo">
-                    </div>
+                        <label for="site_logo" class="form-label">Site Logo</label>
 
-                    <div class="col-md-6 mb-3">
-                        <label>Favicon</label>
-                        <?php if($settings->favicon): ?>
-                            <img src="<?php echo e(asset('storage/' . $settings->favicon)); ?>" alt="favicon" width="40"
-                                class="mb-2">
+                        <?php if(!empty($settings->site_logo)): ?>
+                            <div class="mb-2">
+                                <img src="<?php echo e(asset('storage/' . $settings->site_logo)); ?>" alt="Site Logo"
+                                    class="img-fluid rounded shadow-sm" style="max-height: 100px;">
+                            </div>
                         <?php endif; ?>
-                        <input type="file" class="form-control" name="favicon">
+
+                        <input type="file" class="form-control" id="site_logo" name="site_logo" accept="image/*">
+
+                        <div class="mt-2">
+                            <img id="previewSiteLogo" style="max-height: 100px; display: none;"
+                                class="img-fluid rounded shadow-sm">
+                        </div>
                     </div>
 
                     <div class="col-md-12 mb-3">
@@ -118,6 +118,22 @@
         <?php endif; ?>
     </div>
 
+    <div class="modal fade" id="cropperModalLogo" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crop Site Logo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="cropperImageLogo" style="max-width:100%; max-height:500px;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cropButtonLogo" class="btn btn-success">Crop & Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -208,10 +224,73 @@
         </div>
     </div>
 <?php $__env->stopSection(); ?>
-
+<script></script>
 <?php $__env->startSection('scripts'); ?>
     <script>
         $(document).ready(function() {
+            let cropperLogo;
+            const inputLogo = $('#site_logo')[0];
+            const modalLogo = new bootstrap.Modal($('#cropperModalLogo')[0], {
+                backdrop: 'static', // prevents closing on outside click
+                keyboard: false // prevents closing with escape
+            });
+            const cropperImageLogo = $('#cropperImageLogo')[0];
+            const previewLogo = $('#previewSiteLogo')[0];
+
+            // When user selects a new logo
+            $('#site_logo').on('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function() {
+                        cropperImageLogo.src = reader.result;
+                        modalLogo.show();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Initialize Cropper when modal opens
+            $('#cropperModalLogo').on('shown.bs.modal', function() {
+                cropperLogo = new Cropper(cropperImageLogo, {
+                    aspectRatio: 200 / 200, // fixed width x height
+                    viewMode: 1,
+                    autoCropArea: 1,
+                    background: false,
+                    responsive: true
+                });
+            }).on('hidden.bs.modal', function() {
+                if (cropperLogo) {
+                    cropperLogo.destroy();
+                    cropperLogo = null;
+                }
+            });
+
+            // Crop and replace file input
+            $('#cropButtonLogo').on('click', function() {
+                const canvas = cropperLogo.getCroppedCanvas({
+                    width: 200,
+                    height: 200,
+                    imageSmoothingEnabled: true,
+                    imageSmoothingQuality: 'high'
+                });
+
+                // Show preview
+                previewLogo.src = canvas.toDataURL("image/png");
+                previewLogo.style.display = "block";
+
+                // Replace file input with blob
+                canvas.toBlob(function(blob) {
+                    const file = new File([blob], "site_logo.png", {
+                        type: "image/png"
+                    });
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    inputLogo.files = dataTransfer.files;
+                }, "image/png", 1);
+
+                modalLogo.hide();
+            });
             $('#settingsForm').on('submit', function(e) {
                 e.preventDefault();
 
