@@ -6,12 +6,12 @@
     <div class="page-title">
         <div class="row">
             <div class="col-sm-6">
-            
+
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-end">
                     <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
-                    <li class="breadcrumb-item active text-primary">Dashboard</li>
+                    <li class="breadcrumb-item active text-primary">Appointments</li>
                 </ol>
             </div>
         </div>
