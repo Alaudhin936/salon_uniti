@@ -1,19 +1,25 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BannerController;
+use App\Http\Controllers\Api\SalonController;
+use App\Http\Controllers\Api\ServiceController;
+// use App\Http\Controllers\ServiceController;
+use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return response()->json($request->user());
+    });
+    Route::get('/banners',[BannerController::class,'get']);
+    Route::get('/popular/services',[ServiceController::class , 'get']);
+    Route::get('/popular/salons',[SalonController::class , 'get']);
 });
+
+
+
+Route::post('/request/otp', [AuthController::class, 'requestOtp']);
+Route::post('/request/verifyOtp', [AuthController::class, 'verifyOTP']);

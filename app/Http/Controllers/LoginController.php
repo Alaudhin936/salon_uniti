@@ -8,20 +8,21 @@ use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Traits\SmsOtpTrait;
 use Illuminate\Support\Facades\Session as FacadesSession;
 
 class LoginController extends Controller
 {
+    use SmsOtpTrait;
     public function login(Request $request)
     {
         $request->validate([
             'email'    => ['required', 'email'],
             'password' => ['required', 'string', 'min:6'],
-            'g-recaptcha-response' => 'required|captcha', // just validate
+            'g-recaptcha-response' => 'required|captcha',
         ]);
 
-        $credentials = $request->only('email', 'password'); // only DB columns
-
+        $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
 
@@ -48,7 +49,6 @@ class LoginController extends Controller
         $phone = $request->input('ph_number');
         $otp = rand(1000, 9999);
         $user = User::where('phone', $phone)->where('role_id', 2)->first();
-        FacadesSession::put('salondummyphone', $phone);
         if ($user) {
             $user->update([
                 'otp'        => $otp,
@@ -71,38 +71,7 @@ class LoginController extends Controller
         }
     }
 
-    public function sendSmsCommon($recipients, $messagetext, $template_id)
-    {
-        $apiKey = '76a4a331953994b26514dbee1a9b275c';
-        $sender = 'INSTNE';
-        $route = 2;
-        $messagetext = urlencode($messagetext);
 
-        $url = "http://sms.spiderindia.com/api/smsapi?key={$apiKey}&route={$route}&sender={$sender}&number={$recipients}&templateid={$template_id}&sms={$messagetext}";
-
-        $curl = curl_init();
-        curl_setopt_array($curl, [
-            CURLOPT_URL => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 10,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-        ]);
-
-        $response = curl_exec($curl);
-
-        if (curl_errno($curl)) {
-            \Log::error('SMS sending failed: ' . curl_error($curl));
-            curl_close($curl);
-            return false;
-        }
-
-        curl_close($curl);
-        return $response;
-    }
 
     public function salonVerifyOTP(Request $request)
     {
@@ -113,7 +82,6 @@ class LoginController extends Controller
             ->first();
 
         if ($user) {
-
             $user->update([
                 'otp' => null
             ]);

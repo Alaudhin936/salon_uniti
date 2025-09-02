@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\VendorDetail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
 
 class AppointmentController extends Controller
@@ -29,8 +30,6 @@ class AppointmentController extends Controller
             ->groupBy('month')
             ->orderBy('month')
             ->pluck('total', 'month');
-
-
 
         $todaysAppointments = DB::table('appointments')
             ->join('services', 'appointments.service_id', '=', 'services.id')
