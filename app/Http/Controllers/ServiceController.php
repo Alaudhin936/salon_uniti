@@ -32,7 +32,6 @@ class ServiceController extends Controller
             'service_category_id' => $request->service_category_id,
             'service_img' => isset($path) ? $path : ''
         ]);
-
         return response()->json(['status' => 'success', 'services' => $id]);
     }
 

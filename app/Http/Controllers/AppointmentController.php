@@ -67,26 +67,57 @@ class AppointmentController extends Controller
         return view('admin_unique_layout.box_dashboard', compact('monthlyRevenue', 'vendor', 'monthlyEarnings', 'todaysAppointments', 'todaysRevenue'));
     }
 
-    public function appointments()
+    public function getAppointments(Request $request)
     {
-
-        $users = DB::table('users')->where('role_id', 3)->get();
-        $services = DB::table('services')->where('vendor_id', auth()->id())->where('is_active', 1)->get();
-        $appointments = DB::table('appointments')
+        $appointmentsQuery = DB::table('appointments')
             ->join('services', 'appointments.service_id', '=', 'services.id')
             ->join('users as customers', 'appointments.user_id', '=', 'customers.id')
             ->join('users as vendors', 'services.vendor_id', '=', 'vendors.id')
             ->where('vendors.id', auth()->id())
             ->select(
-                'appointments.*',
+                'appointments.id',
+                'appointments.date',
+                'appointments.slot_start',
+                'appointments.slot_end',
+                'appointments.status',
                 'services.name as service_name',
                 'customers.name as customer_name'
-            )
-            ->orderBy('appointments.date', 'asc')
-            ->get()
-            ->groupBy('date');
+            );
 
-        return view('appointments', compact('appointments', 'users', 'services'));
+        // Filter by status
+        if ($request->status && $request->status != 'all') {
+            if ($request->status == 'upcoming') {
+                $appointmentsQuery->whereIn('appointments.status', ['booked', 'pending']);
+            } else {
+                $appointmentsQuery->where('appointments.status', $request->status);
+            }
+        }
+
+        return DataTables::of($appointmentsQuery)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+                $markDoneDisabled = $row->status === 'completed' ? 'disabled' : '';
+                $rejectDisabled = $row->status === 'cancelled' ? 'disabled' : '';
+
+                return '
+                <div class="d-flex gap-2">
+    <i class="fa fa-check-circle text-success ' . $markDoneDisabled . '"
+       onclick="markAppointment(' . $row->id . ', \'disable\')"></i>
+    <i class="fa fa-times-circle text-danger ' . $rejectDisabled . '"
+       onclick="markAppointment(' . $row->id . ', \'enable\')"></i>
+</div>';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+    public function appointments(Request $request)
+    {
+        $users = DB::table('users')->where('role_id', 3)->get();
+        $services = DB::table('services')->where('vendor_id', auth()->id())->where('is_active', 1)->get();
+
+        // AJAX request for DataTables
+        // Initial page load (view)
+        return view('appointments', compact('users', 'services'));
     }
 
     public function store(Request $request)
@@ -171,6 +202,7 @@ class AppointmentController extends Controller
 
     public function markAsDone(Request $request, $id, $status)
     {
+        // dd($status);
         if ($status == "disable") {
             $appointment = Appointment::where('id', $id)->update([
                 'status' => 'completed'

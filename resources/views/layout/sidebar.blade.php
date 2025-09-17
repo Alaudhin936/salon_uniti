@@ -1,4 +1,9 @@
 <div class="sidebar-wrapper">
+    <style>
+        .sidebar-link.active{
+            background: linear-gradient(135deg, #0ba18c 0%, #00ff3c2c 100%);
+        }
+    </style>
     @if (auth()->user()->role_id == 2)
         <div class="sidebar-container">
             <!-- Logo & Top Controls -->

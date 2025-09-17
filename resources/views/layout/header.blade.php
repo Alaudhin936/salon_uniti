@@ -1,4 +1,9 @@
 <div class="page-header">
+    <style>
+        .toggle-sidebar{
+            background: linear-gradient(135deg, #0ba18c 0%, #00ff3c8f 100%) !important;
+        }
+    </style>
     <div class="header-wrapper row m-0">
         <form class="form-inline search-full col" action="#" method="get">
             <div class="form-group w-100">

@@ -14,8 +14,6 @@
                         <div class="login-main">
                             <form class="theme-form" method="POST" action="<?php echo e(route('salonWebLogin')); ?>">
                                 <?php echo csrf_field(); ?>
-
-
                                 <div class="form-group">
                                     <label class="col-form-label">Email Mobile Number</label>
                                     <input class="form-control" type="text" name="ph_number"
@@ -32,15 +30,13 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                 </div>
 
-
-
                                 
                                 <div class="form-group mb-0">
                                     <div class="text-end mt-3">
                                         <button class="btn btn-primary btn-block w-100" type="submit">Get Otp</button>
                                     </div>
                                 </div>
-                                
+
                             </form>
                         </div>
                     </div>
@@ -54,4 +50,4 @@ unset($__errorArgs, $__bag); ?>
 <?php $__env->startSection('others_script'); ?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('others.others_layout.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp8.2\htdocs\salon_unitiii\resources\views/others/authentication/vendor_login.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('others.others_layout.master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp8.2\htdocs\salon_unitiii\resources\views/others/authentication/vendor_login.blade.php ENDPATH**/ ?>

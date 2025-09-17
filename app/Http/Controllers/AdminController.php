@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
 
 class AdminController extends Controller
 {
@@ -80,42 +81,58 @@ class AdminController extends Controller
         return view('dashboards.default_dashboard', compact('users', 'salons', 'topRatedSalons', 'trendingServices'));
     }
 
-    public function salons()
+  public function salonIndex()
+{
+    $types = SalonType::all();
+    $salonsCount = DB::table('vendor_details as vd')
+        ->join('users as u', 'vd.vendor_id', '=', 'u.id')
+        ->where('u.role_id', 2)
+        ->count();
+
+    return view('salons', compact('types', 'salonsCount'));
+}
+
+    public function salonData(Request $request)
     {
-        $salons = DB::table('vendor_details as vd')
-            ->join('users as u', 'vd.vendor_id', '=', 'u.id')
-            ->join('salon_types as st', 'vd.salon_type_id', '=', 'st.id')
-            ->where('u.role_id', 2)
-            ->select([
-                'u.id',
-                'vd.vendor_id',
-                'vd.business_name',
-                'vd.slogan',
-                'vd.location',
-                'vd.gst_number',
-                'vd.lattitude',
-                'vd.longitude',
-                'vd.created_at',
-                'vd.updated_at',
-                'vd.is_active',
-                'vd.buffer_timing',
-                'vd.cover_photo',
-                'vd.salon_type_id',
-                'st.name as salon_type_name',
-                'u.name as vendor_name',
-                'u.email',
-                'u.phone',
-                'u.otp',
-                'u.role_id',
-                'u.email_verified_at',
-                'u.password',
-                'u.remember_token'
-            ])
-            ->get();
+        if ($request->ajax()) {
+            // dd('d');
+            $salons = DB::table('vendor_details as vd')
+                ->join('users as u', 'vd.vendor_id', '=', 'u.id')
+                ->join('salon_types as st', 'vd.salon_type_id', '=', 'st.id')
+                ->where('u.role_id', 2)
+                ->select([
+                    'u.id',
+                    'vd.vendor_id',
+                    'vd.business_name' ,
+                    'vd.slogan',
+                    'vd.location',
+                    'vd.gst_number',
+                    'vd.lattitude',
+                    'vd.longitude',
+                    'vd.created_at',
+                    'vd.updated_at',
+                    'vd.is_active',
+                    'vd.buffer_timing',
+                    'vd.cover_photo',
+                    'vd.salon_type_id',
+                    'st.name as salon_type_name',
+                    'u.name as vendor_name',
+                    'u.email',
+                    'u.phone',
+                ]);
+            // dd($salons);
+            return DataTables::of($salons)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    return '<button class="btn btn-primary btn-sm viewSalonBtn" data-id="' . $row->id . '">View</button>';
+                })
+                ->addColumn('status', function ($row) {
+                    return (int) $row->is_active;
+                })
+                ->rawColumns(['action', 'status'])
+                ->make(true);
+        }
 
-        $types = SalonType::all();
-
-        return view('salons', compact('salons', 'types'));
     }
 
     public function registerSalon(Request $request)

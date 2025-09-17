@@ -16,8 +16,6 @@
                         <div class="login-main">
                             <form class="theme-form" method="POST" action="{{ route('salonWebLogin') }}">
                                 @csrf
-
-
                                 <div class="form-group">
                                     <label class="col-form-label">Email Mobile Number</label>
                                     <input class="form-control" type="text" name="ph_number"
@@ -27,15 +25,13 @@
                                     @enderror
                                 </div>
 
-
-
                                 {{-- Remember Me & Forgot Password --}}
                                 <div class="form-group mb-0">
                                     <div class="text-end mt-3">
                                         <button class="btn btn-primary btn-block w-100" type="submit">Get Otp</button>
                                     </div>
                                 </div>
-                                
+
                             </form>
                         </div>
                     </div>

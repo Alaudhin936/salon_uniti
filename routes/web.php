@@ -40,7 +40,8 @@ Route::get('/logout', function () {
 })->name('logout');
 
 Route::middleware('role:1')->group(function () {
-    Route::get('/salons', [AdminController::class, 'salons'])->name('salons');
+    Route::get('/salons', [AdminController::class, 'salonIndex'])->name('salons');
+    Route::get('/salons/getData', [AdminController::class, 'salonData'])->name('salonData');
     Route::get('/banners', [BannerController::class, 'index'])->name('banners');
     Route::get('/payments', [AdminController::class, 'paymentIndex'])->name('admin.payments');
     Route::post('/payments/store', [AdminController::class, 'storePaymentType'])->name('admin.payment.types.store');
@@ -64,10 +65,10 @@ Route::middleware('role:1')->group(function () {
 });
 
 Route::prefix('salonweb')->group(function () {
-    Route::view('login', 'others.authentication.vendor_login');
+    Route::view('login', 'others.authentication.vendor_login')->middleware('guestCheck');
     Route::get('/verifyOtp', function () {
         return view('others.authentication.verify_otp');
-    })->name('verifyOTP');
+    })->name('verifyOTP')->middleware('guestCheck');
 
     Route::post('/verifyOtp', [LoginController::class, 'salonVerifyOTP'])->name('verifyOtpSubmit');
 
@@ -85,7 +86,9 @@ Route::prefix('salonweb')->group(function () {
         Route::post('/bookings/payments/confirm', [BookingController::class, 'createBooking'])->name('payments.bookings.create');
 
         Route::get('/appointments', [AppointmentController::class, 'appointments'])->name('appointments');
+        Route::get('/appointments/data', [AppointmentController::class, 'getAppointments'])->name('appointments.data');
         Route::get('/customers', [AppointmentController::class, 'customers'])->name('customers');
+        Route::post('/customers/get', [AppointmentController::class, 'getCustomers'])->name('customers.data');
         Route::post('/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
         Route::get('/services', [ServiceController::class, 'index'])->name('services');
         Route::post('/store', [ServiceController::class, 'store'])->name('services.store');

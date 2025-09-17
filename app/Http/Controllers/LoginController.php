@@ -47,16 +47,20 @@ class LoginController extends Controller
         ]);
 
         $phone = $request->input('ph_number');
-        $otp = rand(1000, 9999);
+        $otp   = rand(1000, 9999);
+
         $user = User::where('phone', $phone)->where('role_id', 2)->first();
+
         if ($user) {
+            session(['salondummyphone' => $phone]);
+
             $user->update([
                 'otp'        => $otp,
                 'created_at' => now(),
             ]);
 
-            $recipients = "91" . trim($phone);
-            $app_name   = "Salon Unitii -- salon";
+            $recipients  = "91" . trim($phone);
+            $app_name    = "Salon Unitii -- salon";
             $messagetext = "Your OTP for $app_name is " . $otp . ". Please do not share this OTP.";
             $template_id = "1407168862906996721";
 
@@ -65,22 +69,24 @@ class LoginController extends Controller
             DB::table('settings')
                 ->where('variable', 'total_otp_used')
                 ->increment('value');
+
             return redirect()->route('verifyOTP')->with('success', 'OTP sent successfully');
         } else {
-            return back()->with('error', 'Invalid phone number');
+            return back()->withErrors([
+                'ph_number' => 'Phone number does not exist in our records'
+            ])->withInput();
         }
     }
-
 
 
     public function salonVerifyOTP(Request $request)
     {
         $submittedOtp = $request->input('verify_otp');
         $phone = session('salondummyphone');
+
         $user = User::where('phone', $phone)
             ->where('otp', $submittedOtp)
             ->first();
-
         if ($user) {
             $user->update([
                 'otp' => null
@@ -99,7 +105,9 @@ class LoginController extends Controller
             return redirect()->route('vendor_dashboard')
                 ->with('message', 'OTP verified successfully!');
         } else {
-            return back()->with('error', 'Invalid OTP. Please try again.');
+            return back()->withErrors([
+                'verify_otp' => 'Invalid OTP. Please try again.'
+            ])->withInput();
         }
     }
 }

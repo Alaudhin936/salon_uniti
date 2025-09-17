@@ -19,11 +19,13 @@ class Roles
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
         if(!Auth::check()){
-            return response()->json(['message' => 'Unauthorized'], 401);
+            return abort(403, 'Unauthorized');
+;
         }
         $user = Auth::user();
         if (!in_array($user->role_id, $roles)) {
-            return response()->json(['message' => 'Forbidden'], 403);
+            return abort(403, 'Unauthorized');
+;
         }
         return $next($request);
     }
